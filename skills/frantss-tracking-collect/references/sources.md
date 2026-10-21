@@ -7,6 +7,5 @@ Choose tools at runtime; preserve instance, identity, and restrictions across me
 Use inclusive-start/exclusive-end local calendar windows converted to source time; supplied timezone/week start precede shared settings, with no guessed defaults.
 Retrieve only necessary attribution/meaning/date context around personal matches; distinguish performed actions, assignments, scheduled activity, and quotations. Attribute native actors and dated events; older context and unsupported/inferred dates retain uncertainty.
 Keep non-secret capability/query scope and cursors in temporary handoffs; resume only for compatible method, instance, identity, fixed provider policy, project locations, and window. Older handoffs require bounded rescans.
-Otherwise rescan the requested window within budget, including dated updates to older objects; deduplicate across methods/query filters without stored checkpoints.
 
 Before any source search, read [fixed personal policies](personal.md); for `provider: git`, also read [Git collection](git.md).

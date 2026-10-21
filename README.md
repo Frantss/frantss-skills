@@ -35,6 +35,9 @@ and direct mentions; Jira searches issues you were assigned, created, or acted o
 Source registrations contain identities and native project locations. Search
 modes, custom filters, and collection budgets are not configurable. Unsupported
 personal searches remain explicit coverage gaps.
+Source searches attempt delegation to small, fast sub-agents. The main agent
+merges results and handles writes; workers share the existing collection budget.
+Unavailable delegation falls back to direct collection with an explicit reason.
 
 ## Install
 

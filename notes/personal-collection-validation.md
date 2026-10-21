@@ -1,7 +1,7 @@
 # Fixed personal collection
 
-Manual instruction walkthrough with synthetic Slack/Jira results and configured
-native identities. No live source scan, configuration write, or task/report save
+Manual walkthroughs and offline sub-agent checks use synthetic source responses
+and native identities. No live source scan, configuration write, or task/report save
 was exercised. Collection has one eligibility policy per provider, fixed call/item
 budgets, and source registrations containing only native identities/locations.
 
@@ -103,3 +103,40 @@ provider permission behavior remain untested.
 `make validate` passed with the existing package warnings. All skills installed
 into a temporary directory; the copied collection/configuration references
 matched the source files. `git diff --check` passed.
+
+## Delegated source workers
+
+Behavioral checks used native sub-agents with fresh context and requested
+`gpt-6-luna` at low reasoning effort. The workers read installed skill copies and
+synthetic connector-response files. They called no live source API and made no
+writes. This checks worker behavior, not provider access or model speed/cost.
+
+- Slack returned only M1 (authored commitment) and M2 (direct incoming request).
+  It deduplicated M1, rejected name/channel mentions and wrong-instance/date
+  results, and kept M2's ownership uncertain. It examined 7 fixture entries with
+  1 fixture response read and 0 source API calls, within its 5-call/12-item allowance.
+- The first Jira worker blurred personal activity and relevant task context.
+  The instructions were sharpened to retain updates on assigned/created issues
+  while attributing other actors' changes correctly. A fresh worker reran the
+  unchanged fixture against a newly installed skill copy.
+- The Jira recheck returned WIDGET-1 as assigned-issue context, WIDGET-2 as
+  creator-related context with closure attributed to A2, and WIDGET-3 as a
+  frantss-authored commitment candidate. It excluded reporter/name-only WIDGET-4
+  and out-of-project OTHER-1. It inspected 5 issues and 1 nested comment, with
+  0 source API calls, within its 5-call/12-item allowance.
+- Both workers retained `capture:none`, performed no task actions, avoided
+  recursive delegation, and correctly declined source searching for the nearby
+  saved-report retrieval request. Jira exposed unavailable worklog/history
+  capabilities and limited fixture coverage rather than widening its search.
+- The coordinator retained both native source events for the shared export
+  commitment and grouped their links under one outcome candidate. No candidate
+  was persisted. Actual runtime billing/model telemetry was not exposed.
+
+Coordinator failure/budget paths were walked manually: authorship and mention
+workers assigned 8 calls/20 items each leave 4 calls/10 items for coordinator
+verification/capture within the shared 20-call/50-item source budget. Retrying or
+falling back spends the remainder, not a new allowance. Busy capacity queues
+pending workers. Unavailable model selection, smaller suitable models, native
+delegation, or worker tools requires a stated limitation; only missing work may
+fall back to a capable coordinator, otherwise coverage remains partial. These
+failure paths were not induced against a live connector.

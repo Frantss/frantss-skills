@@ -1,13 +1,8 @@
 # Temporary observations
 
-Keep source observations, deduplication identities, excerpts, query details, and cursors in the current session or handoff only.
-Collection creates no evidence, run, event, or checkpoint records and supplies no observation payloads to persistence.
-For each useful finding, retain project, source identity, actor, action/outcome, supported occurrence date/time, and verified source link or native locator.
-Use context only to establish meaning, attribution, ownership, or dates; summarize findings rather than return transcripts or an observation ledger.
+Keep observations, excerpts, query details, native deduplication identities, and cursors temporary; create no evidence/run/event/checkpoint records. Summarize findings rather than return transcripts or an observation ledger.
+Each useful finding retains project, source identity, actor, outcome, supported occurrence date/time, and verified link/locator. Preserve date precision and unknowns; retrieval time never establishes occurrence. Context serves only meaning, attribution, ownership, and dates.
 Deduplicate by native provider, instance, container, object, and event identity across mappings/tools; query filters never define identity.
-Retain source-supported date precision; unknown dates stay unknown. Retrieval time never establishes occurrence.
 Task handoffs carry outcome/ownership, supported dates, and relevant source links; the task workflow decides matches, state, and writes.
-Activity without a task remains temporary input; its durable summary and supporting links belong in a requested report.
-Return source/window coverage and unfinished cursors separately from findings. These describe access/completeness, not task evidence.
-Resume only with a supplied compatible handoff; without one, rescan within budget and deduplicate against existing task links.
-Unavailable task storage leaves task candidates unsaved; it does not require saving a collection bundle elsewhere.
+Activity without a task remains temporary input; durable summaries/links belong in requested reports. Return source/window coverage and cursors separately as access/completeness information.
+Resume only compatible handoffs; otherwise rescan within budget and deduplicate against existing task links. Unavailable task storage leaves candidates unsaved, without saving a collection bundle elsewhere.
