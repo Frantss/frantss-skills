@@ -108,7 +108,8 @@ For skills installed with Vercel's CLI, use `npx skills update`.
 Tasks start in Inbox. Clear evidence supports automatic triage: assigned current-sprint work goes to Next,
 nonurgent commitments to Later, and tentative possibilities to Maybe. Uncertain decisions stay in Inbox for clarification.
 Workspace assignment and your `reviewed-by-frantss` acknowledgment are independent of state; blockers remain notes on Next/Later tasks.
-Firm due dates and expected completion dates are optional and distinct.
+Firm due dates and expected completion dates are optional and distinct. Weekly reports include undated Later commitments;
+daily reports emphasize Next, dates, and blockers. Reports suggest reassessment without changing tasks.
 Task content aims for 5–15 lines, with a hard limit of 50 excluding link-only lines and storage metadata.
 Linked tickets/documents retain their details; tasks hold an outcome, brief context, and references.
 Legacy `pending` tasks await triage with their workspace/history preserved; reads and reports do not rewrite them.

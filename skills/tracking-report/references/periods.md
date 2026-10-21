@@ -7,6 +7,8 @@ State exact boundaries and timezone. For custom ranges, clarify whether an ambig
 
 Attribute activity by occurrence time, not collection time. An observation collected later can belong to an earlier day's report.
 Keep unsupported occurrence dates unknown; exclude them from dated completion claims and explain the uncertainty.
-Reconstruct pending work at period end from dated task history. Distinguish that result from what remains pending now.
+Reconstruct task state, dates, and blockers at period end from dated history/revisions; distinguish these from current values.
 If history cannot establish prior status, label historical status unknown and any displayed current status with its current cutoff.
 A task completed during the period and reopened later retains its completion event; show its later reopening separately.
+For due/expected groupings, use the full local day/week at the cutoff (just before it for exclusive period ends), even when activity ends now.
+Historical groupings use dates and states known at that cutoff; preserve missing-history gaps instead of substituting current values.
