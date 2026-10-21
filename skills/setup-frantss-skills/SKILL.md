@@ -1,38 +1,25 @@
 ---
 name: setup-frantss-skills
-description: "Set up, inspect, or change personal tracking configuration: the shared backend in .frantss/tracking.yaml, reporting settings, account identities, and explicitly requested project/source mappings. Ensure .frantss is ignored by Git. Ordinary task capture, collection, and report requests do not initiate setup."
+description: "Set up, inspect, or update Frantss skills configuration under .frantss. Prepare the shared configuration directory and Git exclusion, then load guides for requested configurations. Ordinary use of configured skills does not initiate setup."
 ---
 
 # Setup Frantss skills
 
-Configure one backend shared by all tracked projects. Use real filesystem tools and an available persistence adapter.
-Own only `.frantss/tracking.yaml`; preserve configuration files for other skills in the shared `.frantss` directory.
-Read [configuration](references/configuration.md) for discovery, schema, and ownership before selecting or changing settings.
-For inspection or checks, report resolved configuration and read-only access checks; do not run initialization or repairs.
+Manage configuration files and records; distinguish initialization, requested updates, and read-only inspection.
+General setup prepares only `.frantss` and presents available configurations; it enables none by default.
+Load only selected guides; a request for all configurations selects every supported entry below. Report unsupported requests without inventing schemas or defaults.
 
-## Configure
+| Configuration | Owned file | Guide |
+| --- | --- | --- |
+| Tracking | `tracking.yaml` | [Tracking](references/tracking.md) |
 
-1. Resolve the selected configuration workspace, independently of the projects being tracked.
-   Reuse an existing config; when creating one, use an explicitly selected workspace or the current Git root, otherwise ask.
-2. Resolve the adapter and required connection options with the user. Never save example paths as actual destinations.
-   Keep missing values as unresolved draft fields; setup remains partial until the adapter verifies its required options.
-3. Before writing config, follow [Git exclusion](references/configuration.md#git-exclusion).
-   Preserve existing config fields and human edits. Parse YAML as data; reject unsupported schema versions or conflicting backend selections.
-4. Write `.frantss/tracking.yaml` with one backend. Create or patch it safely, then parse and read back the saved selection.
-   All projects use that backend; per-project backend overrides are unsupported.
-5. If its skill is available, pass the selected options to the adapter for explicit storage initialization.
-   Otherwise retain the connection draft and report the unavailable adapter; do not claim backend setup succeeded.
-6. Save supplied timezone, week start, account identities, and collection limits through the adapter's settings operation.
-   Preserve existing settings; ask for missing timezone/week start when required, rather than guessing them.
-7. For explicitly requested project creation, resolve its name and work/personal area; use `tracking-tasks` when available.
-   Without it, persist only an explicitly authorized project payload. Setup alone creates no project records.
-   Apply supplied source mappings to exact existing projects; resolve ambiguous targets and identities before changing their scope.
+Use an explicitly selected workspace, otherwise the current Git root.
+Outside Git, use an explicit workspace or unique ancestor `.frantss`; ask when unresolved or ambiguous.
+An external tracking connection never changes the selected workspace.
+Before writes, read [directory setup](references/workspace.md), prepare `.frantss`, then follow selected guides.
+Inspection creates or repairs nothing, including dependencies and Git exclusion.
+Patch only requested fields; preserve unknown fields, human edits, sibling configurations, and unrelated files.
+Keep credentials in tool credential stores. Never change agent-wide instructions during setup.
 
-Changing a backend selection does not migrate records. Preserve the previous selection and explain any separate migration requirement.
-Do not scan sources, capture tasks, generate reports, or change agent-wide instructions as part of setup.
-
-## Finish
-
-Return the config path, selected backend, Git exclusion result, verified settings/project changes, and unresolved requirements.
-Verify project/source records through persistence and confirm every project still shares the same backend.
-Report partial config/backend writes with their saved locations and missing steps. An ignored draft is not a configured backend.
+Verify guide completion and read back changes; return directory/exclusion status, per-configuration results, unsupported operations, and unresolved requirements.
+Distinguish prepared directories from partial configuration/dependency setup; retain drafts and recovery steps.

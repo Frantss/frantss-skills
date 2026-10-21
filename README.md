@@ -62,14 +62,17 @@ For Codex, use the global `~/.codex/AGENTS.md`. See the
 For other agents, use their supported persistent instructions file or setting.
 This repository's `AGENTS.md` already includes the rule for work here.
 
-## Tracking
+## Configuration
 
-[setup-frantss-skills](skills/setup-frantss-skills/SKILL.md) configures one shared backend
-for every project in `<selected-workspace>/.frantss/tracking.yaml`. It ensures
-that workspace's `.gitignore` excludes `/.frantss/` and verifies the exclusion
-when Git is available. Already tracked configuration requires explicit cleanup.
-Use it to set up tracking, inspect configuration, or change settings and source
-mappings. Inspection is read-only; projects require explicit creation commands.
+[setup-frantss-skills](skills/setup-frantss-skills/SKILL.md) manages the shared
+`.frantss` configuration directory and its Git exclusion. General setup prepares
+this directory without enabling a configuration. Tracking is currently supported;
+other configurations can add guides and files without changing shared setup.
+
+Inspection is read-only. Updates preserve unselected configuration files, and
+already tracked configuration requires explicit Git index cleanup.
+
+## Tracking
 
 Shared reporting settings and account identities live in the selected backend;
 each project record holds its sources. The local config holds only the backend
