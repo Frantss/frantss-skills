@@ -12,17 +12,17 @@ The adapter implements write ordering, verification, and recoverable storage app
 
 ## Read, query, and history
 
-Supply record type and ID/key for lookup, or project, area, date, state, and result limits for queries.
-An inbox query selects pending tasks without a project. Ordinary queries select current records, excluding archived revisions.
+Supply record type and ID/key for lookup, or workspace, area, date, state, and result limits for queries.
+An inbox query selects pending tasks without a workspace. Ordinary queries select current records, excluding archived revisions.
 Activity queries use occurrence date; collection or file modification dates cannot establish when activity happened.
 Historical status requires dated events and retained revisions at the requested cutoff; distinguish it from current status.
 Request exact ID/revision pairs for report inputs. Return missing history, unsupported filters, inaccessible records, and pagination explicitly.
 
 ## Configure and return
 
-Use `setup-frantss-skills` when available for explicit configuration: `.frantss/tracking.yaml` selects one backend for every project.
-The adapter saves shared reporting settings and project source records in that backend and initializes requested storage/views.
-Setup alone creates no project records. Changing the backend selection does not migrate existing records.
+Use `setup-frantss-skills` when available for explicit configuration: `.frantss/tracking.yaml` selects one backend for every workspace.
+The adapter saves shared reporting settings and workspace source records in that backend and initializes requested storage/views.
+Setup alone creates no workspace records. Changing the backend selection does not migrate existing records.
 Return `verified`, `partial`, `failed`, or `unsupported` per operation, with IDs, keys, revisions, durable references, and coverage.
 For partial or failed writes, include persisted parts, missing steps, recoverable payload locations, and remaining unsaved inputs.
 Stop after a repeated unresolved conflict or access failure and identify what needs resolution.

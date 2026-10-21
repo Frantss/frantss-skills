@@ -19,6 +19,6 @@ Separate occurrence and recording times; unknown dates stay unknown.
 
 ## Retrieve
 
-Return uncategorized pending tasks for inbox queries. Respect requested project or area scope.
-With no scope specified, include the inbox and all projects. Include references, deadlines, and acknowledgment state where useful.
+Return uncategorized pending tasks for inbox queries. Respect requested workspace or area scope.
+With no scope specified, include the inbox and all workspaces. Include references, deadlines, and acknowledgment state where useful.
 Identify inaccessible or incomplete results instead of presenting them as empty.

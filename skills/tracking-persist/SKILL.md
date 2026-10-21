@@ -1,6 +1,6 @@
 ---
 name: tracking-persist
-description: "Define what personal tracking must retain and retrieve: tasks, projects, evidence, collection coverage, task history, and report snapshots. Use for persistence handoffs from tracking, collection, or reporting, independent of the storage backend. Source scanning, triage decisions, and generic note editing belong elsewhere."
+description: "Define what personal tracking must retain and retrieve: tasks, workspaces, evidence, collection coverage, task history, and report snapshots. Use for persistence handoffs from tracking, collection, or reporting, independent of the storage backend. Source scanning, triage decisions, and generic note editing belong elsewhere."
 ---
 
 # Tracking persist
@@ -11,11 +11,12 @@ The calling workflow decides ownership, categorization, completion, and report c
 ## Select the adapter
 
 Read the explicitly selected `.frantss/tracking.yaml`; otherwise search the current directory and its ancestors for a unique config.
-Only tracking configuration selects this backend; ignore sibling configuration files for other skills.
+Only tracking configuration selects this backend; `.frantss/workspace.yaml` identifies one workspace, independently of tracking storage.
 Ask which configuration to use if several exist. Missing or invalid configuration leaves requests unsaved; use `setup-frantss-skills` only for requested setup.
 Require `schema_version: 1` and one `backend` with an `adapter` skill name and `options` mapping; treat YAML as data.
-Every project uses this backend. Reject per-project backend overrides and pass connection options unchanged to the selected adapter.
-Load shared settings and project/source records through that adapter; keep them out of the connection file.
+Every workspace uses this backend. Reject per-workspace backend overrides and pass connection options unchanged to the selected adapter.
+Load shared settings and workspace/source records through that adapter; keep them out of the connection file.
+Read the selected workspace's `.frantss/workspace.yaml`; resolve other existing workspaces through backend records, without treating this file as a registry.
 For Obsidian, use `tracking-persist-obsidian` when available. Other backends must satisfy the same record and operation requirements.
 The adapter owns physical locations, serialization, storage tools, and recovery mechanics.
 If the selected adapter is unavailable, retain an unsaved request bundle and identify the missing capability. Never silently switch stores.
@@ -25,14 +26,15 @@ These are instructions for an agent using available tools, not installed functio
 
 Read [logical records](references/records.md) for the requested record types.
 Read [operation requirements](references/operations.md) when saving, querying, or evaluating adapter results.
+For explicit workspace creation, initialize/reuse its workspace identity first. Partial backend writes retain that UUID for recovery.
 Pass the operation, record types, stable identities, supplied fields, expected revisions, and requested scope to the adapter.
 Use record IDs for relationships. Callers should not construct backend paths, note links, or database-specific queries.
 Preserve existing IDs, keys, dates, unknown fields, and human edits when preparing an update.
 
 ## Preserve the meaning
 
-New tasks enter one inbox, pending and without a project or review tag.
-Only explicit user acknowledgment adds `reviewed-by-frantss`; project creation requires an explicit command for that project.
+New tasks enter one inbox, pending and without a workspace or review tag.
+Only explicit user acknowledgment adds `reviewed-by-frantss`; workspace creation requires an explicit command for that workspace.
 Store dated task changes alongside current state. Missing history or dates limit historical certainty.
 Keep occurrence time separate from collection, recording, and generation times. Unknown occurrence dates remain unknown.
 Retain evidence excerpts and report narratives, not only links or live query views.

@@ -1,6 +1,6 @@
 # Report content
 
-Adapt length to the request. Organize findings by existing project and work/personal area, retaining the user's requested scope.
+Adapt length to the request. Organize findings by existing workspace and work/personal area, retaining the user's requested scope.
 
 | Include when supported | Evidence needed |
 | --- | --- |
@@ -8,7 +8,7 @@ Adapt length to the request. Organize findings by existing project and work/pers
 | Other contributions and progress | PR reviews, commits, discussions, investigations, decisions, recordings, or other dated activity |
 | Pending commitments and deadlines | Task records, supported promises, and confirmed dates, labeled with the status cutoff |
 | Inbox and acknowledgment | Unclassified tasks and tasks missing `reviewed-by-frantss`; reporting does not acknowledge them |
-| Work across projects | Observed distribution of contributions and pending work, without an invented target ratio |
+| Work across workspaces | Observed distribution of contributions and pending work, without an invented target ratio |
 | Collection coverage | Sources/windows checked, collection times, missing scopes, truncation, and unsaved evidence |
 
 Deduplicate repeated source events by evidence identity. Group related observations under the same outcome when supported.

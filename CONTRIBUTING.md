@@ -1,6 +1,6 @@
 # Authoring skills
 
-Start with one concrete task you repeat across projects. Give the skill a name
+Start with one concrete task you repeat across workspaces. Give the skill a name
 that describes that task and a description that helps an agent recognize when
 to use it. The folder and frontmatter name must match.
 
@@ -37,7 +37,7 @@ Add supporting files when needed:
 Link references from the point where an agent needs them. Use links relative
 to the containing Markdown file, and bundle every required resource within the
 skill as real files and directories. GitHub CLI's local installer skips symlinks,
-including internal ones. Keep examples generic enough to travel between projects;
+including internal ones. Keep examples generic enough to travel between workspaces;
 record actual system, network, or tool requirements in `compatibility` when
 relevant.
 

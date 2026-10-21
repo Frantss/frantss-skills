@@ -4,7 +4,7 @@ Persist the written report with these logical fields in the configured storage f
 
 | Field | Meaning |
 | --- | --- |
-| Report key | Report type, exact interval, timezone, and sorted project identities |
+| Report key | Report type, exact interval, timezone, and sorted workspace identities |
 | Generation time | When the report was produced, distinct from its activity period |
 | Evidence | Collection IDs, supporting evidence/task references, and source revisions when available |
 | Status cutoffs | Whether pending work represents period end or current status, with the relevant timestamp |

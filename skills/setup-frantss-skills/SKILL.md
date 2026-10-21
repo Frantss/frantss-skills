@@ -1,6 +1,6 @@
 ---
 name: setup-frantss-skills
-description: "Set up, inspect, or update Frantss skills configuration under .frantss. Prepare the shared configuration directory and Git exclusion, then load guides for requested configurations. Ordinary use of configured skills does not initiate setup."
+description: "Set up, inspect, or update Frantss skills configuration under .frantss, including tracking sources. Prepare the shared configuration directory and Git exclusion, then load guides for requested configurations. Ordinary use of configured skills does not initiate setup."
 ---
 
 # Setup Frantss skills
@@ -11,6 +11,7 @@ Load only selected guides; a request for all configurations selects every suppor
 
 | Configuration | Owned file | Guide |
 | --- | --- | --- |
+| Workspace identity | `workspace.yaml` | [Workspace](references/workspace-identity.md) |
 | Tracking | `tracking.yaml` | [Tracking](references/tracking.md) |
 
 Use an explicitly selected workspace, otherwise the current Git root.
