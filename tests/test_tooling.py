@@ -20,8 +20,8 @@ class ToolingTests(unittest.TestCase):
             shutil.copytree(source / folder, self.root / folder)
         (self.root / "skills").mkdir()
 
-    def finished_skill(self):
-        skill = create_skill(self.root, "example-task", 'Use when a task contains: "quotes".')
+    def finished_skill(self, name="example-task"):
+        skill = create_skill(self.root, name, 'Use when a task contains: "quotes".')
         path = skill / "SKILL.md"
         lines = path.read_text().splitlines()
         path.write_text("\n".join(line for line in lines if "<!-- scaffold:" not in line))
@@ -93,6 +93,50 @@ class ToolingTests(unittest.TestCase):
     def test_template_is_not_discovered_but_stray_skills_fail(self):
         (self.root / "templates/SKILL.md").write_text("An accidentally discoverable template.")
         self.assertTrue(any("directly under skills/" in error for error in packaging_errors(self.root)))
+
+    def test_line_limit_counts_entrypoint_references_and_metadata(self):
+        skill = self.finished_skill()
+        initial = len((skill / "SKILL.md").read_text().splitlines())
+        (skill / "references").mkdir()
+        (skill / "references/details.md").write_text("\n" * (98 - initial))
+        (skill / "agents").mkdir()
+        metadata = skill / "agents/openai.yaml"
+        metadata.write_text('policy:\n  allow_implicit_invocation: true\n')
+        self.assertEqual(packaging_errors(self.root), [])
+        with metadata.open("a") as output:
+            output.write("\n")
+        self.assertTrue(any("101 text lines" in error for error in packaging_errors(self.root)))
+
+    def test_line_limit_counts_helper_code_but_excludes_binary_assets(self):
+        skill = self.finished_skill()
+        (skill / "assets").mkdir()
+        (skill / "assets/binary.dat").write_bytes(b"\0\xff\n" * 200)
+        self.assertEqual(packaging_errors(self.root), [])
+        (skill / "scripts").mkdir()
+        (skill / "scripts/helper.py").write_text("pass\n" * 101)
+        self.assertTrue(any("line limit" in error for error in packaging_errors(self.root)))
+
+    def test_persistence_has_a_200_line_limit_including_references(self):
+        skill = self.finished_skill("personal-persist")
+        initial = len((skill / "SKILL.md").read_text().splitlines())
+        (skill / "references").mkdir()
+        reference = skill / "references/records.md"
+        reference.write_text("\n" * (200 - initial))
+        self.assertEqual(packaging_errors(self.root), [])
+        with reference.open("a") as output:
+            output.write("\n")
+        errors = packaging_errors(self.root)
+        self.assertEqual(len(errors), 1)
+        self.assertIn("201 text lines exceeds the 200-line limit", errors[0])
+
+    def test_persistence_exception_does_not_apply_to_other_names(self):
+        for name in ("personal-persist-other", "personal-persist-obsidian"):
+            with self.subTest(name=name):
+                skill = self.finished_skill(name)
+                initial = len((skill / "SKILL.md").read_text().splitlines())
+                (skill / "details.txt").write_text("\n" * (101 - initial))
+                self.assertTrue(any(f"skills/{name}: 101 text lines exceeds the 100-line limit" in error
+                                    for error in packaging_errors(self.root)))
 
 
 if __name__ == "__main__":
