@@ -51,6 +51,11 @@ context, and collection coverage for later queries. Source-specific guidance and
 the evidence format load only when needed. Collection can hand outstanding
 commitments to `personal-track`.
 
+[personal-report](skills/personal-report/SKILL.md) creates and saves daily or
+weekly reports from collected evidence and task history. It includes untracked
+contributions, distinguishes past status from current pending work, and records
+coverage gaps. Period, content, and persistence details load only when needed.
+
 ## Install
 
 This repository is private. Anyone installing from GitHub needs repository
