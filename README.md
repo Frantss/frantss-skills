@@ -102,27 +102,32 @@ For skills installed with Vercel's CLI, use `npx skills update`.
 | [tracking-tasks](skills/tracking-tasks/SKILL.md) | Capture commitments into one inbox, triage them into workspaces, and manage pending tasks and acknowledgment. |
 | [tracking-collect](skills/tracking-collect/SKILL.md) | Gather dated activity and evidence from configured sources, preserving provenance and collection coverage. |
 | [tracking-report](skills/tracking-report/SKILL.md) | Create, save, and retrieve daily or weekly reports covering contributions, pending work, and evidence gaps. |
-| [tracking-persist](skills/tracking-persist/SKILL.md) | Define shared settings, logical records, and storage requirements for tasks, evidence, and reports across backends. |
-| [tracking-persist-obsidian](skills/tracking-persist-obsidian/SKILL.md) | Use the Obsidian CLI to store tracking records and revisions as notes, with Bases views for tasks and activity. |
+| [frantss-persistance](skills/frantss-persistance/SKILL.md) | Persist shared workspace configuration and prepared workflow records through one backend, with conditional tracking schemas. |
+| [frantss-persistance-obsidian](skills/frantss-persistance-obsidian/SKILL.md) | Use the Obsidian CLI to store Frantss records and revisions as notes and create requested Bases views. |
 
 ## Configuration
 
-Use `setup-frantss-skills` for user-wide connection setup and explicit workspace registration.
-Its [connection guide](skills/setup-frantss-skills/references/tracking.md) checks the shared backend;
-its [tracking guide](skills/setup-frantss-skills/references/sources.md) configures settings and sources.
+Use `setup-frantss-skills` to configure your user-wide connection and register workspaces.
+Its [persistence guide](skills/setup-frantss-skills/references/persistence.md)
+checks the shared backend; its [tracking guide](skills/setup-frantss-skills/references/sources.md)
+configures tracking settings and source scope with CLI, API, skill, MCP, or plugin access methods.
 
-Tracking reads one connection from `~/.frantss/tracking.yaml`, independently of the working directory.
-The file holds `schema_version: 1` and `backend: {adapter, options}`; other Frantss configurations can use sibling files.
-Workspace IDs, names, work/personal areas, repository associations, machine-specific paths, and sources live in the backend.
-Repository-backed workspace IDs use kebab-case `org/repo`, such as `frantss/frantssuy`; other workspaces use a readable slug.
-IDs remain fixed across renames; other record types retain UUIDs.
+Frantss workflows share one connection in `~/.frantss/persistance.yaml`, regardless of the current directory.
+The file holds `schema_version: 1` and `backend: {adapter, options}`. Other Frantss configurations can use sibling files.
+The backend stores shared [settings](skills/frantss-persistance/references/settings.md) and each workspace's
+stable readable ID, display name, work/personal area, repository associations, machine-specific local paths, and sources.
+Repository-backed IDs use kebab-case `org/repo`, such as `frantss/frantssuy`; other workspaces use a chosen slug, such as `personal-admin`.
+IDs remain fixed after repository renames or moves; other record types continue to use UUIDs.
 
-Explicit selection takes precedence over registered remotes, then machine-specific canonical paths.
-Missing or ambiguous matches require clarification. Worktrees can share one identity; inbox capture needs no checkout association.
-General setup creates no workspaces or associations; their creation requires explicit instructions.
-Repository-local `.frantss` folders and Git-ignore changes are no longer required or discovered.
-Explicit legacy imports map UUIDs to readable IDs and migrate references/history; retain old files until cleanup is requested.
-Install both persistence skills for Obsidian and supply an existing vault path and tracking root.
+An explicit workspace selection takes precedence. For the current workspace, match registered repository remotes,
+then machine-specific canonical paths; ask when a match is absent or ambiguous. Worktrees can share a workspace identity.
+Creating workspaces and changing their associations require explicit instructions; general setup creates neither.
+Inbox capture and cross-workspace reports need no local workspace association.
+
+Repository-local `.frantss` folders and Git-ignore changes are no longer required.
+Existing connections using the former tracking config or adapter name require explicit import; vault/root options stay unchanged.
+Legacy UUIDs need an old-to-new ID mapping and reference/history migration. Local files are not discovered automatically.
+Install both persistence skills to use Obsidian; setup requires an existing vault path and a storage root, defaulting to `Frantss` for new setups.
 Enable and register the official Obsidian CLI; it connects to the desktop app.
 
 ## Automatic use

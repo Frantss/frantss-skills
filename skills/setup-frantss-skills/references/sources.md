@@ -1,6 +1,6 @@
 # Tracking configuration
 
-For requested tracking settings/accounts, use the `tracking-persist` schema; preserve existing fields and resolve timezone/week start when needed. Read [persistence setup](tracking.md) for connection checks.
+For requested tracking settings/accounts, use the `frantss-persistance` schema; preserve existing fields and resolve timezone/week start when needed. Read [persistence setup](persistence.md) for connection checks.
 Store workspace `sources` in its backend record; the catalog below defines supported providers for setup.
 Each mapping has workspace-unique stable string `id`, `provider`, `account`, user `identity`, bounded `scope`, and nonempty `access` list.
 Account identifies a host/account or tenant; identity is a user identifier or shared account-identity reference.

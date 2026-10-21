@@ -14,8 +14,8 @@ The generator refuses existing destinations and invalid names.
 ## Write the shared instructions
 
 Each skill has a hard limit of 100 total lines across its authored UTF-8 text
-files, except `tracking-persist`, which may use up to 200 lines.
-Storage adapters, including `tracking-persist-obsidian`, keep the 100-line limit.
+files, except `frantss-persistance`, which may use up to 200 lines.
+Storage adapters, including `frantss-persistance-obsidian`, keep the 100-line limit.
 Count frontmatter, blank lines, references, helper code, and metadata.
 Binary assets are excluded. `make validate` enforces the total per skill;
 progressive disclosure does not increase the budget.

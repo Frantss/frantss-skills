@@ -167,7 +167,7 @@ class ToolingTests(unittest.TestCase):
         self.assertTrue(any("line limit" in error for error in packaging_errors(self.root)))
 
     def test_persistence_has_a_200_line_limit_including_references(self):
-        skill = self.finished_skill("tracking-persist")
+        skill = self.finished_skill("frantss-persistance")
         initial = len((skill / "SKILL.md").read_text().splitlines())
         (skill / "references").mkdir()
         reference = skill / "references/records.md"
@@ -180,7 +180,7 @@ class ToolingTests(unittest.TestCase):
         self.assertIn("201 text lines exceeds the 200-line limit", errors[0])
 
     def test_persistence_exception_does_not_apply_to_other_names(self):
-        for name in ("tracking-persist-other", "tracking-persist-obsidian"):
+        for name in ("frantss-persistance-other", "frantss-persistance-obsidian"):
             with self.subTest(name=name):
                 skill = self.finished_skill(name)
                 initial = len((skill / "SKILL.md").read_text().splitlines())

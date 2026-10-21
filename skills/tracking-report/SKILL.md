@@ -7,7 +7,7 @@ description: "Create, save, or retrieve daily and weekly reports of personal act
 
 Explain what the user did and what remains pending across selected work and personal workspaces.
 Use collected evidence and task history, including contributions without tracked tasks. Planning is outside this workflow.
-Use the shared backend selected by `~/.frantss/tracking.yaml`; reporting does not initialize or change configuration.
+Use the shared backend selected by `~/.frantss/persistance.yaml`; reporting does not initialize or change configuration.
 Resolve requested workspace IDs through persistence; current-workspace lookup uses registered remotes or machine-scoped paths, never repository-local configuration.
 
 ## Prepare
@@ -30,7 +30,7 @@ An explicit request for task changes belongs to `tracking-tasks` when available;
 ## Save or retrieve
 
 For a new report, read [persistence rules](references/save.md) and save through configured storage without another approval prompt.
-Use `tracking-persist` when available for record requirements; its adapter owns formats and locations. Verify the write and return its reference.
+Use `frantss-persistance` when available for record requirements; its adapter owns formats and locations. Verify the write and return its reference.
 For a request to retrieve an existing report, return its saved snapshot and generation time without silently regenerating it.
 If no saved report exists, say so and offer a newly generated report from available evidence, labeled with its generation time.
 If storage is unavailable or saving fails, return the report as unsaved with the specific missing capability or failure.

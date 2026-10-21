@@ -11,7 +11,7 @@ Load only selected guides; a request for all configurations selects every suppor
 
 | Configuration | Stored in | Guide |
 | --- | --- | --- |
-| Persistence connection | `~/.frantss/tracking.yaml` | [Persistence](references/tracking.md) |
+| Persistence connection | `~/.frantss/persistance.yaml` | [Persistence](references/persistence.md) |
 | Workspace registration and associations | Backend workspace record | [Workspace](references/workspace-identity.md) |
 | Tracking settings and sources | Backend settings/workspace records | [Tracking](references/sources.md) |
 

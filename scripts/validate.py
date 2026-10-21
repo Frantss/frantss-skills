@@ -13,7 +13,7 @@ from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 MAX_SKILL_LINES = 100
-SKILL_LINE_LIMITS = {"tracking-persist": 200}
+SKILL_LINE_LIMITS = {"frantss-persistance": 200}
 LINK = re.compile(r'!?\[[^\]\n]*\]\(\s*(<[^>\n]+>|[^\s)]+)(?:\s+[\'\"][^)\n]*[\'\"])?\s*\)')
 FENCE = re.compile(r"^```[^\n]*\n.*?^```\s*$", re.MULTILINE | re.DOTALL)
 

@@ -5,7 +5,7 @@ Use [Bases YAML](https://obsidian.md/help/bases/syntax). Scope every view to the
 Adapt this Inbox example to the selected root; serialize paths as quoted data rather than interpolating arbitrary expressions:
 
 ```yaml
-filters: 'file.inFolder("Tracking") && !file.inFolder("Tracking/History")'
+filters: 'file.inFolder("Frantss") && !file.inFolder("Frantss/History")'
 views:
   - type: table
     name: Inbox

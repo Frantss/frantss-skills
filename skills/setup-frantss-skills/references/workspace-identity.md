@@ -1,7 +1,7 @@
 # Workspace identity
 
-Use the backend selected by `~/.frantss/tracking.yaml`; workspace identity and configuration are backend records, shared across Frantss skills.
-Read [persistence setup](tracking.md) for connection/access checks; use `tracking-persist` when available for workspace schema and resolution.
+Use the backend selected by `~/.frantss/persistance.yaml`; workspace identity and configuration are backend records, shared across Frantss skills.
+Read [persistence setup](persistence.md) for connection/access checks; use `frantss-persistance` when available for workspace schema and resolution.
 Resolve explicit readable ID or unique display title first; otherwise match registered repository remotes, then machine-scoped canonical local roots.
 When inferring context, inspect the current Git root/remotes, not parents; unresolved matches require clarification and never imply workspace creation.
 Only explicit workspace creation registers an ID: use kebab-case `org/repo` from the selected repository, e.g. `frantss/frantssuy`, or a user-chosen slug without a repository.
