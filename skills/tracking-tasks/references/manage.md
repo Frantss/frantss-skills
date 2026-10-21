@@ -1,19 +1,8 @@
-# Acknowledge
+# Management
 
-Absence of `reviewed-by-frantss` means unreviewed; natural-language acknowledgment requires clear task/batch scope, not general workflow agreement.
-Preserve acknowledgment during other changes; remove the tag only on an explicit request to mark unreviewed.
-
-## Update
-
-Resolve the exact task; clarify ambiguous targets. Preserve unrelated fields, evidence, and human edits; apply [content/date rules](content.md).
-Reassess states using [triage](triage.md); reopening restores the appropriate unfinished state from evidence, not automatically Next.
-
-Record Done only from an explicit user report or evidence satisfying the outcome; a merged subtask PR does not complete a broader release.
-Persist dated before/after events for state, workspace, acknowledgment, dates, blockers, triage reasons, and context changes, including reopening.
-Separate occurrence and recording times; unknown dates stay unknown. Repeated triage with no change creates no event.
-
-## Retrieve
-
-Inbox queries select `inbox` or legacy `pending`, regardless of workspace. Pending queries return Next/Later plus Inbox awaiting triage; show Maybe separately when requested.
-Respect workspace/area scope; without scope, include the inbox and all workspaces. Include references, dates, blockers, and acknowledgment where useful.
-Identify inaccessible/incomplete results rather than presenting them as empty; legacy `pending` needs triage, preserving its workspace and history.
+Acknowledgment needs clear task/batch scope; general workflow agreement is insufficient. Remove the review tag only on an explicit request to mark unreviewed.
+Resolve the exact task before updates; preserve unrelated fields, evidence, and human edits. Apply [record/content rules](content.md).
+Completion requires the whole outcome, not a merged subtask PR. Reopening uses [triage](triage.md), without automatically selecting Next.
+Record dated events for changes; unchanged retries/repeated triage create no event or revision. Recover incomplete task/event writes before further changes.
+Inbox queries select `status: inbox` regardless of workspace. Pending queries include Next/Later and unresolved Inbox; Maybe appears separately when requested.
+Respect workspace/area scope; without scope include Inbox and all workspaces. Return references, dates, blockers, acknowledgment, and explicit access/pagination gaps.

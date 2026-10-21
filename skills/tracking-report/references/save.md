@@ -1,18 +1,12 @@
-# Save a report snapshot
+# Report snapshot records
 
-Persist the written report with these logical fields in the configured storage format:
-
-| Field | Meaning |
-| --- | --- |
-| Report key | Report type, exact interval, timezone, and sorted workspace identities |
-| Generation time | When the report was produced, distinct from its activity period |
-| Evidence | Collection IDs, supporting evidence/task references, and source revisions when available |
-| Status cutoffs | Whether pending work represents period end or current status, with the relevant timestamp |
-| Coverage | Source windows, gaps, truncation, unsaved inputs, and completeness at generation time |
-| Narrative | The saved account of outcomes, contributions, and pending work, with supporting links |
-
-Keep the narrative as a dated snapshot. Live query views may supplement it but must not replace its saved evidence or conclusions.
-Before saving, find an existing report with the same key. Retries must not create accidental duplicates.
-On regeneration, retain the prior snapshot as a revision and preserve human edits; identify the revised evidence cutoff.
-If storage cannot preserve a revision, resolve replacement of existing content before overwriting it.
-Read back by key after an uncertain write. Return a verified reference or an explicit partial/unsaved result.
+Supply the common persistence envelope with UUID `id`; retain `report_type: daily|weekly`, `workspaces`, `window_start`, `window_end`, and `timezone`.
+Also retain `generated_at`, `evidence`, `narrative`, and `manifest`; generation time is distinct from the reported activity period.
+Key: compact canonical JSON `[report_type, window_start, window_end, timezone, sorted_workspace_ids]`.
+Normalize key timestamps to UTC, sort unique readable workspace strings lexicographically, and use inclusive-start/exclusive-end windows.
+The manifest retains collection IDs, exact input IDs/revisions, status cutoffs, coverage, and completeness at generation time.
+Identify whether pending work is at period end or current status, with timestamp; preserve unavailable snapshots/history as gaps.
+Find by key before creation; identical scope identifies one report with successive revisions, and retries cannot duplicate it.
+Retain prior report/input revisions so exact inputs remain retrievable after edits. Preserve human narrative edits during regeneration.
+If storage cannot retain a prior revision, resolve replacement before overwriting. Live views supplement, never replace saved narratives/manifests.
+Read back uncertain writes by key; return a verified reference or partial/unsaved payload with missing steps, without repeating saved effects.

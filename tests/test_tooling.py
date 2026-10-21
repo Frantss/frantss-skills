@@ -148,14 +148,14 @@ class ToolingTests(unittest.TestCase):
         skill = self.finished_skill()
         initial = len((skill / "SKILL.md").read_text().splitlines())
         (skill / "references").mkdir()
-        (skill / "references/details.md").write_text("\n" * (98 - initial))
+        (skill / "references/details.md").write_text("\n" * (73 - initial))
         (skill / "agents").mkdir()
         metadata = skill / "agents/openai.yaml"
         metadata.write_text('policy:\n  allow_implicit_invocation: true\n')
         self.assertEqual(packaging_errors(self.root), [])
         with metadata.open("a") as output:
             output.write("\n")
-        self.assertTrue(any("101 text lines" in error for error in packaging_errors(self.root)))
+        self.assertTrue(any("76 text lines exceeds the 75-line limit" in error for error in packaging_errors(self.root)))
 
     def test_line_limit_counts_helper_code_but_excludes_binary_assets(self):
         skill = self.finished_skill()
@@ -163,29 +163,33 @@ class ToolingTests(unittest.TestCase):
         (skill / "assets/binary.dat").write_bytes(b"\0\xff\n" * 200)
         self.assertEqual(packaging_errors(self.root), [])
         (skill / "scripts").mkdir()
-        (skill / "scripts/helper.py").write_text("pass\n" * 101)
+        (skill / "scripts/helper.py").write_text("pass\n" * 76)
         self.assertTrue(any("line limit" in error for error in packaging_errors(self.root)))
 
-    def test_persistence_has_a_200_line_limit_including_references(self):
-        skill = self.finished_skill("frantss-persistance")
-        initial = len((skill / "SKILL.md").read_text().splitlines())
-        (skill / "references").mkdir()
-        reference = skill / "references/records.md"
-        reference.write_text("\n" * (200 - initial))
-        self.assertEqual(packaging_errors(self.root), [])
-        with reference.open("a") as output:
-            output.write("\n")
-        errors = packaging_errors(self.root)
-        self.assertEqual(len(errors), 1)
-        self.assertIn("201 text lines exceeds the 200-line limit", errors[0])
-
-    def test_persistence_exception_does_not_apply_to_other_names(self):
-        for name in ("frantss-persistance-other", "frantss-persistance-obsidian"):
+    def test_named_line_limits_include_references(self):
+        for name, limit in (("communicate", 50), ("frantss-persistance", 100),
+                            ("frantss-persistance-obsidian", 100)):
             with self.subTest(name=name):
                 skill = self.finished_skill(name)
                 initial = len((skill / "SKILL.md").read_text().splitlines())
-                (skill / "details.txt").write_text("\n" * (101 - initial))
-                self.assertTrue(any(f"skills/{name}: 101 text lines exceeds the 100-line limit" in error
+                (skill / "references").mkdir()
+                reference = skill / "references/records.md"
+                reference.write_text("\n" * (limit - initial))
+                self.assertEqual(packaging_errors(self.root), [])
+                with reference.open("a") as output:
+                    output.write("\n")
+                errors = packaging_errors(self.root)
+                self.assertEqual(len(errors), 1)
+                self.assertIn(f"{limit + 1} text lines exceeds the {limit}-line limit", errors[0])
+                reference.write_text("\n" * (limit - initial))
+
+    def test_line_limit_exceptions_require_exact_skill_names(self):
+        for name in ("frantss-persistance-other", "communicate-other"):
+            with self.subTest(name=name):
+                skill = self.finished_skill(name)
+                initial = len((skill / "SKILL.md").read_text().splitlines())
+                (skill / "details.txt").write_text("\n" * (76 - initial))
+                self.assertTrue(any(f"skills/{name}: 76 text lines exceeds the 75-line limit" in error
                                     for error in packaging_errors(self.root)))
 
 

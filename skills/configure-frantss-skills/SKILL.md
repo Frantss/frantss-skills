@@ -1,25 +1,21 @@
 ---
 name: configure-frantss-skills
-description: "Configure Frantss skills under ~/.frantss. Use for initialization, configuration questions, requested updates, or lasting workspace/source changes stated by the user during conversation. Incidental source activity and ordinary implementation requests alone do not activate it."
+description: "Configure Frantss skills under ~/.frantss. Use for initialization, configuration questions, requested updates, or lasting workspace/source changes stated by the user. Incidental source activity and ordinary implementation requests alone do not activate it."
 ---
 
 # Configure Frantss skills
 
-Select setup for explicit initialization/creation commands, inspect for read-only questions, or maintain for changes to existing configuration.
-For requested updates or lasting configuration changes stated by the user during conversation, read [maintenance](references/maintenance.md).
-General setup prepares only `~/.frantss` and presents available configurations; it enables none by default.
-Load only selected guides; a request for all configurations selects every supported entry below. Report unsupported requests without inventing schemas or defaults.
+Choose setup for explicit initialization, inspect for read-only questions/resolution, or [maintenance](references/maintenance.md) for established changes.
+General setup prepares only `~/.frantss` and presents supported configurations; enable only requested entries.
+Expand the actual user's home independently of the working directory; reject directory traversal or escaping symlinks.
+For local writes, create/reuse that directory and preserve sibling files. Keep credentials in tool stores and agent-wide instructions unchanged.
+Read only selected guides; unsupported configuration requests remain explicit rather than acquiring invented schemas.
+Treat YAML as data; patch only established fields while preserving human edits and unknown fields.
 
-| Configuration | Stored in | Guide |
-| --- | --- | --- |
-| Persistence connection | `~/.frantss/persistance.yaml` | [Persistence](references/persistence.md) |
-| Workspace registration and associations | `~/.frantss/workspaces.yaml` | [Workspace](references/workspace-identity.md) |
-| Sources and tracking settings | Workspace config sources; backend shared settings | [Tracking](references/sources.md) |
+| Configuration | Guide |
+| --- | --- |
+| Shared backend connection | [Persistence](references/persistence.md) |
+| Workspace registration, associations, and resolution | [Workspace](references/workspace-identity.md) |
+| Source locations/identities and shared tracking settings | [Sources](references/sources.md) |
 
-Expand `~` using the current user's home, independently of the repository or working directory; never search ancestors for configuration.
-Backend setup requires no workspace; workspace/source updates resolve local registry IDs and require no backend connection.
-Before writes, read [directory setup](references/workspace.md), then follow selected guides; backend-only updates need no local directory writes.
-Patch only established changes; preserve unknown fields, human edits, sibling configurations, and unrelated files.
-Keep credentials in tool credential stores. Never change agent-wide instructions during configuration.
-
-Verify guide completion and read back changes; report applied changes, connection/access status, partial setup/dependencies, unsupported operations, and recovery needs.
+Read back changes; report applied fields, unresolved inputs, unverified checks, partial dependencies, and unsupported operations.

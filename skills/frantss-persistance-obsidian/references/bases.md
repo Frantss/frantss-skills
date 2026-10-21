@@ -9,7 +9,7 @@ filters: 'file.inFolder("Frantss") && !file.inFolder("Frantss/History")'
 views:
   - type: table
     name: Inbox
-    filters: 'note.record_type == "task" && (note.status == "inbox" || note.status == "pending")'
+    filters: 'note.record_type == "task" && note.status == "inbox"'
     order: [note.title, note.workspace, note.due_date, note.expected_date, note.tags]
 ```
 

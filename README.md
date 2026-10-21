@@ -102,7 +102,7 @@ For skills installed with Vercel's CLI, use `npx skills update`.
 | [tracking-tasks](skills/tracking-tasks/SKILL.md) | Capture brief tasks, triage them across Inbox, Next, Later, Maybe, and Done, and manage workspaces, dates, blockers, and acknowledgment. |
 | [tracking-collect](skills/tracking-collect/SKILL.md) | Gather dated activity and evidence from configured sources, preserving provenance and collection coverage. |
 | [tracking-report](skills/tracking-report/SKILL.md) | Create, save, and retrieve daily or weekly reports covering contributions, pending work, and evidence gaps. |
-| [frantss-persistance](skills/frantss-persistance/SKILL.md) | Resolve local workspace/source configuration and persist prepared workflow records through one backend, with conditional tracking schemas. |
+| [frantss-persistance](skills/frantss-persistance/SKILL.md) | Persist complete workflow payloads through one backend, preserving common record identities, revisions, and recoverable operations. |
 | [frantss-persistance-obsidian](skills/frantss-persistance-obsidian/SKILL.md) | Use the Obsidian CLI to store Frantss records and revisions as notes and create requested Bases views. |
 
 Tasks start in Inbox. Clear evidence supports automatic triage: assigned current-sprint work goes to Next,
@@ -112,7 +112,6 @@ Firm due dates and expected completion dates are optional and distinct. Weekly r
 daily reports emphasize Next, dates, and blockers. Reports suggest reassessment without changing tasks.
 Task content aims for 5–15 lines, with a hard limit of 50 excluding link-only lines and storage metadata.
 Linked tickets/documents retain their details; tasks hold an outcome, brief context, and references.
-Legacy `pending` tasks await triage with their workspace/history preserved; reads and reports do not rewrite them.
 
 ## Configuration
 
@@ -155,13 +154,11 @@ IDs remain fixed after repository renames or moves; backend workflow records use
 
 An explicit workspace selection takes precedence. For the current workspace, match registered repository remotes,
 then machine-specific canonical paths; ask when a match is absent or ambiguous. Worktrees can share a workspace identity.
-Creating workspaces and changing their associations require explicit instructions; setup edits the local registry and general setup creates neither.
+Creating workspaces requires an explicit command; established association changes use configuration maintenance. General setup creates no workspaces or associations.
 Inbox capture and cross-workspace reports need no local workspace association.
 
-Repository-local `.frantss` folders and Git-ignore changes are no longer required.
-Existing connections using the former tracking config or adapter name require explicit import; vault/root options stay unchanged.
-Legacy UUIDs need an old-to-new ID mapping and reference/history migration. Repository-local files are not discovered automatically.
-Existing backend workspace definitions require an explicit export into the registry; preserve IDs, reconcile conflicts, and verify the local entries before separately requested cleanup.
+Configuration is user-wide; repository-local folders and Git-ignore changes are unnecessary.
+Only the documented current formats are supported. Incompatible data is reported without conversion; record history and partial-write recovery remain supported.
 Install both persistence skills to use Obsidian; setup requires an existing vault path and a storage root, defaulting to `Frantss` for new setups.
 Enable and register the official Obsidian CLI; it connects to the desktop app.
 
