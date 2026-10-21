@@ -14,7 +14,7 @@ Keep the directory and config as real local paths; stop on symlinks that redirec
 ```yaml
 schema_version: 1
 backend:
-  adapter: personal-persist-obsidian
+  adapter: tracking-persist-obsidian
   options:
     vault: /path/to/your/vault
     root: Tracking

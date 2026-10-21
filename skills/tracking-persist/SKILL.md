@@ -1,9 +1,9 @@
 ---
-name: personal-persist
+name: tracking-persist
 description: "Define what personal tracking must retain and retrieve: tasks, projects, evidence, collection coverage, task history, and report snapshots. Use for persistence handoffs from tracking, collection, or reporting, independent of the storage backend. Source scanning, triage decisions, and generic note editing belong elsewhere."
 ---
 
-# Personal persist
+# Tracking persist
 
 Prepare storage requests and assess their results. Keep the same logical records when the storage tool changes.
 The calling workflow decides ownership, categorization, completion, and report content; this skill preserves those decisions and their evidence.
@@ -12,11 +12,11 @@ The calling workflow decides ownership, categorization, completion, and report c
 
 Read the explicitly selected `.frantss/tracking.yaml`; otherwise search the current directory and its ancestors for a unique config.
 Only tracking configuration selects this backend; ignore sibling configuration files for other skills.
-Ask which configuration to use if several exist. Missing or invalid configuration leaves requests unsaved; use `personal-setup` only for requested setup.
+Ask which configuration to use if several exist. Missing or invalid configuration leaves requests unsaved; use `setup-frantss-skills` only for requested setup.
 Require `schema_version: 1` and one `backend` with an `adapter` skill name and `options` mapping; treat YAML as data.
 Every project uses this backend. Reject per-project backend overrides and pass connection options unchanged to the selected adapter.
 Load shared settings and project/source records through that adapter; keep them out of the connection file.
-For Obsidian, use `personal-persist-obsidian` when available. Other backends must satisfy the same record and operation requirements.
+For Obsidian, use `tracking-persist-obsidian` when available. Other backends must satisfy the same record and operation requirements.
 The adapter owns physical locations, serialization, storage tools, and recovery mechanics.
 If the selected adapter is unavailable, retain an unsaved request bundle and identify the missing capability. Never silently switch stores.
 These are instructions for an agent using available tools, not installed functions or a background service.

@@ -1,12 +1,12 @@
 ---
-name: personal-persist-obsidian
+name: tracking-persist-obsidian
 description: "Read and write prepared personal tracking records in a selected Obsidian vault. Use when Obsidian is the configured persistence adapter or for explicit tracking-vault setup and Bases changes. General persistence policy and ordinary note editing belong elsewhere."
 ---
 
-# Personal persist Obsidian
+# Tracking persist Obsidian
 
 Implement supplied logical storage requests using real filesystem tools or an available Obsidian connector.
-If available, `personal-persist` prepares those requests. Without it, accept complete caller-supplied record payloads and operation requirements.
+If available, `tracking-persist` prepares those requests. Without it, accept complete caller-supplied record payloads and operation requirements.
 Ask for missing payload fields rather than inferring ownership, triage, acknowledgment, or report content.
 
 ## Setup and routing

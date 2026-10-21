@@ -1,9 +1,9 @@
 ---
-name: personal-setup
+name: setup-frantss-skills
 description: "Set up, inspect, or change personal tracking configuration: the shared backend in .frantss/tracking.yaml, reporting settings, account identities, and explicitly requested project/source mappings. Ensure .frantss is ignored by Git. Ordinary task capture, collection, and report requests do not initiate setup."
 ---
 
-# Personal setup
+# Setup Frantss skills
 
 Configure one backend shared by all tracked projects. Use real filesystem tools and an available persistence adapter.
 Own only `.frantss/tracking.yaml`; preserve configuration files for other skills in the shared `.frantss` directory.
@@ -24,7 +24,7 @@ For inspection or checks, report resolved configuration and read-only access che
    Otherwise retain the connection draft and report the unavailable adapter; do not claim backend setup succeeded.
 6. Save supplied timezone, week start, account identities, and collection limits through the adapter's settings operation.
    Preserve existing settings; ask for missing timezone/week start when required, rather than guessing them.
-7. For explicitly requested project creation, resolve its name and work/personal area; use `personal-track` when available.
+7. For explicitly requested project creation, resolve its name and work/personal area; use `tracking-tasks` when available.
    Without it, persist only an explicitly authorized project payload. Setup alone creates no project records.
    Apply supplied source mappings to exact existing projects; resolve ambiguous targets and identities before changing their scope.
 

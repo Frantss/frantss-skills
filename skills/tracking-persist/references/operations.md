@@ -20,7 +20,7 @@ Request exact ID/revision pairs for report inputs. Return missing history, unsup
 
 ## Configure and return
 
-Use `personal-setup` when available for explicit configuration: `.frantss/tracking.yaml` selects one backend for every project.
+Use `setup-frantss-skills` when available for explicit configuration: `.frantss/tracking.yaml` selects one backend for every project.
 The adapter saves shared reporting settings and project source records in that backend and initializes requested storage/views.
 Setup alone creates no project records. Changing the backend selection does not migrate existing records.
 Return `verified`, `partial`, `failed`, or `unsupported` per operation, with IDs, keys, revisions, durable references, and coverage.

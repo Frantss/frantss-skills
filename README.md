@@ -62,9 +62,9 @@ For Codex, use the global `~/.codex/AGENTS.md`. See the
 For other agents, use their supported persistent instructions file or setting.
 This repository's `AGENTS.md` already includes the rule for work here.
 
-## Personal tracking
+## Tracking
 
-[personal-setup](skills/personal-setup/SKILL.md) configures one shared backend
+[setup-frantss-skills](skills/setup-frantss-skills/SKILL.md) configures one shared backend
 for every project in `<selected-workspace>/.frantss/tracking.yaml`. It ensures
 that workspace's `.gitignore` excludes `/.frantss/` and verifies the exclusion
 when Git is available. Already tracked configuration requires explicit cleanup.
@@ -79,7 +79,7 @@ continue to share one backend. Config files stay outside installed skill folders
 The `.frantss` directory is shared across Frantss skills. Tracking owns only
 `tracking.yaml`; other skills can keep separate configuration files alongside it.
 
-[personal-track](skills/personal-track/SKILL.md) captures tasks and commitments,
+[tracking-tasks](skills/tracking-tasks/SKILL.md) captures tasks and commitments,
 triages the single inbox into existing projects, and tracks pending work.
 It also captures clear user-owned follow-ups during ongoing work.
 
@@ -88,27 +88,27 @@ categorization and completion preserve that separate review state.
 Project creation requires an explicit command from you.
 
 The skills use short entrypoints and operation-specific references, within a
-hard limit of 100 total lines per skill, or 200 for `personal-persist`.
+hard limit of 100 total lines per skill, or 200 for `tracking-persist`.
 References load only when needed.
 Live writes require a configured persistence interface.
 
-[personal-collect](skills/personal-collect/SKILL.md) gathers and persists activity
+[tracking-collect](skills/tracking-collect/SKILL.md) gathers and persists activity
 from each selected project's configured sources. It retains event dates, source
 context, and collection coverage for later queries. Source-specific guidance and
 the evidence format load only when needed. Collection can hand outstanding
-commitments to `personal-track`.
+commitments to `tracking-tasks`.
 
-[personal-report](skills/personal-report/SKILL.md) creates and saves daily or
+[tracking-report](skills/tracking-report/SKILL.md) creates and saves daily or
 weekly reports from collected evidence and task history. It includes untracked
 contributions, distinguishes past status from current pending work, and records
 coverage gaps. Period, content, and persistence details load only when needed.
 
-[personal-persist](skills/personal-persist/SKILL.md) defines what must be saved
+[tracking-persist](skills/tracking-persist/SKILL.md) defines what must be saved
 and retrieved: tasks, projects, evidence, collection coverage, task events,
 report snapshots, and prior revisions. It defines logical records and operation
 requirements, then routes requests to the configured storage adapter.
 
-[personal-persist-obsidian](skills/personal-persist-obsidian/SKILL.md) implements
+[tracking-persist-obsidian](skills/tracking-persist-obsidian/SKILL.md) implements
 that storage in a selected Obsidian vault. It handles note mapping, file reads
 and writes, recovery, revision folders, and scoped Bases views. Those references
 load only when needed. Install both persistence skills for this backend;
@@ -117,7 +117,7 @@ workflows. Setup requires a vault path and tracking root. No live vault is
 configured by this repository.
 
 For reliable automatic capture across sessions, add a rule to your agent's
-persistent instructions to use `personal-track` when clear user-owned follow-ups
+persistent instructions to use `tracking-tasks` when clear user-owned follow-ups
 or commitments arise. Skill discovery alone does not guarantee that behavior.
 
 ## Install
