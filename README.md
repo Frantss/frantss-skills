@@ -45,6 +45,12 @@ For reliable automatic capture across sessions, add a rule to your agent's
 persistent instructions to use `personal-track` when clear user-owned follow-ups
 or commitments arise. Skill discovery alone does not guarantee that behavior.
 
+[personal-collect](skills/personal-collect/SKILL.md) gathers and persists activity
+from each selected project's configured sources. It retains event dates, source
+context, and collection coverage for later queries. Source-specific guidance and
+the evidence format load only when needed. Collection can hand outstanding
+commitments to `personal-track`.
+
 ## Install
 
 This repository is private. Anyone installing from GitHub needs repository
