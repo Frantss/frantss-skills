@@ -30,7 +30,7 @@ Distinct actions on one object remain distinct observations. Source edits create
 
 ## Collection runs
 
-Retain `workspaces`, `window_start`, `window_end`, `timezone`, `collected_at`, `status: partial|complete`, `evidence`, and per-source `coverage`.
+Retain `workspaces`, `window_start`, `window_end`, `timezone`, `collected_at`, `capture: automatic|none`, `status: partial|complete`, `evidence`, and per-source `coverage`.
 Coverage includes scope, requested window, pages, continuation cursor, limits, usage when supplied, gaps, and completed-through checkpoints.
 A run identifies one collection attempt. Preserve partial coverage and cursors even when some sources fail.
 Advance a source checkpoint only after all pages and evidence writes for that scope/window are verified.

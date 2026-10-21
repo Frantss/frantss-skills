@@ -2,6 +2,7 @@
 
 Accept explicit requests and automatically capture clear user-owned commitments
 or tasks during current work, without per-item approval.
+For evidence passed with `capture: none`, return candidates without task writes; handle explicit user capture requests as separate operations.
 
 1. Establish the intended outcome and ownership. A promise by the user supports
    a commitment. Quoted promises, hypothetical examples, and team suggestions

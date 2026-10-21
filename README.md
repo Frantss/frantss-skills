@@ -151,7 +151,8 @@ Live writes require a configured persistence interface.
 from each selected workspace's configured sources. It retains event dates, source
 context, and collection coverage for later queries. Access guidance and
 the evidence format load only when needed. Collection can hand outstanding
-commitments to `tracking-tasks`.
+commitments to `tracking-tasks`. Direct collection defaults to `capture: automatic`;
+report handoffs pass `capture: none` and return candidates without task writes.
 
 [tracking-report](skills/tracking-report/SKILL.md) creates and saves daily or
 weekly reports from collected evidence and task history. It includes untracked
