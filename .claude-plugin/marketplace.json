@@ -1,0 +1,13 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "frantss",
+  "description": "Frantss's personal agent skills.",
+  "owner": { "name": "Frantss" },
+  "plugins": [
+    {
+      "name": "frantss-skills",
+      "description": "Frantss's personal agent skills.",
+      "source": "./"
+    }
+  ]
+}
