@@ -1,6 +1,6 @@
 ---
 name: frantss-tracking-report
-description: "Create, refresh, or retrieve daily and weekly reports of the user's activity and pending commitments across workspaces, including past dates, using collected evidence and task history."
+description: "Create, refresh, or retrieve daily and weekly reports of frantss's activity and pending commitments across workspaces, including past dates, using collected evidence and task history."
 ---
 
 # Tracking report

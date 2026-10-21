@@ -6,7 +6,7 @@ description: "Store and retrieve prepared Frantss records using caller-supplied 
 # Frantss persistance
 
 The caller supplies domain schemas, relationships, content, and requested changes; the adapter owns physical storage and recovery.
-Read only `~/.frantss/persistance.yaml`, expanding the current user's home independently of the working directory.
+Read only `~/.frantss/persistance.yaml`, expanding the current OS account's home independently of the working directory.
 Require `schema_version: 1` and `backend: {adapter: <skill-name>, options: <mapping>}`; parse configuration as data.
 One backend serves every workspace; reject per-workspace overrides. Pass configured options unchanged to the selected adapter.
 Use `frantss-persistance-obsidian` when selected and available; missing configuration/capabilities leave requests explicitly unsaved, never in another store.

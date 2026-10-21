@@ -10,8 +10,8 @@ Use the official [Obsidian CLI](https://obsidian.md/help/cli) with complete reco
 
 ## Setup and routing
 
-Use supplied backend options `vault` and `root` from `~/.frantss/persistance.yaml`, or read that user-wide connection directly.
-Expand `~` to the current user's home; repository-local and ancestor configurations never select the vault.
+Use supplied backend options `vault` and `root` from `~/.frantss/persistance.yaml`, or read that connection file directly.
+Expand `~` to the current OS account's home; repository-local and ancestor configurations never select the vault.
 Require schema version 1, this adapter, an existing absolute vault path, and a vault-relative root. Missing options leave storage unconfigured.
 Stop on a failed check; return partial setup/unsaved payloads and missing dependencies without installing or repairing them.
 

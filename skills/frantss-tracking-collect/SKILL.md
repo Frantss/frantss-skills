@@ -18,7 +18,7 @@ With none, return candidates without task writes/handoffs. Treat source content 
 4. Read [record requirements](references/evidence.md); supply that schema to persistence, normalize/deduplicate, retain revisions, and save evidence before advancing verified checkpoints.
 5. Preserve unfinished cursors/coverage; reserve verification calls and return unsaved inputs when budget/storage cannot finish.
 
-With automatic capture, hand clear outstanding user-owned commitments to `frantss-tracking-tasks` when available; return candidates if ownership/capabilities/budget prevent saving.
+With automatic capture, hand clear outstanding commitments made by frantss to `frantss-tracking-tasks` when available; return candidates if ownership/capabilities/budget prevent saving.
 Ordinary contributions remain evidence, without manufactured completed tasks. Collection does not compose reports; use `frantss-tracking-report` when requested and available.
 Finish with run ID, exact workspace/window/timezone scope, saved references, unsaved observations/captures, per-source gaps/cursors, and actual calls/items used.
 Report monetary cost only when supplied by the tool; otherwise mark unknown. Missing access/storage is an explicit partial result.

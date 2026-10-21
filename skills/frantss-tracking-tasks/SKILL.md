@@ -1,6 +1,6 @@
 ---
 name: frantss-tracking-tasks
-description: "Capture and manage user-owned tasks and commitments, including clear follow-ups during ongoing work. Use for triage, acknowledgment, pending-task queries, state/date updates, or explicit workspace creation. Ordinary implementation requests alone do not activate it."
+description: "Capture and manage frantss's tasks and commitments, including clear follow-ups during ongoing work. Use for triage, acknowledgment, pending-task queries, state/date updates, or explicit workspace creation. Ordinary implementation requests alone do not activate it."
 ---
 
 # Tracking tasks
@@ -18,7 +18,7 @@ Inbox capture/existing-ID operations need no checkout; the current repository ne
 Use `frantss-persistance` when available and the backend in `~/.frantss/persistance.yaml`.
 Without storage/schema capabilities, return unsaved payloads and missing dependencies; ordinary tracking never initiates setup or another store.
 
-- For explicit capture or clear user-owned follow-ups, read [capture](references/capture.md).
+- For explicit capture or clear follow-ups owned by frantss, read [capture](references/capture.md).
 - For categorization, reassessment, or workspace creation, read [triage](references/triage.md).
 - For acknowledgment, state changes, or queries, read [management](references/manage.md).
 
