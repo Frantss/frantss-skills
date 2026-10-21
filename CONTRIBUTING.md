@@ -15,17 +15,20 @@ The generator refuses existing destinations and invalid names.
 ## Write the shared instructions
 
 Each skill has a hard limit of 75 total lines across its authored UTF-8 text
-files. `frantss-communicate` has a 50-line limit; `frantss-persistance` and
-`frantss-persistance-obsidian` each have a 100-line limit.
+files. `frantss-communicate` and `frantss-update` each have a 50-line limit;
+`frantss-persistance` and `frantss-persistance-obsidian` each have a 100-line limit.
 `frantss-decompose` has a 200-line limit.
 Count frontmatter, blank lines, references, helper code, and metadata.
 Binary assets are excluded. `make validate` enforces the total per skill;
 progressive disclosure does not increase the budget.
 
 Workflows own their domain schemas; persistence owns the common record envelope
-and storage operations. Support only current formats. Keep record history and
-interrupted-write recovery. Conversion between configuration or data formats is
-outside scope.
+and storage operations. Ordinary workflows support only current formats. Keep
+record history and interrupted-write recovery. `frantss-update` owns upgrades:
+compare source commits and migrate configuration/data before recording success.
+When changing a stored format, document the old/new mapping, applicability,
+verification, and retry behavior in the same commit. Preserve those instructions
+in source history so updates can cross several revisions.
 
 Replace every scaffold comment with the workflow's actual decisions and a
 checkable completion condition. Keep only guidance that changes how an agent

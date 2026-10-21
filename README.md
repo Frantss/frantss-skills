@@ -13,6 +13,7 @@ These skills are a work in progress. I'm still iterating on them.
 | [frantss-communicate](skills/frantss-communicate/SKILL.md) | Write clear, direct replies throughout the session. |
 | [frantss-decompose](skills/frantss-decompose/SKILL.md) | Break down problems through guided planning conversations. |
 | [frantss-configure](skills/frantss-configure/SKILL.md) | Set up and maintain connections, projects, and sources. |
+| [frantss-update](skills/frantss-update/SKILL.md) | Update skills by commit hash and migrate configuration and stored records. |
 | [frantss-tracking-tasks](skills/frantss-tracking-tasks/SKILL.md) | Capture tasks and manage commitments, dates, and blockers. |
 | [frantss-tracking-collect](skills/frantss-tracking-collect/SKILL.md) | Gather dated activity and evidence from project sources. |
 | [frantss-tracking-report](skills/frantss-tracking-report/SKILL.md) | Create daily and weekly activity reports. |
@@ -105,6 +106,19 @@ claude plugin update frantss-skills@frantss
 See the [private marketplace guidance](https://code.claude.com/docs/en/plugins/host-marketplace).
 
 </details>
+
+## Update
+
+Ask `frantss-update` to update your Frantss skill set or check for updates.
+It reviews changes through a fixed default-branch commit, applies required
+configuration/database migrations, and updates through the original installer.
+Checks are read-only; explicit pins and selected skills remain in effect.
+
+Full installation and shared data commit hashes are tracked separately in
+`~/.frantss/skills-state.yaml`. First use verifies existing provenance and data
+formats. Backups and a pending-step journal support interrupted updates.
+The installer commands above update skill files only; use this workflow for
+configuration and stored-record migrations.
 
 ## Setup and automatic use
 

@@ -167,7 +167,7 @@ class ToolingTests(unittest.TestCase):
         self.assertTrue(any("line limit" in error for error in packaging_errors(self.root)))
 
     def test_named_line_limits_include_references(self):
-        for name, limit in (("frantss-communicate", 50), ("frantss-decompose", 200),
+        for name, limit in (("frantss-communicate", 50), ("frantss-update", 50), ("frantss-decompose", 200),
                             ("frantss-persistance", 100), ("frantss-persistance-obsidian", 100)):
             with self.subTest(name=name):
                 skill = self.finished_skill(name)
@@ -184,7 +184,7 @@ class ToolingTests(unittest.TestCase):
                 reference.write_text("\n" * (limit - initial))
 
     def test_line_limit_exceptions_require_exact_skill_names(self):
-        for name in ("frantss-persistance-other", "frantss-communicate-other", "frantss-decompose-other"):
+        for name in ("frantss-persistance-other", "frantss-communicate-other", "frantss-update-other", "frantss-decompose-other"):
             with self.subTest(name=name):
                 skill = self.finished_skill(name)
                 initial = len((skill / "SKILL.md").read_text().splitlines())
