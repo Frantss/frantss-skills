@@ -21,17 +21,23 @@ An empty source list enables no collection. Semantic task deduplication and work
 
 ## Evidence
 
-Retain `workspaces`, `source`, `account`, `source_scope`, `object_id`, `event_id`, `actor`, and `action`.
+Retain `workspaces`, `source_refs`, `source`, `account`, `source_scope`, `object_id`, `event_id`, `actor`, and `action`.
+`source` is the provider identifier; `account` is its canonical native host/tenant/account namespace, independent of authenticated profiles.
+`source_scope` is null for account-global object/event IDs; otherwise use the stable native container ID. Query filters never belong here.
+Normalize connector wrappers to native object/event strings; unresolved identity requires clarification before saving or deduplication.
+`source_refs` is a unique list of `{workspace: <uuid>, source_id: <configured-id>}` pairs, sorted by workspace/source ID, identifying contributing mappings.
+Merge references/workspace IDs when multiple mappings find one event; these provenance fields do not participate in its key.
 Retain `occurred_at`, `occurred_date`, `collected_at`, `timezone`, `source_url`, excerpt `content`, and attribution `context`.
 Derive local occurrence date from a known occurrence time; preserve source-supported date-only evidence when time is unknown.
-The key is `[source, account, source_scope, object_id, event_id]` encoded as a canonical JSON string.
-If no event ID exists, use the collector's stable event discriminator; unresolved identity requires clarification before deduplication.
+The key is `[source, account, source_scope, object_id, event_id]` encoded as a canonical JSON string, independent of access method and collection scope.
+If no event ID exists, use an access-independent stable event discriminator; reconcile older matches by native identity without replacing their UUIDs.
 Distinct actions on one object remain distinct observations. Source edits create revisions of the same evidence identity.
 
 ## Collection runs
 
 Retain `workspaces`, `window_start`, `window_end`, `timezone`, `collected_at`, `capture: automatic|none`, `status: partial|complete`, `evidence`, and per-source `coverage`.
-Coverage includes scope, requested window, pages, continuation cursor, limits, usage when supplied, gaps, and completed-through checkpoints.
+Coverage identifies each workspace/source-ID pair and access method, with scope, requested window, pages, cursor, limits, usage, gaps, and completed-through checkpoints.
+Coverage retains the selected access descriptor with its cursor, not merely its position in the configured access list.
 A run identifies one collection attempt. Preserve partial coverage and cursors even when some sources fail.
 Advance a source checkpoint only after all pages and evidence writes for that scope/window are verified.
 

@@ -131,6 +131,9 @@ sources:
         auth_ref: <credential-store-reference>
 ```
 
+Evidence keys use native provider/account/container/object/event identity, independent
+of access method and query filters. Provenance records the workspace/source-ID mappings
+that observed each event; overlapping mappings reuse the observation.
 Access changes retain source IDs and existing evidence identities. Missing access
 or ambiguous scope leaves collection incomplete; it never expands collection to all locations.
 
