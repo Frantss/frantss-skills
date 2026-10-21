@@ -75,7 +75,8 @@ Inbox capture and operations scoped by stored workspace IDs require no local ide
 
 ## Tracking
 
-Shared reporting settings and account identities live in the selected backend;
+Shared [settings](skills/tracking-persist/references/settings.md) define timezone, ISO weekday week start,
+collection limits, and account-identity aliases. They live in the selected backend;
 each tracking workspace record holds its sources and uses its workspace ID.
 Tracking setup configures each source's stable ID, provider, account, user identity,
 collection scope, and access methods. The [source configuration guide](skills/setup-frantss-skills/references/sources.md)

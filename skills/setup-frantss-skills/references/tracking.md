@@ -12,7 +12,7 @@ Every workspace uses this backend. Shared settings/accounts and workspace area/s
 Follow only requested backend, settings, workspace, or source steps; inspection remains read-only throughout.
 For backend changes, prepare the directory, patch requested options, parse YAML as data, and read back schema version 1 and backend selection.
 For requested storage initialization, use the selected adapter; a connection file alone does not establish working storage.
-Save supplied shared settings; preserve existing values and resolve timezone/week start when required.
+Save supplied shared settings using the `tracking-persist` logical schema; preserve existing values and resolve required timezone/week start.
 Explicit workspace creation reads [identity setup](workspace-identity.md), initializes/reuses its UUID, and resolves work/personal area before backend writes.
 For source setup or inspection, read [source configuration](sources.md). Resolve an existing workspace record by UUID; missing records require explicit creation.
 Persist through `tracking-persist` and its adapter when available; otherwise retain unsaved payloads and report missing capabilities.

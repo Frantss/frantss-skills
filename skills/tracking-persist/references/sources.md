@@ -4,7 +4,7 @@ A source is a configured location from which a workspace can collect evidence of
 The workspace configuration defines its sources; this skill applies no provider catalog or default source selection.
 Retain each workspace's `sources` as mappings with stable workspace-local `id`, `provider`, `account`, `identity`, `scope`, and `access`.
 `provider` identifies the source system; `account` identifies its host/account or tenant, without credentials.
-`identity` identifies the user within that account, directly or through a shared account-identity mapping.
+`identity` is a native user identifier or `{account_ref: <alias>}` resolved through [shared settings](settings.md).
 `scope` contains the configured locations and restrictions; preserve its provider-specific fields without imposing a common location schema.
 
 `access` retains descriptors of how to read the source, including references, dependencies, and supplied method preferences.

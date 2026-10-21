@@ -26,6 +26,7 @@ These are instructions for an agent using available tools, not installed functio
 ## Prepare the request
 
 Read [logical records](references/records.md) for the requested record types.
+For settings or account references, read [shared settings](references/settings.md) for the backend-independent payload and defaults.
 Read [operation requirements](references/operations.md) when saving, querying, or evaluating adapter results.
 For explicit workspace creation, initialize/reuse its workspace identity first. Partial backend writes retain that UUID for recovery.
 Pass the operation, record types, stable identities, supplied fields, expected revisions, and requested scope to the adapter.

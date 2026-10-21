@@ -21,7 +21,7 @@ For requested view setup or changes, read [Bases views](references/bases.md).
 
 ## Reads and results
 
-Search current record folders by key, ID, or supplied filters; exclude History unless a revision is requested.
+Search current record folders and Settings.md by key, ID, or supplied filters; exclude History unless a revision is requested.
 Decode note links to logical UUID relationships and labeled JSON sections to structured fields.
 Read Events and retained revisions for historical cutoffs; expose missing dates, history, access, or truncated results.
 Return logical fields plus IDs, keys, revisions, note references, and per-operation verified/partial/failed/unsupported status.

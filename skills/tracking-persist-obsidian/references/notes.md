@@ -2,8 +2,9 @@
 
 Use one current note per UUID: `<root>/<Folder>/<id>.md`. Map task/workspace/evidence/run/event/report to Tasks/Workspaces/Evidence/Runs/Events/Reports.
 Use the supplied workspace UUID for workspace notes; never allocate a replacement workspace identity in this adapter.
+Map the singleton settings record to `<root>/Settings.md`; retain common metadata and revisions using the ordinary write protocol.
 Setup creates those folders, History, Views, and Settings.md; it creates no workspaces.
-Settings properties hold timezone, week_start, and collection limits; an Accounts JSON body section holds identity mappings.
+Settings properties hold `timezone` and `week_start`; structured settings use `collection_limits`/Collection limits and `accounts`/Accounts fenced JSON sections.
 Use YAML frontmatter for common record fields and scalar/list fields, retaining logical field names and types.
 Use ISO 8601 timestamps with offsets and quoted date-only strings; preserve nulls. Use lists for tags.
 Serialize relationships as quoted vault-relative wikilinks, for example `workspace: "[[Tracking/Workspaces/<uuid>]]"`; relationship lists use the same strings.
