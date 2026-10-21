@@ -188,7 +188,7 @@ For other agents, use their supported persistent instructions file or setting.
 See [CONTRIBUTING.md](CONTRIBUTING.md) for writing, testing, and packaging skills.
 Create a skill with `python3 scripts/new_skill.py frantss-my-skill --description "Use when ..."`,
 then run `make validate`. Validation requires Python 3.10+, GitHub CLI with `gh skill`,
-and Claude Code. CI pins GitHub CLI 2.101.0 and Claude Code 2.1.291.
+and Claude Code.
 
 ## Layout
 
@@ -199,7 +199,6 @@ scripts/new_skill.py           Create a skill without overwriting an existing on
 scripts/validate.py            Packaging checks and official CLI validators
 .claude-plugin/                Claude plugin and shared marketplace manifests
 .codex-plugin/                 Codex plugin manifest pointing to the shared skills
-.github/workflows/validate.yml Validation on pushes and pull requests
 AGENTS.md                     Guidance for agents editing this repository
 ```
 
