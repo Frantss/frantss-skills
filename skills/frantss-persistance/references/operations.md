@@ -20,8 +20,8 @@ Request exact ID/revision pairs for report inputs. Return missing history, unsup
 
 ## Configure and return
 
-Use `setup-frantss-skills` when available for explicit configuration: `~/.frantss/persistance.yaml` selects one backend for every workspace.
-The adapter saves shared settings and workflow records there; workspace/source definitions are read from `~/.frantss/workspaces.yaml` and written only by requested setup.
+Use `configure-frantss-skills` when available for configuration setup, inspection, or maintenance; `~/.frantss/persistance.yaml` selects one backend for every workspace.
+The adapter saves shared settings and workflow records there; `~/.frantss/workspaces.yaml` definitions are read locally and changed through `configure-frantss-skills`.
 General setup registers no workspaces. Backend changes leave the local registry unchanged and do not migrate workflow records.
 Return `verified`, `partial`, `failed`, or `unsupported` per operation, with IDs, keys, revisions, durable references, and coverage.
 For partial or failed writes, include persisted parts, missing steps, recoverable payload locations, and remaining unsaved inputs.

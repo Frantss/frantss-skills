@@ -19,5 +19,5 @@ Prefer stable native IDs or canonical URLs; display names are labels, and ambigu
 Store locations and actor identities, without `access`, commands, CLI/API/MCP/plugin/skill bindings, credentials, or tool preferences.
 Collection chooses available capabilities at runtime; the authenticated agent account never replaces the configured user identity.
 Check bounded identity/location metadata when tools allow, without collecting activity; mark unavailable checks unverified rather than invalidating a complete definition.
-Patch only requested sources; preserve stable IDs and unrelated fields. Ignore legacy `access` fields at runtime and remove them only on requested source updates.
+Apply only established source changes; preserve stable IDs and unrelated fields. Ignore legacy `access` fields at runtime and remove them only on requested source updates.
 An empty list enables no collection; missing identity or empty/ambiguous scope is incomplete, never permission to collect everything.

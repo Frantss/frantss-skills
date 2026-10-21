@@ -16,7 +16,7 @@ Repository-local and ancestor configurations are not discovered. Missing or inva
 Require `schema_version: 1` and one `backend` with an `adapter` skill name and `options` mapping; treat YAML as data.
 Every workspace uses this backend. Reject per-workspace backend overrides and pass connection options unchanged to the selected adapter.
 Retrieve shared settings and workflow records through that adapter; workspace/source definitions come only from `~/.frantss/workspaces.yaml`.
-Read [workspace resolution](references/workspaces.md) for registry schema or current-workspace identification; setup owns configuration writes.
+Read [workspace resolution](references/workspaces.md) for registry schema or current-workspace identification; configuration writes belong to `configure-frantss-skills`.
 Operations scoped by existing IDs, including inbox queries, require no checkout; ordinary reads and saves never create workspace identity or associations.
 For Obsidian, use `frantss-persistance-obsidian` when available. Other backends must satisfy the same record and operation requirements.
 The adapter owns physical locations, serialization, storage tools, and recovery mechanics.
@@ -28,7 +28,7 @@ Read [logical records](references/records.md) for shared backend fields and work
 For `task`, `evidence`, `run`, `event`, or `report` records, read [tracking records](references/tracking.md).
 For settings or account references, read [shared settings](references/settings.md) for the backend-independent payload and defaults.
 Read [operation requirements](references/operations.md) when saving, querying, or evaluating adapter results.
-Workspace/source configuration writes belong to `setup-frantss-skills` when available; otherwise return the requested change as unsaved, never a backend record.
+Workspace/source configuration writes belong to `configure-frantss-skills` when available; otherwise return the requested change as unsaved, never a backend record.
 Pass the operation, record types, stable identities, supplied fields, expected revisions, and requested scope to the adapter.
 Use record IDs for relationships. Callers should not construct backend paths, note links, or database-specific queries.
 Preserve existing IDs, keys, dates, unknown fields, and human edits when preparing an update.

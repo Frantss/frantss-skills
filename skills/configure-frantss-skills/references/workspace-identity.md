@@ -8,8 +8,8 @@ When inferring context, inspect the current Git root/remotes, not parents; unres
 Only explicit workspace creation registers an ID: use kebab-case `org/repo` from the selected repository, e.g. `frantss/frantssuy`, or a user-chosen slug without a repository.
 IDs have one or two slash-separated `[a-z0-9]+(?:-[a-z0-9]+)*` segments, never UUIDs; resolve owner/repository ambiguity and ID collisions before saving.
 Default new `sources`, `repositories`, and `local_paths` to empty lists; read [source configuration](sources.md) only for requested source changes.
-Register only requested associations: canonical remote strings in `repositories`, or `{machine, path}` entries in `local_paths` with a stable device identifier and absolute canonical root.
-Keep association changes explicit; a new checkout or changed remote never rewrites registration automatically.
+Register only established associations: canonical remote strings in `repositories`, or `{machine, path}` entries in `local_paths` with a stable device identifier and absolute canonical root.
+Update associations only from explicit requests or lasting changes stated by the user; a discovered checkout/remote alone changes nothing.
 Reject malformed registries, unsupported versions, duplicate keys/IDs, and missing required fields; a missing registry is unresolved during inspection or ordinary use.
 An explicit workspace-creation command may initialize a missing registry with `schema_version: 1` and `workspaces: {}` before adding the requested entry.
 Before replacement, recheck original content; use exclusive creation/atomic replacement when supported, preserve human edits and unknown fields, and read back the intended entry.

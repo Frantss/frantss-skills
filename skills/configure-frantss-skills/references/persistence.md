@@ -12,8 +12,5 @@ For its access check, put `vault=<selector>` before each command; require succes
 On a failed Obsidian check, mark dependency setup partial, retain drafts, and stop backend writes; report the missing CLI activation/PATH registration, desktop-app access, or vault requirement without installing or repairing it.
 For backend changes, prepare the directory, patch requested options, parse YAML as data, and read back schema version 1 and backend selection.
 For requested storage initialization, use the selected adapter; a connection file alone does not establish working storage.
-For workspace/source changes, use [registry setup](workspace-identity.md) without requiring this connection; general setup creates no workspaces.
 Persist through `frantss-persistance` and its adapter when available; otherwise retain unsaved payloads and report missing capabilities.
-Read back connection and requested record changes. Report partial connection/backend writes; reuse record IDs on retry.
 Backend changes do not migrate records; retain the previous selection and explain separate migration requirements.
-Setup does not collect activity, capture tasks, or generate reports.

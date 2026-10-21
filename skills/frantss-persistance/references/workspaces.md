@@ -19,8 +19,8 @@ Normalize SSH/scp and HTTPS spellings, lowercase the host, and preserve reposito
 File/local Git remotes require machine-scoped path bindings rather than inventing a host-based remote identity.
 Unresolved aliases or conflicting canonicalization require clarification. Do not persist credentials or guess distinct hosts are equivalent.
 Canonicalize local roots to absolute resolved paths; register them only with an established device identifier.
-Association writes require explicit setup/update instructions; discovery alone never registers a checkout or changes bindings.
-Only explicit workspace creation registers an ID through setup after reconciling existing IDs, titles, and association matches; ordinary use never edits this file.
+Association changes require an explicit request or lasting change stated by the user; discovery alone never registers a checkout or changes bindings.
+Only explicit workspace creation registers an ID through `configure-frantss-skills` after reconciling existing IDs, titles, and association matches; ordinary reads never edit this file.
 For repository-backed creation, derive `org/repo` from the selected repository's owner and name, e.g. `frantss/frantssuy`; kebab-case each component.
 Allow one or two slash-separated segments matching `[a-z0-9]+(?:-[a-z0-9]+)*`; reject UUID-shaped IDs and unsafe path segments.
 Without a repository, use a user-chosen slug. Clarify missing owners, multiple candidate repositories, or normalization/host collisions; never invent disambiguating suffixes.
