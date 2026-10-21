@@ -1,6 +1,6 @@
 # Shared settings
 
-Settings are one backend-wide singleton, independent of workspace identity; use the common fields from [logical records](records.md).
+Settings are one backend-wide singleton, independent of project identity; use the common fields from [logical records](records.md).
 Use `record_type: settings` and `key: settings`; allocate one UUID on explicit initialization and reuse it for updates/retries.
 Read and patch settings through the same logical save/read operations; preserve revisions, unknown fields, and existing values.
 
@@ -8,7 +8,7 @@ Read and patch settings through the same logical save/read operations; preserve 
 | --- | --- |
 | `timezone` | IANA timezone string, or null while unresolved |
 | `week_start` | ISO weekday integer 1 (Monday) through 7 (Sunday), or null while unresolved |
-| `collection_limits` | Mapping with positive integer `max_calls` and `max_items`, each per workspace/source per collection run |
+| `collection_limits` | Mapping with positive integer `max_calls` and `max_items`, each per project/source per collection run |
 | `accounts` | Mapping of stable aliases to `{provider, account, identity}`; all three values are nonempty native identifier strings |
 
 Absent limit fields default to `max_calls: 20`, `max_items: 50`; missing `accounts` defaults to an empty mapping.

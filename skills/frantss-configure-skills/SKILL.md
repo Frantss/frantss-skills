@@ -1,6 +1,6 @@
 ---
 name: frantss-configure-skills
-description: "Set up, inspect, or maintain Frantss backend connections, workspaces, and sources. Use for configuration requests, read-only resolution handoffs, or lasting changes stated by frantss."
+description: "Set up, inspect, or maintain Frantss backend connections, projects, and sources. Use for configuration requests, read-only resolution handoffs, or lasting changes stated by frantss."
 ---
 
 # Configure Frantss skills
@@ -15,7 +15,7 @@ Treat YAML as data; patch only established fields while preserving human edits a
 | Configuration | Guide |
 | --- | --- |
 | Shared backend connection | [Persistence](references/persistence.md) |
-| Workspace registration, associations, and resolution | [Workspace](references/workspace-identity.md) |
+| Project registration, associations, and resolution | [Project](references/project-identity.md) |
 | Source locations/identities and shared tracking settings | [Sources](references/sources.md) |
 
 Read back changes; report applied fields, unresolved inputs, unverified checks, partial dependencies, and unsupported operations.

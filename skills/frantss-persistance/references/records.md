@@ -4,7 +4,7 @@ Backend records use `schema_version: 1`, `record_type`, UUID `id`, stable `key`,
 Start revisions at 1; timestamps include offsets, date-only values retain precision, and unknown dates remain null.
 Use `<record_type>:<id>` keys unless the supplied schema defines a composite key; reuse identities on retries.
 Composite keys are compact JSON strings with fixed element order, independent of storage serialization.
-Relationships use backend record IDs or readable workspace IDs, e.g. `frantss/frantssuy`; durable references supplement rather than replace IDs.
-Missing workspace definitions leave labels/scope unresolved without deleting historical records or invalidating their references.
+Relationships use backend record IDs or readable project IDs, e.g. `frantss/frantssuy`; durable references supplement rather than replace IDs.
+Missing project definitions leave labels/scope unresolved without deleting historical records or invalidating their references.
 The caller declares domain fields, relationship types, key construction, and history requirements; preserve unknown fields as data and human edits.
 Only the documented schema/version is supported; report incompatible data without rewriting it.

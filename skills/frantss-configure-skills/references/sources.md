@@ -1,7 +1,7 @@
 # Sources and shared settings
 
-Sources live in each workspace registry entry; use [registry writes](workspace-identity.md). Shared settings/accounts use `frantss-persistance` when available.
-Each mapping has workspace-unique stable `id`, `provider`, native instance `account`, frantss's `identity`, and bounded provider-specific `scope`.
+Sources live in each project registry entry; use [registry writes](project-identity.md). Shared settings/accounts use `frantss-persistance` when available.
+Each mapping has project-unique stable `id`, `provider`, native instance `account`, frantss's `identity`, and bounded provider-specific `scope`.
 Identity is a native string or `{account_ref: <alias>}` into shared settings; the authenticated agent account never substitutes for frantss.
 
 | Provider | Account; scope |

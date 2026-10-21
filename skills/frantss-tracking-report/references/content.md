@@ -1,12 +1,12 @@
 # Report content
 
-Organize by selected workspace/work-personal area; include contributions without tracked tasks and retain requested scope.
+Organize by selected project/work-personal area; include contributions without tracked tasks and retain requested scope.
 Report completed outcomes only from reports from frantss or outcome-satisfying evidence with supported occurrence dates.
 Include PR reviews, commits, discussions, investigations, decisions, and recordings; attribute frantss's contribution without claiming others' deliverables.
 Deduplicate native source events; group related observations under supported outcomes while retaining distinct reviews/replies as evidence.
 A merged subtask shows progress, not completion of a broader outcome; closed status alone supplies no completion date.
 Show Next/Later commitments and supported promises with due/expected dates and the task-status cutoff.
-Show Inbox (`status: inbox`, independent of workspace) and unreviewed tasks; Maybe remains separate from obligations even when dated.
+Show Inbox (`status: inbox`, independent of project) and unreviewed tasks; Maybe remains separate from obligations even when dated.
 Daily reports emphasize Next, relevant dates, and blockers; weekly reports include undated Later commitments, surfacing new/older items needing attention.
 Group commitments by overdue firm deadlines, due/expected today/this week, passed expectations needing reassessment, and upcoming/undated.
 Date-only deadlines become overdue the following local day; offset timestamps after their instant. A missed expectation is not an overdue firm commitment.

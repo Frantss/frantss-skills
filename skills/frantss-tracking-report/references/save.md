@@ -1,9 +1,9 @@
 # Report snapshot records
 
-Supply the common persistence envelope with UUID `id`; retain `report_type: daily|weekly`, `workspaces`, `window_start`, `window_end`, and `timezone`.
+Supply the common persistence envelope with UUID `id`; retain `report_type: daily|weekly`, `projects`, `window_start`, `window_end`, and `timezone`.
 Also retain `generated_at`, `evidence`, `narrative`, and `manifest`; generation time is distinct from the reported activity period.
-Key: compact canonical JSON `[report_type, window_start, window_end, timezone, sorted_workspace_ids]`.
-Normalize key timestamps to UTC, sort unique readable workspace strings lexicographically, and use inclusive-start/exclusive-end windows.
+Key: compact canonical JSON `[report_type, window_start, window_end, timezone, sorted_project_ids]`.
+Normalize key timestamps to UTC, sort unique readable project strings lexicographically, and use inclusive-start/exclusive-end windows.
 The manifest retains collection IDs, exact input IDs/revisions, status cutoffs, coverage, and completeness at generation time.
 Identify whether pending work is at period end or current status, with timestamp; preserve unavailable snapshots/history as gaps.
 Find by key before creation; identical scope identifies one report with successive revisions, and retries cannot duplicate it.

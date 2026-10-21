@@ -99,16 +99,18 @@ For skills installed with Vercel's CLI, use `npx skills update`.
 | --- | --- |
 | [frantss-communicate](skills/frantss-communicate/SKILL.md) | Write clear, direct replies throughout the session while preserving technical meaning. |
 | [frantss-decompose](skills/frantss-decompose/SKILL.md) | Break down problems through context gathering, alternatives, and questionnaire rounds per part, with a live Markdown document and stable IDs. |
-| [frantss-configure-skills](skills/frantss-configure-skills/SKILL.md) | Set up, inspect, and maintain Frantss configuration, including lasting workspace/source changes stated during conversation. |
-| [frantss-tracking-tasks](skills/frantss-tracking-tasks/SKILL.md) | Capture brief tasks, triage them across Inbox, Next, Later, Maybe, and Done, and manage workspaces, dates, blockers, and acknowledgment. |
+| [frantss-configure-skills](skills/frantss-configure-skills/SKILL.md) | Set up, inspect, and maintain Frantss configuration, including lasting project/source changes stated during conversation. |
+| [frantss-tracking-tasks](skills/frantss-tracking-tasks/SKILL.md) | Capture brief tasks, triage them across Inbox, Next, Later, Maybe, and Done, and manage projects, dates, blockers, and acknowledgment. |
 | [frantss-tracking-collect](skills/frantss-tracking-collect/SKILL.md) | Gather dated activity and evidence from configured sources, preserving provenance and collection coverage. |
 | [frantss-tracking-report](skills/frantss-tracking-report/SKILL.md) | Create, save, and retrieve daily or weekly reports covering contributions, pending work, and evidence gaps. |
 | [frantss-persistance](skills/frantss-persistance/SKILL.md) | Persist complete workflow payloads through one backend, preserving common record identities, revisions, and recoverable operations. |
 | [frantss-persistance-obsidian](skills/frantss-persistance-obsidian/SKILL.md) | Use the Obsidian CLI to store Frantss records and revisions as notes and create requested Bases views. |
 
+A [project](GLOSSARY.md) groups related tasks, activity, and sources for frantss. It may be ongoing or bounded and span multiple repositories.
+
 Tasks start in Inbox. Clear evidence supports automatic triage: assigned current-sprint work goes to Next,
 nonurgent commitments to Later, and tentative possibilities to Maybe. Uncertain decisions stay in Inbox for clarification.
-Workspace assignment and your `reviewed-by-frantss` acknowledgment are independent of state; blockers remain notes on Next/Later tasks.
+Project assignment and your `reviewed-by-frantss` acknowledgment are independent of state; blockers remain notes on Next/Later tasks.
 Firm due dates and expected completion dates are optional and distinct. Weekly reports include undated Later commitments;
 daily reports emphasize Next, dates, and blockers. Reports suggest reassessment without changing tasks.
 Task content aims for 5–15 lines, with a hard limit of 50 excluding link-only lines and storage metadata.
@@ -116,7 +118,7 @@ Linked tickets/documents retain their details; tasks hold an outcome, brief cont
 
 ## Configuration
 
-Use `frantss-configure-skills` to set up, inspect, and maintain your user-wide connection, workspace registry, and sources.
+Use `frantss-configure-skills` to set up, inspect, and maintain your user-wide connection, project registry, and sources.
 Its [persistence guide](skills/frantss-configure-skills/references/persistence.md)
 checks the shared backend; its [tracking guide](skills/frantss-configure-skills/references/sources.md)
 configures tracking settings, source instances, target locations, and the user's identity in each source.
@@ -125,16 +127,16 @@ Source records contain `id`, `provider`, `account`, `identity`, and bounded `sco
 Setup initializes only explicitly selected configuration. Inspection reads without changing it.
 Maintenance applies clear, lasting changes stated by you during conversation and asks when the target or scope is uncertain.
 Incidental mentions, quoted discussions, inactivity, and access failures do not establish additions or removals.
-Workspace creation and backend changes still need explicit commands. Source changes retain stable IDs when they represent the same logical source,
+Project creation and backend changes still need explicit commands. Source changes retain stable IDs when they represent the same logical source,
 apply to subsequent collection runs, and preserve stored evidence/history.
 
 Frantss workflows share one connection in `~/.frantss/persistance.yaml`, regardless of the current directory.
 The file holds `schema_version: 1` and `backend: {adapter, options}`. Other Frantss configurations can use sibling files.
-Workspace definitions live in `~/.frantss/workspaces.yaml`, independently of backend availability:
+Project definitions live in `~/.frantss/projects.yaml`, independently of backend availability:
 
 ```yaml
 schema_version: 1
-workspaces:
+projects:
   frantss/frantssuy:
     title: Frantss website
     area: personal
@@ -149,14 +151,14 @@ workspaces:
 ```
 
 The backend stores tasks, evidence, collection runs, reports, revisions, and shared
-[settings/accounts](skills/frantss-persistance/references/settings.md). Records reference workspace IDs as strings; they do not store workspace or source definitions.
-Repository-backed IDs use kebab-case `org/repo`, such as `frantss/frantssuy`; other workspaces use a chosen slug, such as `personal-admin`.
+[settings/accounts](skills/frantss-persistance/references/settings.md). Records reference project IDs as strings; they do not store project or source definitions.
+Repository-backed IDs use kebab-case `org/repo`, such as `frantss/frantssuy`; other projects use a chosen slug, such as `personal-admin`.
 IDs remain fixed after repository renames or moves; backend workflow records use UUIDs.
 
-An explicit workspace selection takes precedence. For the current workspace, match registered repository remotes,
-then machine-specific canonical paths; ask when a match is absent or ambiguous. Worktrees can share a workspace identity.
-Creating workspaces requires an explicit command; established association changes use configuration maintenance. General setup creates no workspaces or associations.
-Inbox capture and cross-workspace reports need no local workspace association.
+An explicit project selection takes precedence. For the current project, match registered repository remotes,
+then machine-specific canonical paths; ask when a match is absent or ambiguous. Worktrees can share a project identity.
+Creating projects requires an explicit command; established association changes use configuration maintenance. General setup creates no projects or associations.
+Inbox capture and cross-project reports need no local project association.
 
 Configuration is user-wide; repository-local folders and Git-ignore changes are unnecessary.
 Only the documented current formats are supported. Incompatible data is reported without conversion; record history and partial-write recovery remain supported.

@@ -1,12 +1,12 @@
 ---
 name: frantss-tracking-report
-description: "Create, refresh, or retrieve daily and weekly reports of frantss's activity and pending commitments across workspaces, including past dates, using collected evidence and task history."
+description: "Create, refresh, or retrieve daily and weekly reports of frantss's activity and pending commitments across projects, including past dates, using collected evidence and task history."
 ---
 
 # Tracking report
 
 Choose retrieve for a saved snapshot, create for a new report, or regenerate for a requested refresh. Clarify uncertain intent before collection.
-Use `frantss-persistance` when available and the backend in `~/.frantss/persistance.yaml`; reporting never initializes configuration or creates workspaces.
+Use `frantss-persistance` when available and the backend in `~/.frantss/persistance.yaml`; reporting never initializes configuration or creates projects.
 Leave task records/events unchanged, including capture, acknowledgment, and triage. Explicit task changes belong to `frantss-tracking-tasks` when available.
 
 ## Retrieve
@@ -17,8 +17,8 @@ If absent, report that result and offer creation; if inaccessible, report the ac
 
 ## Create or regenerate
 
-1. Resolve workspace IDs, period, timezone, and report type; read [period rules](references/periods.md) and clarify unresolved scope.
-   Use `~/.frantss/workspaces.yaml`, with read-only `frantss-configure-skills` resolution when available; retain historical missing-definition gaps.
+1. Resolve project IDs, period, timezone, and report type; read [period rules](references/periods.md) and clarify unresolved scope.
+   Use `~/.frantss/projects.yaml`, with read-only `frantss-configure-skills` resolution when available; retain historical missing-definition gaps.
    Explicit selection precedes unique registered remotes, then machine-scoped paths.
 2. Retrieve scoped evidence, coverage, tasks, and dated history/revisions, including older outstanding commitments; expose access/pagination gaps.
 3. When fresh evidence is needed/requested, use `frantss-tracking-collect` when available with the same scope and `capture: none`.

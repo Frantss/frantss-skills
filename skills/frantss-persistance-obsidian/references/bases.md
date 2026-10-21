@@ -10,10 +10,10 @@ views:
   - type: table
     name: Inbox
     filters: 'note.record_type == "task" && note.status == "inbox"'
-    order: [note.title, note.workspace, note.due_date, note.expected_date, note.tags]
+    order: [note.title, note.project, note.due_date, note.expected_date, note.tags]
 ```
 
-Other requested [views](https://obsidian.md/help/bases/views) can group tasks by supplied state/workspace; keep Maybe separate from Next/Later and show blockers/due/expected fields. Task-only unreviewed rows use `!file.hasTag("reviewed-by-frantss")`.
-Activity views filter evidence/events by occurred_date; report views filter saved reports by period/workspace and show generation time.
+Other requested [views](https://obsidian.md/help/bases/views) can group tasks by supplied state/project; keep Maybe separate from Next/Later and show blockers/due/expected fields. Task-only unreviewed rows use `!file.hasTag("reviewed-by-frantss")`.
+Activity views filter evidence/events by occurred_date; report views filter saved reports by period/project and show generation time.
 Viewing rows never acknowledges tasks. Canvas is optional presentation; it does not replace records or reports.
 Use the CLI write protocol for `.base` files. Read back YAML and run `base:query path=<root>/Views/<name>.base view=<view> format=json` to check scope and filters against sample notes.

@@ -1,6 +1,6 @@
 # Source access
 
-Each configured source identifies workspace-local `id`, `provider`, native `account`, frantss's `identity`, and bounded provider-specific `scope`.
+Each configured source identifies project-local `id`, `provider`, native `account`, frantss's `identity`, and bounded provider-specific `scope`.
 Resolve `{account_ref: <alias>}` identities through shared settings; provider/account must match. Never substitute authenticated-agent identity.
 Use configured native IDs/locations, independent of tool profiles. Empty source lists enable no collection; missing identity/ambiguous scope needs clarification.
 Choose tools at runtime; preserve instance, identity, and restrictions across methods. Source configuration grants no external-write permission.
