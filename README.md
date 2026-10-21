@@ -56,6 +56,11 @@ weekly reports from collected evidence and task history. It includes untracked
 contributions, distinguishes past status from current pending work, and records
 coverage gaps. Period, content, and persistence details load only when needed.
 
+[personal-persist](skills/personal-persist/SKILL.md) defines what must be saved
+and retrieved: tasks, projects, evidence, collection coverage, task events,
+report snapshots, and prior revisions. It defines logical records and operation
+requirements, then routes requests to the configured storage adapter.
+
 ## Install
 
 This repository is private. Anyone installing from GitHub needs repository
