@@ -24,6 +24,8 @@ Tracking stores tasks with direct evidence links and saved report summaries,
 including daily reports. Collection findings and scan cursors stay temporary;
 activity without a task survives in a requested report's summary and source links.
 Task/report revisions support recovery, and shared settings remain configuration.
+Obsidian notes use descriptive filenames, such as `Fix invoice export.md` or
+`2026-10-20 - Gildara daily report.md`; stable IDs remain note properties.
 Existing evidence, run, and event records need an explicit
 [migration](skills/frantss-persistance/references/lean-migration.md); editing or
 installing these skills does not migrate or delete stored data.

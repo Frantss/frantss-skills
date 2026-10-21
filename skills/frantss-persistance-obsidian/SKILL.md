@@ -8,8 +8,6 @@ compatibility: Requires Python 3 and Obsidian 1.12.7+ with the official obsidian
 
 Use the official [Obsidian CLI](https://obsidian.md/help/cli) with complete record payloads and operation requirements from the caller or `frantss-persistance` when available.
 
-## Setup and routing
-
 Use supplied backend options `vault` and `root` from `~/.frantss/persistance.yaml`, or read that connection file directly; expand `~` to the current OS account's home. Repository-local and ancestor configurations never select the vault.
 Require schema version 1, this adapter, an existing absolute vault path, and a vault-relative root; missing options leave storage unconfigured. For sandboxed agents, read [CLI access](references/sandbox.md) before checks; after its permitted retry, stop on failure and retain partial setup/unsaved payloads without installing or repairing dependencies.
 
@@ -20,9 +18,7 @@ Require schema version 1, this adapter, an existing absolute vault path, and a v
 Initialize only on explicit setup; offer `Frantss` as the default root and preserve configured roots, unrelated notes, and `.obsidian` settings. Keep destinations inside the root; reject traversal and escaping symlinks. Keep credentials in their tool's credential store.
 For record operations or setup, read [note mapping](references/notes.md); before writes, also read [write protocol](references/writes.md). For requested view setup or changes, read [Bases views](references/bases.md).
 
-## CLI operations
-
-Use exact vault-relative `path=<root>/.../<id>.md`, including the extension; omitted paths and `file=` can target unintended notes.
+Use the exact discovered vault-relative `path=<root>/.../<readable name>.md`, including the extension; omitted paths and `file=` can target unintended notes. Never derive paths from UUIDs.
 List candidates with `files folder=<root>/<Folder>`, then `read path=<path>` and filter decoded records by exact keys or fields; exclude History unless requested. Use `search query=<text> path=<root> format=json` for discovery; results alone do not prove completeness or identity.
 Pass arguments through a process argument array. Preserve literal backslashes and multiline payloads across CLI escape handling (`\n`, `\t`).
 Run CLI reads through the [bounded reader](scripts/read_cli.py): `python3 <installed-skill-dir>/scripts/read_cli.py vault=<name> <command> ...`. It captures output locally and waits up to 5 seconds for process exit before returning it. Give the host tool at least 10 seconds and retain its sandbox/approval flow. Require exit zero and error-free output; a timeout or background task is incomplete, even when a full note was printed. Report failure before retrying.

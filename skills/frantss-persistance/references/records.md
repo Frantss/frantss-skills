@@ -1,6 +1,7 @@
 # Common record fields
 
 Backend records use `schema_version: 1`, `record_type`, UUID `id`, stable `key`, `title`, integer `revision`, `created_at`, and `updated_at`.
+Stable IDs are record properties; adapters use human-readable note names and resolve identity independently of filenames.
 Ordinary tracking stores only `task` and `report`; `settings` is shared configuration. Retired evidence/run/event records are migration inputs only.
 Start revisions at 1; timestamps include offsets, date-only values retain precision, and unknown dates remain null.
 Use `<record_type>:<id>` keys unless the supplied schema defines a composite key; reuse identities on retries.

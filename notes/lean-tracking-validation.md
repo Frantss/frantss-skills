@@ -67,3 +67,25 @@ No step authorizes deleting the old archive or substituting a retrieval date.
 warnings. All skills installed into the temporary directory, including the
 migration reference. `git diff --check` passed. Runtime adapter behavior and
 live-data migration remain untested.
+
+## Human-readable Obsidian names
+
+Additional manual walkthrough against the updated adapter and common record
+rules. This checks instruction decisions, without a live rename or link update.
+
+| Fixture | Walkthrough result |
+| --- | --- |
+| Task titled “Fix invoice export” with a UUID property | `Tasks/Fix invoice export.md`; UUID remains in `id` |
+| Gildara daily report for 2026-10-20 | `Reports/2026-10-20 - Gildara daily report.md` |
+| Two distinct tasks with the same title/project | Add readable project context and then `(2)` when needed; keep distinct IDs and reuse chosen paths on retries |
+| Task title containing `/`, `:`, `[`, `]`, and `#` | Replace unsafe characters before path creation; retain the original meaningful title in properties |
+| Existing task renamed after its outcome changes | Find by ID/key, archive the previous revision, save the changed title, rename through FileManager, and verify inbound links and lookup |
+| Path-only rename with unchanged content | Preserve ID/key and logical revision; do not manufacture a new task or logical revision |
+| Historical task revision | `History/Tasks/Fix invoice export/Revision 1.md`; locate by ID/revision even after current title changes |
+| Interrupted migration from a UUID path | Resolve the journaled ID/revision at old/new paths; reuse a verified move and conflict on another identity at the target |
+| Internal-link auto-update disabled | Inspect and repair affected references; preserve the user's setting and report unresolved links as partial |
+| Request to edit an unrelated Obsidian note | Do not activate the adapter or apply database naming migrations |
+
+The rename method and its dependence on user link settings were checked against
+the official [Obsidian API declarations](https://github.com/obsidianmd/obsidian-api/blob/master/obsidian.d.ts).
+Existing vault notes and agent installations remain unchanged by this exercise.

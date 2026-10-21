@@ -14,7 +14,7 @@ The common envelope remains version 1; domain shape, not that number alone, dete
 5. Reports: preserve narrative, scope, ID/key, generation time, and human edits. Resolve evidence to supporting `source_urls` and referenced task IDs to `tasks`.
    Map manifest cutoff to `status_cutoff` and coverage/completeness to brief text `coverage`; preserve uncertainty when an old cutoff or source scope is missing.
    Remove current `evidence`/`manifest`; observations, input revisions, collection IDs, and query/cursor details remain only in the archived original.
-6. Archive each original before replacing it through the adapter protocol. Keep original History unchanged; legacy snapshots remain readable as archival data, with unsupported domain/history queries reported as gaps.
+6. Archive each original before replacing it through the adapter protocol. Preserve History payloads; path/link migrations follow the adapter's naming rules with original bytes backed up. Legacy snapshots remain archival data, with unsupported domain/history queries reported as gaps.
 7. Update affected owned views to task/report inputs after replacements verify; preserve custom views and report any that still depend on retired types.
 8. Verify IDs/keys, link resolution, mapped fields, report text, history preservation, and current task/report queries. Do not mark migration complete with unresolved references.
 9. Retry by the journal's original identities and expected revisions; inspect started-step effects, reuse verified replacements/archives, and write only missing work.

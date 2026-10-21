@@ -6,6 +6,7 @@
 4. Use CLI `eval code=<javascript>` with `app.vault.create(path, text)` for new records and archives; existing paths must conflict.
    For replacement, use `app.vault.process(file, current => { if (current !== expected) throw Error('conflict'); return next; })`. Resolve `file` by exact path; serialize path/expected/next as JSON data literals in trusted code. Await calls and inspect errors.
 5. Increment revision for a logical content change, not an identical retry. Read back fields, revision, and links.
+After title changes or during a naming migration, use CLI `eval` with [`app.fileManager.renameFile(file, newPath)`](https://github.com/obsidianmd/obsidian-api/blob/master/obsidian.d.ts); check source identity/content and target vacancy first. Link updates depend on user settings: inspect and repair affected references without changing settings. Preserve IDs/keys; path-only moves keep logical revisions and require link/lookup verification.
 Create missing parents through CLI `eval` using [`app.vault.createFolder`](https://github.com/obsidianmd/obsidian-api/blob/master/obsidian.d.ts), checking existing folders and proceeding parent-first.
 
 ## Task and report saves
