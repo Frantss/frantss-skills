@@ -62,6 +62,21 @@ For Codex, use the global `~/.codex/AGENTS.md`. See the
 For other agents, use their supported persistent instructions file or setting.
 This repository's `AGENTS.md` already includes the rule for work here.
 
+## Personal tracking
+
+[personal-track](skills/personal-track/SKILL.md) captures tasks and commitments,
+triages the single inbox into existing projects, and tracks pending work.
+It also captures clear user-owned follow-ups during ongoing work.
+
+Tasks start unreviewed. Your explicit acknowledgment adds `reviewed-by-frantss`;
+categorization and completion preserve that separate review state.
+Project creation requires an explicit command from you.
+
+The skills use short entrypoints and operation-specific references, within a
+hard limit of 100 total lines per skill, or 200 for `personal-persist`.
+References load only when needed.
+Live writes require a configured persistence interface.
+
 ## Install
 
 This repository is private. Anyone installing from GitHub needs repository
