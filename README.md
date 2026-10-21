@@ -7,178 +7,6 @@ Cursor, GitHub Copilot, Gemini CLI, and other agents that support
 Skills live in `skills/<name>/SKILL.md`. Claude Code can install the collection
 as a plugin; other agents can install individual skills with GitHub CLI.
 
-## Create a skill
-
-Requires Python 3.10+, GitHub CLI with `gh skill` support, and Claude Code for
-manifest validation. This setup is checked with GitHub CLI 2.101.0 and Claude
-Code 2.1.291; CI pins those versions.
-
-```bash
-python3 scripts/new_skill.py my-skill \
-  --description "Use when performing the specific task this skill handles."
-```
-
-Edit the generated file, replacing the scaffold comments with real instructions,
-then run:
-
-```bash
-make validate
-```
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for writing, testing, and packaging skills.
-
-## Communication
-
-[communicate](skills/communicate/SKILL.md) applies to every message. It combines
-simple English with rules for direct answers, consistent terms, and natural writing.
-It preserves technical meaning and exact code or quotes.
-
-For use across workspaces, install the skill at user scope after these changes
-are committed and pushed:
-
-```bash
-gh skill install Frantss/frantss-skills communicate --agent codex --scope user
-```
-
-Skill discovery alone does not ensure use on every turn. Add this rule to your
-agent's persistent instructions. Replace `<installed-skill-path>` with the actual
-path to the installed `communicate/SKILL.md`:
-
-```text
-Before your first reply, read <installed-skill-path>.
-Apply it to every message to me throughout the session, on every topic.
-If its instructions leave the context, read it again before your next message.
-```
-
-For Codex, use the global `~/.codex/AGENTS.md`. See the
-[persistent instructions guide](https://learn.chatgpt.com/docs/agent-configuration/agents-md).
-For other agents, use their supported persistent instructions file or setting.
-This repository's `AGENTS.md` already includes the rule for work here.
-
-## Configuration
-
-[setup-frantss-skills](skills/setup-frantss-skills/SKILL.md) manages the shared
-`.frantss` configuration directory and its Git exclusion. General setup prepares this directory
-without enabling a configuration. Named configurations load their own guides;
-workspace identity and tracking are currently supported. Other configurations can
-add separate guides and files without changing the shared setup procedure.
-
-Inspection is read-only. Updates preserve unselected configuration files, and
-already tracked configuration requires explicit Git index cleanup.
-
-Each workspace has its own `.frantss/workspace.yaml`, containing one
-stable UUID and display name. This identity is shared by that workspace's Frantss
-skills and requires no tracking backend. Explicit workspace setup allocates the
-identity once; renaming the workspace, moving its files, or changing backends
-preserves it. Tracking can query other workspaces through their persisted records.
-Inbox capture and operations scoped by stored workspace IDs require no local identity file.
-
-## Tracking
-
-Shared [settings](skills/tracking-persist/references/settings.md) define timezone, ISO weekday week start,
-collection limits, and account-identity aliases. They live in the selected backend;
-each tracking workspace record holds its sources and uses its workspace ID.
-Tracking setup configures each source's stable ID, provider, account, user identity,
-collection scope, and access methods. The [source configuration guide](skills/setup-frantss-skills/references/sources.md)
-defines supported providers and fields, including `gmail` and `google-calendar`.
-Collection and persistence consume configuration without their own provider catalogs.
-Source changes preserve other mappings; unavailable access checks remain explicit.
-The tracking connection file holds only the backend
-connection. Agents can discover a unique config in the current directory or
-its ancestors. Supply the same config path when working elsewhere, so workspaces
-continue to share one backend. Config files stay outside installed skill folders.
-The `.frantss` directory is shared across Frantss skills. Tracking owns only
-`tracking.yaml`; other skills can keep separate configuration files alongside it.
-
-A source can use a CLI, API, skill, MCP server, plugin, or a combination.
-Referenced guidance can connect methods; interchangeable methods follow list order.
-Setup resolves exact references and checks availability. Credentials remain in credential stores.
-
-This example is a `sources` payload for a workspace record in the backend.
-Replace placeholders with actual account, scope, and installed capability references:
-
-```yaml
-sources:
-  - id: personal-mail
-    provider: gmail
-    account: <google-account>
-    identity: <user-identity>
-    scope:
-      labels: [<label-id>]
-    access:
-      - kind: skill
-        name: <installed-mail-skill>
-      - kind: mcp
-        server: <configured-mail-server>
-        tools: [<read-tool>]
-      - kind: plugin
-        id: <installed-mail-plugin>
-        tools: [<read-tool>]
-  - id: personal-calendar
-    provider: google-calendar
-    account: <google-account>
-    identity: <user-identity>
-    scope:
-      calendars: [<calendar-id>]
-    access:
-      - kind: cli
-        executable: <calendar-cli>
-        profile: personal
-        guidance: <command-documentation-reference>
-      - kind: api
-        base_url: <calendar-api-base-url>
-        docs: <api-documentation-reference>
-        auth_ref: <credential-store-reference>
-```
-
-Evidence keys use native provider/account/container/object/event identity, independent
-of access method and query filters. Provenance records the workspace/source-ID mappings
-that observed each event; overlapping mappings reuse the observation.
-Access changes retain source IDs and existing evidence identities. Missing access
-or ambiguous scope leaves collection incomplete; it never expands collection to all locations.
-
-[tracking-tasks](skills/tracking-tasks/SKILL.md) captures tasks and commitments,
-triages the single inbox into existing workspaces, and tracks pending work.
-It also captures clear user-owned follow-ups during ongoing work.
-
-Tasks start unreviewed. Your explicit acknowledgment adds `reviewed-by-frantss`;
-categorization and completion preserve that separate review state.
-Workspace creation requires an explicit command from you.
-
-The skills use short entrypoints and operation-specific references, within a
-hard limit of 100 total lines per skill, or 200 for `tracking-persist`.
-References load only when needed.
-Live writes require a configured persistence interface.
-
-[tracking-collect](skills/tracking-collect/SKILL.md) gathers and persists activity
-from each selected workspace's configured sources. It retains event dates, source
-context, and collection coverage for later queries. Access guidance and
-the evidence format load only when needed. Collection can hand outstanding
-commitments to `tracking-tasks`. Direct collection defaults to `capture: automatic`;
-report handoffs pass `capture: none` and return candidates without task writes.
-
-[tracking-report](skills/tracking-report/SKILL.md) creates and saves daily or
-weekly reports from collected evidence and task history. It includes untracked
-contributions, distinguishes past status from current pending work, and records
-coverage gaps. Period, content, and persistence details load only when needed.
-
-[tracking-persist](skills/tracking-persist/SKILL.md) defines what must be saved
-and retrieved: tasks, workspaces, evidence, collection coverage, task events,
-report snapshots, and prior revisions. It defines logical records and operation
-requirements, then routes requests to the configured storage adapter.
-
-[tracking-persist-obsidian](skills/tracking-persist-obsidian/SKILL.md) implements
-that storage in a selected Obsidian vault. It handles note mapping, file reads
-and writes, recovery, revision folders, and scoped Bases views. Those references
-load only when needed. Install both persistence skills for this backend;
-replacing the adapter does not change the tracking, collection, or reporting
-workflows. Setup requires a vault path and tracking root. No live vault is
-configured by this repository.
-
-For reliable automatic capture across sessions, add a rule to your agent's
-persistent instructions to use `tracking-tasks` when clear user-owned follow-ups
-or commitments arise. Skill discovery alone does not guarantee that behavior.
-
 ## Install
 
 This repository is private. Anyone installing from GitHub needs repository
@@ -242,6 +70,53 @@ claude plugin update frantss-skills@frantss
 ```
 
 For skills installed with Vercel's CLI, use `npx skills update`.
+
+## Skills
+
+| Skill | Description |
+| --- | --- |
+| [communicate](skills/communicate/SKILL.md) | Write clear, direct replies throughout the session while preserving technical meaning. |
+| [setup-frantss-skills](skills/setup-frantss-skills/SKILL.md) | Set up `.frantss`, workspace identity, and tracking's shared backend and source access. |
+| [tracking-tasks](skills/tracking-tasks/SKILL.md) | Capture commitments into one inbox, triage them into workspaces, and manage pending tasks and acknowledgment. |
+| [tracking-collect](skills/tracking-collect/SKILL.md) | Gather dated activity and evidence from configured sources, preserving provenance and collection coverage. |
+| [tracking-report](skills/tracking-report/SKILL.md) | Create, save, and retrieve daily or weekly reports covering contributions, pending work, and evidence gaps. |
+| [tracking-persist](skills/tracking-persist/SKILL.md) | Define shared settings, logical records, and storage requirements for tasks, evidence, and reports across backends. |
+| [tracking-persist-obsidian](skills/tracking-persist-obsidian/SKILL.md) | Store tracking records and revisions as Obsidian notes, with Bases views for tasks and activity. |
+
+## Configuration
+
+Use `setup-frantss-skills` to configure a workspace. Its [tracking guide](skills/setup-frantss-skills/references/tracking.md)
+handles the shared backend; its [source guide](skills/setup-frantss-skills/references/sources.md)
+defines source scope and CLI, API, skill, MCP, or plugin access methods.
+
+Each workspace has a stable identity in `.frantss/workspace.yaml`. Tracking uses
+one shared backend selected by `.frantss/tracking.yaml`. Shared [settings](skills/tracking-persist/references/settings.md)
+and workspace source mappings live in that backend. Setup excludes `.frantss` from Git.
+Install both persistence skills to use Obsidian; setup requires an existing vault path and a tracking root.
+
+## Automatic use
+
+For consistent communication and task capture across sessions, reference
+`communicate` and `tracking-tasks` in your agent's persistent instructions.
+Skill discovery alone does not ensure automatic use.
+
+For `communicate`, replace `<installed-skill-path>` with its installed location:
+
+```text
+Before your first reply, read <installed-skill-path>.
+Apply it to every message to me throughout the session, on every topic.
+If its instructions leave the context, read it again before your next message.
+```
+
+For Codex, use `~/.codex/AGENTS.md`; see the [persistent instructions guide](https://learn.chatgpt.com/docs/agent-configuration/agents-md).
+For other agents, use their supported persistent instructions file or setting.
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for writing, testing, and packaging skills.
+Create a skill with `python3 scripts/new_skill.py my-skill --description "Use when ..."`,
+then run `make validate`. Validation requires Python 3.10+, GitHub CLI with `gh skill`,
+and Claude Code. CI pins GitHub CLI 2.101.0 and Claude Code 2.1.291.
 
 ## Layout
 
