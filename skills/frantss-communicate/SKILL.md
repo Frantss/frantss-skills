@@ -6,6 +6,7 @@ description: "Apply to every reply, question, progress update, and final report 
 # Communicate
 
 Apply throughout the session, on every topic, alongside task-specific skills.
+Apply this skill silently. Mention it only when frantss asks about it.
 Use this practical adaptation of [ASD-STE100](https://www.asd-ste100.org/about_STE.html).
 These rules do not require its full dictionary or establish STE compliance.
 

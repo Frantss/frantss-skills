@@ -18,7 +18,7 @@ If absent, report that result and offer creation; if inaccessible, report the ac
 ## Create or regenerate
 
 1. Resolve project IDs, period, timezone, and report type; read [period rules](references/periods.md) and clarify unresolved scope.
-   Use `~/.frantss/projects.yaml`, with read-only `frantss-configure-skills` resolution when available; retain historical missing-definition gaps.
+   Use `~/.frantss/projects.yaml`, with read-only `frantss-configure` resolution when available; retain historical missing-definition gaps.
    Explicit selection precedes unique registered remotes, then machine-scoped paths.
 2. Retrieve scoped evidence, coverage, tasks, and dated history/revisions, including older outstanding commitments; expose access/pagination gaps.
 3. When fresh evidence is needed/requested, use `frantss-tracking-collect` when available with the same scope and `capture: none`.

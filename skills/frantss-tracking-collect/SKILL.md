@@ -6,7 +6,7 @@ description: "Collect or refresh dated activity and evidence from configured pro
 # Tracking collect
 
 Resolve project IDs, window, timezone, and source identities from the request/configuration; clarify missing scope without creating projects/sources.
-Read sources from `~/.frantss/projects.yaml`; use read-only `frantss-configure-skills` resolution when available for current context.
+Read sources from `~/.frantss/projects.yaml`; use read-only `frantss-configure` resolution when available for current context.
 Explicit selection precedes unique registered remotes, then machine-scoped canonical paths; the checkout never limits cross-project scope.
 Retrieve shared settings and save through the backend in `~/.frantss/persistance.yaml`, using `frantss-persistance` when available.
 Accept `capture: automatic|none`: direct collection defaults to automatic, report handoffs to none. Resume with the recorded policy; changing it requires a new run.

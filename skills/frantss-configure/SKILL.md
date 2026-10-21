@@ -1,9 +1,9 @@
 ---
-name: frantss-configure-skills
+name: frantss-configure
 description: "Set up, inspect, or maintain Frantss backend connections, projects, and sources. Use for configuration requests, read-only resolution handoffs, or lasting changes stated by frantss."
 ---
 
-# Configure Frantss skills
+# Configure Frantss
 
 Choose setup for explicit initialization, inspect for read-only questions/resolution, or [maintenance](references/maintenance.md) for established changes.
 General setup prepares only `~/.frantss` and presents supported configurations; enable only requested entries.

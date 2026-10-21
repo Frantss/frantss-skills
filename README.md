@@ -99,7 +99,7 @@ For skills installed with Vercel's CLI, use `npx skills update`.
 | --- | --- |
 | [frantss-communicate](skills/frantss-communicate/SKILL.md) | Write clear, direct replies throughout the session while preserving technical meaning. |
 | [frantss-decompose](skills/frantss-decompose/SKILL.md) | Break down problems through context gathering, alternatives, and questionnaire rounds per part, with a live Markdown document and stable IDs. |
-| [frantss-configure-skills](skills/frantss-configure-skills/SKILL.md) | Set up, inspect, and maintain Frantss configuration, including lasting project/source changes stated during conversation. |
+| [frantss-configure](skills/frantss-configure/SKILL.md) | Set up, inspect, and maintain Frantss configuration, including lasting project/source changes stated during conversation. |
 | [frantss-tracking-tasks](skills/frantss-tracking-tasks/SKILL.md) | Capture brief tasks, triage them across Inbox, Next, Later, Maybe, and Done, and manage projects, dates, blockers, and acknowledgment. |
 | [frantss-tracking-collect](skills/frantss-tracking-collect/SKILL.md) | Gather dated activity and evidence from configured sources, preserving provenance and collection coverage. |
 | [frantss-tracking-report](skills/frantss-tracking-report/SKILL.md) | Create, save, and retrieve daily or weekly reports covering contributions, pending work, and evidence gaps. |
@@ -118,9 +118,9 @@ Linked tickets/documents retain their details; tasks hold an outcome, brief cont
 
 ## Configuration
 
-Use `frantss-configure-skills` to set up, inspect, and maintain your user-wide connection, project registry, and sources.
-Its [persistence guide](skills/frantss-configure-skills/references/persistence.md)
-checks the shared backend; its [tracking guide](skills/frantss-configure-skills/references/sources.md)
+Use `frantss-configure` to set up, inspect, and maintain your user-wide connection, project registry, and sources.
+Its [persistence guide](skills/frantss-configure/references/persistence.md)
+checks the shared backend; its [tracking guide](skills/frantss-configure/references/sources.md)
 configures tracking settings, source instances, target locations, and the user's identity in each source.
 Source records contain `id`, `provider`, `account`, `identity`, and bounded `scope`; collection chooses available tools in the active harness.
 
@@ -168,7 +168,7 @@ Enable and register the official Obsidian CLI; it connects to the desktop app.
 ## Automatic use
 
 For consistent communication, task capture, and configuration maintenance across sessions, reference
-`frantss-communicate`, `frantss-tracking-tasks`, and `frantss-configure-skills` in your agent's persistent instructions.
+`frantss-communicate`, `frantss-tracking-tasks`, and `frantss-configure` in your agent's persistent instructions.
 Skill discovery alone does not ensure automatic use.
 
 For `frantss-communicate`, replace `<installed-skill-path>` with its installed location:

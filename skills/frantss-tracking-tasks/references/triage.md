@@ -16,4 +16,4 @@ A sprint ticket supplies no invented date; a nonurgent physician appointment bel
 Keep blocked commitments in Next/Later with a blocker/next actor when known; clear resolved blockers from evidence.
 Assign named or uniquely source-mapped projects; unresolved fit stays in Inbox. A known project can coexist with Inbox; null project never defines it.
 Retain a brief `triage_reason` with `evidence`/`source_urls`; reevaluate on new evidence/subsequent triage, preserving frantss's choices.
-A suggested/missing project name or task acknowledgment is not creation; explicit creation uses `frantss-configure-skills` when available, otherwise returns an unsaved request.
+A suggested/missing project name or task acknowledgment is not creation; explicit creation uses `frantss-configure` when available, otherwise returns an unsaved request.
