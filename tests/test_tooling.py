@@ -1,6 +1,8 @@
 import json
+import os
 from pathlib import Path
 import shutil
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -16,7 +18,7 @@ class ToolingTests(unittest.TestCase):
         self.addCleanup(self.temporary.cleanup)
         self.root = Path(self.temporary.name)
         source = Path(__file__).resolve().parents[1]
-        for folder in (".claude-plugin", "templates"):
+        for folder in (".claude-plugin", ".codex-plugin", "templates"):
             shutil.copytree(source / folder, self.root / folder)
         (self.root / "skills").mkdir()
 
@@ -89,6 +91,54 @@ class ToolingTests(unittest.TestCase):
         errors = packaging_errors(self.root)
         self.assertTrue(any("same name" in error for error in errors))
         self.assertTrue(any("versions" in error for error in errors))
+
+    def test_codex_plugin_must_match_the_shared_package(self):
+        path = self.root / ".codex-plugin/plugin.json"
+        original = json.loads(path.read_text())
+        for changes, message in (
+            ({"name": "other-plugin"}, "plugin names must match"),
+            ({"skills": "../another-directory/"}, "shared ./skills/ directory"),
+            ({"skills": ["./skills/example-task/"]}, "shared ./skills/ directory"),
+            ({"version": "1.0.0"}, "Codex plugin versions"),
+        ):
+            with self.subTest(changes=changes):
+                path.write_text(json.dumps({**original, **changes}))
+                self.assertTrue(any(message in error for error in packaging_errors(self.root)))
+
+    def test_missing_codex_manifest_fails(self):
+        (self.root / ".codex-plugin/plugin.json").unlink()
+        self.assertTrue(any("invalid plugin manifests" in error for error in packaging_errors(self.root)))
+
+    @unittest.skipUnless(shutil.which("codex"), "Codex CLI is needed for the plugin installation smoke test")
+    def test_codex_installs_and_refreshes_shared_skills(self):
+        skill = self.finished_skill()
+        with tempfile.TemporaryDirectory() as runtime:
+            env = {**os.environ, "CODEX_HOME": runtime}
+
+            def codex(*args):
+                result = subprocess.run(
+                    ["codex", "plugin", *args, "--json"],
+                    cwd=runtime, env=env, capture_output=True, text=True, timeout=30,
+                )
+                self.assertEqual(result.returncode, 0, result.stderr)
+                return json.loads(result.stdout)
+
+            market = codex("marketplace", "add", str(self.root))
+            self.assertEqual(market["marketplaceName"], "frantss")
+            result = codex("add", "frantss-skills@frantss")
+            installed = Path(result["installedPath"])
+            self.assertTrue(installed.resolve().is_relative_to(Path(runtime).resolve()))
+            self.assertEqual((installed / "skills" / skill.name / "SKILL.md").read_bytes(),
+                             (skill / "SKILL.md").read_bytes())
+
+            with (skill / "SKILL.md").open("a") as output:
+                output.write("\nA locally updated instruction.\n")
+            added = self.finished_skill("second-task")
+            result = codex("add", "frantss-skills@frantss")
+            installed = Path(result["installedPath"])
+            for source in (skill, added):
+                self.assertEqual((installed / "skills" / source.name / "SKILL.md").read_bytes(),
+                                 (source / "SKILL.md").read_bytes())
 
     def test_template_is_not_discovered_but_stray_skills_fail(self):
         (self.root / "templates/SKILL.md").write_text("An accidentally discoverable template.")

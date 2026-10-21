@@ -58,7 +58,8 @@ make validate
 ```
 
 This runs repository packaging checks, `gh skill publish --dry-run` for actual
-skills, and `claude plugin validate`. It publishes nothing. A missing-version
+skills, and `claude plugin validate`. Packaging checks include the Codex manifest
+and its shared marketplace identity. It publishes nothing. A missing-version
 or missing-license warning can be expected for these private manifests; review
 other warnings. An empty collection is allowed while setting up the repository.
 
@@ -81,11 +82,15 @@ authoring folder can hide dependencies that disappear during installation.
 For Claude, `claude --plugin-dir .` loads the local plugin for a test session.
 Avoid installing drafts into your everyday skills directories.
 
+With the Codex CLI installed, `make test` also exercises plugin installation and
+reinstallation through the shared marketplace, using a temporary Codex configuration
+and cache. It verifies that new and edited skills reach the installed package.
+
 ## Share changes
 
 Commit and push completed skills to this private repository. Every new skill
 under `skills/` is discovered automatically; manifests need no per-skill list.
-Use `gh skill install` to choose individual skills, or the Claude plugin for the
+Use `gh skill install` to choose individual skills, or a Codex or Claude plugin for the
 collection. Keep skill names stable so installations and explicit invocations
 continue to resolve.
 

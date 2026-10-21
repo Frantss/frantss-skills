@@ -6,15 +6,15 @@ My personal agent skills, shared from one source across Codex, Claude Code,
 Cursor, GitHub Copilot, Gemini CLI, and other agents that support
 [Agent Skills](https://agentskills.io/specification).
 
-Skills live in `skills/<name>/SKILL.md`. Claude Code can install the collection
-as a plugin; other agents can install individual skills with GitHub CLI.
+Skills live in `skills/<name>/SKILL.md`. Codex and Claude Code can install the
+collection as a plugin; other agents can install individual skills with GitHub CLI.
 
 ## Install
 
 This repository is private. Anyone installing from GitHub needs repository
 access. Authenticate GitHub CLI with `gh auth login` first.
 
-### Codex and other agents
+### Individual skills
 
 Run inside the workspace that should receive the skills:
 
@@ -39,6 +39,19 @@ reads the same source:
 npx skills add Frantss/frantss-skills
 ```
 
+### Codex plugin
+
+Use a Codex CLI with `plugin` commands and Git credentials that can read this private repository:
+
+```bash
+codex plugin marketplace add Frantss/frantss-skills
+codex plugin add frantss-skills@frantss
+```
+
+Start a new Codex session after installation. Codex uses its own manifest and
+the same marketplace and `skills/` directory as Claude Code.
+See the [Codex plugin command reference](https://learn.chatgpt.com/docs/cli/reference#codex-plugin).
+
 ### Claude Code plugin
 
 ```bash
@@ -46,7 +59,7 @@ claude plugin marketplace add Frantss/frantss-skills
 claude plugin install frantss-skills@frantss
 ```
 
-Use either the plugin or direct skill installation for Claude Code to avoid
+Use either the plugin or direct skill installation for each agent to avoid
 duplicate skills. For private Git sources, configure SSH access to GitHub on
 the machine running Claude Code. See its
 [private marketplace guidance](https://code.claude.com/docs/en/plugins/host-marketplace).
@@ -64,7 +77,14 @@ gh skill update my-skill
 locations; `--dir .agents/skills` limits the scan to that directory. Pinned
 skills stay pinned unless you pass `--unpin`.
 
-For the Claude plugin:
+For the Codex plugin, refresh the marketplace and reinstall the updated package:
+
+```bash
+codex plugin marketplace upgrade frantss
+codex plugin add frantss-skills@frantss
+```
+
+For the Claude Code plugin:
 
 ```bash
 claude plugin marketplace update frantss
@@ -127,7 +147,8 @@ skills/<name>/SKILL.md         Shared, installable skills
 templates/SKILL.md.tmpl        Starter; excluded from skill discovery
 scripts/new_skill.py           Create a skill without overwriting an existing one
 scripts/validate.py            Packaging checks and official CLI validators
-.claude-plugin/                Claude plugin and marketplace manifests
+.claude-plugin/                Claude plugin and shared marketplace manifests
+.codex-plugin/                 Codex plugin manifest pointing to the shared skills
 .github/workflows/validate.yml Validation on pushes and pull requests
 AGENTS.md                     Guidance for agents editing this repository
 ```

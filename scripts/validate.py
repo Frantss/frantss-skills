@@ -22,6 +22,7 @@ def packaging_errors(root: Path) -> list[str]:
     errors = []
     try:
         plugin = json.loads((root / ".claude-plugin/plugin.json").read_text())
+        codex = json.loads((root / ".codex-plugin/plugin.json").read_text())
         market = json.loads((root / ".claude-plugin/marketplace.json").read_text())
         entries = market.get("plugins", [])
         if len(entries) != 1 or entries[0].get("name") != plugin.get("name"):
@@ -34,6 +35,12 @@ def packaging_errors(root: Path) -> list[str]:
                 errors.append("omit plugin versions to track Git revisions")
             if "skills" in manifest:
                 errors.append("use automatic skills/ discovery instead of explicit skill lists")
+        if codex.get("name") != plugin.get("name"):
+            errors.append("Codex and Claude plugin names must match")
+        if codex.get("skills") != "./skills/":
+            errors.append("Codex skills must reference the shared ./skills/ directory")
+        if "version" in codex:
+            errors.append("omit Codex plugin versions to track Git revisions")
     except (OSError, ValueError, TypeError, AttributeError) as error:
         errors.append(f"invalid plugin manifests: {error}")
 
