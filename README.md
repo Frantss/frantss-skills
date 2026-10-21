@@ -33,18 +33,11 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for writing, testing, and packaging skill
 simple English with rules for direct answers, consistent terms, and natural writing.
 It preserves technical meaning and exact code or quotes.
 
-[review-communication](skills/review-communication/SKILL.md) checks selected text
-when explicitly invoked. Use it to get specific findings and suggested changes.
-In Codex, invoke it as `$review-communication`. Other agents can use their
-explicit skill invocation interface.
-The review skill includes its own checks and works without `communicate`.
-
 For use across workspaces, install the skill at user scope after these changes
 are committed and pushed:
 
 ```bash
 gh skill install Frantss/frantss-skills communicate --agent codex --scope user
-gh skill install Frantss/frantss-skills review-communication --agent codex --scope user
 ```
 
 Skill discovery alone does not ensure use on every turn. Add this rule to your
