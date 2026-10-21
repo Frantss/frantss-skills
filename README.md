@@ -122,7 +122,7 @@ Use `frantss-configure` to set up, inspect, and maintain your user-wide connecti
 Its [persistence guide](skills/frantss-configure/references/persistence.md)
 checks the shared backend; its [tracking guide](skills/frantss-configure/references/sources.md)
 configures tracking settings, source instances, target locations, and the user's identity in each source.
-Source records contain `id`, `provider`, `account`, `identity`, and bounded `scope`; collection chooses available tools in the active harness.
+Source records contain `id`, `provider`, `instance`, `identity`, and bounded `scope`; collection chooses available tools in the active harness.
 
 Setup initializes only explicitly selected configuration. Inspection reads without changing it.
 Maintenance applies clear, lasting changes stated by you during conversation and asks when the target or scope is uncertain.
@@ -140,12 +140,11 @@ projects:
   frantss/frantssuy:
     title: Frantss website
     area: side-projects
-    repositories: [github.com/frantss/frantssuy]
     local_paths: []
     sources:
       - id: code
         provider: github
-        account: github.com
+        instance: github.com
         identity: frantss
         scope: {repositories: [frantss/frantssuy]}
 ```
@@ -155,8 +154,10 @@ The backend stores tasks, evidence, collection runs, reports, revisions, and sha
 Repository-backed IDs use kebab-case `org/repo`, such as `frantss/frantssuy`; other projects use a chosen slug, such as `personal-admin`.
 IDs remain fixed after repository renames or moves; backend workflow records use UUIDs.
 
-An explicit project selection takes precedence. For the current project, match registered repository remotes,
-then machine-specific canonical paths; ask when a match is absent or ambiguous. Worktrees can share a project identity.
+Sources define repository associations as well as collection scope. An explicit project selection takes precedence.
+GitHub supplies repository events; local Git identifies the checkout through its root and remotes.
+For the current project, match repository locations from sources, then machine-specific canonical paths;
+ask when a match is absent or ambiguous. Worktrees can share a project identity.
 Creating projects requires an explicit command; established association changes use configuration maintenance. General setup creates no projects or associations.
 Inbox capture and cross-project reports need no local project association.
 

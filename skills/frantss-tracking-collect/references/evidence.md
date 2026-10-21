@@ -1,11 +1,11 @@
 # Evidence and run records
 
 Supply the common persistence envelope; evidence/runs use UUIDs. Allocate a run ID before writes, provisional if unsaved.
-Evidence fields: `projects`, `source_refs`, `source`, `account`, `source_scope`, `object_id`, `event_id`, `actor`, and `action`.
-`source` is the provider; `account` its native host/tenant/account namespace, independent of authentication profiles.
-`source_scope` is the stable native container, or null for account-global object/event IDs; query filters never form identity.
+Evidence fields: `projects`, `source_refs`, `source`, `instance`, `source_scope`, `object_id`, `event_id`, `actor`, and `action`.
+`source` is the provider; `instance` its native host/tenant/account namespace, independent of authentication profiles.
+`source_scope` is the stable native container, or null for instance-global object/event IDs; query filters never form identity.
 Normalize connector wrappers to native strings; unresolved identity needs clarification before saving/deduplication.
-Key: compact canonical JSON `[source, account, source_scope, object_id, event_id]`, independent of tools, query scope, and configured mapping IDs.
+Key: compact canonical JSON `[source, instance, source_scope, object_id, event_id]`, independent of tools, query scope, and configured mapping IDs.
 Without an event ID, use a stable access-independent event discriminator; match native identity and retain existing UUIDs on retries.
 `source_refs` is a sorted unique list of `{project, source_id}` pairs; merge references/project IDs across mappings without changing the key.
 Also retain `occurred_at`, `occurred_date`, `collected_at`, `timezone`, `source_url`, excerpt `content`, and attribution `context`.
