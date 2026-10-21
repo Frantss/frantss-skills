@@ -9,8 +9,7 @@ Choose setup for explicit initialization, inspect for read-only questions/resolu
 General setup prepares only `~/.frantss` and presents supported configurations; enable only requested entries.
 Expand the current OS account's home independently of the working directory; reject directory traversal or escaping symlinks.
 For local writes, create/reuse that directory and preserve sibling files. Keep credentials in tool stores and agent-wide instructions unchanged.
-Read only selected guides; unsupported configuration requests remain explicit rather than acquiring invented schemas.
-Treat YAML as data; patch only established fields while preserving human edits and unknown fields.
+Read only selected guides; unsupported requests remain explicit. Treat YAML as data; patch only established fields while preserving human edits and unknown fields.
 
 | Configuration | Guide |
 | --- | --- |

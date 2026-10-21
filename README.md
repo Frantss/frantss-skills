@@ -30,6 +30,12 @@ Existing evidence, run, and event records need an explicit
 [migration](skills/frantss-persistance/references/lean-migration.md); editing or
 installing these skills does not migrate or delete stored data.
 
+Each provider has one fixed personal-search policy. Slack searches your messages
+and direct mentions; Jira searches issues you were assigned, created, or acted on.
+Source registrations contain identities and native project locations. Search
+modes, custom filters, and collection budgets are not configurable. Unsupported
+personal searches remain explicit coverage gaps.
+
 ## Install
 
 This repository is private. You need GitHub access and credentials for your

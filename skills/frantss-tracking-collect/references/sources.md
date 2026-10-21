@@ -1,22 +1,12 @@
 # Source access
 
-Each configured source identifies project-local `id`, `provider`, frantss's `identity`, and bounded provider-specific `scope`. Hosted sources require native `instance`; local Git derives it from each repository's common directory.
+Each source identifies project-local `id`, `provider`, frantss's `identity`, and required project locations in `scope`. Hosted sources require native `instance`; local Git derives it from repository common directories. Slack/Gmail use their instance without selectors.
 Resolve `{account_ref: <alias>}` identities through shared settings; provider/instance must match. Never substitute authenticated-agent identity.
-Use configured native IDs/locations, independent of tool profiles. Empty source lists enable no collection; missing identity/ambiguous scope needs clarification.
-Choose tools at runtime; preserve instance, identity, and restrictions across methods. Source configuration grants no external-write permission.
-Unavailable access/dependencies leave coverage gaps; continue accessible sources without installing dependencies or broadening scope.
+Use native IDs/locations independently of tool profiles; empty source lists enable no collection. Unresolved identity or required locations need clarification. Retired search options have no effect; registrations supply where/who, never search behavior.
+Choose tools at runtime; preserve instance, identity, and restrictions across methods. Unavailable access/dependencies leave gaps; continue accessible branches without installing dependencies, broadening scope, or source writes.
 Use inclusive-start/exclusive-end local calendar windows converted to source time; supplied timezone/week start precede shared settings, with no guessed defaults.
-Retrieve context for actors, negation, agreement, and dates; distinguish performed actions, assignments, scheduled activity, and quotations.
-Attribute actual actors; inspect dated events inside updated threads, retaining older context only as context. Unsupported/inferred dates retain uncertainty/basis.
-Keep non-secret capability/query scope and cursors in temporary handoffs; resume only for compatible method, instance, identity, scope, and window.
+Retrieve only necessary attribution/meaning/date context around personal matches; distinguish performed actions, assignments, scheduled activity, and quotations. Attribute native actors and dated events; older context and unsupported/inferred dates retain uncertainty.
+Keep non-secret capability/query scope and cursors in temporary handoffs; resume only for compatible method, instance, identity, fixed provider policy, project locations, and window. Older handoffs require bounded rescans.
 Otherwise rescan the requested window within budget, including dated updates to older objects; deduplicate across methods/query filters without stored checkpoints.
 
-For `provider: git`, read [Git collection](git.md) before querying commits.
-
-## Slack message scope
-
-`scope.messages: authored-or-mentioned` selects messages across the configured workspace, including accessible public/private channels and direct/group messages; optional nonempty `channels`/`threads` intersect it.
-Search authorship and direct mentions of the resolved member ID separately within the collection window and location scope; union results and deduplicate by native message identity.
-Verify the native author or direct mention field/token (`<@ID>`); display-name text, thread participation, and surrounding messages alone do not match. Retain surrounding messages only as context.
-Attribute mentions to their authors; a request addressed to frantss is not evidence that frantss performed it.
-Preserve access restrictions across both searches; report missing authorship/mention branches and conversation types as coverage gaps.
+Before any source search, read [fixed personal policies](personal.md); for `provider: git`, also read [Git collection](git.md).

@@ -8,7 +8,7 @@ For different records with colliding names, including case/Unicode equivalents, 
 Find records by frontmatter type and ID/key, not basename. A changed title may change the path without changing identity.
 Project/source definitions belong to `~/.frantss/projects.yaml`; return unsupported for backend configuration saves.
 Map singleton settings to `<root>/Settings.md`; retain common metadata/revisions. Setup initializes Tasks, Reports, History, Views, and Settings.md, with no project configuration notes.
-Settings properties hold `timezone` and `week_start`; structured settings use `collection_limits`/Collection limits and `accounts`/Accounts fenced JSON sections.
+Settings properties hold `timezone` and `week_start`; structured settings use an `accounts`/Accounts fenced JSON section. Search modes and collection budgets are not settings.
 Use YAML frontmatter for common record fields and scalar/list fields, retaining logical field names and types. Use ISO 8601 timestamps with offsets and quoted date-only strings; preserve nulls. Use lists for tags.
 Store `project`/`projects` as literal configured ID strings, e.g. `project: "frantss/frantssuy"`; serialize declared relationships to backend records as quoted vault-relative wikilinks.
 Resolve backend relationships to discovered note paths for wikilinks; decode target frontmatter ID/type, never infer identity from filenames. Preserve unknown properties and human-authored sections.
