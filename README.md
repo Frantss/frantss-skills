@@ -26,8 +26,24 @@ make validate
 ```
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for writing, testing, and packaging skills.
-The collection starts empty; install commands become useful after the first
-completed skill is committed and pushed.
+
+## Personal tracking
+
+[personal-track](skills/personal-track/SKILL.md) captures tasks and commitments,
+triages the single inbox into existing projects, and tracks pending work.
+It also captures clear user-owned follow-ups during ongoing work.
+
+Tasks start unreviewed. Your explicit acknowledgment adds `reviewed-by-frantss`;
+categorization and completion preserve that separate review state.
+Project creation requires an explicit command from you.
+
+The skills use short entrypoints and operation-specific references, within a
+hard limit of 100 total lines per skill, or 200 for `personal-persist`.
+References load only when needed. Live writes require configured persistence.
+
+For reliable automatic capture across sessions, add a rule to your agent's
+persistent instructions to use `personal-track` when clear user-owned follow-ups
+or commitments arise. Skill discovery alone does not guarantee that behavior.
 
 ## Install
 
