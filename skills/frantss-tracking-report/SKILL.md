@@ -1,6 +1,6 @@
 ---
 name: frantss-tracking-report
-description: "Create, save, or retrieve daily/weekly activity and pending-work reports across selected workspaces, including past dates. Use collected evidence/task history. Source scans, direct capture, code review, and ordinary implementation requests belong elsewhere."
+description: "Create, refresh, or retrieve daily and weekly reports of the user's activity and pending commitments across workspaces, including past dates, using collected evidence and task history."
 ---
 
 # Tracking report

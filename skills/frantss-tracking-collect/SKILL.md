@@ -1,6 +1,6 @@
 ---
 name: frantss-tracking-collect
-description: "Gather and persist dated activity/evidence from selected workspaces and configured sources. Use for bounded scans, evidence refreshes, or gathering report inputs. Direct task capture, ordinary implementation requests, and writing from existing evidence do not activate it."
+description: "Collect or refresh dated activity and evidence from configured workspace sources. Use for bounded source scans, including report handoffs requiring fresh evidence."
 ---
 
 # Tracking collect

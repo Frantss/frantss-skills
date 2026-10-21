@@ -1,6 +1,6 @@
 ---
 name: frantss-configure-skills
-description: "Configure Frantss skills under ~/.frantss. Use for initialization, configuration questions, requested updates, or lasting workspace/source changes stated by the user. Incidental source activity and ordinary implementation requests alone do not activate it."
+description: "Set up, inspect, or maintain Frantss backend connections, workspaces, and sources. Use for configuration requests, read-only resolution handoffs, or lasting changes stated by the user."
 ---
 
 # Configure Frantss skills

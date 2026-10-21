@@ -1,6 +1,6 @@
 ---
 name: frantss-communicate
-description: "Apply automatically to every message to the user: replies, progress updates, questions, and final reports. Use clear, direct language and avoid typical AI writing patterns."
+description: "Apply to every user-facing reply, question, progress update, and final report to keep communication clear and direct."
 ---
 
 # Communicate

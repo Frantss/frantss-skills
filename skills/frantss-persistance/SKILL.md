@@ -1,6 +1,6 @@
 ---
 name: frantss-persistance
-description: "Persist and retrieve prepared Frantss records through one backend. Use for save, read, query, history, and persistence handoffs. Configuration changes, source scans, workflow decisions, and ordinary note editing belong elsewhere."
+description: "Store and retrieve prepared Frantss records using caller-supplied schemas. Use for persistence handoffs, record saves and queries, or historical revisions; configuration changes and source scans belong elsewhere."
 ---
 
 # Frantss persistance

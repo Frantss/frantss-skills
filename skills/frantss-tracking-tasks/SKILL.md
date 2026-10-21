@@ -1,6 +1,6 @@
 ---
 name: frantss-tracking-tasks
-description: "Track tasks and commitments: capture, triage, reassessment, acknowledgment, pending queries, updates, or explicit workspace creation. Also capture clear user-owned follow-ups during work. Ordinary implementation requests alone, source scans, and report writing belong elsewhere."
+description: "Capture and manage user-owned tasks and commitments, including clear follow-ups during ongoing work. Use for triage, acknowledgment, pending-task queries, state/date updates, or explicit workspace creation. Ordinary implementation requests alone do not activate it."
 ---
 
 # Tracking tasks
