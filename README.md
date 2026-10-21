@@ -103,7 +103,7 @@ For skills installed with Vercel's CLI, use `npx skills update`.
 | [tracking-collect](skills/tracking-collect/SKILL.md) | Gather dated activity and evidence from configured sources, preserving provenance and collection coverage. |
 | [tracking-report](skills/tracking-report/SKILL.md) | Create, save, and retrieve daily or weekly reports covering contributions, pending work, and evidence gaps. |
 | [tracking-persist](skills/tracking-persist/SKILL.md) | Define shared settings, logical records, and storage requirements for tasks, evidence, and reports across backends. |
-| [tracking-persist-obsidian](skills/tracking-persist-obsidian/SKILL.md) | Store tracking records and revisions as Obsidian notes, with Bases views for tasks and activity. |
+| [tracking-persist-obsidian](skills/tracking-persist-obsidian/SKILL.md) | Use the Obsidian CLI to store tracking records and revisions as notes, with Bases views for tasks and activity. |
 
 ## Configuration
 
@@ -115,6 +115,7 @@ Each workspace has a stable identity in `.frantss/workspace.yaml`. Tracking uses
 one shared backend selected by `.frantss/tracking.yaml`. Shared [settings](skills/tracking-persist/references/settings.md)
 and workspace source mappings live in that backend. Setup excludes `.frantss` from Git.
 Install both persistence skills to use Obsidian; setup requires an existing vault path and a tracking root.
+Enable and register the official Obsidian CLI; it connects to the desktop app.
 
 ## Automatic use
 

@@ -16,4 +16,4 @@ views:
 Other requested [views](https://obsidian.md/help/bases/views) can show pending tasks grouped by workspace, or task-only unreviewed rows using `!file.hasTag("reviewed-by-frantss")`.
 Activity views filter evidence/events by occurred_date; report views filter saved reports by period/workspace and show generation time.
 Viewing rows never acknowledges tasks. Canvas is optional presentation; it does not replace records or reports.
-Read back and parse YAML; check scope and filters against sample notes before claiming readiness.
+Use the CLI write protocol for `.base` files. Read back YAML and run `base:query path=<root>/Views/<name>.base view=<view> format=json` to check scope and filters against sample notes.

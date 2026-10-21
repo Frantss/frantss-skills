@@ -3,9 +3,11 @@
 1. Find current notes by key before creation; reuse the supplied UUID/key. Return a conflict for multiple matches.
 2. Read content/revision before patching. Reconcile changed content; preserve unknown fields and human sections.
 3. Archive the previous revision before replacement. Verify an existing archive instead of overwriting it.
-4. Recheck current content against the read version. Use exclusive creation and atomic replacement when supported.
-   Atomic replacement does not prevent concurrent edits; disclose limited protection when conditional writes are unavailable.
+4. Use CLI `eval code=<javascript>` with `app.vault.create(path, text)` for new records and archives; existing paths must conflict.
+   For replacement, use `app.vault.process(file, current => { if (current !== expected) throw Error('conflict'); return next; })`.
+   Resolve `file` by exact path; serialize path/expected/next as JSON data literals in trusted code. Await calls and inspect errors.
 5. Increment revision for a logical content change, not an identical retry. Read back fields, revision, and links.
+Create missing parents through CLI `eval` using [`app.vault.createFolder`](https://github.com/obsidianmd/obsidian-api/blob/master/obsidian.d.ts), checking existing folders and proceeding parent-first.
 
 ## Related records
 
