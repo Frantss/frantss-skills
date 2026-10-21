@@ -1,13 +1,13 @@
 ---
 name: frantss-tracking-report
-description: "Create, refresh, or retrieve daily and weekly reports of frantss's activity and pending commitments across projects, including past dates, using collected evidence and task history."
+description: "Create, refresh, or retrieve daily and weekly report summaries of frantss's activity and commitments, using task links, saved reports, and temporary source findings."
 ---
 
 # Tracking report
 
 Choose retrieve for a saved snapshot, create for a new report, or regenerate for a requested refresh. Clarify uncertain intent before collection.
 Use `frantss-persistance` when available and the backend in `~/.frantss/persistance.yaml`; reporting never initializes configuration or creates projects.
-Leave task records/events unchanged, including capture, acknowledgment, and triage. Explicit task changes belong to `frantss-tracking-tasks` when available.
+Leave task records unchanged, including links, capture, acknowledgment, and triage. Explicit task changes belong to `frantss-tracking-tasks` when available.
 
 ## Retrieve
 
@@ -20,11 +20,11 @@ If absent, report that result and offer creation; if inaccessible, report the ac
 1. Resolve project IDs, period, timezone, and report type; read [period rules](references/periods.md) and clarify unresolved scope.
    Use `~/.frantss/projects.yaml`, with read-only `frantss-configure` resolution when available; retain historical missing-definition gaps.
    Explicit selection precedes unique registered remotes, then machine-scoped paths.
-2. Retrieve scoped evidence, coverage, tasks, and dated history/revisions, including older outstanding commitments; expose access/pagination gaps.
-3. When fresh evidence is needed/requested, use `frantss-tracking-collect` when available with the same scope and `capture: none`.
-   Honor existing-evidence-only requests; reuse observations/coverage without repeating failed scans or widening scope. Unavailable collection remains a gap.
+2. Retrieve scoped tasks, relevant saved report summaries, and needed task revisions, including older outstanding commitments; expose access/history gaps.
+3. When fresh context is needed/requested, use `frantss-tracking-collect` when available with the same scope and `capture: none`.
+   Honor existing-evidence-only requests using saved summaries, task links, and session findings without source scans; otherwise reuse compatible findings without repeated failed scans or wider scope. Unavailable collection remains a gap.
 4. Read [content rules](references/content.md); compose from evidence, separating facts, reflection, and uncertainty, with supporting links.
 5. Read [snapshot records](references/save.md); pass the schema and prepared report to persistence and save without another approval prompt.
-   Finish when the write verifies, or return an explicitly partial/unsaved report with missing steps and recoverable payloads.
+   Save only the summary, links, scope, cutoff, and brief coverage gaps. Finish on a verified write, or return an explicitly partial/unsaved report with recoverable payloads.
 
 Return narrative/reference, exact scope, generation time, supporting links, and gaps. Label incomplete reports partial; planning stays out of scope.

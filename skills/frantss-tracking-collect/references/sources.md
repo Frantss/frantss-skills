@@ -8,8 +8,8 @@ Unavailable access/dependencies leave coverage gaps; continue accessible sources
 Use inclusive-start/exclusive-end local calendar windows converted to source time; supplied timezone/week start precede shared settings, with no guessed defaults.
 Retrieve context for actors, negation, agreement, and dates; distinguish performed actions, assignments, scheduled activity, and quotations.
 Attribute actual actors; inspect dated events inside updated threads, retaining older context only as context. Unsupported/inferred dates retain uncertainty/basis.
-Record non-secret capability/query scope with cursors; resume only for compatible method, instance, identity, scope, and window, otherwise bounded rescan/deduplication.
-For incremental scans, overlap prior checkpoints to catch late updates; native evidence identity remains unchanged across methods/query filters.
+Keep non-secret capability/query scope and cursors in temporary handoffs; resume only for compatible method, instance, identity, scope, and window.
+Otherwise rescan the requested window within budget, including dated updates to older objects; deduplicate across methods/query filters without stored checkpoints.
 
 For `provider: git`, read [Git collection](git.md) before querying commits.
 

@@ -15,10 +15,18 @@ These skills are a work in progress. I'm still iterating on them.
 | [frantss-configure](skills/frantss-configure/SKILL.md) | Set up and maintain connections, projects, and sources. |
 | [frantss-update](skills/frantss-update/SKILL.md) | Update skills by commit hash and migrate configuration and stored records. |
 | [frantss-tracking-tasks](skills/frantss-tracking-tasks/SKILL.md) | Capture tasks and manage commitments, dates, and blockers. |
-| [frantss-tracking-collect](skills/frantss-tracking-collect/SKILL.md) | Gather dated activity and evidence from project sources. |
+| [frantss-tracking-collect](skills/frantss-tracking-collect/SKILL.md) | Read project sources for task links and report summaries. |
 | [frantss-tracking-report](skills/frantss-tracking-report/SKILL.md) | Create daily and weekly activity reports. |
 | [frantss-persistance](skills/frantss-persistance/SKILL.md) | Store workflow records and their history through a shared backend. |
 | [frantss-persistance-obsidian](skills/frantss-persistance-obsidian/SKILL.md) | Store records in Obsidian through its official CLI. |
+
+Tracking stores tasks with direct evidence links and saved report summaries,
+including daily reports. Collection findings and scan cursors stay temporary;
+activity without a task survives in a requested report's summary and source links.
+Task/report revisions support recovery, and shared settings remain configuration.
+Existing evidence, run, and event records need an explicit
+[migration](skills/frantss-persistance/references/lean-migration.md); editing or
+installing these skills does not migrate or delete stored data.
 
 ## Install
 

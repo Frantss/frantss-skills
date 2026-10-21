@@ -14,6 +14,6 @@ views:
 ```
 
 Other requested [views](https://obsidian.md/help/bases/views) can group tasks by supplied state/project; keep Maybe separate from Next/Later and show blockers/due/expected fields. Task-only unreviewed rows use `!file.hasTag("reviewed-by-frantss")`.
-Activity views filter evidence/events by occurred_date; report views filter saved reports by period/project and show generation time.
+Activity views use report summaries by period/project and show generation time; task links open original sources.
 Viewing rows never acknowledges tasks. Canvas is optional presentation; it does not replace records or reports.
 Use the CLI write protocol for `.base` files. Read back YAML and run `base:query path=<root>/Views/<name>.base view=<view> format=json` to check scope and filters against sample notes.

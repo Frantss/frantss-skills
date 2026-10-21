@@ -3,7 +3,7 @@
 Organize by selected project or configured area; include contributions without tracked tasks and retain requested scope.
 Report completed outcomes only from reports from frantss or outcome-satisfying evidence with supported occurrence dates.
 Include PR reviews, commits, discussions, investigations, decisions, and recordings; attribute frantss's contribution without claiming others' deliverables.
-Deduplicate native source events; group related observations under supported outcomes while retaining distinct reviews/replies as evidence.
+Deduplicate native source events; summarize related observations under supported outcomes, with relevant source links and no per-event ledger.
 A merged subtask shows progress, not completion of a broader outcome; closed status alone supplies no completion date.
 Show Next/Later commitments and supported promises with due/expected dates and the task-status cutoff.
 Show Inbox (`status: inbox`, independent of project) and unreviewed tasks; Maybe remains separate from obligations even when dated.
@@ -15,4 +15,4 @@ Upcoming is a report grouping, not a state. Only explicit acknowledgment adds `r
 Count distinct tasks/outcomes only with established identities; incomplete history/coverage prevents reliable backlog arithmetic.
 Describe observed work distribution without invented balance targets. Hours require explicit time records/reports from frantss; calendar duration is scheduled time.
 Commit/message volume cannot measure effort. Inaccessible/empty sources do not establish inactivity; distinguish gaps from verified absence.
-Include checked source windows, collection times, truncation, unsaved evidence, and completeness; cost is known only when tools supply it.
+Include a brief coverage/gaps summary; keep query logs and cursors temporary. Cost is known only when tools supply it.

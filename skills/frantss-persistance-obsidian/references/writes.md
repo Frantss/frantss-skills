@@ -8,17 +8,13 @@
 5. Increment revision for a logical content change, not an identical retry. Read back fields, revision, and links.
 Create missing parents through CLI `eval` using [`app.vault.createFolder`](https://github.com/obsidianmd/obsidian-api/blob/master/obsidian.d.ts), checking existing folders and proceeding parent-first.
 
-## Related records
+## Task and report saves
 
-Before changing a task, recover its pending events. Stop with partial status if recovery cannot finish.
-Write desired task fields, `history_complete: false`, and a Pending events fenced JSON section in one task save.
-The section stores prior history completeness and each supplied event's UUID/key, fields, dates, evidence, and before/after changes.
-Create or verify Events notes by those keys. On retries, recover payloads from the task instead of repeating the transition.
-After verification, remove pending payloads and restore prior completeness; new tasks become complete, earlier gaps stay incomplete.
-Journal finalization keeps the same logical task revision and still requires a content check and read-back.
-Write evidence before advancing the corresponding run's coverage checkpoint; retain partial-run cursors separately.
+Save task fields and source links in one note; save report summaries, links, and brief coverage in one note.
+Only task/report/settings writes and their revision archives use this protocol; ordinary operations never create evidence/run/event notes or checkpoint journals.
+Legacy evidence/history_complete/manifest fields or Pending events sections require migration, not ordinary write recovery. Leave affected records unchanged and return unsupported.
 
 ## Partial failures
 
-Multi-file saves are not transactions. Inspect current notes, History, and pending event payloads after an uncertain write. Retry only missing steps using the same identities. Preserve unsaved inputs when no recoverable note was written.
+Archives and current notes are separate writes. After an uncertain write, inspect both; retry only missing steps using the same identities and expected content. Preserve unsaved inputs when no recoverable note was written.
 Return persisted parts, missing steps, and recovery locations; stop after a repeated unresolved conflict or access failure.
