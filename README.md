@@ -77,6 +77,12 @@ hard limit of 100 total lines per skill, or 200 for `personal-persist`.
 References load only when needed.
 Live writes require a configured persistence interface.
 
+[personal-collect](skills/personal-collect/SKILL.md) gathers and persists activity
+from each selected project's configured sources. It retains event dates, source
+context, and collection coverage for later queries. Source-specific guidance and
+the evidence format load only when needed. Collection can hand outstanding
+commitments to `personal-track`.
+
 ## Install
 
 This repository is private. Anyone installing from GitHub needs repository
