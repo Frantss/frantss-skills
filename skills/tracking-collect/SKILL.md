@@ -11,8 +11,8 @@ Keep observations distinct from task ownership, completion, and the final report
 ## Scope
 
 Resolve workspaces, time window, timezone, and source identities from the request or configured defaults.
-Use the shared backend selected by `.frantss/tracking.yaml` for all workspaces; retrieve settings and workspace sources through persistence.
-Resolve requested workspace IDs through persistence; consult local `.frantss/workspace.yaml` only when the request identifies the current workspace.
+Use the shared backend selected by `~/.frantss/tracking.yaml` for all workspaces; retrieve settings and workspace sources through persistence.
+Resolve requested workspace IDs through persistence; current-workspace lookup uses registered remotes or machine-scoped paths, never repository-local configuration.
 Ask for unresolved scope; a missing workspace or source mapping does not authorize creating one.
 Use each selected workspace's configured sources, account identities, and scope restrictions; configuration is the source list.
 Empty mappings mean no collection. The current checkout does not determine the workspace scope.

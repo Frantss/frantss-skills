@@ -5,7 +5,7 @@ Store one meaningful observation per source event. Preserve these logical fields
 | Field | Meaning |
 | --- | --- |
 | Evidence key | Canonical provider/native-account/native-container/object/event identity, independent of query filters, configuration IDs, and access methods |
-| Workspace links | Existing UUIDs and `source_refs` pairs `{workspace, source_id}`; merge provenance when several mappings observe the same event |
+| Workspace links | Existing readable workspace IDs and `source_refs` pairs `{workspace, source_id}`; merge provenance when several mappings observe the same event |
 | Source | Native provider/account namespace, stable container or null for account-global IDs, original object/event strings, and returned permalink |
 | Actor and event | Who did what, their relationship to the user, and the basis for attribution |
 | Occurred time and local date | Source-supported occurrence time and date in the selected timezone; unknown when unsupported |

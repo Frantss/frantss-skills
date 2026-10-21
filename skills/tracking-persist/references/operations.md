@@ -20,8 +20,8 @@ Request exact ID/revision pairs for report inputs. Return missing history, unsup
 
 ## Configure and return
 
-Use `setup-frantss-skills` when available for explicit configuration: `.frantss/tracking.yaml` selects one backend for every workspace.
-The adapter saves shared reporting settings and workspace source records in that backend and initializes requested storage/views.
+Use `setup-frantss-skills` when available for explicit configuration: `~/.frantss/tracking.yaml` selects one backend for every workspace.
+The adapter saves shared settings and workspace identities, associations, and sources in that backend and initializes requested storage/views.
 Setup alone creates no workspace records. Changing the backend selection does not migrate existing records.
 Return `verified`, `partial`, `failed`, or `unsupported` per operation, with IDs, keys, revisions, durable references, and coverage.
 For partial or failed writes, include persisted parts, missing steps, recoverable payload locations, and remaining unsaved inputs.

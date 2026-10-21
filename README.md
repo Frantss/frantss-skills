@@ -98,7 +98,7 @@ For skills installed with Vercel's CLI, use `npx skills update`.
 | Skill | Description |
 | --- | --- |
 | [communicate](skills/communicate/SKILL.md) | Write clear, direct replies throughout the session while preserving technical meaning. |
-| [setup-frantss-skills](skills/setup-frantss-skills/SKILL.md) | Set up `.frantss`, workspace identity, and tracking's shared backend and source access. |
+| [setup-frantss-skills](skills/setup-frantss-skills/SKILL.md) | Set up `~/.frantss`, the shared backend connection, and backend workspace registrations and source access. |
 | [tracking-tasks](skills/tracking-tasks/SKILL.md) | Capture commitments into one inbox, triage them into workspaces, and manage pending tasks and acknowledgment. |
 | [tracking-collect](skills/tracking-collect/SKILL.md) | Gather dated activity and evidence from configured sources, preserving provenance and collection coverage. |
 | [tracking-report](skills/tracking-report/SKILL.md) | Create, save, and retrieve daily or weekly reports covering contributions, pending work, and evidence gaps. |
@@ -107,14 +107,22 @@ For skills installed with Vercel's CLI, use `npx skills update`.
 
 ## Configuration
 
-Use `setup-frantss-skills` to configure a workspace. Its [tracking guide](skills/setup-frantss-skills/references/tracking.md)
-handles the shared backend; its [source guide](skills/setup-frantss-skills/references/sources.md)
-defines source scope and CLI, API, skill, MCP, or plugin access methods.
+Use `setup-frantss-skills` for user-wide connection setup and explicit workspace registration.
+Its [connection guide](skills/setup-frantss-skills/references/tracking.md) checks the shared backend;
+its [tracking guide](skills/setup-frantss-skills/references/sources.md) configures settings and sources.
 
-Each workspace has a stable identity in `.frantss/workspace.yaml`. Tracking uses
-one shared backend selected by `.frantss/tracking.yaml`. Shared [settings](skills/tracking-persist/references/settings.md)
-and workspace source mappings live in that backend. Setup excludes `.frantss` from Git.
-Install both persistence skills to use Obsidian; setup requires an existing vault path and a tracking root.
+Tracking reads one connection from `~/.frantss/tracking.yaml`, independently of the working directory.
+The file holds `schema_version: 1` and `backend: {adapter, options}`; other Frantss configurations can use sibling files.
+Workspace IDs, names, work/personal areas, repository associations, machine-specific paths, and sources live in the backend.
+Repository-backed workspace IDs use kebab-case `org/repo`, such as `frantss/frantssuy`; other workspaces use a readable slug.
+IDs remain fixed across renames; other record types retain UUIDs.
+
+Explicit selection takes precedence over registered remotes, then machine-specific canonical paths.
+Missing or ambiguous matches require clarification. Worktrees can share one identity; inbox capture needs no checkout association.
+General setup creates no workspaces or associations; their creation requires explicit instructions.
+Repository-local `.frantss` folders and Git-ignore changes are no longer required or discovered.
+Explicit legacy imports map UUIDs to readable IDs and migrate references/history; retain old files until cleanup is requested.
+Install both persistence skills for Obsidian and supply an existing vault path and tracking root.
 Enable and register the official Obsidian CLI; it connects to the desktop app.
 
 ## Automatic use

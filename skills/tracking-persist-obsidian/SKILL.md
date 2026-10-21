@@ -12,8 +12,8 @@ Ask for missing payload fields rather than inferring ownership, triage, acknowle
 
 ## Setup and routing
 
-Use supplied backend options `vault` and `root`, or read them from the selected `.frantss/tracking.yaml`.
-Without an explicit selection, use a unique config found in the current directory or its ancestors; ask when ambiguous.
+Use supplied backend options `vault` and `root` from `~/.frantss/tracking.yaml`, or read that user-wide connection directly.
+Expand `~` to the current user's home; repository-local and ancestor configurations never select the vault.
 Require schema version 1, this adapter, an existing absolute vault path, and a vault-relative root. Missing options leave storage unconfigured.
 Check `obsidian help`; if unavailable, retain payloads and explain CLI activation under Settings → General and PATH registration.
 The desktop app must run; CLI commands can launch it. This adapter is not a headless workflow.
@@ -34,6 +34,6 @@ Use `obsidian help <command>` for installed syntax. If CLI access fails, report 
 
 ## Reads and results
 
-Decode note links to logical UUID relationships and labeled JSON sections to structured fields.
+Decode note links to logical record IDs, including readable workspace IDs, and labeled JSON sections to structured fields.
 Read Events and retained revisions for historical cutoffs; expose missing dates, history, access, or truncated results.
 Return logical fields plus IDs, keys, revisions, note references, and per-operation verified/partial/failed/unsupported status.

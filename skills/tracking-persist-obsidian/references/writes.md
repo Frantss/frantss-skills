@@ -1,6 +1,6 @@
 # File writes and recovery
 
-1. Find current notes by key before creation; reuse the supplied UUID/key. Return a conflict for multiple matches.
+1. Find current notes by key before creation; reuse the supplied ID/key. Return a conflict for multiple matches.
 2. Read content/revision before patching. Reconcile changed content; preserve unknown fields and human sections.
 3. Archive the previous revision before replacement. Verify an existing archive instead of overwriting it.
 4. Use CLI `eval code=<javascript>` with `app.vault.create(path, text)` for new records and archives; existing paths must conflict.
