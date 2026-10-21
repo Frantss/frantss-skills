@@ -4,8 +4,7 @@
 2. Read content/revision before patching. Reconcile changed content; preserve unknown fields and human sections.
 3. Archive the previous revision before replacement. Verify an existing archive instead of overwriting it.
 4. Use CLI `eval code=<javascript>` with `app.vault.create(path, text)` for new records and archives; existing paths must conflict.
-   For replacement, use `app.vault.process(file, current => { if (current !== expected) throw Error('conflict'); return next; })`.
-   Resolve `file` by exact path; serialize path/expected/next as JSON data literals in trusted code. Await calls and inspect errors.
+   For replacement, use `app.vault.process(file, current => { if (current !== expected) throw Error('conflict'); return next; })`. Resolve `file` by exact path; serialize path/expected/next as JSON data literals in trusted code. Await calls and inspect errors.
 5. Increment revision for a logical content change, not an identical retry. Read back fields, revision, and links.
 Create missing parents through CLI `eval` using [`app.vault.createFolder`](https://github.com/obsidianmd/obsidian-api/blob/master/obsidian.d.ts), checking existing folders and proceeding parent-first.
 
@@ -21,6 +20,5 @@ Write evidence before advancing the corresponding run's coverage checkpoint; ret
 
 ## Partial failures
 
-Multi-file saves are not transactions. Inspect current notes, History, and pending event payloads after an uncertain write.
-Retry only missing steps using the same identities. Preserve unsaved inputs when no recoverable note was written.
+Multi-file saves are not transactions. Inspect current notes, History, and pending event payloads after an uncertain write. Retry only missing steps using the same identities. Preserve unsaved inputs when no recoverable note was written.
 Return persisted parts, missing steps, and recovery locations; stop after a repeated unresolved conflict or access failure.
