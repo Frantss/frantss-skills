@@ -93,6 +93,18 @@ and retrieved: tasks, projects, evidence, collection coverage, task events,
 report snapshots, and prior revisions. It defines logical records and operation
 requirements, then routes requests to the configured storage adapter.
 
+[personal-persist-obsidian](skills/personal-persist-obsidian/SKILL.md) implements
+that storage in a selected Obsidian vault. It handles note mapping, file reads
+and writes, recovery, revision folders, and scoped Bases views. Those references
+load only when needed. Install both persistence skills for this backend;
+replacing the adapter does not change the tracking, collection, or reporting
+workflows. Setup requires a vault path and tracking root. No live vault is
+configured by this repository.
+
+For reliable automatic capture across sessions, add a rule to your agent's
+persistent instructions to use `personal-track` when clear user-owned follow-ups
+or commitments arise. Skill discovery alone does not guarantee that behavior.
+
 ## Install
 
 This repository is private. Anyone installing from GitHub needs repository
