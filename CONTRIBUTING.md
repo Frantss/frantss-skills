@@ -17,6 +17,7 @@ The generator refuses existing destinations and invalid names.
 Each skill has a hard limit of 75 total lines across its authored UTF-8 text
 files. `frantss-communicate` has a 50-line limit; `frantss-persistance` and
 `frantss-persistance-obsidian` each have a 100-line limit.
+`frantss-decompose` has a 200-line limit.
 Count frontmatter, blank lines, references, helper code, and metadata.
 Binary assets are excluded. `make validate` enforces the total per skill;
 progressive disclosure does not increase the budget.

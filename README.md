@@ -98,6 +98,7 @@ For skills installed with Vercel's CLI, use `npx skills update`.
 | Skill | Description |
 | --- | --- |
 | [frantss-communicate](skills/frantss-communicate/SKILL.md) | Write clear, direct replies throughout the session while preserving technical meaning. |
+| [frantss-decompose](skills/frantss-decompose/SKILL.md) | Break down problems through context gathering, alternatives, and questionnaire rounds per part, with a live Markdown document and stable IDs. |
 | [frantss-configure-skills](skills/frantss-configure-skills/SKILL.md) | Set up, inspect, and maintain Frantss configuration, including lasting workspace/source changes stated during conversation. |
 | [frantss-tracking-tasks](skills/frantss-tracking-tasks/SKILL.md) | Capture brief tasks, triage them across Inbox, Next, Later, Maybe, and Done, and manage workspaces, dates, blockers, and acknowledgment. |
 | [frantss-tracking-collect](skills/frantss-tracking-collect/SKILL.md) | Gather dated activity and evidence from configured sources, preserving provenance and collection coverage. |
