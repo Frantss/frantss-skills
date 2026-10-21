@@ -64,6 +64,21 @@ This repository's `AGENTS.md` already includes the rule for work here.
 
 ## Personal tracking
 
+[personal-setup](skills/personal-setup/SKILL.md) configures one shared backend
+for every project in `<selected-workspace>/.frantss/tracking.yaml`. It ensures
+that workspace's `.gitignore` excludes `/.frantss/` and verifies the exclusion
+when Git is available. Already tracked configuration requires explicit cleanup.
+Use it to set up tracking, inspect configuration, or change settings and source
+mappings. Inspection is read-only; projects require explicit creation commands.
+
+Shared reporting settings and account identities live in the selected backend;
+each project record holds its sources. The local config holds only the backend
+connection. Agents can discover a unique config in the current directory or
+its ancestors. Supply the same config path when working elsewhere, so projects
+continue to share one backend. Config files stay outside installed skill folders.
+The `.frantss` directory is shared across Frantss skills. Tracking owns only
+`tracking.yaml`; other skills can keep separate configuration files alongside it.
+
 [personal-track](skills/personal-track/SKILL.md) captures tasks and commitments,
 triages the single inbox into existing projects, and tracks pending work.
 It also captures clear user-owned follow-ups during ongoing work.

@@ -11,6 +11,7 @@ Keep observations distinct from task ownership, completion, and the final report
 ## Scope
 
 Resolve projects, time window, timezone, and source identities from the request or configured defaults.
+Use the shared backend selected by `.frantss/tracking.yaml` for all projects; retrieve settings and project sources through persistence.
 Ask for unresolved scope; a missing project or source mapping does not authorize creating one.
 Use each selected project's configured accounts, repositories, branches, channels, and other source locations.
 Empty mappings mean no collection. The current checkout does not determine the project scope.

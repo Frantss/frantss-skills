@@ -11,7 +11,9 @@ Ask for missing payload fields rather than inferring ownership, triage, acknowle
 
 ## Setup and routing
 
-Resolve the selected vault path and vault-relative tracking root. Ask for missing configuration; never select another vault silently.
+Use supplied backend options `vault` and `root`, or read them from the selected `.frantss/tracking.yaml`.
+Without an explicit selection, use a unique config found in the current directory or its ancestors; ask when ambiguous.
+Require schema version 1, this adapter, an existing absolute vault path, and a vault-relative root. Missing options leave storage unconfigured.
 Initialize only on explicit setup; offer `Tracking` as the default root. Preserve unrelated notes and `.obsidian` settings.
 Keep every resolved destination inside the root; reject traversal and escaping symlinks. Keep credentials in their tool's credential store.
 For record operations or setup, read [note mapping](references/notes.md); before writes, also read [write protocol](references/writes.md).

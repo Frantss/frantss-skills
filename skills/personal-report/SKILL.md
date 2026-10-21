@@ -7,6 +7,7 @@ description: "Create, save, or retrieve daily and weekly reports of personal act
 
 Explain what the user did and what remains pending across selected personal and work projects.
 Use collected evidence and task history, including contributions without tracked tasks. Planning is outside this workflow.
+Use the shared backend selected by `.frantss/tracking.yaml`; reporting does not initialize or change configuration.
 
 ## Prepare
 

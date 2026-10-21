@@ -20,8 +20,9 @@ Request exact ID/revision pairs for report inputs. Return missing history, unsup
 
 ## Configure and return
 
-Explicit setup selects a backend and destination, reporting timezone, week start, account identities, and collection limits.
-The adapter configures its storage and requested views. Setup alone creates no project records.
+Use `personal-setup` when available for explicit configuration: `.frantss/tracking.yaml` selects one backend for every project.
+The adapter saves shared reporting settings and project source records in that backend and initializes requested storage/views.
+Setup alone creates no project records. Changing the backend selection does not migrate existing records.
 Return `verified`, `partial`, `failed`, or `unsupported` per operation, with IDs, keys, revisions, durable references, and coverage.
 For partial or failed writes, include persisted parts, missing steps, recoverable payload locations, and remaining unsaved inputs.
 Stop after a repeated unresolved conflict or access failure and identify what needs resolution.
