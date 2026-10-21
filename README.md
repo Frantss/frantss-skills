@@ -98,7 +98,7 @@ For skills installed with Vercel's CLI, use `npx skills update`.
 | Skill | Description |
 | --- | --- |
 | [communicate](skills/communicate/SKILL.md) | Write clear, direct replies throughout the session while preserving technical meaning. |
-| [setup-frantss-skills](skills/setup-frantss-skills/SKILL.md) | Set up `~/.frantss`, the shared backend connection, and backend workspace registrations and source access. |
+| [setup-frantss-skills](skills/setup-frantss-skills/SKILL.md) | Set up `~/.frantss`, the shared backend connection, workspace registrations, and source locations and identities. |
 | [tracking-tasks](skills/tracking-tasks/SKILL.md) | Capture commitments into one inbox, triage them into workspaces, and manage pending tasks and acknowledgment. |
 | [tracking-collect](skills/tracking-collect/SKILL.md) | Gather dated activity and evidence from configured sources, preserving provenance and collection coverage. |
 | [tracking-report](skills/tracking-report/SKILL.md) | Create, save, and retrieve daily or weekly reports covering contributions, pending work, and evidence gaps. |
@@ -110,7 +110,8 @@ For skills installed with Vercel's CLI, use `npx skills update`.
 Use `setup-frantss-skills` to configure your user-wide connection and register workspaces.
 Its [persistence guide](skills/setup-frantss-skills/references/persistence.md)
 checks the shared backend; its [tracking guide](skills/setup-frantss-skills/references/sources.md)
-configures tracking settings and source scope with CLI, API, skill, MCP, or plugin access methods.
+configures tracking settings, source instances, target locations, and the user's identity in each source.
+Source records contain `id`, `provider`, `account`, `identity`, and bounded `scope`; collection chooses available tools in the active harness.
 
 Frantss workflows share one connection in `~/.frantss/persistance.yaml`, regardless of the current directory.
 The file holds `schema_version: 1` and `backend: {adapter, options}`. Other Frantss configurations can use sibling files.

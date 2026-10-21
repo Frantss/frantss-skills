@@ -28,7 +28,7 @@ Distinct actions on one object remain distinct observations. Source edits create
 
 Retain `workspaces`, `window_start`, `window_end`, `timezone`, `collected_at`, `capture: automatic|none`, `status: partial|complete`, `evidence`, and per-source `coverage`.
 Coverage identifies each workspace/source-ID pair and access method, with scope, requested window, pages, cursor, limits, usage, gaps, and completed-through checkpoints.
-Coverage retains the selected access descriptor with its cursor, not merely its position in the configured access list.
+Coverage retains the non-secret runtime capability and query scope with each cursor; resume only with a compatible capability/query, otherwise rescan within budget and deduplicate.
 A run identifies one collection attempt. Preserve partial coverage and cursors even when some sources fail.
 Advance a source checkpoint only after all pages and evidence writes for that scope/window are verified.
 
