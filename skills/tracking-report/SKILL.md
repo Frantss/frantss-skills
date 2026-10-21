@@ -8,7 +8,7 @@ description: "Create, save, or retrieve daily and weekly reports of personal act
 Explain what the user did and what remains pending across selected work and personal workspaces.
 Use collected evidence and task history, including contributions without tracked tasks. Planning is outside this workflow.
 Use the shared backend selected by `.frantss/tracking.yaml`; reporting does not initialize or change configuration.
-Use `.frantss/workspace.yaml` for the workspace's identity; resolve other requested workspaces through persistence and retain their UUIDs in report scope.
+Resolve requested workspace IDs through persistence; read local `.frantss/workspace.yaml` only when identifying the current workspace.
 
 ## Prepare
 

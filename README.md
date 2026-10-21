@@ -71,6 +71,7 @@ stable UUID and display name. This identity is shared by that workspace's Frants
 skills and requires no tracking backend. Explicit workspace setup allocates the
 identity once; renaming the workspace, moving its files, or changing backends
 preserves it. Tracking can query other workspaces through their persisted records.
+Inbox capture and operations scoped by stored workspace IDs require no local identity file.
 
 ## Tracking
 
