@@ -12,6 +12,8 @@ from urllib.parse import unquote, urlsplit
 
 
 ROOT = Path(__file__).resolve().parents[1]
+MAX_SKILL_LINES = 100
+SKILL_LINE_LIMITS = {"personal-persist": 200}
 LINK = re.compile(r'!?\[[^\]\n]*\]\(\s*(<[^>\n]+>|[^\s)]+)(?:\s+[\'\"][^)\n]*[\'\"])?\s*\)')
 FENCE = re.compile(r"^```[^\n]*\n.*?^```\s*$", re.MULTILINE | re.DOTALL)
 
@@ -47,6 +49,7 @@ def packaging_errors(root: Path) -> list[str]:
             continue
         if not (skill / "SKILL.md").is_file():
             errors.append(f"{label}: missing SKILL.md")
+        line_count = 0
         for path in sorted(skill.rglob("*")):
             label = path.relative_to(root)
             if path.is_symlink():
@@ -57,9 +60,18 @@ def packaging_errors(root: Path) -> list[str]:
             except (OSError, RuntimeError) as error:
                 errors.append(f"{label}: unresolved path: {error}")
                 continue
-            if not path.is_file() or path.suffix != ".md":
+            if not path.is_file():
                 continue
-            text = path.read_text(encoding="utf-8")
+            data = path.read_bytes()
+            if b"\0" in data:
+                continue
+            try:
+                text = data.decode("utf-8")
+            except UnicodeDecodeError:
+                continue
+            line_count += len(text.splitlines())
+            if path.suffix != ".md":
+                continue
             if "<!-- scaffold:" in text:
                 errors.append(f"{label}: replace unfinished scaffold comments")
             for match in LINK.finditer(FENCE.sub("", text)):
@@ -71,6 +83,9 @@ def packaging_errors(root: Path) -> list[str]:
                     errors.append(f"{label}: link escapes its skill folder: {target.path}")
                 elif not destination.exists():
                     errors.append(f"{label}: broken local link: {target.path}")
+        line_limit = SKILL_LINE_LIMITS.get(skill.name, MAX_SKILL_LINES)
+        if line_count > line_limit:
+            errors.append(f"{skill.relative_to(root)}: {line_count} text lines exceeds the {line_limit}-line limit")
 
     for directory, children, files in os.walk(root):
         children[:] = [name for name in children if name not in {".git", ".venv", "node_modules"}]
