@@ -83,12 +83,61 @@ preserves it. Tracking can query other workspaces through their persisted record
 
 Shared reporting settings and account identities live in the selected backend;
 each tracking workspace record holds its sources and uses its workspace ID.
+Tracking setup configures each source's stable ID, provider, account, user identity,
+collection scope, and access methods. The [source configuration guide](skills/setup-frantss-skills/references/sources.md)
+defines supported providers and fields, including `gmail` and `google-calendar`.
+Collection and persistence consume configuration without their own provider catalogs.
+Source changes preserve other mappings; unavailable access checks remain explicit.
 The tracking connection file holds only the backend
 connection. Agents can discover a unique config in the current directory or
 its ancestors. Supply the same config path when working elsewhere, so workspaces
 continue to share one backend. Config files stay outside installed skill folders.
 The `.frantss` directory is shared across Frantss skills. Tracking owns only
 `tracking.yaml`; other skills can keep separate configuration files alongside it.
+
+A source can use a CLI, API, skill, MCP server, plugin, or a combination.
+Referenced guidance can connect methods; interchangeable methods follow list order.
+Setup resolves exact references and checks availability. Credentials remain in credential stores.
+
+This example is a `sources` payload for a workspace record in the backend.
+Replace placeholders with actual account, scope, and installed capability references:
+
+```yaml
+sources:
+  - id: personal-mail
+    provider: gmail
+    account: <google-account>
+    identity: <user-identity>
+    scope:
+      labels: [<label-id>]
+    access:
+      - kind: skill
+        name: <installed-mail-skill>
+      - kind: mcp
+        server: <configured-mail-server>
+        tools: [<read-tool>]
+      - kind: plugin
+        id: <installed-mail-plugin>
+        tools: [<read-tool>]
+  - id: personal-calendar
+    provider: google-calendar
+    account: <google-account>
+    identity: <user-identity>
+    scope:
+      calendars: [<calendar-id>]
+    access:
+      - kind: cli
+        executable: <calendar-cli>
+        profile: personal
+        guidance: <command-documentation-reference>
+      - kind: api
+        base_url: <calendar-api-base-url>
+        docs: <api-documentation-reference>
+        auth_ref: <credential-store-reference>
+```
+
+Access changes retain source IDs and existing evidence identities. Missing access
+or ambiguous scope leaves collection incomplete; it never expands collection to all locations.
 
 [tracking-tasks](skills/tracking-tasks/SKILL.md) captures tasks and commitments,
 triages the single inbox into existing workspaces, and tracks pending work.
@@ -105,7 +154,7 @@ Live writes require a configured persistence interface.
 
 [tracking-collect](skills/tracking-collect/SKILL.md) gathers and persists activity
 from each selected workspace's configured sources. It retains event dates, source
-context, and collection coverage for later queries. Source-specific guidance and
+context, and collection coverage for later queries. Access guidance and
 the evidence format load only when needed. Collection can hand outstanding
 commitments to `tracking-tasks`.
 

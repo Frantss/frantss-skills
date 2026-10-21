@@ -16,7 +16,7 @@ Workspaces retain `area: work|personal` and `sources` mappings.
 The workspace ID comes from its schema-version-1 `.frantss/workspace.yaml` (`id`, `name`); use that UUID for its backend record.
 Each workspace owns one identity; backend records retain those IDs for queries across workspaces without opening every directory.
 Names are mutable labels. Resolve ambiguous or conflicting identities before writes; backend setup never allocates replacement workspace IDs.
-Each mapping identifies provider, account, user identity, and source locations, branches, or query constraints.
+For source mappings, read [sources](sources.md) for their meaning, retained configuration, and use during collection.
 An empty source list enables no collection. Semantic task deduplication and workspace creation decisions come from the caller.
 
 ## Evidence

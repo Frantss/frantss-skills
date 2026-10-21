@@ -14,8 +14,7 @@ For backend changes, prepare the directory, patch requested options, parse YAML 
 For requested storage initialization, use the selected adapter; a connection file alone does not establish working storage.
 Save supplied shared settings; preserve existing values and resolve timezone/week start when required.
 Explicit workspace creation reads [identity setup](workspace-identity.md), initializes/reuses its UUID, and resolves work/personal area before backend writes.
-For source updates, resolve an existing workspace by UUID; missing records require explicit workspace creation.
-Retain provider, account, user identity, and bounded scope; patch only requested mappings and resolve ambiguous targets before writes.
+For source setup or inspection, read [source configuration](sources.md). Resolve an existing workspace record by UUID; missing records require explicit creation.
 Persist through `tracking-persist` and its adapter when available; otherwise retain unsaved payloads and report missing capabilities.
 Read back settings/workspace/source changes. Report partial identity/backend writes; reuse UUIDs on retry.
 Backend changes do not migrate records; retain the previous selection and explain separate migration requirements.
