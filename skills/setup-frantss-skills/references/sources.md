@@ -1,7 +1,7 @@
 # Tracking configuration
 
-For requested tracking settings/accounts, use the `frantss-persistance` schema; preserve existing fields and resolve timezone/week start when needed. Read [persistence setup](persistence.md) for connection checks.
-Store workspace `sources` in its backend record; the catalog below defines supported providers for setup.
+For requested shared settings/accounts, use `frantss-persistance` and [persistence setup](persistence.md); backend checks apply to those operations only.
+Store `sources` in the selected `~/.frantss/workspaces.yaml` entry; follow [registry writes](workspace-identity.md). The catalog below defines supported providers.
 Each mapping has workspace-unique stable string `id`, `provider`, `account`, user `identity`, and bounded `scope`.
 Account identifies the native instance/tenant/mailbox, not a tool profile; identity is the user's native identifier or shared account-identity reference.
 

@@ -1,13 +1,17 @@
-# Workspace identity
+# Workspace registry
 
-Use the backend selected by `~/.frantss/persistance.yaml`; workspace identity and configuration are backend records, shared across Frantss skills.
-Read [persistence setup](persistence.md) for connection/access checks; use `frantss-persistance` when available for workspace schema and resolution.
+Use `~/.frantss/workspaces.yaml`: `schema_version: 1` and a `workspaces` mapping keyed by readable IDs, shared across Frantss skills.
+Each entry requires `title` and `area: work|personal`; `repositories`, `local_paths`, and `sources` are optional lists. Configuration entries need no backend record metadata.
+Read and write through filesystem tools; backend configuration/access is not a prerequisite. Use `frantss-persistance` when available for registry resolution.
 Resolve explicit readable ID or unique display title first; otherwise match registered repository remotes, then machine-scoped canonical local roots.
 When inferring context, inspect the current Git root/remotes, not parents; unresolved matches require clarification and never imply workspace creation.
 Only explicit workspace creation registers an ID: use kebab-case `org/repo` from the selected repository, e.g. `frantss/frantssuy`, or a user-chosen slug without a repository.
 IDs have one or two slash-separated `[a-z0-9]+(?:-[a-z0-9]+)*` segments, never UUIDs; resolve owner/repository ambiguity and ID collisions before saving.
-Resolve display `title` and `area: work|personal`; default new `sources`, `repositories`, and `local_paths` to empty lists.
+Default new `sources`, `repositories`, and `local_paths` to empty lists; read [source configuration](sources.md) only for requested source changes.
 Register only requested associations: canonical remote strings in `repositories`, or `{machine, path}` entries in `local_paths` with a stable device identifier and absolute canonical root.
 Keep association changes explicit; a new checkout or changed remote never rewrites registration automatically.
-Reuse readable IDs across renames, moves, backend changes, and retries; legacy UUID import needs an explicit old→new mapping and migration of references, keys, paths, and history.
-Persist and read back by workspace ID; preserve unknown fields. If backend access or schema guidance is unavailable, return unsaved inputs without local identity files.
+Reject malformed registries, unsupported versions, duplicate keys/IDs, and missing required fields; a missing registry is unresolved during inspection or ordinary use.
+An explicit workspace-creation command may initialize a missing registry with `schema_version: 1` and `workspaces: {}` before adding the requested entry.
+Before replacement, recheck original content; use exclusive creation/atomic replacement when supported, preserve human edits and unknown fields, and read back the intended entry.
+Reuse readable IDs on renames, moves, and retries; new registration requires the explicit creation command above. Stop after a repeated conflict or access failure with unsaved inputs.
+For requested backend export, reconcile entries by ID and copy configuration fields, preserving recovery mappings; migrate UUID references explicitly and leave old records for separate cleanup.

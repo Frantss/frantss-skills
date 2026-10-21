@@ -1,6 +1,6 @@
 ---
 name: setup-frantss-skills
-description: "Set up, inspect, or update user-wide Frantss skills configuration under ~/.frantss and workspace records in the backend. Load guides for requested connections, workspace registration, or tracking sources. Ordinary use of configured skills does not initiate setup."
+description: "Set up, inspect, or update user-wide Frantss configuration under ~/.frantss, including backend connections, workspace registration, and source locations. Load only requested configuration guides. Ordinary use of configured skills does not initiate setup."
 ---
 
 # Setup Frantss skills
@@ -12,11 +12,11 @@ Load only selected guides; a request for all configurations selects every suppor
 | Configuration | Stored in | Guide |
 | --- | --- | --- |
 | Persistence connection | `~/.frantss/persistance.yaml` | [Persistence](references/persistence.md) |
-| Workspace registration and associations | Backend workspace record | [Workspace](references/workspace-identity.md) |
-| Tracking settings and sources | Backend settings/workspace records | [Tracking](references/sources.md) |
+| Workspace registration and associations | `~/.frantss/workspaces.yaml` | [Workspace](references/workspace-identity.md) |
+| Sources and tracking settings | Workspace config sources; backend shared settings | [Tracking](references/sources.md) |
 
 Expand `~` using the current user's home, independently of the repository or working directory; never search ancestors for configuration.
-Backend setup requires no workspace; workspace/source operations resolve existing backend identities before updates.
+Backend setup requires no workspace; workspace/source updates resolve local registry IDs and require no backend connection.
 Before writes, read [directory setup](references/workspace.md), then follow selected guides; backend-only updates need no local directory writes.
 Inspection creates or repairs nothing, including dependencies.
 Patch only requested fields; preserve unknown fields, human edits, sibling configurations, and unrelated files.

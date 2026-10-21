@@ -8,7 +8,6 @@ Tasks retain `status: pending|done`, nullable `workspace`, `tags`, `evidence`, `
 Optional `due_date` or `due_at` preserves the deadline's precision. A null workspace identifies the inbox.
 The absence of `reviewed-by-frantss` means unreviewed. Preserve this state during unrelated changes.
 New tasks enter the single inbox, pending and without a review tag; only explicit user acknowledgment adds `reviewed-by-frantss`.
-Retain dated task changes; capture and triage decisions belong to the caller.
 
 ## Evidence
 

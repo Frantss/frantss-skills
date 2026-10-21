@@ -1,6 +1,6 @@
 ---
 name: frantss-persistance-obsidian
-description: "Read and write prepared Frantss workspace configuration and workflow records through the Obsidian CLI. Use when Obsidian is the configured persistence adapter or for explicit storage setup and Bases changes. Logical schemas, workflow decisions, and ordinary note editing belong elsewhere."
+description: "Read and write prepared Frantss workflow records through the Obsidian CLI. Use when Obsidian is the configured persistence adapter or for explicit storage setup and Bases changes. Local configuration, logical schemas, workflow decisions, and ordinary note editing belong elsewhere."
 compatibility: Requires Obsidian 1.12.7+ with the official obsidian CLI enabled and registered, and access to the desktop app.
 ---
 

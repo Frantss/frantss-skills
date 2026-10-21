@@ -102,7 +102,7 @@ For skills installed with Vercel's CLI, use `npx skills update`.
 | [tracking-tasks](skills/tracking-tasks/SKILL.md) | Capture commitments into one inbox, triage them into workspaces, and manage pending tasks and acknowledgment. |
 | [tracking-collect](skills/tracking-collect/SKILL.md) | Gather dated activity and evidence from configured sources, preserving provenance and collection coverage. |
 | [tracking-report](skills/tracking-report/SKILL.md) | Create, save, and retrieve daily or weekly reports covering contributions, pending work, and evidence gaps. |
-| [frantss-persistance](skills/frantss-persistance/SKILL.md) | Persist shared workspace configuration and prepared workflow records through one backend, with conditional tracking schemas. |
+| [frantss-persistance](skills/frantss-persistance/SKILL.md) | Resolve local workspace/source configuration and persist prepared workflow records through one backend, with conditional tracking schemas. |
 | [frantss-persistance-obsidian](skills/frantss-persistance-obsidian/SKILL.md) | Use the Obsidian CLI to store Frantss records and revisions as notes and create requested Bases views. |
 
 ## Configuration
@@ -115,19 +115,38 @@ Source records contain `id`, `provider`, `account`, `identity`, and bounded `sco
 
 Frantss workflows share one connection in `~/.frantss/persistance.yaml`, regardless of the current directory.
 The file holds `schema_version: 1` and `backend: {adapter, options}`. Other Frantss configurations can use sibling files.
-The backend stores shared [settings](skills/frantss-persistance/references/settings.md) and each workspace's
-stable readable ID, display name, work/personal area, repository associations, machine-specific local paths, and sources.
+Workspace definitions live in `~/.frantss/workspaces.yaml`, independently of backend availability:
+
+```yaml
+schema_version: 1
+workspaces:
+  frantss/frantssuy:
+    title: Frantss website
+    area: personal
+    repositories: [github.com/frantss/frantssuy]
+    local_paths: []
+    sources:
+      - id: code
+        provider: github
+        account: github.com
+        identity: frantss
+        scope: {repositories: [frantss/frantssuy]}
+```
+
+The backend stores tasks, evidence, collection runs, reports, revisions, and shared
+[settings/accounts](skills/frantss-persistance/references/settings.md). Records reference workspace IDs as strings; they do not store workspace or source definitions.
 Repository-backed IDs use kebab-case `org/repo`, such as `frantss/frantssuy`; other workspaces use a chosen slug, such as `personal-admin`.
-IDs remain fixed after repository renames or moves; other record types continue to use UUIDs.
+IDs remain fixed after repository renames or moves; backend workflow records use UUIDs.
 
 An explicit workspace selection takes precedence. For the current workspace, match registered repository remotes,
 then machine-specific canonical paths; ask when a match is absent or ambiguous. Worktrees can share a workspace identity.
-Creating workspaces and changing their associations require explicit instructions; general setup creates neither.
+Creating workspaces and changing their associations require explicit instructions; setup edits the local registry and general setup creates neither.
 Inbox capture and cross-workspace reports need no local workspace association.
 
 Repository-local `.frantss` folders and Git-ignore changes are no longer required.
 Existing connections using the former tracking config or adapter name require explicit import; vault/root options stay unchanged.
-Legacy UUIDs need an old-to-new ID mapping and reference/history migration. Local files are not discovered automatically.
+Legacy UUIDs need an old-to-new ID mapping and reference/history migration. Repository-local files are not discovered automatically.
+Existing backend workspace definitions require an explicit export into the registry; preserve IDs, reconcile conflicts, and verify the local entries before separately requested cleanup.
 Install both persistence skills to use Obsidian; setup requires an existing vault path and a storage root, defaulting to `Frantss` for new setups.
 Enable and register the official Obsidian CLI; it connects to the desktop app.
 

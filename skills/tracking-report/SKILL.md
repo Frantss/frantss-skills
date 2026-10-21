@@ -8,7 +8,7 @@ description: "Create, save, or retrieve daily and weekly reports of personal act
 Explain what the user did and what remains pending across selected work and personal workspaces.
 Use collected evidence and task history, including contributions without tracked tasks. Planning is outside this workflow.
 Use the shared backend selected by `~/.frantss/persistance.yaml`; reporting does not initialize or change configuration.
-Resolve requested workspace IDs through persistence; current-workspace lookup uses registered remotes or machine-scoped paths, never repository-local configuration.
+Resolve workspace IDs and labels from `~/.frantss/workspaces.yaml`; use registered remotes or machine-scoped paths for current context, and retain missing-definition gaps for historical records.
 
 ## Prepare
 

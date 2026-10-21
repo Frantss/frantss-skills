@@ -1,8 +1,8 @@
 # Sources
 
 A source is a configured location from which a workspace can collect evidence of activity and commitments.
-The workspace configuration defines its sources; this skill applies no provider catalog or default source selection.
-Retain each workspace's `sources` as mappings with stable workspace-local `id`, `provider`, `account`, `identity`, and `scope`.
+Read sources from the selected `~/.frantss/workspaces.yaml` entry; this skill applies no provider catalog or default source selection.
+Each source mapping has stable workspace-local `id`, `provider`, `account`, `identity`, and `scope`; configuration edits go through setup, not the adapter.
 `provider` identifies the source system; `account` identifies its native instance/tenant/mailbox, independent of tool profiles and credentials.
 `identity` is a native user identifier or `{account_ref: <alias>}` resolved through [shared settings](settings.md).
 `scope` contains the configured locations and restrictions; preserve its provider-specific fields without imposing a common location schema.
