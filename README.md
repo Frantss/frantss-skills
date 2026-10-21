@@ -99,11 +99,19 @@ For skills installed with Vercel's CLI, use `npx skills update`.
 | --- | --- |
 | [communicate](skills/communicate/SKILL.md) | Write clear, direct replies throughout the session while preserving technical meaning. |
 | [configure-frantss-skills](skills/configure-frantss-skills/SKILL.md) | Set up, inspect, and maintain Frantss configuration, including lasting workspace/source changes stated during conversation. |
-| [tracking-tasks](skills/tracking-tasks/SKILL.md) | Capture commitments into one inbox, triage them into workspaces, and manage pending tasks and acknowledgment. |
+| [tracking-tasks](skills/tracking-tasks/SKILL.md) | Capture brief tasks, triage them across Inbox, Next, Later, Maybe, and Done, and manage workspaces, dates, blockers, and acknowledgment. |
 | [tracking-collect](skills/tracking-collect/SKILL.md) | Gather dated activity and evidence from configured sources, preserving provenance and collection coverage. |
 | [tracking-report](skills/tracking-report/SKILL.md) | Create, save, and retrieve daily or weekly reports covering contributions, pending work, and evidence gaps. |
 | [frantss-persistance](skills/frantss-persistance/SKILL.md) | Resolve local workspace/source configuration and persist prepared workflow records through one backend, with conditional tracking schemas. |
 | [frantss-persistance-obsidian](skills/frantss-persistance-obsidian/SKILL.md) | Use the Obsidian CLI to store Frantss records and revisions as notes and create requested Bases views. |
+
+Tasks start in Inbox. Clear evidence supports automatic triage: assigned current-sprint work goes to Next,
+nonurgent commitments to Later, and tentative possibilities to Maybe. Uncertain decisions stay in Inbox for clarification.
+Workspace assignment and your `reviewed-by-frantss` acknowledgment are independent of state; blockers remain notes on Next/Later tasks.
+Firm due dates and expected completion dates are optional and distinct.
+Task content aims for 5–15 lines, with a hard limit of 50 excluding link-only lines and storage metadata.
+Linked tickets/documents retain their details; tasks hold an outcome, brief context, and references.
+Legacy `pending` tasks await triage with their workspace/history preserved; reads and reports do not rewrite them.
 
 ## Configuration
 

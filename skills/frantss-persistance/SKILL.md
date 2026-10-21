@@ -5,7 +5,6 @@ description: "Persist and retrieve prepared Frantss workflow records through one
 
 # Frantss persistance
 
-Prepare storage requests and assess their results. Keep the same logical records when the storage tool changes.
 The calling workflow defines field meanings, requested changes, and content; this skill preserves those decisions across storage backends.
 
 ## Select the adapter
@@ -17,9 +16,7 @@ Require `schema_version: 1` and one `backend` with an `adapter` skill name and `
 Every workspace uses this backend. Reject per-workspace backend overrides and pass connection options unchanged to the selected adapter.
 Retrieve shared settings and workflow records through that adapter; workspace/source definitions come only from `~/.frantss/workspaces.yaml`.
 Read [workspace resolution](references/workspaces.md) for registry schema or current-workspace identification; configuration writes belong to `configure-frantss-skills`.
-Operations scoped by existing IDs, including inbox queries, require no checkout; ordinary reads and saves never create workspace identity or associations.
-For Obsidian, use `frantss-persistance-obsidian` when available. Other backends must satisfy the same record and operation requirements.
-The adapter owns physical locations, serialization, storage tools, and recovery mechanics.
+For Obsidian, use `frantss-persistance-obsidian` when available; every adapter owns physical storage/recovery and satisfies the same record/operation requirements.
 If the selected adapter is unavailable, retain an unsaved request bundle and identify the missing capability. Never silently switch stores.
 
 ## Prepare the request

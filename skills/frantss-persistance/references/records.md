@@ -3,8 +3,7 @@
 Backend records have `schema_version: 1`, `record_type`, UUID `id`, stable `key`, `title`, integer `revision`, `created_at`, and `updated_at`.
 Start revisions at 1. Timestamps carry an offset; date-only values retain their precision. Unknown dates are null.
 Relationships contain backend record IDs or readable local workspace IDs. A returned durable reference supplements an ID without replacing it.
-Use `<record_type>:<id>` keys unless the supplied schema defines a composite key; reuse identities during retries.
-Composite keys use compact JSON strings with fixed element order, independent of backend serialization.
+Reuse `<record_type>:<id>` keys on retries unless the schema defines a composite key: compact JSON with fixed element order, independent of backend serialization.
 
 ## Workspace references
 

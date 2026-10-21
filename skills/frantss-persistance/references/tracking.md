@@ -4,10 +4,15 @@ Use the common fields from [logical records](records.md); task, evidence, run, e
 
 ## Tasks
 
-Tasks retain `status: pending|done`, nullable `workspace`, `tags`, `evidence`, `history_complete`, and task `context`.
-Optional `due_date` or `due_at` preserves the deadline's precision. A null workspace identifies the inbox.
-The absence of `reviewed-by-frantss` means unreviewed. Preserve this state during unrelated changes.
-New tasks enter the single inbox, pending and without a review tag; only explicit user acknowledgment adds `reviewed-by-frantss`.
+Tasks retain `status: inbox|next|later|maybe|done`, nullable `workspace`, `tags`, `evidence`, `history_complete`, and brief task `context`.
+Inbox means untriaged, independently of workspace; Next/Later are commitments, Maybe is tentative, Done is complete. New tasks start in Inbox.
+Only explicit acknowledgment adds `reviewed-by-frantss`; its absence means unreviewed. Preserve acknowledgment during unrelated changes.
+Optional `source_urls` holds original links, `triage_reason` a brief supported decision, and `blocker` the dependency/next actor; blockers add no state.
+Optional `due_date`/`due_at` represents a firm deadline; `expected_date`/`expected_at` anticipated completion. Both kinds can coexist, each as date or offset timestamp.
+Keep unsupported dates null and source precision intact; sprint membership supplies no date. Record before/after changes to dates, blockers, and triage reasons.
+Task title/context/blocker/reason and headings/blanks total at most 50 authored lines; exclude link-only lines and storage metadata. Aim for 5–15.
+Summarize linked sources rather than copying tickets/transcripts; keep longer material in linked records, preserving human edits and revisions.
+Treat legacy `pending` as awaiting triage without losing workspace or rewriting on read; historical `pending` cannot establish a Next/Later distinction.
 
 ## Evidence
 

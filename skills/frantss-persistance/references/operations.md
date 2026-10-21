@@ -7,13 +7,12 @@ Find by key before creation. An identical retry must not create another record, 
 Conflicting matches or changes since the expected revision require reconciliation before replacement.
 Preserve the prior revision before a content update. Preserve unknown fields and human edits.
 Related records form one logical operation; require a result for every part, including task/events or run/evidence writes for tracking.
-Partial results must retain the missing payloads and identities so recovery completes rather than repeats the logical change.
-The adapter implements write ordering, verification, and recoverable storage appropriate to its backend.
+The adapter owns write ordering/verification; partial results retain missing payloads/identities so recovery completes rather than repeats the logical change.
 
 ## Read, query, and history
 
 Supply record type and ID/key for lookup, or schema-defined filters and result limits for queries.
-For tracking, inbox queries select pending tasks without a workspace. Ordinary queries select current records, excluding archived revisions.
+For tracking, Inbox selects `inbox` or legacy `pending`, regardless of workspace; pending queries include Next/Later and unresolved Inbox, with Maybe separate. Exclude archived revisions.
 Tracking activity queries use occurrence date; collection or file modification dates cannot establish when activity happened.
 Tracking historical status requires dated events and retained revisions at the cutoff; other types follow their supplied history schema.
 Request exact ID/revision pairs for report inputs. Return missing history, unsupported filters, inaccessible records, and pagination explicitly.
