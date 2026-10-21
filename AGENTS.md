@@ -1,5 +1,9 @@
 # Repository guidance
 
+Before your first reply, read [communicate](skills/communicate/SKILL.md).
+Apply it to every message to the user throughout the session, on every topic.
+If its instructions leave the context, read it again before your next message.
+
 This repository distributes personal skills through standard skill installers
 and a Claude Code plugin. Install and authoring commands are in `README.md`;
 the writing and packaging conventions are in `CONTRIBUTING.md`.

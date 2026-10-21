@@ -26,8 +26,41 @@ make validate
 ```
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for writing, testing, and packaging skills.
-The collection starts empty; install commands become useful after the first
-completed skill is committed and pushed.
+
+## Communication
+
+[communicate](skills/communicate/SKILL.md) applies to every message. It combines
+simple English with rules for direct answers, consistent terms, and natural writing.
+It preserves technical meaning and exact code or quotes.
+
+[review-communication](skills/review-communication/SKILL.md) checks selected text
+when explicitly invoked. Use it to get specific findings and suggested changes.
+In Codex, invoke it as `$review-communication`. Other agents can use their
+explicit skill invocation interface.
+The review skill includes its own checks and works without `communicate`.
+
+For use across projects, install the skill at user scope after these changes
+are committed and pushed:
+
+```bash
+gh skill install Frantss/frantss-skills communicate --agent codex --scope user
+gh skill install Frantss/frantss-skills review-communication --agent codex --scope user
+```
+
+Skill discovery alone does not ensure use on every turn. Add this rule to your
+agent's persistent instructions. Replace `<installed-skill-path>` with the actual
+path to the installed `communicate/SKILL.md`:
+
+```text
+Before your first reply, read <installed-skill-path>.
+Apply it to every message to me throughout the session, on every topic.
+If its instructions leave the context, read it again before your next message.
+```
+
+For Codex, use the global `~/.codex/AGENTS.md`. See the
+[persistent instructions guide](https://learn.chatgpt.com/docs/agent-configuration/agents-md).
+For other agents, use their supported persistent instructions file or setting.
+This repository's `AGENTS.md` already includes the rule for work here.
 
 ## Install
 
