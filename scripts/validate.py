@@ -14,7 +14,7 @@ from urllib.parse import unquote, urlsplit
 ROOT = Path(__file__).resolve().parents[1]
 MAX_SKILL_LINES = 75
 SKILL_LINE_LIMITS = {
-    "communicate": 50,
+    "frantss-communicate": 50,
     "frantss-persistance": 100,
     "frantss-persistance-obsidian": 100,
 }

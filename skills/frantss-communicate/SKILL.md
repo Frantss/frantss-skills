@@ -1,5 +1,5 @@
 ---
-name: communicate
+name: frantss-communicate
 description: "Apply automatically to every message to the user: replies, progress updates, questions, and final reports. Use clear, direct language and avoid typical AI writing patterns."
 ---
 

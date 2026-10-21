@@ -1,5 +1,5 @@
 ---
-name: tracking-tasks
+name: frantss-tracking-tasks
 description: "Track tasks and commitments: capture, triage, reassessment, acknowledgment, pending queries, updates, or explicit workspace creation. Also capture clear user-owned follow-ups during work. Ordinary implementation requests alone, source scans, and report writing belong elsewhere."
 ---
 
@@ -12,7 +12,7 @@ Only explicit acknowledgment adds `reviewed-by-frantss`.
 Creation, triage, and completion leave tasks unreviewed unless already acknowledged.
 Workspace creation requires an explicit command. Tracking writes authorize neither performing tasks nor messaging others; planning remains out of scope.
 Before reads, queries, history lookups, or writes, read [task/event records](references/content.md); pass that schema to persistence.
-Use `~/.frantss/workspaces.yaml` for workspace scope; request read-only resolution through `configure-frantss-skills` when available.
+Use `~/.frantss/workspaces.yaml` for workspace scope; request read-only resolution through `frantss-configure-skills` when available.
 Explicit selection takes precedence over unique registered remotes, then machine-scoped canonical paths; clarify unresolved matches without creating a workspace.
 Inbox capture/existing-ID operations need no checkout; the current repository never limits cross-workspace scope.
 Use `frantss-persistance` when available and the backend in `~/.frantss/persistance.yaml`.

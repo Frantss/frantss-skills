@@ -11,7 +11,7 @@ Require `schema_version: 1` and `backend: {adapter: <skill-name>, options: <mapp
 One backend serves every workspace; reject per-workspace overrides. Pass configured options unchanged to the selected adapter.
 Use `frantss-persistance-obsidian` when selected and available; missing configuration/capabilities leave requests explicitly unsaved, never in another store.
 Workspace/source definitions remain in `~/.frantss/workspaces.yaml`; supplied workspace references are readable strings, never backend workspace records.
-Configuration inspection/changes belong to `configure-frantss-skills` when available; record operations never initialize configuration or create workspaces.
+Configuration inspection/changes belong to `frantss-configure-skills` when available; record operations never initialize configuration or create workspaces.
 
 Before record operations, read [common fields](references/records.md) and [operation requirements](references/operations.md).
 For shared settings or account references, also read [settings](references/settings.md).

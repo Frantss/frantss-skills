@@ -1,6 +1,6 @@
 # Repository guidance
 
-Before your first reply, read [communicate](skills/communicate/SKILL.md).
+Before your first reply, read [frantss-communicate](skills/frantss-communicate/SKILL.md).
 Apply it to every message to the user throughout the session, on every topic.
 If its instructions leave the context, read it again before your next message.
 

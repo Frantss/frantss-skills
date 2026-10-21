@@ -16,4 +16,4 @@ A sprint ticket supplies no invented date; a nonurgent physician appointment bel
 Keep blocked commitments in Next/Later with a blocker/next actor when known; clear resolved blockers from evidence.
 Assign named or uniquely source-mapped workspaces; unresolved fit stays in Inbox. A known workspace can coexist with Inbox; null workspace never defines it.
 Retain a brief `triage_reason` with `evidence`/`source_urls`; reevaluate on new evidence/subsequent triage, preserving user choices.
-A suggested/missing workspace name or task acknowledgment is not creation; explicit creation uses `configure-frantss-skills` when available, otherwise returns an unsaved request.
+A suggested/missing workspace name or task acknowledgment is not creation; explicit creation uses `frantss-configure-skills` when available, otherwise returns an unsaved request.

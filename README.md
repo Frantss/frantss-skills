@@ -70,7 +70,7 @@ Use the installer that originally installed the skills:
 
 ```bash
 gh skill update --dry-run
-gh skill update my-skill
+gh skill update frantss-my-skill
 ```
 
 `gh skill update --all` updates installed skills across known workspace and user
@@ -97,11 +97,11 @@ For skills installed with Vercel's CLI, use `npx skills update`.
 
 | Skill | Description |
 | --- | --- |
-| [communicate](skills/communicate/SKILL.md) | Write clear, direct replies throughout the session while preserving technical meaning. |
-| [configure-frantss-skills](skills/configure-frantss-skills/SKILL.md) | Set up, inspect, and maintain Frantss configuration, including lasting workspace/source changes stated during conversation. |
-| [tracking-tasks](skills/tracking-tasks/SKILL.md) | Capture brief tasks, triage them across Inbox, Next, Later, Maybe, and Done, and manage workspaces, dates, blockers, and acknowledgment. |
-| [tracking-collect](skills/tracking-collect/SKILL.md) | Gather dated activity and evidence from configured sources, preserving provenance and collection coverage. |
-| [tracking-report](skills/tracking-report/SKILL.md) | Create, save, and retrieve daily or weekly reports covering contributions, pending work, and evidence gaps. |
+| [frantss-communicate](skills/frantss-communicate/SKILL.md) | Write clear, direct replies throughout the session while preserving technical meaning. |
+| [frantss-configure-skills](skills/frantss-configure-skills/SKILL.md) | Set up, inspect, and maintain Frantss configuration, including lasting workspace/source changes stated during conversation. |
+| [frantss-tracking-tasks](skills/frantss-tracking-tasks/SKILL.md) | Capture brief tasks, triage them across Inbox, Next, Later, Maybe, and Done, and manage workspaces, dates, blockers, and acknowledgment. |
+| [frantss-tracking-collect](skills/frantss-tracking-collect/SKILL.md) | Gather dated activity and evidence from configured sources, preserving provenance and collection coverage. |
+| [frantss-tracking-report](skills/frantss-tracking-report/SKILL.md) | Create, save, and retrieve daily or weekly reports covering contributions, pending work, and evidence gaps. |
 | [frantss-persistance](skills/frantss-persistance/SKILL.md) | Persist complete workflow payloads through one backend, preserving common record identities, revisions, and recoverable operations. |
 | [frantss-persistance-obsidian](skills/frantss-persistance-obsidian/SKILL.md) | Use the Obsidian CLI to store Frantss records and revisions as notes and create requested Bases views. |
 
@@ -115,9 +115,9 @@ Linked tickets/documents retain their details; tasks hold an outcome, brief cont
 
 ## Configuration
 
-Use `configure-frantss-skills` to set up, inspect, and maintain your user-wide connection, workspace registry, and sources.
-Its [persistence guide](skills/configure-frantss-skills/references/persistence.md)
-checks the shared backend; its [tracking guide](skills/configure-frantss-skills/references/sources.md)
+Use `frantss-configure-skills` to set up, inspect, and maintain your user-wide connection, workspace registry, and sources.
+Its [persistence guide](skills/frantss-configure-skills/references/persistence.md)
+checks the shared backend; its [tracking guide](skills/frantss-configure-skills/references/sources.md)
 configures tracking settings, source instances, target locations, and the user's identity in each source.
 Source records contain `id`, `provider`, `account`, `identity`, and bounded `scope`; collection chooses available tools in the active harness.
 
@@ -165,10 +165,10 @@ Enable and register the official Obsidian CLI; it connects to the desktop app.
 ## Automatic use
 
 For consistent communication, task capture, and configuration maintenance across sessions, reference
-`communicate`, `tracking-tasks`, and `configure-frantss-skills` in your agent's persistent instructions.
+`frantss-communicate`, `frantss-tracking-tasks`, and `frantss-configure-skills` in your agent's persistent instructions.
 Skill discovery alone does not ensure automatic use.
 
-For `communicate`, replace `<installed-skill-path>` with its installed location:
+For `frantss-communicate`, replace `<installed-skill-path>` with its installed location:
 
 ```text
 Before your first reply, read <installed-skill-path>.
@@ -182,7 +182,7 @@ For other agents, use their supported persistent instructions file or setting.
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for writing, testing, and packaging skills.
-Create a skill with `python3 scripts/new_skill.py my-skill --description "Use when ..."`,
+Create a skill with `python3 scripts/new_skill.py frantss-my-skill --description "Use when ..."`,
 then run `make validate`. Validation requires Python 3.10+, GitHub CLI with `gh skill`,
 and Claude Code. CI pins GitHub CLI 2.101.0 and Claude Code 2.1.291.
 
