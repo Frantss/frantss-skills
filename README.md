@@ -139,7 +139,7 @@ schema_version: 1
 projects:
   frantss/frantssuy:
     title: Frantss website
-    area: personal
+    area: side-projects
     repositories: [github.com/frantss/frantssuy]
     local_paths: []
     sources:

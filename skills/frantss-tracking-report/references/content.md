@@ -1,6 +1,6 @@
 # Report content
 
-Organize by selected project/work-personal area; include contributions without tracked tasks and retain requested scope.
+Organize by selected project or configured area; include contributions without tracked tasks and retain requested scope.
 Report completed outcomes only from reports from frantss or outcome-satisfying evidence with supported occurrence dates.
 Include PR reviews, commits, discussions, investigations, decisions, and recordings; attribute frantss's contribution without claiming others' deliverables.
 Deduplicate native source events; group related observations under supported outcomes while retaining distinct reviews/replies as evidence.
