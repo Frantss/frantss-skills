@@ -1,5 +1,7 @@
 # Frantss skills
 
+These skills are a work in progress. I'm still iterating on them.
+
 My personal agent skills, shared from one source across Codex, Claude Code,
 Cursor, GitHub Copilot, Gemini CLI, and other agents that support
 [Agent Skills](https://agentskills.io/specification).
