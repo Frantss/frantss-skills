@@ -14,10 +14,10 @@ from urllib.parse import unquote, urlsplit
 ROOT = Path(__file__).resolve().parents[1]
 MAX_SKILL_LINES = 75
 SKILL_LINE_LIMITS = {
-    "frantss-communicate": 50,
-    "frantss-update": 50,
-    "frantss-persistance": 100,
-    "frantss-persistance-obsidian": 100,
+    "core-communicate": 50,
+    "core-update": 50,
+    "persistence-records": 100,
+    "persistence-obsidian": 100,
 }
 LINK = re.compile(r'!?\[[^\]\n]*\]\(\s*(<[^>\n]+>|[^\s)]+)(?:\s+[\'\"][^)\n]*[\'\"])?\s*\)')
 FENCE = re.compile(r"^```[^\n]*\n.*?^```\s*$", re.MULTILINE | re.DOTALL)

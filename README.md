@@ -10,20 +10,20 @@ These skills are a work in progress. I'm still iterating on them.
 
 | Skill | Purpose |
 | --- | --- |
-| [frantss-communicate](skills/frantss-communicate/SKILL.md) | Write clear, direct replies throughout the session. |
+| [core-communicate](skills/core-communicate/SKILL.md) | Write clear, direct replies throughout the session. |
 | [bdd-frame-problem](skills/bdd-frame-problem/SKILL.md) | Establish needs, outcomes, evidence, scope, and constraints in a live problem brief. |
 | [bdd-design-solution](skills/bdd-design-solution/SKILL.md) | Select a solution concept and refine its design against agreed needs and behavior. |
 | [bdd-discover-behavior](skills/bdd-discover-behavior/SKILL.md) | Discover expected behavior through examples and per-area review in a live Markdown record. |
 | [bdd-formulate-behavior](skills/bdd-formulate-behavior/SKILL.md) | Turn agreed behavior into Gherkin specifications for existing test tools. |
 | [bdd-slice-work](skills/bdd-slice-work/SKILL.md) | Group specified behavior into manageable tickets and review the breakdown with the user. |
 | [bdd-implement-ticket](skills/bdd-implement-ticket/SKILL.md) | Implement one accepted ticket with native tests and current behavioral verification evidence. |
-| [frantss-configure](skills/frantss-configure/SKILL.md) | Set up and maintain connections, projects, and sources. |
-| [frantss-update](skills/frantss-update/SKILL.md) | Update skills by commit hash and migrate configuration and stored records. |
-| [frantss-tracking-tasks](skills/frantss-tracking-tasks/SKILL.md) | Capture tasks and manage commitments, dates, and blockers. |
-| [frantss-tracking-collect](skills/frantss-tracking-collect/SKILL.md) | Read project sources for task links and report summaries. |
-| [frantss-tracking-report](skills/frantss-tracking-report/SKILL.md) | Create daily and weekly activity reports. |
-| [frantss-persistance](skills/frantss-persistance/SKILL.md) | Store task links and report summaries through a shared backend. |
-| [frantss-persistance-obsidian](skills/frantss-persistance-obsidian/SKILL.md) | Store records in Obsidian through its official CLI. |
+| [core-configure](skills/core-configure/SKILL.md) | Set up and maintain connections, projects, and sources. |
+| [core-update](skills/core-update/SKILL.md) | Update skills by commit hash and migrate configuration and stored records. |
+| [tracking-tasks](skills/tracking-tasks/SKILL.md) | Capture tasks and manage commitments, dates, and blockers. |
+| [tracking-collect](skills/tracking-collect/SKILL.md) | Read project sources for task links and report summaries. |
+| [tracking-report](skills/tracking-report/SKILL.md) | Create daily and weekly activity reports. |
+| [persistence-records](skills/persistence-records/SKILL.md) | Store task links and report summaries through a shared backend. |
+| [persistence-obsidian](skills/persistence-obsidian/SKILL.md) | Store records in Obsidian through its official CLI. |
 
 For the framing, design, and BDD flow, map the overall scope, then advance a small
 coherent slice through discovery, formulation, design refinement, and ticket
@@ -58,7 +58,7 @@ Task titles and Obsidian filenames follow their source names. Jira tasks use
 Reports use names such as `2026-10-20 - Gildara daily report.md`;
 stable IDs remain note properties.
 Existing evidence, run, and event records need an explicit
-[migration](skills/frantss-persistance/references/lean-migration.md); editing or
+[migration](skills/persistence-records/references/lean-migration.md); editing or
 installing these skills does not migrate or delete stored data.
 
 Each provider has one fixed personal-search policy. Slack searches your messages
@@ -379,7 +379,7 @@ See the [private marketplace guidance](https://code.claude.com/docs/en/plugins/h
 
 ## Update
 
-Ask `frantss-update` to update your Frantss skill set or check for updates.
+Ask `core-update` to update your Frantss skill set or check for updates.
 It reviews changes through a fixed default-branch commit, applies required
 configuration/database migrations, and updates through the original installer.
 Checks are read-only; explicit pins and selected skills remain in effect.
@@ -390,16 +390,51 @@ formats. Backups and a pending-step journal support interrupted updates.
 The installer commands above update skill files only; use this workflow for
 configuration and stored-record migrations.
 
+### Functional skill names
+
+Skills use functional prefixes: `bdd-`, `tracking-`, `persistence-`, and `core-`.
+The BDD skill names are unchanged. Earlier installations use these mappings:
+
+| Earlier name | Current name |
+| --- | --- |
+| `frantss-communicate` | `core-communicate` |
+| `frantss-configure` | `core-configure` |
+| `frantss-update` | `core-update` |
+| `frantss-tracking-tasks` | `tracking-tasks` |
+| `frantss-tracking-collect` | `tracking-collect` |
+| `frantss-tracking-report` | `tracking-report` |
+| `frantss-persistance` | `persistence-records` |
+| `frantss-persistance-obsidian` | `persistence-obsidian` |
+
+For an authorized upgrade across this rename, use the update workflow's fixed
+target, backups, expected-content checks, and pending-step journal. Map selected
+skill names in installation state and installer selections through this table;
+`all` remains `all`. Install and verify replacements before removing obsolete
+owned skill folders. Preserve local edits and unrelated installations.
+
+In `~/.frantss/persistance.yaml`, change only a matching
+`backend.adapter: frantss-persistance-obsidian` to `persistence-obsidian`.
+Preserve other adapter values, backend options, unknown fields, and schema version 1.
+Configuration paths, stored records, IDs, revisions, and BDD run files are unchanged;
+this rename requires no record or vault migration. Do not initialize missing storage.
+Update references in persistent agent instructions within the authorized scope.
+
+Verify installed names, selected subsets, instruction references, and the configured
+adapter's inspection/read capability before recording the upgrade as complete.
+Retries reuse the same mapping and journal: current names need no further change,
+and failures retain verified progress and explicit blockers. Editing or installing
+these source files alone does not modify existing configuration or instructions.
+
 ## Setup and automatic use
 
-Use [frantss-configure](skills/frantss-configure/SKILL.md) to set up the shared
+Use [core-configure](skills/core-configure/SKILL.md) to set up the shared
 backend, projects, and sources. Configuration applies across workspaces.
 For Obsidian storage, install both persistence skills and enable the official
 Obsidian CLI with an existing vault. Setup requires Tasks and Reports Bases with
 verified default views; missing or failing views leave setup incomplete.
 
-For automatic use across sessions, reference `frantss-communicate`,
-`frantss-tracking-tasks`, and `frantss-configure` in your agent's persistent
+For automatic use across sessions, reference `core-communicate`,
+`tracking-tasks`, and `core-configure` in your agent's persistent
 instructions. Skill discovery alone does not ensure automatic use.
 
 For communication, add this text with the installed skill's path:
@@ -419,6 +454,6 @@ Skills live in `skills/<name>/SKILL.md`. See [CONTRIBUTING.md](CONTRIBUTING.md)
 for authoring and testing instructions, or the [glossary](GLOSSARY.md) for shared terms.
 
 ```bash
-python3 scripts/new_skill.py frantss-my-skill --description "Use when ..."
+python3 scripts/new_skill.py tracking-my-skill --description "Use when ..."
 make validate
 ```

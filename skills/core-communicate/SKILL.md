@@ -1,5 +1,5 @@
 ---
-name: frantss-communicate
+name: core-communicate
 description: "Apply to every reply, question, progress update, and final report addressed to frantss. Keep communication clear and direct."
 ---
 

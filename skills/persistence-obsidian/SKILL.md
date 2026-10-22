@@ -1,12 +1,12 @@
 ---
-name: frantss-persistance-obsidian
+name: persistence-obsidian
 description: "Read and write prepared Frantss records through the Obsidian CLI. Use when selected as the backend adapter, or for explicit storage setup, vault access checks, and Bases view changes; ordinary note editing belongs elsewhere."
 compatibility: Requires Python 3 and Obsidian 1.12.7+ with the official obsidian CLI enabled and registered, and access to the desktop app.
 ---
 
-# Frantss persistance Obsidian
+# Persist records in Obsidian
 
-Use the official [Obsidian CLI](https://obsidian.md/help/cli) with complete record payloads and operation requirements from the caller or `frantss-persistance` when available.
+Use the official [Obsidian CLI](https://obsidian.md/help/cli) with complete record payloads and operation requirements from the caller or `persistence-records` when available.
 
 Use supplied backend options `vault` and `root` from `~/.frantss/persistance.yaml`, or read that connection file directly; expand `~` to the current OS account's home. Repository-local and ancestor configurations never select the vault.
 Require schema version 1, this adapter, an existing absolute vault path, and a vault-relative root; missing options leave storage unconfigured. For sandboxed agents, read [CLI access](references/sandbox.md) before checks; after its permitted retry, stop on failure and retain partial setup/unsaved payloads without installing or repairing dependencies.

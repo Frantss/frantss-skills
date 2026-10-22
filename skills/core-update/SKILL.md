@@ -1,5 +1,5 @@
 ---
-name: frantss-update
+name: core-update
 description: "Update the installed Frantss skill set, check available updates, or resume an upgrade using commit hashes and configuration/database migrations. Editing skill instructions and ordinary configuration changes belong elsewhere."
 compatibility: Requires Git, access to the private Frantss/frantss-skills repository, the original installer, and configured backend tools for data migrations.
 ---

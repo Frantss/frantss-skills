@@ -14,5 +14,5 @@ Aim for 5–15 content lines; title/context/blocker/reason plus headings/blanks 
 Keep outcomes/high-level context and source links; acceptance criteria and implementation details stay at the source. Inline-link prose counts toward the limit.
 Summarize updates rather than append; preserve human edits. Unsafe condensation leaves a draft/conflict, never silent deletion or over-limit saves.
 Keep one current task; dated sources or saved reports support past state. Recording/modification times never establish when an action occurred.
-Legacy `evidence`, `history_complete`, or Pending events payloads require migration through `frantss-update`; ordinary task operations leave them unchanged and report the affected record unsupported.
+Legacy `evidence`, `history_complete`, or Pending events payloads require migration through `core-update`; ordinary task operations leave them unchanged and report the affected record unsupported.
 Version 1 remains compatible: existing tasks without `parent` stay standalone with unchanged IDs/keys/state. Upgrades never infer hierarchy from shared projects/links; apply only source-supported parent links through expected-content writes, verify ancestors, and retry missing operations with the original identities.

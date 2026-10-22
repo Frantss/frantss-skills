@@ -1,5 +1,5 @@
 ---
-name: frantss-configure
+name: core-configure
 description: "Set up, inspect, or maintain Frantss backend connections, projects, and sources. Use for configuration requests, read-only resolution handoffs, or lasting changes stated by frantss."
 ---
 

@@ -10,4 +10,4 @@ Generation time is distinct from the activity period. Identify whether pending w
 Find by key before creation; identical scope identifies one report with successive revisions, and retries cannot duplicate it.
 Regenerate the same report in place, preserving human narrative edits; retain one summary per period/scope without revision archives. Links support source lookup.
 Read back uncertain writes by key; return a verified reference or partial/unsaved payload with missing steps, without repeating saved effects.
-Legacy `evidence` or `manifest` fields require `frantss-update`; ordinary report operations leave affected records unchanged and return unsupported.
+Legacy `evidence` or `manifest` fields require `core-update`; ordinary report operations leave affected records unchanged and return unsupported.

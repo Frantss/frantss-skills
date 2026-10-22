@@ -1,8 +1,8 @@
 # Migration to task links and report summaries
 
-Use only through an explicitly requested `frantss-update` migration, with its verified backups, fixed commits, journal, and adapter protocol.
+Use only through an explicitly requested `core-update` migration, with its verified backups, fixed commits, journal, and adapter protocol.
 Applies to retained settings/evidence/run/event/revision notes, tasks with `evidence`/`history_complete`/Pending events and reports with `evidence`/`manifest`; empty storage needs no conversion; current tasks may still require legacy-note cleanup.
-The common envelope remains version 1; domain shape, not that number alone, determines applicability. Local registry version 1 supports optional shared `settings`; legacy backend Settings notes migrate through `frantss-configure` before removal.
+The common envelope remains version 1; domain shape, not that number alone, determines applicability. Local registry version 1 supports optional shared `settings`; legacy backend Settings notes migrate through `core-configure` before removal.
 
 1. Inspect current records, referenced evidence/events/runs, retained revisions, and affected views. Exclude concurrent legacy writers before conversion.
 2. Resolve old Pending events with the baseline write protocol before mapping; ambiguous/missing dependencies leave the affected conversion incomplete.

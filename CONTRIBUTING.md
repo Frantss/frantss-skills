@@ -5,18 +5,19 @@ that describes that task and a description that helps an agent recognize when
 to use it. The folder and frontmatter name must match.
 
 ```bash
-python3 scripts/new_skill.py frantss-my-skill --description "Use when ..."
+python3 scripts/new_skill.py tracking-my-skill --description "Use when ..."
 ```
 
-Prefix the BDD flow skills with `bdd-` and other skills with `frantss-`.
+Use functional prefixes: `bdd-` for behavior-led development, `tracking-` for tasks,
+activity and reports, `persistence-` for storage, and `core-` for shared capabilities.
 Use lowercase letters, digits, and single hyphens, up to 64 characters.
 The generator refuses existing destinations and invalid names.
 
 ## Write the shared instructions
 
 Each skill has a hard limit of 75 total lines across its authored UTF-8 text
-files. `frantss-communicate` and `frantss-update` each have a 50-line limit;
-`frantss-persistance` and `frantss-persistance-obsidian` each have a 100-line limit.
+files. `core-communicate` and `core-update` each have a 50-line limit;
+`persistence-records` and `persistence-obsidian` each have a 100-line limit.
 Count frontmatter, blank lines, references, helper code, and metadata.
 Binary assets are excluded. `make validate` enforces the total per skill;
 progressive disclosure does not increase the budget.
@@ -24,7 +25,7 @@ progressive disclosure does not increase the budget.
 Workflows own their domain schemas; persistence owns the common record envelope
 and storage operations. Ordinary workflows support only current formats. Keep
 current records and interrupted-write recovery; keep migration backups outside
-active storage. `frantss-update` owns upgrades:
+active storage. `core-update` owns upgrades:
 compare source commits and migrate configuration/data before recording success.
 When changing a stored format, document the old/new mapping, applicability,
 verification, and retry behavior in the same commit. Preserve those instructions
@@ -81,7 +82,7 @@ Try installation into a temporary directory before sharing a new skill:
 
 ```bash
 preview_dir=$(mktemp -d)
-gh skill install . frantss-my-skill --from-local --dir "$preview_dir"
+gh skill install . tracking-my-skill --from-local --dir "$preview_dir"
 ```
 
 Inspect that copied folder and exercise it with the intended agents. Check one
