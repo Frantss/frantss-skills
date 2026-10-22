@@ -8,8 +8,8 @@ to use it. The folder and frontmatter name must match.
 python3 scripts/new_skill.py frantss-my-skill --description "Use when ..."
 ```
 
-Prefix skill names with `frantss-`. Use lowercase letters, digits, and single
-hyphens, up to 64 characters.
+Prefix the BDD flow skills with `bdd-` and other skills with `frantss-`.
+Use lowercase letters, digits, and single hyphens, up to 64 characters.
 The generator refuses existing destinations and invalid names.
 
 ## Write the shared instructions
@@ -17,7 +17,6 @@ The generator refuses existing destinations and invalid names.
 Each skill has a hard limit of 75 total lines across its authored UTF-8 text
 files. `frantss-communicate` and `frantss-update` each have a 50-line limit;
 `frantss-persistance` and `frantss-persistance-obsidian` each have a 100-line limit.
-`frantss-decompose` has a 200-line limit.
 Count frontmatter, blank lines, references, helper code, and metadata.
 Binary assets are excluded. `make validate` enforces the total per skill;
 progressive disclosure does not increase the budget.
