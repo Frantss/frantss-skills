@@ -1,4 +1,7 @@
-.PHONY: validate test
+.PHONY: validate test sync-bdd
+
+sync-bdd:
+	python3 scripts/sync_bdd_references.py
 
 validate:
 	python3 scripts/validate.py

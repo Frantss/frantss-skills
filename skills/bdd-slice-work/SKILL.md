@@ -1,74 +1,41 @@
 ---
 name: bdd-slice-work
-description: "Slice accepted behavioral specifications into implementation tickets, or review an existing breakdown for granularity and dependencies. Behavior discovery, implementation, and publishing approved tickets alone do not activate it."
+description: "Draft or review implementation tickets from agreed behavioral specifications, checking scope, granularity, coverage, and dependencies. Accept supplied specifications without an existing BDD run. Behavior discovery, implementation, and publishing tickets alone are separate tasks."
 ---
 
 # Slice work into tickets
 
-Deliver local implementation tickets that define their observable outcomes, specification cases, and verification. Publishing and implementation require separate authorization.
+Deliver compact implementation tickets with observable outcomes, source behavior, and verification. Publishing and implementation need their own authorization.
 
-## Establish the supported scope
+## Choose the working mode
 
-Read the selected slice, accepted specifications, relevant design decisions, and existing tickets; use supplied context without requiring other installed skills.
-Inspect available code and tests to distinguish required work from already-satisfied behavior; cite evidence and qualify unverified claims.
-Resolve unsettled behavior through discovery/formulation and consequential technical choices through design; continue independent work with agreed cases and name blocked behavior.
-Before writing, apply the Run record contract below. Proceed with an explicit selected scope, its source cases, and identified blockers.
+Default to standalone: use supplied sources and deliver the breakdown in the reply or the requested document. Selecting this skill does not enroll the task in a BDD run.
+Track a run only when the user requests a tracked BDD workflow or the current task explicitly continues an identified run. A nearby run folder alone is insufficient. For tracked work, read [the run contract](references/run-record.md) and create only the records this stage needs.
+Accept agreed behavioral specifications and relevant design directly, including source cases outside Gherkin. Clarify blocking behavior/design choices without creating earlier stages' records.
 
-## Draft vertical slices
+## Establish supported scope
 
-Use `S-*` for specification slices and stable `TK-001` ticket IDs. One specification slice can produce several delivery tickets.
-Group scenarios that deliver one coherent outcome; one ticket can cover the entire selected scope.
-Each vertical slice includes the relevant implementation layers and native tests, with an outcome verifiable after its prerequisites.
-Size tickets by change scope, uncertainty, and verification effort; explain proposed splits using those factors.
-List blocking ticket IDs under Dependencies, or `None`; add a brief reason only when the prerequisite is unclear. Keep ordering preferences separate.
-Create preparatory/refactoring tickets only for concrete prerequisites: name the dependent tickets in the behavior row, use `None` for Cases, and require verifiable preservation checks under Verification.
-For a wide mechanical change, use compatible expansion, bounded migration, and contraction steps.
-Keep Overview to one sentence naming selected slices and source documents; record ticket-to-slice membership in run.md Members. Add already-satisfied case references/evidence only when needed.
+Read the selected scope, specifications, design decisions, existing tickets, code, and tests. Distinguish required work from already-satisfied behavior with evidence and qualified verification claims.
+Identify agreed behavior, source cases/examples, dependencies, and consequential blockers. Keep independently supported work moving and preserve existing source identities.
 
-## Define behavior and check coverage
+## Draft verifiable outcomes
 
-Each Behavior row briefly names the implemented behavior and its `behavior.feature` case tags; the title states the outcome. Reuse source context instead of adding outcome, scope, slice, or design-reference fields.
-Treat each linked case as its complete acceptance contract, including outputs, state changes, and prohibited effects; use short behavior summaries instead of repeating assertions.
-Assign all Examples rows unless allocation identifies stable groups by case tag and Examples name/tag; each allocation must be verifiable after ticket prerequisites.
-Default verification is all assigned cases and Examples through existing project tests. Add at most one sentence under Verification for non-obvious setup or extra regressions; omit the field otherwise.
-Give each required case/group one accountable delivery ticket; optional Verification can reference regression cases or prerequisite tickets without transferring ownership.
-When a case spans several changes, its owner completes the behavior and names earlier tickets as dependencies; those prerequisites still need their own completion checks.
-Account for every selected case as assigned, already satisfied with evidence, or an explicit gap. Coverage gaps lists only in-scope gaps/exclusions and source references, or `None`; exclusions require source/user authority and other questions stay with their owners.
-Before each user review, verify bounded outcomes, source references, unique ownership, coverage, verifiable acceptance criteria, and an acyclic dependency graph; repair defects or identify blockers.
+Give tickets stable IDs such as TK-001. Group behavior into coherent outcomes across the necessary implementation layers and native tests; one ticket may cover the selected scope.
+Size tickets by change scope, uncertainty, and verification effort. Explain meaningful splits and separate genuine prerequisites from ordering preferences.
+For wide mechanical changes, consider compatible expansion, bounded migration, and contraction. Preparatory/refactoring tickets must justify concrete dependent work and independently verifiable preservation checks.
+Each ticket has an outcome title, one-sentence context, blocking Dependencies or None, and concise behavior/source-case mappings. Add extra Verification only for non-obvious setup or regressions.
+Reference complete acceptance cases, including outputs, state changes, and prohibited effects, instead of copying their assertions into tickets.
+Assign all relevant Examples rows, or identify stable groups. A ticket must be verifiable after its prerequisites; give each required case/group one accountable delivery owner.
+When behavior spans changes, its completing ticket owns the cases and names prerequisites; prerequisite tickets still need their own checks. Regression references do not transfer ownership.
+Account for every selected case as assigned, already satisfied with evidence, or an explicit gap. Preserve authorized exclusions and keep other unresolved choices with their source definitions.
+Verify bounded outcomes, source resolution, unique ownership, meaningful completion checks, and an acyclic dependency graph before presenting the draft.
 
-## Obtain agreement on the breakdown
+## Deliver and review the breakdown
 
-Save the draft, then present ticket IDs, outcomes, implemented behaviors/cases, and dependencies as a compact numbered breakdown.
-Ask through an available feedback interface: "Does this breakdown fit how you want to work? Which tickets should we split further or group together?"
-Recommend useful merges or splits with their trade-offs; apply answers only to addressed points and update affected allocations/dependencies before presenting the result again.
-Keep the breakdown draft until the user explicitly accepts its actual ticket boundaries, behavior allocation, and dependencies; silence or agreement to the general approach leaves it draft.
-An explicitly accepted usable subset may be partial with named blockers; unrelated pending slices do not block a complete selected slice.
-Reuse explicit acceptance. Material changes to ticket boundaries, allocated behavior, or dependencies reopen affected portions and their readiness.
-When source behavior or design changes, review affected tickets and downstream dependencies; return decisions to their owning stage and mark affected conclusions draft or blocked.
-
-## Handoff
-
-Set stage to slicing and tickets.md's per-slice review status in run.md. Readiness covers accepted ticket definitions; unfinished delivery prerequisites still block implementation.
-Record completed review checks and their limits under run.md Validation, distinguishing specification review from executed implementation tests.
-Link tickets.md and its specification/design sources; state ready work and blockers. Separately authorized implementation can start once its delivery prerequisites are complete.
-
-## Run record contract
-
-Use `.scratch/bdd/<run_id>/` for one feature across sessions/slices; on creation set stable YAML `feature_name`, lowercase kebab-case `feature_slug`, and `run_id: <feature_slug>-<NNN>`, choosing the next per-feature ordinal padded to at least three digits.
-Resume the identified run by reading `run.md`; ask if ambiguous. Create another only for a different feature or an explicit new-run request.
-Create exactly `run.md`, `problem.md`, `discovery.md`, `behavior.feature`, `design.md`, and `tickets.md`, even standalone; on resume, preserve contents and initialize only missing files/sections.
-Use `<feature_name>: <document role>` Markdown titles and `Feature: <feature_name>`. Use `Pending` for unvisited content, `None` for empty lists, and only a pending comment beneath an unvisited Feature.
-Keep current content only: replace changed definitions and remove obsolete entries and resolved questions. Keep no transcripts, histories, tombstones, or extra files/subfolders; preserve continuing IDs and repair affected references.
-YAML `stage` is `framing`, `concept`, `discovery`, `formulation`, `design`, `slicing`, or `implementation`, identifying active work; `current_slice` names a stable `S-*` slice and `current_ticket` a selected `TK-*` ticket or `null`.
-`run.md` uses exactly `Documents`, `Validation`, `Next action` as level-two sections, in order; keep latest checks/limits under Validation and the next step under Next action. Update affected records before asking the next round.
-Under Documents, use `### <slice_id>: <name>` per current slice with `Scope`, `Members`, and `Dependencies` fields, then a `File | Status` table for the other five files.
-Members lists explicit file-qualified IDs, such as `discovery.md:R-001`, including in-slice rules/examples; use `Pending` until known. Dependencies lists slice/question references or `None`; preserve other slices when focus changes.
-Document statuses: `pending` = unvisited, `draft` = unaccepted work, `blocked` = an unresolved prerequisite prevents readiness, `ready` = accepted and unblocked, `partial` = explicitly accepted usable subset with named blockers.
-Once execution is tracked, run.md Validation adds `### Implementation` with `Ticket | State | Evidence`: states are `pending`, `in_progress`, `blocked`, `done`; document readiness stays separate.
-`### Behavior checks` uses `Ticket | Cases | Check | Result`: case/group IDs or `None` for non-scenario checks, test selectors/commands, and `passed`, `failed`, `blocked`, `not_run`; keep current evidence and invalidate affected results when inputs change.
-Keep scope/blockers in slice fields; for partial, Scope names usable member IDs. Keep check results under Validation. Area-map statuses use the same values plus `excluded`, requiring source/user authority; area status covers its whole included scope.
-`problem.md` uses exactly these level-two sections, in order: `Problem`, `Context and evidence`, `People`, `Goals and success criteria`, `Scope and constraints`, `Open questions`.
-`discovery.md` uses exactly these ordered level-two sections `Boundary and vocabulary`, `Area map`, `Area details`, `Coverage gaps`, `Open questions`; map columns are `ID | Area | Status | Dependencies`, with `### <id>: <name>` details containing `Boundary`, `Rules`, `Examples` fields.
-`design.md` uses exactly these level-two sections, in order: `Context`, `Approach`, `Structure`, `Decisions`, `Open questions`; Structure describes parts' purposes, boundaries, interfaces, and dependencies.
-`behavior.feature` contains one named Feature, current scope description, Rule groups, tagged Given/When/Then scenarios, and Examples for outlines. Cross-check slice membership and references before handoff.
-`tickets.md` uses exactly `Overview`, `Tickets`, `Coverage gaps` as level-two sections, in order. Each `### <TK-id>: <outcome>` has a one-sentence summary, bold `Dependencies`, then a `Behavior | Cases` table; add bold `Verification` only for essential setup or regressions absent from the cases.
+Deliver a compact breakdown of IDs, outcomes, source behaviors/cases, and dependencies. A draft request is complete when the supported proposal and gaps are delivered.
+When acceptance or dependent work is requested, ask whether boundaries should be split or grouped. Recommend changes with trade-offs and apply answers only to addressed portions.
+Keep definitions draft until the user accepts the actual boundaries, behavior allocation, and dependencies; general agreement or silence does not establish that acceptance.
+Reuse explicit acceptance. Material allocation/boundary/dependency changes reopen affected portions while preserving unaffected agreements; revisit downstream dependencies when sources change.
+For tracked work, update tickets and run status. Mark accepted, unblocked definitions ready; delivery prerequisites separately govern when implementation may start.
+An explicitly accepted usable subset may be partial with named blockers; unrelated pending scope does not block the selected scope. Report review checks without claiming executed implementation tests.
+Link supplied or requested artifacts when present. Stop before unrequested publication or implementation, or continue when that work is already authorized.

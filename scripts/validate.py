@@ -10,6 +10,8 @@ import shutil
 import subprocess
 from urllib.parse import unquote, urlsplit
 
+from sync_bdd_references import reference_errors
+
 
 ROOT = Path(__file__).resolve().parents[1]
 MAX_SKILL_LINES = 75
@@ -104,7 +106,7 @@ def packaging_errors(root: Path) -> list[str]:
         children[:] = [name for name in children if name not in {".git", ".venv", "node_modules"}]
         if "SKILL.md" in files and Path(directory).parent != skills:
             errors.append(f"{Path(directory).relative_to(root)}/SKILL.md: skills must live directly under skills/")
-    return errors
+    return errors + reference_errors(root)
 
 
 def main() -> None:

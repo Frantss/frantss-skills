@@ -1,75 +1,40 @@
 ---
 name: bdd-discover-behavior
-description: "Discover expected behavior through a user-agent conversation before formulation. Use when clarifying consumer-visible rules, examples, boundaries, or unresolved behavior decisions. Ordinary implementation, test execution, and Gherkin conversion of settled requirements do not activate it."
+description: "Clarify unresolved consumer-visible rules, examples, boundaries, or behavior decisions through conversation. Use when expected behavior needs agreement. Implementation, test execution, and converting already-settled rules to Gherkin do not require discovery."
 ---
 
 # Discover behavior
 
-Discover consumer-visible behavior through examples and conversation; deliver agreed definitions for formulation without requiring other skills. Gherkin, test integration, and implementation belong to later work.
+Deliver agreed behavior definitions through examples and conversation. Accept supplied requirements and prior agreements without requiring earlier skills.
 
-## Start and maintain the live record
+## Choose the working mode
 
-Read supplied context and relevant project evidence before asking questions that those sources can answer.
-Use `.scratch/bdd/<run_id>/` for one feature across sessions/slices; on creation set stable YAML `feature_name`, lowercase kebab-case `feature_slug`, and `run_id: <feature_slug>-<NNN>`, choosing the next per-feature ordinal padded to at least three digits.
-Resume the identified run by reading `run.md`; ask if ambiguous. Create another only for a different feature or an explicit new-run request.
-Create exactly `run.md`, `problem.md`, `discovery.md`, `behavior.feature`, `design.md`, and `tickets.md`, even standalone; on resume, preserve contents and initialize only missing files/sections.
-Use `<feature_name>: <document role>` Markdown titles and `Feature: <feature_name>`. Use `Pending` for unvisited content, `None` for empty lists, and only a pending comment beneath an unvisited Feature.
-Keep current content only: replace changed definitions and remove obsolete entries and resolved questions. Keep no transcripts, histories, tombstones, or extra files/subfolders; preserve continuing IDs and repair affected references.
-YAML `stage` is `framing`, `concept`, `discovery`, `formulation`, `design`, `slicing`, or `implementation`, identifying active work; `current_slice` names a stable `S-*` slice and `current_ticket` a selected `TK-*` ticket or `null`.
-`run.md` uses exactly `Documents`, `Validation`, `Next action` as level-two sections, in order; keep latest checks/limits under Validation and the next step under Next action. Update affected records before asking the next round.
-Under Documents, use `### <slice_id>: <name>` per current slice with `Scope`, `Members`, and `Dependencies` fields, then a `File | Status` table for the other five files.
-Members lists explicit file-qualified IDs, such as `discovery.md:R-001`, including in-slice rules/examples; use `Pending` until known. Dependencies lists slice/question references or `None`; preserve other slices when focus changes.
-Document statuses: `pending` = unvisited, `draft` = unaccepted work, `blocked` = an unresolved prerequisite prevents readiness, `ready` = accepted and unblocked, `partial` = explicitly accepted usable subset with named blockers.
-Once execution is tracked, run.md Validation adds `### Implementation` with `Ticket | State | Evidence`: states are `pending`, `in_progress`, `blocked`, `done`; document readiness stays separate.
-`### Behavior checks` uses `Ticket | Cases | Check | Result`: case/group IDs or `None` for non-scenario checks, test selectors/commands, and `passed`, `failed`, `blocked`, `not_run`; keep current evidence and invalidate affected results when inputs change.
-Keep scope/blockers in slice fields; for partial, Scope names usable member IDs. Keep check results under Validation. Area-map statuses use the same values plus `excluded`, requiring source/user authority; area status covers its whole included scope.
-`problem.md` uses exactly these level-two sections, in order: `Problem`, `Context and evidence`, `People`, `Goals and success criteria`, `Scope and constraints`, `Open questions`.
-`discovery.md` uses exactly these ordered level-two sections `Boundary and vocabulary`, `Area map`, `Area details`, `Coverage gaps`, `Open questions`; map columns are `ID | Area | Status | Dependencies`, with `### <id>: <name>` details containing `Boundary`, `Rules`, `Examples` fields.
-`design.md` uses exactly these level-two sections, in order: `Context`, `Approach`, `Structure`, `Decisions`, `Open questions`; Structure describes parts' purposes, boundaries, interfaces, and dependencies.
-`behavior.feature` contains one named Feature, current scope description, Rule groups, tagged Given/When/Then scenarios, and Examples for outlines. Cross-check slice membership and references before handoff.
-`tickets.md` uses exactly `Overview`, `Tickets`, `Coverage gaps` as level-two sections, in order. Each `### <TK-id>: <outcome>` has a one-sentence summary, bold `Dependencies`, then a `Behavior | Cases` table; add bold `Verification` only for essential setup or regressions absent from the cases.
-Distinguish agreed behavior, proposals, observations of existing code, assumptions, and unresolved questions; cite sources where available.
-User acceptance determines agreement. Apply answers only to the points addressed; silence leaves other points unresolved.
-Give substantive points stable IDs: CO context, A areas, R rules, E examples, T terms, Q questions, D decisions; use increasing numbers such as `R-001`, preserving existing schemes and one authoritative entry per point.
-Show focused changes and link the record during the conversation rather than repeating the full document.
+Default to standalone: use the conversation and supplied sources; deliver rules, examples, and open decisions in the reply or the requested document. Selecting this skill does not enroll the task in a BDD run.
+Track a run only when the user requests a tracked BDD workflow or the current task explicitly continues an identified run. A nearby run folder alone is insufficient. For tracked work, read [the run contract](references/run-record.md) and create only the records this stage needs.
+Keep Gherkin, test integration, and implementation within separately requested scope. Address a blocking question directly without creating other stages' records.
 
-## Frame and map areas first
+## Establish the boundary
 
-Establish the subject, intended outcome, consumer, observable boundary, domain terms, and included or excluded scope.
-The consumer may be a person, API client, or calling code; preserve public interface details that affect their expectations.
-Use code as evidence of current behavior, not automatic authority for expected behavior.
-Before detailed cases, map consumer-visible areas and dependencies; record each area's purpose, boundary, scope, and status using the area-map vocabulary.
-Resolve uncertainty that prevents a useful map through framing questions, then review the map with the user before exploring areas.
-Select a small coherent slice using dependencies and the user's priorities; use the whole scope when small or tightly coupled.
-Revise the map when evidence changes it; explain and obtain agreement on changed scope instead of silently expanding or dropping behavior.
+Read supplied context and project evidence before asking questions those sources answer. Code establishes current behavior, not automatic authority for expected behavior.
+Establish the subject, outcome, consumer, observable boundary, vocabulary, and included or excluded scope. A consumer may be a person, API client, or calling code.
+Map relevant behavior areas and dependencies before detailed cases. Resolve uncertainty preventing a useful map and review consequential scope choices with the user.
+Select a coherent scope using dependencies and user priorities; use the whole subject when small or tightly coupled. Obtain agreement before changing scope.
+Preserve stable source IDs when present; assign rule/example/area IDs when continued work needs traceability. Keep one authoritative definition per point.
 
-## Discover one area at a time
+## Explore rules and examples
 
-Start with known rules or concrete examples. Propose examples to challenge rules and propose rules to explain examples.
-Use relevant input classes, boundaries, condition combinations, state changes, failures, retries, and timing to expose missing decisions.
-Capture general properties as rules with illustrative examples; examples alone do not establish universal correctness.
-For stateful subjects, compare actions across observable states and state-crossing sequences; use a compact state/action table when helpful, with a formal model optional.
-For each example, establish starting conditions, action/event, outcomes, meaningful side effects, prohibited effects, and consequential terms or time boundaries.
-Recommend behavior when useful, explaining the reason and trade-off; keep it proposed until the user decides.
-Identify uncertainties that affect expected behavior. Investigate available facts and ask the user about unresolved choices.
-Ask independent questions together using available feedback interfaces, with stable IDs, affected areas, and the behavior each answer determines; defer dependent questions.
-After each answer, update agreements and recompute the questions that can now be answered without guessing other decisions.
+Start with known rules or concrete examples. Challenge rules with examples and use proposed rules to explain examples; examples alone do not establish universal correctness.
+Explore relevant input classes, boundaries, condition combinations, state changes, failures, retries, and timing. For stateful behavior, compare actions across states and sequences.
+For each example, establish starting conditions, action/event, observable outcomes, side effects, prohibited effects, and meaningful terms, units, or time boundaries.
+Distinguish agreed behavior, observations, assumptions, proposals, and unresolved questions. Recommend behavior with reasons and trade-offs while leaving it proposed until accepted.
+Investigate available facts; ask about unresolved choices that affect expected behavior. Group independent questions and explain their impact; defer dependent questions.
+Apply answers only to addressed points, update agreements, and recompute remaining questions. Silence and explicit deferral do not establish agreement, defaults, or exclusions.
 
-## Review each area
+## Review and deliver
 
-Review the area's rules, examples, vocabulary, exclusions, gaps, and questions for the current slice before moving to another area.
-Incorporate corrections and obtain agreement on resolved behavior; avoid confirmation after every individual answer.
-Track accepted behavior by slice; mark an entire area ready only when its included behavior is accepted and unblocked.
-Explicit user deferrals permit a partial area: identify the missing decisions, their effects, and which behavior remains ready.
-Deferral leaves a question unresolved; it does not imply agreement, a default outcome, or exclusion from scope.
-When agreements change, check linked framing, specifications, designs, and tickets; update authorized records or identify required updates, marking affected conclusions draft or blocked.
-Questions from formulation or design enter this loop under their source areas; keep unaffected current agreements and IDs without recording the conversation or change itself.
-
-## Cross-area review and handoff
-
-After the slice's area reviews, check interactions, shared terms, contradictions, missing areas, and dependencies on pending behavior against the original goal.
-Return newly exposed decisions to their affected areas and repeat review as needed.
-Account for every mapped area's status and deferred question; pending work remains in scope, and exclusions require source or user authority.
-Present the complete slice for acceptance, with rules, examples, uncertainty, and its place in the overall map visible; reuse prior explicit agreements.
-Mark the accepted slice ready for formulation when unblocked; unrelated pending areas do not block it or require a partial-handoff exception.
-Link the record and identify its outcome. Readiness covers the agreed scope and does not claim exhaustive coverage or tested behavior.
+Review each relevant area's rules, examples, vocabulary, exclusions, and gaps before expanding another area. Reuse explicit agreements rather than confirming every answer.
+Check cross-area interactions, shared terms, contradictions, missing areas, and dependencies against the original outcome. Account for all included scope; exclusions require source or user authority.
+When agreements change, update affected authorized definitions and existing links; preserve unaffected agreements and mark dependent conclusions unresolved until reviewed.
+Deliver the complete supported definitions and consequential questions. A draft request is complete when this draft is delivered; acceptance governs readiness for dependent work.
+For tracked work, update discovery and run status. An area's status covers its included scope; an accepted, unblocked slice may be ready while unrelated areas remain pending. Use partial only for explicitly accepted usable scope with named blockers.
+State what is agreed and what remains open without claiming exhaustive coverage or tested behavior. Stop before unrequested formulation or implementation.

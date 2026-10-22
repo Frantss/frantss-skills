@@ -1,0 +1,68 @@
+[
+  {
+    "request": "Plan a StyleX migration and define shared theme variables.",
+    "skill": "bdd-design-solution",
+    "mode": "standalone",
+    "outcome": "Deliver a scoped proposal; no BDD artifacts or acceptance gate for delivering the draft."
+  },
+  {
+    "request": "Help me understand why onboarding is failing and define the problem before choosing a solution.",
+    "skill": "bdd-frame-problem",
+    "mode": "standalone",
+    "outcome": "Clarify needs and evidence; no solution choice or automatic run scaffold."
+  },
+  {
+    "request": "Clarify these refund rules: refunds are allowed, but the cutoff and treatment of partial refunds are undecided.",
+    "skill": "bdd-discover-behavior",
+    "mode": "standalone",
+    "outcome": "Ask consequential behavior questions; no invented rules, Gherkin, or workflow enrollment."
+  },
+  {
+    "request": "Turn these agreed rules into Gherkin: integers 1 through 5 are accepted; other integers are rejected without changing state.",
+    "skill": "bdd-formulate-behavior",
+    "mode": "standalone",
+    "outcome": "Deliver source-linked scenarios and valid boundary derivations; no rediscovery or forced discovery file."
+  },
+  {
+    "request": "Draft implementation tickets for these agreed behavior examples and dependencies.",
+    "skill": "bdd-slice-work",
+    "mode": "standalone",
+    "outcome": "Deliver verifiable draft tickets linked to supplied cases; do not publish, implement, or wait for acceptance to deliver the draft."
+  },
+  {
+    "request": "Implement accepted ticket TK-001 using its supplied acceptance criteria and the existing native tests.",
+    "skill": "bdd-implement-ticket",
+    "mode": "standalone",
+    "outcome": "Implement and verify the selected ticket without requiring Gherkin or new planning records."
+  },
+  {
+    "request": "Start a tracked BDD run for the upload limits feature and formulate the supplied agreed rules.",
+    "skill": "bdd-formulate-behavior",
+    "mode": "tracked",
+    "outcome": "Create run.md and the needed specification; future-stage files remain absent."
+  },
+  {
+    "request": "Continue the identified BDD run upload-limits-001 by refining its current design.",
+    "skill": "bdd-design-solution",
+    "mode": "tracked",
+    "outcome": "Preserve run identity and accepted sources; update only the participating design/run records."
+  },
+  {
+    "request": "Fix this typo in a CSS comment.",
+    "skill": null,
+    "mode": "ordinary",
+    "outcome": "No BDD skill or run artifacts."
+  },
+  {
+    "request": "Run the existing tests and report the results.",
+    "skill": null,
+    "mode": "ordinary",
+    "outcome": "Execute tests; do not enroll the task in discovery, formulation, design, or implementation."
+  },
+  {
+    "request": "Plan a styling migration in a workspace containing an unrelated prior BDD run.",
+    "skill": "bdd-design-solution",
+    "mode": "standalone",
+    "outcome": "Deliver the proposal without changing or resuming the nearby run."
+  }
+]

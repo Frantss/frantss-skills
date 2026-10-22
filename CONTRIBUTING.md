@@ -63,6 +63,20 @@ external actions on the user's behalf.
 Keep credentials and machine-specific paths in the user's environment. When
 adapting an existing skill, preserve its license and attribution.
 
+## Shared BDD references
+
+Edit `templates/bdd-run-record.md` for the tracked-run contract, then run
+`make sync-bdd`. The generator writes real copies to the six BDD skill folders;
+`make validate` rejects missing or stale copies. Keep mode selection and each
+stage's workflow in its entrypoint; the shared reference is loaded only for
+tracked work. Bundled copies count toward each skill's existing line limit.
+
+Behavioral regression requests live in `tests/fixtures/bdd-requests.json`.
+Exercise them in isolated workspaces and check actual outputs, artifacts,
+questions, and stopping behavior. The matrix records expected outcomes; it is
+not an automated claim of model behavior. Include nearby requests that should
+use ordinary work and requests that explicitly continue existing tracked runs.
+
 ## Check a skill
 
 ```bash
