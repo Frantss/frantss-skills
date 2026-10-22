@@ -13,7 +13,7 @@ Require schema version 1, this adapter, an existing absolute vault path, and a v
 
 1. Before CLI checks, derive the vault name from the configured canonical path's basename. Run `obsidian vault=<name> vaults verbose`; match the exact configured path to a unique registered name/ID, clarifying missing or ambiguous matches.
 2. Prefix every command, including help and sandbox retries, with `vault=<name-or-id>`. Require successful `obsidian vault=<name-or-id> help` and `obsidian vault=<name-or-id> vault info=path`; the returned path must match the configured canonical path.
-3. For setup/inspection, require successful `files`; when Settings.md is listed, also require `read path=<root>/Settings.md`. Empty storage is valid.
+3. For setup/inspection, require successful `files`. Empty storage is valid; Settings.md is a legacy migration input.
 
 Initialize only on explicit setup; offer `Frantss` as the default root and preserve configured roots, unrelated notes, and `.obsidian` settings. Keep destinations inside the root; reject traversal and escaping symlinks. Keep credentials in their tool's credential store.
 For record operations or setup, read [note mapping](references/notes.md); before writes, also read [write protocol](references/writes.md). For requested view setup or changes, read [Bases views](references/bases.md).

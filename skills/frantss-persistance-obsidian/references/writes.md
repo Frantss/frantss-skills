@@ -10,7 +10,7 @@ Create missing parents through CLI `eval` using [`app.vault.createFolder`](https
 ## Task and report saves
 
 Save task fields and source links in one note; save report summaries, links, and brief coverage in one note.
-Only task/report/settings writes use this protocol. Keep one current note each, without evidence/run/event notes, revision archives, or checkpoint journals.
+Only task/report writes use this protocol; return unsupported for settings/configuration saves. Keep one current note each, without evidence/run/event notes, revision archives, or checkpoint journals.
 Legacy evidence/history_complete/manifest fields or Pending events sections require migration, not ordinary write recovery. Leave affected records unchanged and return unsupported.
 
 For authorized cleanup, back up outside the vault, verify inbound references and exact content, then use CLI `eval` with `app.vault.trash(file, false)` for recoverable removal. Remove only empty owned folders; verify absence and retained records.

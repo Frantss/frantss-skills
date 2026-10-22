@@ -1,5 +1,4 @@
 # Project registry and resolution
-
 Use filesystem tools on `~/.frantss/projects.yaml`: `schema_version: 1` and `projects` keyed by readable IDs; projects may be ongoing or bounded; no backend access is required.
 Entries require `title` and `area: work|side-projects|personal` (`side-projects`: independent projects; `personal`: real-world matters); optional lists `local_paths` and `sources` read as empty without saving defaults.
 Reject unsupported versions, malformed entries, duplicate keys/IDs, and missing required fields; missing/unreadable configuration is unresolved.

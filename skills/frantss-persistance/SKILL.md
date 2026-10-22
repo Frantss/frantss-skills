@@ -14,7 +14,6 @@ Project/source definitions remain in `~/.frantss/projects.yaml`; supplied projec
 Configuration inspection/changes belong to `frantss-configure` when available; record operations never initialize configuration or create projects.
 
 Before record operations, read [common fields](references/records.md) and [operation requirements](references/operations.md).
-For shared settings or account references, also read [settings](references/settings.md).
 For an explicitly requested legacy tracking upgrade, read [migration rules](references/lean-migration.md); ordinary operations never migrate data.
 Pass complete domain fields/schema, stable identities, expected revisions, related records, filters, limits, and requested cutoff to the adapter.
 If a required domain schema is missing, ask for it rather than inventing fields or workflow decisions.

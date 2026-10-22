@@ -94,7 +94,7 @@ Existing vault notes and agent installations remain unchanged by this exercise.
 
 The previous migration retained retired notes/history in the active vault. The
 corrected workflow keeps only current tasks, saved report summaries, settings,
-and requested views. Migration backups and journals remain outside the vault.
+and requested views. Settings moved to local configuration in the subsequent correction. Migration backups and journals remain outside the vault.
 
 Manual walkthrough of the corrected instructions:
 
@@ -110,3 +110,16 @@ Manual walkthrough of the corrected instructions:
   trash only unchanged retired records, and retain tasks/settings/custom notes.
 - Nearby request to edit an unrelated Obsidian note: use ordinary note editing;
   neither persistence nor its cleanup migration applies.
+
+## Local settings correction
+
+Manual walkthrough: collection resolves identity aliases and timezone/week start
+from optional `settings` in the local project registry without opening Obsidian.
+An explicit timezone change patches that YAML; a task save writes only a task.
+A prepared backend settings save returns unsupported. An unrelated note edit
+activates neither configuration maintenance nor the adapter.
+Migration merges configured legacy values without overwriting local conflicts;
+unset values need no empty settings section. Back up and remove the legacy note
+after verifying read-back and inbound references.
+The temporary installer retained the removed settings reference; updater cleanup
+removes that verified owned file before checking the complete installed tree.

@@ -39,7 +39,7 @@ Use content checks and atomic state/configuration writes; preserve unknown field
    For Obsidian, use its official CLI and conflict/recovery protocol; unavailable CLI access never permits filesystem writes instead.
    Recheck preconditions, mark started before writing, then read back all affected objects before marking verified.
 8. Use installed installer help to install the fixed target through the original installer; a checkout at that commit can serve local installs.
-   Preserve subsets, map renamed skills through history, and include new skills for `all`. Remove obsolete owned names after replacements verify.
+   Preserve subsets, map renamed skills through history, and include new skills for `all`. Remove obsolete owned files/names after replacements verify.
    If exact installation is unsupported, stop with staged source. Preserve unrelated/local edits; never substitute a moving target.
 9. On failure, retain hashes, journal, backups, and unsaved payloads; report persisted/missing work and pause incompatible workflows.
    Resume the journal's fixed target; inspect started-step effects and execute only missing work with the same identities. Restore only when safe against later edits.

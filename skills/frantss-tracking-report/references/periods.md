@@ -2,7 +2,7 @@
 
 Use inclusive-start/exclusive-end local calendar intervals, converting boundaries for timestamp queries; state exact boundaries/timezone.
 Today/this week end now; a specified past day spans midnight to next midnight. Last week is the previous full configured week.
-Resolve unknown timezone/week start from the request/settings or ask; clarify ambiguous custom-range end dates.
+Resolve unknown timezone/week start from the request or `settings` in `~/.frantss/projects.yaml`, otherwise ask; clarify ambiguous custom-range end dates.
 Attribute activity by occurrence, not collection time; unsupported occurrence dates stay unknown and cannot establish dated completion.
 Use saved report summaries or dated sources for historical state; current task fields alone cannot establish an earlier state.
 If history is insufficient, label historical state unknown and displayed current state with its current cutoff.
