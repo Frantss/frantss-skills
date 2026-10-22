@@ -7,7 +7,7 @@ Sanitize separators, control characters, and link-delimiter characters; collapse
 For different records with colliding names, including case/Unicode equivalents, add readable project/context, then a numeric suffix if needed. Reuse existing paths for the same ID/key on retries.
 Find records by frontmatter type and ID/key, not basename. A changed title may change the path without changing identity.
 Project/source definitions belong to `~/.frantss/projects.yaml`; return unsupported for backend configuration saves.
-Setup initializes Tasks and Reports; create Views only when requested. Settings and project/source configuration stay in local YAML, never notes.
+Setup initializes Tasks, Reports, and Views, including the [required Bases](bases.md). Settings and project/source configuration stay in local YAML, never notes.
 Use YAML frontmatter for common record fields and scalar/list fields, retaining logical field names and types. Use ISO 8601 timestamps with offsets and quoted date-only strings; preserve nulls. Use lists for tags.
 Store `project`/`projects` as literal configured ID strings, e.g. `project: "frantss/frantssuy"`; serialize declared relationships to backend records as quoted vault-relative wikilinks.
 Map task `parent` IDs to one quoted wikilink to the verified parent task; missing/null stays standalone, with no duplicated child list. Resolve backend relationships to discovered note paths for wikilinks; decode target frontmatter ID/type, never infer identity from filenames. Preserve unknown properties and human-authored sections.

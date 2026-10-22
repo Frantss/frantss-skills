@@ -79,6 +79,22 @@ has an acceptance condition requiring all three plus verified integration.
 | Read a saved report or edit an unrelated note | No source scan, task-title change, or naming migration |
 | Source title unavailable or outcome-to-source match unclear | Preserve the existing name and report the unresolved match |
 
+## Required Obsidian Bases
+
+Manual instruction walkthrough using the adapter copied to a temporary installation;
+these cases do not create views or synthetic records in the personal vault.
+
+| Request/fixture | Walkthrough result |
+| --- | --- |
+| Set up Obsidian storage; empty existing vault, no Views folder | Create Tasks, Reports, Views, Tasks.base, and Reports.base without a separate view request; query all eight task views and both report views before completion |
+| Task/report notes exist but a required Base or view is missing | Setup remains incomplete; ordinary reads report the gap without repairing it |
+| Task rows include Inbox, Next, Later, Maybe, Done, and reviewed/unreviewed notes | State views match exactly; Maybe remains separate, Unreviewed includes only tasks without acknowledgment, and project/parent groupings preserve relationships |
+| Query returns out-of-root notes, wrong record types/states, or fails | Report partial setup; do not claim verified Bases |
+| All required queries succeed with no rows | Empty storage is valid; create no synthetic records |
+| Repeat setup with existing defaults and custom views/formulas/columns | Preserve existing definitions, add only missing defaults, and create no duplicates; conflicting default names remain explicit |
+| Authorized upgrade of initialized storage with missing views | Back up and journal additive view changes; preserve task/report records and retry only missing paths/view names |
+| Retrieve a saved report, update a task, inspect the backend, or edit/install the skill | No implicit view creation, repair, record migration, or acknowledgment |
+
 `make validate`, `git diff --check`, and a temporary `gh skill install` exercise
 packaging and resource portability. Live data verification checks existing
 standalone task reads without introducing synthetic tasks into the vault.

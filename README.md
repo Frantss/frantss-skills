@@ -151,7 +151,8 @@ configuration and stored-record migrations.
 Use [frantss-configure](skills/frantss-configure/SKILL.md) to set up the shared
 backend, projects, and sources. Configuration applies across workspaces.
 For Obsidian storage, install both persistence skills and enable the official
-Obsidian CLI with an existing vault.
+Obsidian CLI with an existing vault. Setup requires Tasks and Reports Bases with
+verified default views; missing or failing views leave setup incomplete.
 
 For automatic use across sessions, reference `frantss-communicate`,
 `frantss-tracking-tasks`, and `frantss-configure` in your agent's persistent

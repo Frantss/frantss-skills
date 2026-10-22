@@ -16,7 +16,7 @@ Require schema version 1, this adapter, an existing absolute vault path, and a v
 3. For setup/inspection, require successful `files`. Empty storage is valid; Settings.md is a legacy migration input.
 
 Initialize only on explicit setup; offer `Frantss` as the default root and preserve configured roots, unrelated notes, and `.obsidian` settings. Keep destinations inside the root; reject traversal and escaping symlinks. Keep credentials in their tool's credential store.
-For record operations or setup, read [note mapping](references/notes.md); before writes, also read [write protocol](references/writes.md). For requested view setup or changes, read [Bases views](references/bases.md).
+For record operations or setup, read [note mapping](references/notes.md); before writes, also read [write protocol](references/writes.md). For setup, authorized upgrades, or view changes, read [required Bases views](references/bases.md); setup is incomplete until those views verify.
 
 Use the exact discovered vault-relative `path=<root>/.../<readable name>.md`, including the extension; omitted paths and `file=` can target unintended notes. Never derive paths from UUIDs.
 List candidates with `files folder=<root>/<Folder>`, then `read path=<path>` and filter decoded records by exact keys or fields; exclude History unless requested. Use `search query=<text> path=<root> format=json` for discovery; results alone do not prove completeness or identity.
