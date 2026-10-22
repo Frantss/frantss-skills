@@ -9,7 +9,7 @@ After title changes or during a naming migration, use CLI `eval` with [`app.file
 Create missing parents through CLI `eval` using [`app.vault.createFolder`](https://github.com/obsidianmd/obsidian-api/blob/master/obsidian.d.ts), checking existing folders and proceeding parent-first.
 ## Task and report saves
 
-Save task fields and source links in one note; save report summaries, links, and brief coverage in one note.
+Save task fields, optional parent link, and source links in one note. Verify parent/ancestors by task ID/type, reject cycles/dangling references, and save parents before children; read back/decode parent IDs. Save report summaries, links, and brief coverage in one note.
 Only task/report writes use this protocol; return unsupported for settings/configuration saves. Keep one current note each, without evidence/run/event notes, revision archives, or checkpoint journals.
 Legacy evidence/history_complete/manifest fields or Pending events sections require migration, not ordinary write recovery. Leave affected records unchanged and return unsupported.
 

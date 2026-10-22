@@ -90,7 +90,8 @@ checking expected content; custom/unknown fields and human edits survive.
 “Show the saved daily report” remains a report lookup with no collection.
 “Set up a Slack/Jira source” registers native identity/location without a choice
 of search mode or an activity scan. Quoted suggestions do not write configuration. A report
-handoff retains `capture: none`; personal matches do not authorize task writes.
+handoff defaults to automatic owned-outcome capture; source workers still use
+`capture: none` and never write tasks. Explicit no-task-write requests remain read-only.
 
 The native-author search and direct-mention distinction were checked against
 [Slack search documentation](https://docs.slack.dev/reference/methods/search.messages/)

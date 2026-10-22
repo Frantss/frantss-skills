@@ -1,125 +1,72 @@
-# Lean tracking validation
+# Task links, hierarchy, and report validation
 
-Manual instruction walkthrough against a temporary `gh skill install . --all
---from-local --dir <temporary-directory>` copy. Inputs below are synthetic.
-No live connector, Obsidian write, or database migration was exercised.
+Manual instruction walkthrough against a temporary local installation. These
+synthetic fixtures check workflow decisions; they do not establish live source
+completeness or execute task writes in the personal vault.
 
-## Collection and report fixture
+## Outcome capture
 
-Scope: `sample/widget`, 2026-10-20, `America/Montevideo`. Existing task T1 is
-Next: “Fix invoice export,” with an issue link and no completion date.
+Scope: `sample/widget`, 2026-10-20, `America/Montevideo`.
 
-Source inputs:
-
-- Frantss: “I'll finish the invoice export fix today,” linked to T1's issue.
-- A second connector result wraps the same native message.
-- Frantss reviewed a separate permissions change, with a dated review link.
-- A calendar item shows a scheduled discussion, without evidence it occurred.
-- One source is inaccessible; another result has no supported occurrence date.
-
-Walkthrough results:
-
-1. Direct collection uses automatic capture. The duplicate message becomes one
-   finding. Match T1 by outcome/source; merge the message link and supported
-   expected date into T1. Create no evidence, run, or event records.
-2. The review remains temporary report input. Create no completed task for it.
-   The scheduled discussion establishes no performed work. Undated activity
-   establishes no dated completion. Return the inaccessible source as a gap.
-3. A separate report request uses `capture: none`. Even a newly discovered
-   commitment remains a candidate; reporting changes no task fields or links.
-4. The report summarizes the review and T1's pending outcome. Its domain fields
-   are type, projects, window, timezone, generation time, task IDs, source links,
-   narrative, status cutoff, and brief coverage. The report is partial because
-   of source access. It contains no transcript, input manifest, or cursor log.
-5. An identical retry reuses task/report keys and payloads, including generation
-   time. Existing links remain unique; no new logical revision is needed.
-6. A saved-report lookup returns its saved summary and gaps without collection
-   or writes. An existing-evidence-only report uses saved summaries/task links
-   without opening source links. An unknown historical task state stays unknown.
-
-## Migration fixture
-
-Legacy task T2 has an evidence ID and `history_complete`; legacy report R2 has
-evidence IDs and a manifest. One evidence note has a URL; another has only a
-repository locator and full commit hash.
-
-Ordinary task/report operations return unsupported for those legacy shapes.
-For an explicit update, the documented mapping preserves T2/R2 IDs and keys,
-resolves both link forms, merges task links, and maps report cutoff/coverage.
-Original revisions and retired notes remain in verified external backups. Missing evidence blocks
-the affected conversion. A retry reuses the migration journal's identities.
-After reference/back-up checks, remove retired notes/history from active storage. Never substitute a retrieval date.
-
-## Invocation boundaries
-
-| Skill | Representative request and walkthrough result | Nearby request that does not activate it |
-| --- | --- | --- |
-| Collect | Collect yesterday's activity: temporary findings and task-link handoffs | Retrieve saved daily report: report lookup only |
-| Tasks | Track a stated follow-up: task with links, no event note | Create daily report: no task capture or triage |
-| Report | Create daily report: saved summary and links | Collect activity only: no report save |
-| Persistence | Save a prepared task/schema: delegate one logical record | Search project sources: collection owns source access |
-| Obsidian adapter | Save selected-backend task: One current Tasks note, replaced if changed | Edit an unrelated note: ordinary editing |
-| Configure | Remove a configured source: patch configuration and preserve tasks/reports | Quoted suggestion to remove a source: no configuration write |
-
-## Structural checks
-
-`make validate` passed, with existing private-package license/version/icon
-warnings. All skills installed into the temporary directory, including the
-migration reference. `git diff --check` passed. Runtime adapter behavior and
-live-data migration remain untested.
-
-## Human-readable Obsidian names
-
-Additional manual walkthrough against the updated adapter and common record
-rules. This checks instruction decisions, without a live rename or link update.
-
-| Fixture | Walkthrough result |
+| Finding/request | Walkthrough result |
 | --- | --- |
-| Task titled “Fix invoice export” with a UUID property | `Tasks/Fix invoice export.md`; UUID remains in `id` |
-| Gildara daily report for 2026-10-20 | `Reports/2026-10-20 - Gildara daily report.md` |
-| Two distinct tasks with the same title/project | Add readable project context and then `(2)` when needed; keep distinct IDs and reuse chosen paths on retries |
-| Task title containing `/`, `:`, `[`, `]`, and `#` | Replace unsafe characters before path creation; retain the original meaningful title in properties |
-| Existing task renamed after its outcome changes | Find by ID/key, save the changed title in place, rename through FileManager, and verify inbound links and lookup |
-| Path-only rename with unchanged content | Preserve ID/key and logical revision; do not manufacture a new task or logical revision |
-| Historical task revision | Return unsupported for unavailable prior revisions; use saved reports or dated sources for historical state |
-| Interrupted migration from a UUID path | Resolve the journaled ID/revision at old/new paths; reuse a verified move and conflict on another identity at the target |
-| Internal-link auto-update disabled | Inspect and repair affected references; preserve the user's setting and report unresolved links as partial |
-| Request to edit an unrelated Obsidian note | Do not activate the adapter or apply database naming migrations |
+| Assigned Jira outcome with a clear completion condition | Capture the owned task, then triage from supported commitment/timing |
+| Authored implementation already completed, with supported occurrence date | Capture and triage Done even without a previously recorded promise; retain the completion date and source link |
+| Opened PR, routine review, or Slack discussion without an owned outcome | Report activity; create no task |
+| Accepted Slack follow-up to fix invoice exports | Match the outcome before creation; attach the discussion link |
+| Ticket created for somebody else, or unclear ownership | Do not infer ownership; return an unsaved candidate/question |
+| Explicitly capture a tentative idea | Capture Inbox, then Maybe if clear; no inferred commitment |
+| Duplicate findings for the same outcome | One task with deduplicated links; identical retry creates no revision |
+| Older completion finding for a task subsequently reopened | Preserve the later current state; earlier completion can inform historical reporting |
+| Unknown completion date | Keep the date unknown; retrieval time never supplies it |
 
-The rename method and its dependence on user link settings were checked against
-the official [Obsidian API declarations](https://github.com/obsidianmd/obsidian-api/blob/master/obsidian.d.ts).
-Existing vault notes and agent installations remain unchanged by this exercise.
+## Parent and subtask fixture
 
-## Current-record cleanup correction
+Jira J1 is the owned outcome “Improve registration.” Three PRs implement owned,
+independently trackable outcomes: API, form, and failure coverage. The parent
+has an acceptance condition requiring all three plus verified integration.
 
-The previous migration retained retired notes/history in the active vault. The
-corrected workflow keeps only current tasks, saved report summaries, settings,
-and requested views. Settings moved to local configuration in the subsequent correction. Migration backups and journals remain outside the vault.
+| Case | Walkthrough result |
+| --- | --- |
+| First capture | Create/verify one parent task, then three ordinary tasks referencing its ID through `parent` |
+| Three distinct children share the same Jira link | Keep distinct suboutcomes; a shared source link cannot merge them |
+| Three PRs are successive iterations of one fix | One task with three links, without manufactured subtasks |
+| All three child outcomes complete; integration remains unverified | Three Done children; parent remains pending |
+| Parent acceptance condition satisfied | One completed top-level outcome and three completed subtasks, never four deliveries |
+| Additional nested child | Group under the highest verified ancestor; intermediate parents do not add top-level deliveries |
+| Parent missing or inaccessible; self-link; cycle | Reject the invalid/uncertain relationship and expose the gap |
+| Parent save fails | Dependent children remain unsaved; retry reuses the parent/child identities |
+| Parent completes, reopens, or receives acknowledgment | No automatic child state/date/review changes; surface inconsistent states |
+| Existing version-1 task without `parent` | Read as standalone; no migration write or invented grouping |
 
-Manual walkthrough of the corrected instructions:
+## Report and source boundaries
 
-- Change T1's state: compare current content, replace one note, increment its
-  revision, and read back. Create no history/event/evidence record.
-- Retry after an uncertain write: compare with the intended result; return the
-  verified current record without a second change or archive.
-- Regenerate R1: update the same period/scope key in place, preserve human edits,
-  and retain its task/source links. Create no prior-report note.
-- Request T1's old revision: return unsupported; use saved reports or dated
-  sources for historical reporting without inventing a prior state.
-- Cleanup legacy notes: verify external backup and retained inbound references,
-  trash only unchanged retired records, and retain tasks/settings/custom notes.
-- Nearby request to edit an unrelated Obsidian note: use ordinary note editing;
-  neither persistence nor its cleanup migration applies.
+- Creating/refreshing a report uses automatic capture unless task writes are
+  explicitly disabled. The task workflow persists clear owned outcomes/updates;
+  the report re-reads changed tasks before composition.
+- Explicit no-task-write requests return candidates without task writes. Source
+  workers always stay read-only with `capture: none`; only the coordinator saves.
+- Retrieving a saved report performs no source scan, capture, or report rewrite.
+- Existing-evidence-only requests use saved summaries/links/session findings
+  without opening source links. Inaccessible storage/sources remain gaps.
+- Reviews/discussions without tasks remain report summaries and source links.
+  No evidence/event/run/history records or source transcripts are persisted.
+- Reports use supported occurrence dates and saved summaries for historical
+  state; current task state cannot silently replace missing past state.
 
-## Local settings correction
+## Adapter and configuration boundaries
 
-Manual walkthrough: collection resolves identity aliases and timezone/week start
-from optional `settings` in the local project registry without opening Obsidian.
-An explicit timezone change patches that YAML; a task save writes only a task.
-A prepared backend settings save returns unsupported. An unrelated note edit
-activates neither configuration maintenance nor the adapter.
-Migration merges configured legacy values without overwriting local conflicts;
-unset values need no empty settings section. Back up and remove the legacy note
-after verifying read-back and inbound references.
-The temporary installer retained the removed settings reference; updater cleanup
-removes that verified owned file before checking the complete installed tree.
+- Save parent IDs as quoted wikilinks to human-readable task notes; decode their
+  target task IDs on reads. Derive children instead of storing a second list.
+- A parent title rename preserves identity and repairs affected inbound links,
+  including child parent links, without changing user link-update settings.
+- Unknown/changed content conflicts before replacement; uncertain writes are
+  read back by identity and only missing work is retried.
+- Backend settings saves remain unsupported; preferences stay in local YAML.
+- Editing an unrelated note uses ordinary note editing, without activating
+  tracking, storage setup, or migration.
+- A general implementation request alone does not create tracking records.
+
+`make validate`, `git diff --check`, and a temporary `gh skill install` exercise
+packaging and resource portability. Live data verification checks existing
+standalone task reads without introducing synthetic tasks into the vault.

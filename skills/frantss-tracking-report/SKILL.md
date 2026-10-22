@@ -7,7 +7,7 @@ description: "Create, refresh, or retrieve daily and weekly report summaries of 
 
 Choose retrieve for a saved snapshot, create for a new report, or regenerate for a requested refresh. Clarify uncertain intent before collection.
 Use `frantss-persistance` when available and the backend in `~/.frantss/persistance.yaml`; reporting never initializes configuration or creates projects.
-Leave task records unchanged, including links, capture, acknowledgment, and triage. Explicit task changes belong to `frantss-tracking-tasks` when available.
+Create/refresh delegates source-supported task capture/updates to `frantss-tracking-tasks` when available, including completed outcomes. Honor explicit no-task-write requests; reporting never acknowledges tasks or applies speculative planning changes.
 
 ## Retrieve
 
@@ -21,9 +21,9 @@ If absent, report that result and offer creation; if inaccessible, report the ac
    Use `~/.frantss/projects.yaml`, with read-only `frantss-configure` resolution when available; retain historical missing-definition gaps.
    Explicit selection precedes unique registered remotes, then machine-scoped paths.
 2. Retrieve scoped tasks and relevant saved report summaries, including older outstanding commitments; expose access/history gaps.
-3. When fresh context is needed/requested, use `frantss-tracking-collect` when available with the same scope and `capture: none`.
-   Honor existing-evidence-only requests using saved summaries, task links, and session findings without source scans; otherwise reuse compatible findings without repeated failed scans or wider scope. Unavailable collection remains a gap.
-4. Read [content rules](references/content.md); compose from evidence, separating facts, reflection, and uncertainty, with supporting links.
+3. When fresh context is needed/requested, use `frantss-tracking-collect` when available with the same scope and `capture: automatic`, unless task writes were explicitly disabled.
+   Honor existing-evidence-only requests using saved summaries, task links, and session findings without source scans; otherwise reuse compatible findings without repeated failed scans or wider scope. Hand their owned outcomes to the task workflow under the same capture policy; unavailable collection or unresolved saves remain explicit gaps.
+4. Re-read changed task records after capture; read [content rules](references/content.md) and compose from verified tasks/findings, separating facts, reflection, and uncertainty with links.
 5. Read [snapshot records](references/save.md); pass the schema and prepared report to persistence and save without another approval prompt.
    Save only the summary, links, scope, cutoff, and brief coverage gaps. Finish on a verified write, or return an explicitly partial/unsaved report with recoverable payloads.
 

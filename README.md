@@ -21,7 +21,11 @@ These skills are a work in progress. I'm still iterating on them.
 | [frantss-persistance-obsidian](skills/frantss-persistance-obsidian/SKILL.md) | Store records in Obsidian through its official CLI. |
 
 Tracking stores tasks with direct evidence links and saved report summaries,
-including daily reports. Collection findings and scan cursors stay temporary;
+including daily reports. Tasks represent owned outcomes, including work discovered
+after completion. Optional parent links group distinct subtasks; PRs and discussions
+supply evidence without automatically becoming tasks. Creating or refreshing a
+report captures clear owned outcomes unless task writes are explicitly disabled.
+Collection findings and scan cursors stay temporary;
 activity without a task survives in a requested report's summary and source links.
 Each task/report has one current record; revision numbers detect conflicting writes.
 Shared settings live in the local project registry, outside the backend. Migration backups stay outside the active store.
