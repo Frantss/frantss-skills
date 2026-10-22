@@ -17,21 +17,21 @@ If sources conflict, identify the affected behavior and obtain a decision rather
 
 ## Draft the supported specification
 
-Use `.scratch/bdd/<run_id>/` for one feature across sessions and slices.
-On creation, fix `feature_name`, lowercase kebab-case `feature_slug`, and `run_id: <feature_slug>-<NNN>` in `run.md` YAML; use the next per-feature ordinal, padded to at least three digits.
+Use `.scratch/bdd/<run_id>/` for one feature across sessions/slices; on creation set stable YAML `feature_name`, lowercase kebab-case `feature_slug`, and `run_id: <feature_slug>-<NNN>`, choosing the next per-feature ordinal padded to at least three digits.
 Resume the identified run by reading `run.md`; ask if ambiguous. Create another only for a different feature or an explicit new-run request.
 Create exactly `run.md`, `problem.md`, `discovery.md`, `behavior.feature`, `design.md`, and `tickets.md`, even standalone; on resume, preserve contents and initialize only missing files/sections.
 Use `<feature_name>: <document role>` Markdown titles and `Feature: <feature_name>`. Use `Pending` for unvisited content, `None` for empty lists, and only a pending comment beneath an unvisited Feature.
 Keep current content only: replace changed definitions and remove obsolete entries and resolved questions. Keep no transcripts, histories, tombstones, or extra files/subfolders; preserve continuing IDs and repair affected references.
-YAML `stage` is `framing`, `concept`, `discovery`, `formulation`, `design`, or `slicing`, identifying active work; `current_slice` names a stable slice ID such as `S-001`.
+YAML `stage` is `framing`, `concept`, `discovery`, `formulation`, `design`, `slicing`, or `implementation`, identifying active work; `current_slice` names a stable `S-*` slice and `current_ticket` a selected `TK-*` ticket or `null`.
 `run.md` uses exactly `Documents`, `Validation`, `Next action` as level-two sections, in order; keep latest checks/limits under Validation and the next step under Next action. Update affected records before asking the next round.
 Under Documents, use `### <slice_id>: <name>` per current slice with `Scope`, `Members`, and `Dependencies` fields, then a `File | Status` table for the other five files.
 Members lists explicit file-qualified IDs, such as `discovery.md:R-001`, including in-slice rules/examples; use `Pending` until known. Dependencies lists slice/question references or `None`; preserve other slices when focus changes.
 Document statuses: `pending` = unvisited, `draft` = unaccepted work, `blocked` = an unresolved prerequisite prevents readiness, `ready` = accepted and unblocked, `partial` = explicitly accepted usable subset with named blockers.
+Once execution is tracked, run.md Validation adds `### Implementation` with `Ticket | State | Evidence`: states are `pending`, `in_progress`, `blocked`, `done`; document readiness stays separate.
+`### Behavior checks` uses `Ticket | Cases | Check | Result`: case/group IDs or `None` for non-scenario checks, test selectors/commands, and `passed`, `failed`, `blocked`, `not_run`; keep current evidence and invalidate affected results when inputs change.
 Keep scope/blockers in slice fields; for partial, Scope names usable member IDs. Keep check results under Validation. Area-map statuses use the same values plus `excluded`, requiring source/user authority; area status covers its whole included scope.
 `problem.md` uses exactly these level-two sections, in order: `Problem`, `Context and evidence`, `People`, `Goals and success criteria`, `Scope and constraints`, `Open questions`.
-`discovery.md` uses exactly these level-two sections, in order: `Boundary and vocabulary`, `Area map`, `Area details`, `Coverage gaps`, `Open questions`.
-Area map is an `ID | Area | Status | Dependencies` table; Area details uses `### <id>: <name>` with `Boundary`, `Rules`, `Examples` fields. Qualify cross-document IDs with their filename.
+`discovery.md` uses exactly these ordered level-two sections `Boundary and vocabulary`, `Area map`, `Area details`, `Coverage gaps`, `Open questions`; map columns are `ID | Area | Status | Dependencies`, with `### <id>: <name>` details containing `Boundary`, `Rules`, `Examples` fields.
 `design.md` uses exactly these level-two sections, in order: `Context`, `Approach`, `Structure`, `Decisions`, `Open questions`; Structure describes parts' purposes, boundaries, interfaces, and dependencies.
 `behavior.feature` contains one named Feature, current scope description, Rule groups, tagged Given/When/Then scenarios, and Examples for outlines. Cross-check slice membership and references before handoff.
 `tickets.md` uses exactly `Overview`, `Tickets`, `Coverage gaps` as level-two sections, in order. Each `### <TK-id>: <outcome>` has a one-sentence summary, bold `Dependencies`, then a `Behavior | Cases` table; add bold `Verification` only for essential setup or regressions absent from the cases.

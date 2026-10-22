@@ -16,6 +16,7 @@ These skills are a work in progress. I'm still iterating on them.
 | [bbd-discover-behavior](skills/bbd-discover-behavior/SKILL.md) | Discover expected behavior through examples and per-area review in a live Markdown record. |
 | [bbd-formulate-behavior](skills/bbd-formulate-behavior/SKILL.md) | Turn agreed behavior into Gherkin specifications for existing test tools. |
 | [bbd-slice-work](skills/bbd-slice-work/SKILL.md) | Group specified behavior into manageable tickets and review the breakdown with the user. |
+| [bbd-implement-ticket](skills/bbd-implement-ticket/SKILL.md) | Implement one accepted ticket with native tests and current behavioral verification evidence. |
 | [frantss-configure](skills/frantss-configure/SKILL.md) | Set up and maintain connections, projects, and sources. |
 | [frantss-update](skills/frantss-update/SKILL.md) | Update skills by commit hash and migrate configuration and stored records. |
 | [frantss-tracking-tasks](skills/frantss-tracking-tasks/SKILL.md) | Capture tasks and manage commitments, dates, and blockers. |
@@ -35,6 +36,13 @@ design decisions remain open. Each ticket lists the behaviors it implements and
 their specification cases. The user explicitly accepts the actual breakdown,
 including grouping and dependencies, before its ticket definitions become ready.
 That acceptance does not authorize tracker publication or implementation.
+When implementation is requested, advance one accepted ticket whose delivery
+prerequisites are implemented. Work test-first by default, reuse agreed observable
+boundaries, and verify the complete linked cases through native project tests.
+Already-correct behavior needs adequate passing evidence, not an artificial red
+test. A justified change in test-first ordering does not reduce final verification.
+Behavior/design questions return to their owning stages; routine implementation
+choices stay with the implementing agent.
 
 Tracking stores tasks with direct evidence links and saved report summaries,
 including daily reports. Tasks represent owned outcomes, including work discovered
@@ -88,6 +96,7 @@ feature_slug: slot-booking
 run_id: slot-booking-001
 stage: design
 current_slice: S-001
+current_ticket: null
 ```
 
 Use a lowercase kebab-case slug and the next per-feature ordinal, padded to at
@@ -102,7 +111,7 @@ distinguishable without recording when or how they changed.
 
 | File | Required structure |
 | --- | --- |
-| `run.md` | Identity, stage, and current slice in YAML; `Documents`, `Validation`, `Next action` |
+| `run.md` | Identity, stage, current slice/ticket in YAML; `Documents`, `Validation`, `Next action` |
 | `problem.md` | `Problem`, `Context and evidence`, `People`, `Goals and success criteria`, `Scope and constraints`, `Open questions` |
 | `discovery.md` | `Boundary and vocabulary`, `Area map`, `Area details`, `Coverage gaps`, `Open questions` |
 | `design.md` | `Context`, `Approach`, `Structure`, `Decisions`, `Open questions` |
@@ -110,8 +119,9 @@ distinguishable without recording when or how they changed.
 | `behavior.feature` | One named `Feature`, current scope description, `Rule` groups, tagged scenarios, Given/When/Then outcomes, and `Examples` for outlines |
 
 `stage` identifies active work: `framing`, `concept`, `discovery`, `formulation`,
-`design`, or `slicing`. It does not establish readiness. `current_slice` identifies
-a stable slice such as `S-001`.
+`design`, `slicing`, or `implementation`. It does not establish readiness.
+`current_slice` identifies a stable slice such as `S-001`; `current_ticket` identifies
+the selected ticket, such as `TK-001`, or is `null` before ticket selection.
 
 Under `run.md`'s `Documents`, give each current slice a `### <slice_id>: <name>`
 entry with `Scope`, `Members`, and `Dependencies` fields, followed by a
@@ -139,6 +149,31 @@ current next step. Acceptance and readiness do not imply implementation tests pa
 For `tickets.md`, readiness means the user explicitly accepted the actual ticket
 breakdown and its definitions are unblocked. Delivery dependencies still govern
 when implementation can start; neither approval nor readiness means tickets are done.
+
+Once execution is tracked, add these level-three sections under `Validation`:
+
+| Section | Columns | Values |
+| --- | --- | --- |
+| `Implementation` | `Ticket`, `State`, `Evidence` | `pending`, `in_progress`, `blocked`, `done` |
+| `Behavior checks` | `Ticket`, `Cases`, `Check`, `Result` | `passed`, `failed`, `blocked`, `not_run` |
+
+Execution state belongs to each ticket; document review statuses remain unchanged.
+`Cases` identifies the case or Examples group; use `None` for checks without
+specification cases, including repository or preparatory completion checks. `Check` names native test selectors or executable commands. Split rows
+when case groups have different results. `Evidence` identifies the checked code,
+commands, blockers, limitations, and any justified exception to test-first ordering.
+These are current records, without a work journal or test-run history.
+
+A ticket is `done` only when every assigned behavior and required repository check
+passes against current code. For preparatory tickets, verify their explicit
+completion and preservation checks. Reuse adequate existing tests and check all
+promised outputs, state changes, and prohibited effects. Parsing Gherkin, reviewing
+assertions, or finding a source tag does not establish that behavior passes.
+Failed, blocked, or unexecuted required checks keep the ticket unfinished.
+After code, source behavior, design, or prerequisite changes, invalidate affected
+evidence, set affected results to `not_run`, and reopen affected `done` tickets
+until reverified. Keep execution evidence here rather than expanding `tickets.md`.
+
 In `problem.md`, put current evidence and assumptions under `Context and evidence`,
 current requirements and success measures under `Goals and success criteria`, and
 included/excluded scope, dependencies, and constraints under `Scope and constraints`.
@@ -220,6 +255,14 @@ current specification review and parser outcomes stay in the run record.
 
 When converting earlier outputs, normalize their current content into these fixed
 sections. Keep existing run/slice IDs and map stages to the active-work vocabulary.
+For runs without execution metadata, add `current_ticket: null`; keep the stage
+and document acceptance states. Initialize execution tables only when execution
+is tracked. Existing planning readiness never becomes `done` or `passed` by
+conversion; unknown execution results remain `not_run`, with unresolved
+prerequisites or environmental limits recorded as blockers. Preserve only current
+execution evidence tied to checked code. Verify ticket IDs, case references,
+state/result values, and the separation between review and execution states;
+retries update the same rows and never infer implementation from accepted plans.
 For a five-file run, initialize missing `tickets.md` with its canonical title and
 three required sections marked `Pending`; add a `pending` tickets.md row to each
 slice's document table. Preserve existing ticket content if present and normalize
