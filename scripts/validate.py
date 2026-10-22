@@ -16,7 +16,6 @@ MAX_SKILL_LINES = 75
 SKILL_LINE_LIMITS = {
     "frantss-communicate": 50,
     "frantss-update": 50,
-    "frantss-decompose": 200,
     "frantss-persistance": 100,
     "frantss-persistance-obsidian": 100,
 }

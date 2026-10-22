@@ -11,7 +11,6 @@ These skills are a work in progress. I'm still iterating on them.
 | Skill | Purpose |
 | --- | --- |
 | [frantss-communicate](skills/frantss-communicate/SKILL.md) | Write clear, direct replies throughout the session. |
-| [frantss-decompose](skills/frantss-decompose/SKILL.md) | Break down problems through guided planning conversations. |
 | [frantss-frame-problem](skills/frantss-frame-problem/SKILL.md) | Establish needs, outcomes, evidence, scope, and constraints in a live problem brief. |
 | [frantss-design-solution](skills/frantss-design-solution/SKILL.md) | Select a solution concept and refine its design against agreed needs and behavior. |
 | [frantss-discover-behavior](skills/frantss-discover-behavior/SKILL.md) | Discover expected behavior through examples and per-area review in a live Markdown record. |
