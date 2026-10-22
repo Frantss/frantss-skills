@@ -1,5 +1,5 @@
 ---
-name: frantss-design-solution
+name: bbd-design-solution
 description: "Choose a solution concept or refine its design against agreed needs and behavior. Use when comparing approaches or deciding responsibilities, interfaces, dependencies, and consequential trade-offs. Routine implementation, task scheduling, and behavioral specification alone do not activate it."
 ---
 

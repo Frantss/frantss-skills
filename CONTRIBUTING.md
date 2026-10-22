@@ -8,8 +8,8 @@ to use it. The folder and frontmatter name must match.
 python3 scripts/new_skill.py frantss-my-skill --description "Use when ..."
 ```
 
-Prefix skill names with `frantss-`. Use lowercase letters, digits, and single
-hyphens, up to 64 characters.
+Prefix the BDD flow skills with `bbd-` and other skills with `frantss-`.
+Use lowercase letters, digits, and single hyphens, up to 64 characters.
 The generator refuses existing destinations and invalid names.
 
 ## Write the shared instructions

@@ -1,5 +1,5 @@
 ---
-name: frantss-discover-behavior
+name: bbd-discover-behavior
 description: "Discover expected behavior through a user-agent conversation before formulation. Use when clarifying consumer-visible rules, examples, boundaries, or unresolved behavior decisions. Ordinary implementation, test execution, and Gherkin conversion of settled requirements do not activate it."
 ---
 

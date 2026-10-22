@@ -1,5 +1,5 @@
 ---
-name: frantss-frame-problem
+name: bbd-frame-problem
 description: "Frame an unclear problem through a guided conversation about needs, evidence, intended outcomes, scope, and constraints. Use before choosing a solution or when the problem itself needs reframing. Routine implementation, detailed behavior discovery, and Gherkin conversion do not activate it."
 ---
 
