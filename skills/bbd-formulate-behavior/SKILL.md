@@ -20,12 +20,12 @@ If sources conflict, identify the affected behavior and obtain a decision rather
 Use `.scratch/bdd/<run_id>/` for one feature across sessions and slices.
 On creation, fix `feature_name`, lowercase kebab-case `feature_slug`, and `run_id: <feature_slug>-<NNN>` in `run.md` YAML; use the next per-feature ordinal, padded to at least three digits.
 Resume the identified run by reading `run.md`; ask if ambiguous. Create another only for a different feature or an explicit new-run request.
-Create exactly `run.md`, `problem.md`, `discovery.md`, `behavior.feature`, and `design.md`, even standalone; on resume, preserve contents and initialize only missing files/sections.
+Create exactly `run.md`, `problem.md`, `discovery.md`, `behavior.feature`, `design.md`, and `tickets.md`, even standalone; on resume, preserve contents and initialize only missing files/sections.
 Use `<feature_name>: <document role>` Markdown titles and `Feature: <feature_name>`. Use `Pending` for unvisited content, `None` for empty lists, and only a pending comment beneath an unvisited Feature.
 Keep current content only: replace changed definitions and remove obsolete entries and resolved questions. Keep no transcripts, histories, tombstones, or extra files/subfolders; preserve continuing IDs and repair affected references.
-YAML `stage` is `framing`, `concept`, `discovery`, `formulation`, or `design`, identifying active work; `current_slice` names a stable slice ID such as `S-001`.
+YAML `stage` is `framing`, `concept`, `discovery`, `formulation`, `design`, or `slicing`, identifying active work; `current_slice` names a stable slice ID such as `S-001`.
 `run.md` uses exactly `Documents`, `Validation`, `Next action` as level-two sections, in order; keep latest checks/limits under Validation and the next step under Next action. Update affected records before asking the next round.
-Under Documents, use `### <slice_id>: <name>` per current slice with `Scope`, `Members`, and `Dependencies` fields, then a `File | Status` table for the other four files.
+Under Documents, use `### <slice_id>: <name>` per current slice with `Scope`, `Members`, and `Dependencies` fields, then a `File | Status` table for the other five files.
 Members lists explicit file-qualified IDs, such as `discovery.md:R-001`, including in-slice rules/examples; use `Pending` until known. Dependencies lists slice/question references or `None`; preserve other slices when focus changes.
 Document statuses: `pending` = unvisited, `draft` = unaccepted work, `blocked` = an unresolved prerequisite prevents readiness, `ready` = accepted and unblocked, `partial` = explicitly accepted usable subset with named blockers.
 Keep scope/blockers in slice fields; for partial, Scope names usable member IDs. Keep check results under Validation. Area-map statuses use the same values plus `excluded`, requiring source/user authority; area status covers its whole included scope.
@@ -34,11 +34,11 @@ Keep scope/blockers in slice fields; for partial, Scope names usable member IDs.
 Area map is an `ID | Area | Status | Dependencies` table; Area details uses `### <id>: <name>` with `Boundary`, `Rules`, `Examples` fields. Qualify cross-document IDs with their filename.
 `design.md` uses exactly these level-two sections, in order: `Context`, `Approach`, `Structure`, `Decisions`, `Open questions`; Structure describes parts' purposes, boundaries, interfaces, and dependencies.
 `behavior.feature` contains one named Feature, current scope description, Rule groups, tagged Given/When/Then scenarios, and Examples for outlines. Cross-check slice membership and references before handoff.
+`tickets.md` uses exactly `Overview`, `Tickets`, `Coverage gaps` as level-two sections, in order. Each `### <TK-id>: <outcome>` has a one-sentence summary, bold `Dependencies`, then a `Behavior | Cases` table; add bold `Verification` only for essential setup or regressions absent from the cases.
 Use independently understandable scenarios with relevant starting conditions, an action or event, and observable outcomes.
 Preserve meaningful interface details, units, time boundaries, side effects, and effects that must not occur.
 Use consistent domain terms; keep test setup mechanics and internal implementation choices in later test code.
 Use `Scenario Outline` and `Examples` for the same behavior with different data; distinguish different behaviors explicitly.
-Use `Background` only for shared context that remains easy to understand without relying on another scenario.
 Give current scenarios stable, unique tags such as `@case-001`; update cases in place and remove obsolete scenarios without retaining retired entries.
 Put `@source-<id>` tags such as `@source-R-001 @source-E-001` on scenarios, resolving to current discovery definitions; preserve source IDs/citations or record supplied agreed definitions there without another discovery conversation.
 
@@ -54,7 +54,7 @@ Use a stable question ID and preserve whether the user has explicitly deferred i
 Reopen the affected discovery area with these questions; use the discovery skill if available, otherwise ask directly.
 Keep unaffected agreements and continue independent formulation work.
 When a question is resolved, incorporate the answer into current discovery definitions and scenarios, then remove the resolved question; source tags must point to current definitions.
-When source agreements change, check linked scenarios and design decisions; update authorized records or identify required updates, marking affected conclusions draft or blocked.
+When source agreements change, check linked scenarios, design decisions, and tickets; update authorized records or identify required updates, marking affected conclusions draft or blocked.
 A deferred decision remains unresolved; it does not imply a default outcome or exclusion from scope.
 
 ## Review the complete draft

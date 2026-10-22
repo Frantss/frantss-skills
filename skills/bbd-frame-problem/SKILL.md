@@ -14,12 +14,12 @@ Read supplied material and relevant evidence before asking questions those sourc
 Use `.scratch/bdd/<run_id>/` for one feature across sessions and slices.
 On creation, fix `feature_name`, lowercase kebab-case `feature_slug`, and `run_id: <feature_slug>-<NNN>` in `run.md` YAML; use the next per-feature ordinal, padded to at least three digits.
 Resume the identified run by reading `run.md`; ask if ambiguous. Create another only for a different feature or an explicit new-run request.
-Create exactly `run.md`, `problem.md`, `discovery.md`, `behavior.feature`, and `design.md`, even standalone; on resume, preserve contents and initialize only missing files/sections.
+Create exactly `run.md`, `problem.md`, `discovery.md`, `behavior.feature`, `design.md`, and `tickets.md`, even standalone; on resume, preserve contents and initialize only missing files/sections.
 Use `<feature_name>: <document role>` Markdown titles and `Feature: <feature_name>`. Use `Pending` for unvisited content, `None` for empty lists, and only a pending comment beneath an unvisited Feature.
 Keep current content only: replace changed definitions and remove obsolete entries and resolved questions. Keep no transcripts, histories, tombstones, or extra files/subfolders; preserve continuing IDs and repair affected references.
-YAML `stage` is `framing`, `concept`, `discovery`, `formulation`, or `design`, identifying active work; `current_slice` names a stable slice ID such as `S-001`.
+YAML `stage` is `framing`, `concept`, `discovery`, `formulation`, `design`, or `slicing`, identifying active work; `current_slice` names a stable slice ID such as `S-001`.
 `run.md` uses exactly `Documents`, `Validation`, `Next action` as level-two sections, in order; keep latest checks/limits under Validation and the next step under Next action. Update affected records before asking the next round.
-Under Documents, use `### <slice_id>: <name>` per current slice with `Scope`, `Members`, and `Dependencies` fields, then a `File | Status` table for the other four files.
+Under Documents, use `### <slice_id>: <name>` per current slice with `Scope`, `Members`, and `Dependencies` fields, then a `File | Status` table for the other five files.
 Members lists explicit file-qualified IDs, such as `discovery.md:R-001`, including in-slice rules/examples; use `Pending` until known. Dependencies lists slice/question references or `None`; preserve other slices when focus changes.
 Document statuses: `pending` = unvisited, `draft` = unaccepted work, `blocked` = an unresolved prerequisite prevents readiness, `ready` = accepted and unblocked, `partial` = explicitly accepted usable subset with named blockers.
 Keep scope/blockers in slice fields; for partial, Scope names usable member IDs. Keep check results under Validation. Area-map statuses use the same values plus `excluded`, requiring source/user authority; area status covers its whole included scope.
@@ -28,6 +28,7 @@ Keep scope/blockers in slice fields; for partial, Scope names usable member IDs.
 Area map is an `ID | Area | Status | Dependencies` table; Area details uses `### <id>: <name>` with `Boundary`, `Rules`, `Examples` fields. Qualify cross-document IDs with their filename.
 `design.md` uses exactly these level-two sections, in order: `Context`, `Approach`, `Structure`, `Decisions`, `Open questions`; Structure describes parts' purposes, boundaries, interfaces, and dependencies.
 `behavior.feature` contains one named Feature, current scope description, Rule groups, tagged Given/When/Then scenarios, and Examples for outlines. Cross-check slice membership and references before handoff.
+`tickets.md` uses exactly `Overview`, `Tickets`, `Coverage gaps` as level-two sections, in order. Each `### <TK-id>: <outcome>` has a one-sentence summary, bold `Dependencies`, then a `Behavior | Cases` table; add bold `Verification` only for essential setup or regressions absent from the cases.
 Keep the current focus and review status visible. Distinguish observed facts, reported claims, assumptions, proposals, and agreements.
 Give substantive points stable IDs: CO-001 context, G-001 goals, CN-001 constraints, P-001 subproblems, Q-001 questions, D-001 decisions; keep one authoritative entry per point.
 After answers, recompute unanswered questions; record conclusions, reasoning, and sources.
@@ -59,10 +60,9 @@ Apply answers only to the points addressed. User agreement establishes acceptanc
 
 If one problem contains distinct needs, propose outcome-focused subproblems and their relationships before expanding one.
 Keep subproblems at comparable depth and review the map with the user; select a useful slice while other subproblems remain pending.
-Use only the depth needed to clarify the problem. Behavior cases, technical modules, and implementation tasks belong to their respective later work.
 Preserve behavior requirements that emerge, with their sources and agreement status, as inputs to behavioral discovery.
 Keep early solution ideas and technical details as linked notes for solution design, rather than treating them as accepted directions.
-When evidence changes agreements, check affected points and linked discovery, specifications, and designs; update authorized records or identify required updates, marking affected conclusions draft or blocked.
+When evidence changes agreements, check affected points and linked discovery, specifications, designs, and tickets; update authorized records or identify required updates, marking affected conclusions draft or blocked.
 
 ## Review and handoff
 
