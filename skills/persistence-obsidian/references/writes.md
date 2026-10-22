@@ -1,20 +1,13 @@
-# File writes and recovery
+# Writes and recovery
 
-1. Find current notes by key before creation; reuse the supplied ID/key. Return a conflict for multiple matches.
-2. Read content/revision before patching. Reconcile changed content; preserve unknown fields and human sections.
-3. Use CLI `eval code=<javascript>` with `app.vault.create(path, text)` for new records; existing paths must conflict.
-   For replacement, use `app.vault.process(file, current => { if (current !== expected) throw Error('conflict'); return next; })`. Resolve `file` by exact path; serialize path/expected/next as JSON data literals in trusted code. Await calls and inspect errors.
-4. Increment revision for a logical content change, not an identical retry. Read back fields, revision, and links.
-After title changes or during a naming migration, use CLI `eval` with [`app.fileManager.renameFile(file, newPath)`](https://github.com/obsidianmd/obsidian-api/blob/master/obsidian.d.ts); check source identity/content and target vacancy first. Link updates depend on user settings: inspect and repair affected references without changing settings. Preserve IDs/keys; path-only moves keep logical revisions and require link/lookup verification.
-Create missing parents through CLI `eval` using [`app.vault.createFolder`](https://github.com/obsidianmd/obsidian-api/blob/master/obsidian.d.ts), checking existing folders and proceeding parent-first.
-## Task and report saves
+1. Resolve fresh notes by type and ID/key; duplicate matches conflict. Before creating, fresh-read the scope to prove both identities absent, repeating on scope changes. Inaccessible/unresolved notes leave absence unproven. Reuse supplied IDs/keys.
+2. Before patching, read current identity/content/revision. Reconcile changes; preserve unknown fields and human sections. Increment revision once for changed content; identical retries reuse verified results.
+3. Use the batch runner for prepared records. For manual CLI writes, use `eval` with `app.vault.create(path, text)` or `app.vault.process(file, current => { if (current !== expected) throw Error('conflict'); return next; })`. Resolve exact paths, serialize payloads as JSON data literals, await calls, and inspect errors. Existing create destinations must conflict.
+4. Read back identity, fields, revision, and links. Update batch mappings only after verified changes/moves/deletions; invalidate uncertain entries before reuse.
 
-Save task fields, optional parent link, and source links in one note. Verify parent/ancestors by task ID/type, reject cycles/dangling references, and save parents before children; read back/decode parent IDs. Save report summaries, links, and brief coverage in one note.
-Task/report records and Base views use this protocol; return unsupported for backend settings/configuration saves. Keep one current record each, without evidence/run/event notes, revision archives, or checkpoint journals.
-Legacy evidence/history_complete/manifest fields or Pending events sections require migration, not ordinary write recovery. Leave affected records unchanged and return unsupported.
+After title changes or authorized naming migrations, use [`app.fileManager.renameFile(file, newPath)`](https://github.com/obsidianmd/obsidian-api/blob/master/obsidian.d.ts). Verify source identity/content and target vacancy. Preserve IDs/keys; path-only moves keep logical revisions. Inspect/repair affected links without changing user settings, then verify links/lookup. Create missing parents with `app.vault.createFolder`, checking existing folders and proceeding parent-first.
+Save task fields, parent/source links, or report summaries/coverage in one current note. Verify parent/ancestor IDs/types, reject cycles/dangling links, save parents first, and decode parent IDs on readback. Configuration saves are unsupported; keep settings/projects outside notes, without evidence/run/event records or revision archives.
+Legacy evidence/history_complete/manifest fields and Pending events sections require migration. Leave affected records unchanged and return unsupported.
+For authorized cleanup, back up outside the vault, verify inbound references and exact content, then use `app.vault.trash(file, false)` through CLI `eval`. Remove only empty owned folders; verify absence and retained records.
 
-For authorized cleanup, back up outside the vault, verify inbound references and exact content, then use CLI `eval` with `app.vault.trash(file, false)` for recoverable removal. Remove only empty owned folders; verify absence and retained records.
-## Partial failures
-
-After an uncertain write, read the current note by identity and compare expected/next content. Reuse a verified result; retry only missing writes. Preserve unsaved inputs and conflicts.
-Return persisted parts, missing steps, and recovery locations; stop after a repeated unresolved conflict or access failure.
+After uncertain writes, fresh-read by identity and compare expected/next content. Reuse verified results; retry only missing operations with the same identities. Preserve unsaved inputs/conflicts, report persisted parts/missing steps/recovery locations, and stop after a repeated unresolved conflict or access failure.

@@ -17,7 +17,7 @@ SKILL_LINE_LIMITS = {
     "core-communicate": 50,
     "core-update": 50,
     "persistence-records": 100,
-    "persistence-obsidian": 100,
+    "persistence-obsidian": 350,
 }
 LINK = re.compile(r'!?\[[^\]\n]*\]\(\s*(<[^>\n]+>|[^\s)]+)(?:\s+[\'\"][^)\n]*[\'\"])?\s*\)')
 FENCE = re.compile(r"^```[^\n]*\n.*?^```\s*$", re.MULTILINE | re.DOTALL)

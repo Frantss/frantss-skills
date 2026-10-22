@@ -1,26 +1,21 @@
 ---
 name: persistence-obsidian
-description: "Read and write prepared Frantss records through the Obsidian CLI. Use when selected as the backend adapter, or for explicit storage setup, vault access checks, and Bases view changes; ordinary note editing belongs elsewhere."
-compatibility: Requires Python 3 and Obsidian 1.12.7+ with the official obsidian CLI enabled and registered, and access to the desktop app.
+description: "Read and write prepared Frantss records through the Obsidian CLI. Use for the selected backend, storage setup/access checks, and Bases view changes; ordinary note editing belongs elsewhere."
+compatibility: Requires Python 3.9+ with PyYAML, Obsidian 1.12.7+ with its official CLI enabled and registered, and access to the desktop app.
 ---
 
 # Persist records in Obsidian
 
-Use the official [Obsidian CLI](https://obsidian.md/help/cli) with complete record payloads and operation requirements from the caller or `persistence-records` when available.
+Accept complete record payloads and operation requirements from the caller or `persistence-records`. Read [note mapping](references/notes.md) for record operations/setup, [write protocol](references/writes.md) before writes, and [Bases views](references/bases.md) for setup, authorized upgrades, or view changes.
+Use backend options from `~/.frantss/persistance.yaml`, expanding `~` for the current OS account. Require schema version 1, this adapter, an existing absolute `vault` path, and vault-relative `root`. Repository/ancestor settings never select storage; missing options leave it unconfigured.
+For sandboxed access, read [CLI access](references/sandbox.md) before checks. Stop after its permitted retry fails; retain unsaved payloads without installing dependencies or switching backends/filesystem writes.
 
-Use supplied backend options `vault` and `root` from `~/.frantss/persistance.yaml`, or read that connection file directly; expand `~` to the current OS account's home. Repository-local and ancestor configurations never select the vault.
-Require schema version 1, this adapter, an existing absolute vault path, and a vault-relative root; missing options leave storage unconfigured. For sandboxed agents, read [CLI access](references/sandbox.md) before checks; after its permitted retry, stop on failure and retain partial setup/unsaved payloads without installing or repairing dependencies.
+For record batches, use the [Python runner](scripts/batch.py) and its [interface](references/batch.md). It verifies the connection and reuses an in-memory lookup until process exit; independent calls rebuild it. Let the runner perform connection checks.
+For manual CLI access, derive the selector from the canonical vault path's basename. Run `obsidian vault=<selector> vaults verbose` and require one exact path match. Prefix subsequent commands/help/retries with that registered `vault=<name-or-id>`. Require successful `help` and `vault info=path`, matching the canonical path. Setup/inspection also requires `files`; empty storage is valid and Settings.md is legacy migration input.
 
-1. Before CLI checks, derive the vault name from the configured canonical path's basename. Run `obsidian vault=<name> vaults verbose`; match the exact configured path to a unique registered name/ID, clarifying missing or ambiguous matches.
-2. Prefix every command, including help and sandbox retries, with `vault=<name-or-id>`. Require successful `obsidian vault=<name-or-id> help` and `obsidian vault=<name-or-id> vault info=path`; the returned path must match the configured canonical path.
-3. For setup/inspection, require successful `files`. Empty storage is valid; Settings.md is a legacy migration input.
-
-Initialize only on explicit setup; offer `Frantss` as the default root and preserve configured roots, unrelated notes, and `.obsidian` settings. Keep destinations inside the root; reject traversal and escaping symlinks. Keep credentials in their tool's credential store.
-For record operations or setup, read [note mapping](references/notes.md); before writes, also read [write protocol](references/writes.md). For setup, authorized upgrades, or view changes, read [required Bases views](references/bases.md); setup is incomplete until those views verify.
-
-Use the exact discovered vault-relative `path=<root>/.../<readable name>.md`, including the extension; omitted paths and `file=` can target unintended notes. Never derive paths from UUIDs.
-List candidates with `files folder=<root>/<Folder>`, then `read path=<path>` and filter decoded records by exact keys or fields; exclude History unless requested. Use `search query=<text> path=<root> format=json` for discovery; results alone do not prove completeness or identity.
-Pass arguments through a process argument array. Preserve literal backslashes and multiline payloads across CLI escape handling (`\n`, `\t`).
-Run CLI reads through the [bounded reader](scripts/read_cli.py): `python3 <installed-skill-dir>/scripts/read_cli.py vault=<name> <command> ...`. It captures output locally and waits up to 5 seconds for process exit before returning it. Give the host tool at least 10 seconds and retain its sandbox/approval flow. Require exit zero and error-free output; a timeout or background task is incomplete, even when a full note was printed. Report failure before retrying.
-Use `obsidian vault=<name-or-id> help <command>` for installed syntax. If CLI access fails, report blocked storage without switching to filesystem writes or connectors.
-Use saved summaries or dated sources for historical cutoffs; expose unavailable prior revisions, unsupported legacy shapes, missing dates, access, or truncation. Return logical fields plus IDs, keys, revisions, note references, and per-operation verified/partial/failed/unsupported status.
+Initialize only on explicit setup; offer `Frantss` as the default root. Preserve configured roots, unrelated notes, and `.obsidian` settings; setup remains incomplete until required Bases verify. Keep destinations inside the root and reject traversal/escaping symlinks. Keep credentials in their tool's credential store.
+Use discovered vault-relative `path=<root>/.../<readable name>.md`, including the extension. Omitted paths and `file=` can select unintended notes; UUIDs never determine filenames. Exclude History unless requested.
+Treat metadata/search as candidate hints. Verify selected notes fresh; complete queries and absence checks require fresh scoped reads. Apply caller filters/limits to fresh records, reporting access/truncation gaps rather than claiming completeness.
+For manual reads, use the [bounded reader](scripts/read_cli.py): `python3 <skill-dir>/scripts/read_cli.py vault=<name> <command> ...`. It captures output and requires process exit within five seconds. Give each host call at least ten seconds; preserve sandbox/approval handling. Require exit zero and error-free output; timeouts/background tasks are incomplete. Report failure before retrying.
+Pass CLI arguments as a process argument array; preserve literal backslashes/multiline content across CLI escaping (`\n`, `\t`). Consult `obsidian vault=<selector> help <command>` for installed syntax; [official CLI documentation](https://obsidian.md/help/cli) supplies context.
+Use saved summaries or dated sources for historical cutoffs; expose unavailable revisions, unsupported legacy data, missing dates, and coverage gaps. Return logical fields, IDs/keys/revisions, note references, and per-operation verified/partial/failed/unsupported status.

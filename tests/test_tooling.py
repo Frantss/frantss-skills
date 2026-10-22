@@ -168,7 +168,7 @@ class ToolingTests(unittest.TestCase):
 
     def test_named_line_limits_include_references(self):
         for name, limit in (("core-communicate", 50), ("core-update", 50),
-                            ("persistence-records", 100), ("persistence-obsidian", 100)):
+                            ("persistence-records", 100), ("persistence-obsidian", 350)):
             with self.subTest(name=name):
                 skill = self.finished_skill(name)
                 initial = len((skill / "SKILL.md").read_text().splitlines())

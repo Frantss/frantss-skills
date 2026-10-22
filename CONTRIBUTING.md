@@ -17,7 +17,8 @@ The generator refuses existing destinations and invalid names.
 
 Each skill has a hard limit of 75 total lines across its authored UTF-8 text
 files. `core-communicate` and `core-update` each have a 50-line limit;
-`persistence-records` and `persistence-obsidian` each have a 100-line limit.
+`persistence-records` has a 100-line limit; `persistence-obsidian` has a 350-line
+limit to include its executable batch runner.
 Count frontmatter, blank lines, references, helper code, and metadata.
 Binary assets are excluded. `make validate` enforces the total per skill;
 progressive disclosure does not increase the budget.

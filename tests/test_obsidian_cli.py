@@ -17,7 +17,7 @@ class ObsidianReadCliTests(unittest.TestCase):
         self.directory = tempfile.TemporaryDirectory()
         self.addCleanup(self.directory.cleanup)
         self.bin = Path(self.directory.name)
-        self.env = dict(os.environ, PATH=str(self.bin) + os.pathsep + os.environ.get("PATH", ""))
+        self.env = dict(os.environ, PYTHONDONTWRITEBYTECODE='1', PATH=str(self.bin) + os.pathsep + os.environ.get("PATH", ""))
 
     def run_cli(self, source, *arguments):
         executable = self.bin / "obsidian"
@@ -51,6 +51,14 @@ class ObsidianReadCliTests(unittest.TestCase):
         self.assertEqual(json.loads(stdout.splitlines()[0]), arguments)
         self.assertEqual(stdout.splitlines()[1:], ["line 1", "line 2: café"])
         self.assertEqual(stderr, "")
+
+    def test_import_does_not_run_the_cli(self):
+        result = subprocess.run(
+            [sys.executable, '-c',
+             'import sys; sys.path.insert(0, sys.argv[1]); from read_cli import run_cli; print("imported")',
+             str(SCRIPT.parent)], env=self.env, capture_output=True, text=True, timeout=10,
+        )
+        self.assertEqual((result.returncode, result.stdout, result.stderr), (0, 'imported\n', ''))
 
     def test_preserves_failure_status_and_stderr(self):
         code, stdout, stderr = self.run_cli(
