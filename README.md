@@ -19,6 +19,7 @@ These skills are a work in progress. I'm still iterating on them.
 | [frantss-tracking-report](skills/frantss-tracking-report/SKILL.md) | Create daily and weekly activity reports. |
 | [frantss-persistance](skills/frantss-persistance/SKILL.md) | Store task links and report summaries through a shared backend. |
 | [frantss-persistance-obsidian](skills/frantss-persistance-obsidian/SKILL.md) | Store records in Obsidian through its official CLI. |
+| [frantss-persistance-fizzy](skills/frantss-persistance-fizzy/SKILL.md) | Store records as Fizzy cards through its official CLI. |
 
 Tracking stores tasks with direct evidence links and saved report summaries,
 including daily reports. Tasks represent owned outcomes, including work discovered
@@ -150,6 +151,11 @@ Use [frantss-configure](skills/frantss-configure/SKILL.md) to set up the shared
 backend, projects, and sources. Configuration applies across workspaces.
 For Obsidian storage, install both persistence skills and enable the official
 Obsidian CLI with an existing vault.
+For Fizzy storage, install `frantss-persistance` and `frantss-persistance-fizzy`,
+authenticate the official [Fizzy CLI](https://github.com/basecamp/fizzy-cli), and
+configure a profile, API URL, and shared board through `frantss-configure`.
+Each task/report uses one card with a JSON record block; writes require a
+Read+Write token and serialized writers because the CLI has no atomic revision check.
 
 For automatic use across sessions, reference `frantss-communicate`,
 `frantss-tracking-tasks`, and `frantss-configure` in your agent's persistent

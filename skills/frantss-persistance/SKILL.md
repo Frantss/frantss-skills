@@ -9,7 +9,7 @@ The caller supplies domain schemas, relationships, content, and requested change
 Read only `~/.frantss/persistance.yaml`, expanding the current OS account's home independently of the working directory.
 Require `schema_version: 1` and `backend: {adapter: <skill-name>, options: <mapping>}`; parse configuration as data.
 One backend serves every project; reject per-project overrides. Pass configured options unchanged to the selected adapter.
-Use `frantss-persistance-obsidian` when selected and available; missing configuration/capabilities leave requests explicitly unsaved, never in another store.
+Load the configured adapter skill when available, including `frantss-persistance-obsidian` or `frantss-persistance-fizzy`; missing configuration/capabilities leave requests explicitly unsaved, never in another store.
 Project/source definitions remain in `~/.frantss/projects.yaml`; supplied project references are readable strings, never backend project records.
 Configuration inspection/changes belong to `frantss-configure` when available; record operations never initialize configuration or create projects.
 
