@@ -1,5 +1,5 @@
 ---
-name: bbd-slice-work
+name: bdd-slice-work
 description: "Slice accepted behavioral specifications into implementation tickets, or review an existing breakdown for granularity and dependencies. Behavior discovery, implementation, and publishing approved tickets alone do not activate it."
 ---
 

@@ -1,5 +1,5 @@
 ---
-name: bbd-implement-ticket
+name: bdd-implement-ticket
 description: "Implement or resume one accepted ticket against its linked behavioral specification. Behavior discovery, ticket drafting, standalone review, and whole-slice orchestration are separate work."
 ---
 

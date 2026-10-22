@@ -11,12 +11,12 @@ These skills are a work in progress. I'm still iterating on them.
 | Skill | Purpose |
 | --- | --- |
 | [frantss-communicate](skills/frantss-communicate/SKILL.md) | Write clear, direct replies throughout the session. |
-| [bbd-frame-problem](skills/bbd-frame-problem/SKILL.md) | Establish needs, outcomes, evidence, scope, and constraints in a live problem brief. |
-| [bbd-design-solution](skills/bbd-design-solution/SKILL.md) | Select a solution concept and refine its design against agreed needs and behavior. |
-| [bbd-discover-behavior](skills/bbd-discover-behavior/SKILL.md) | Discover expected behavior through examples and per-area review in a live Markdown record. |
-| [bbd-formulate-behavior](skills/bbd-formulate-behavior/SKILL.md) | Turn agreed behavior into Gherkin specifications for existing test tools. |
-| [bbd-slice-work](skills/bbd-slice-work/SKILL.md) | Group specified behavior into manageable tickets and review the breakdown with the user. |
-| [bbd-implement-ticket](skills/bbd-implement-ticket/SKILL.md) | Implement one accepted ticket with native tests and current behavioral verification evidence. |
+| [bdd-frame-problem](skills/bdd-frame-problem/SKILL.md) | Establish needs, outcomes, evidence, scope, and constraints in a live problem brief. |
+| [bdd-design-solution](skills/bdd-design-solution/SKILL.md) | Select a solution concept and refine its design against agreed needs and behavior. |
+| [bdd-discover-behavior](skills/bdd-discover-behavior/SKILL.md) | Discover expected behavior through examples and per-area review in a live Markdown record. |
+| [bdd-formulate-behavior](skills/bdd-formulate-behavior/SKILL.md) | Turn agreed behavior into Gherkin specifications for existing test tools. |
+| [bdd-slice-work](skills/bdd-slice-work/SKILL.md) | Group specified behavior into manageable tickets and review the breakdown with the user. |
+| [bdd-implement-ticket](skills/bdd-implement-ticket/SKILL.md) | Implement one accepted ticket with native tests and current behavioral verification evidence. |
 | [frantss-configure](skills/frantss-configure/SKILL.md) | Set up and maintain connections, projects, and sources. |
 | [frantss-update](skills/frantss-update/SKILL.md) | Update skills by commit hash and migrate configuration and stored records. |
 | [frantss-tracking-tasks](skills/frantss-tracking-tasks/SKILL.md) | Capture tasks and manage commitments, dates, and blockers. |

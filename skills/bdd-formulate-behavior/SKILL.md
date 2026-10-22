@@ -1,5 +1,5 @@
 ---
-name: bbd-formulate-behavior
+name: bdd-formulate-behavior
 description: "Formulate or review Gherkin specifications from agreed behavioral context, including discovery records. Use when turning requirements into consumer-visible scenarios. Ordinary test implementation, test execution, and open-ended behavior discovery do not activate it."
 ---
 
