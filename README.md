@@ -12,6 +12,8 @@ These skills are a work in progress. I'm still iterating on them.
 | --- | --- |
 | [frantss-communicate](skills/frantss-communicate/SKILL.md) | Write clear, direct replies throughout the session. |
 | [frantss-decompose](skills/frantss-decompose/SKILL.md) | Break down problems through guided planning conversations. |
+| [frantss-discover-behavior](skills/frantss-discover-behavior/SKILL.md) | Discover expected behavior through examples and per-area review in a live Markdown record. |
+| [frantss-formulate-behavior](skills/frantss-formulate-behavior/SKILL.md) | Turn agreed behavior into Gherkin specifications for existing test tools. |
 | [frantss-configure](skills/frantss-configure/SKILL.md) | Set up and maintain connections, projects, and sources. |
 | [frantss-update](skills/frantss-update/SKILL.md) | Update skills by commit hash and migrate configuration and stored records. |
 | [frantss-tracking-tasks](skills/frantss-tracking-tasks/SKILL.md) | Capture tasks and manage commitments, dates, and blockers. |
