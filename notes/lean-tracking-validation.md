@@ -67,6 +67,18 @@ has an acceptance condition requiring all three plus verified integration.
   tracking, storage setup, or migration.
 - A general implementation request alone does not create tracking records.
 
+## Source names
+
+| Finding/request | Walkthrough result |
+| --- | --- |
+| Jira VILL-8614 with original modal-title summary | Title is `VILL-8614 - Add missing question mark to discount code deactivation modal title`; filename has the same stem |
+| Jira summary contains `[S1]`, punctuation, or a slash | Preserve the original title; sanitize only unsafe filename characters |
+| Distinct regression-test child links the same Jira issue | Keep its own source title or suboutcome qualifier; do not rename it to the entire Jira outcome |
+| No named source exists | Use a concise owned-outcome title |
+| Explicit rename of an existing source-backed task | Preserve stable identity/state, update its title and readable path, and repair child/report links with exact-content conflict checks |
+| Read a saved report or edit an unrelated note | No source scan, task-title change, or naming migration |
+| Source title unavailable or outcome-to-source match unclear | Preserve the existing name and report the unresolved match |
+
 `make validate`, `git diff --check`, and a temporary `gh skill install` exercise
 packaging and resource portability. Live data verification checks existing
 standalone task reads without introducing synthetic tasks into the vault.

@@ -2,6 +2,7 @@
 
 Supply the common persistence envelope; tasks use UUIDs and default `task:<id>` keys.
 A task is a specific owned outcome; subtasks use the same record type and fields. Tasks retain `status: inbox|next|later|maybe|done`, nullable `project`, `tags`, brief `context`, and `source_urls` (unique source links or locators).
+Keep titles close to their primary source: Jira tasks use `<issue key> - <original summary>`, preserving source spelling, case, and punctuation. Distinct subtasks use their own source titles or a brief suboutcome qualifier; a shared parent-ticket link never substitutes its summary for the child's outcome. Without a source title, use a concise outcome name.
 Optional `parent` is a task ID or null; missing means standalone. Derive children by querying this field; store no separate child list or outcome records.
 Use a child only for a distinct owned suboutcome with its own completion condition; PR count alone never establishes subtasks. Resolve parent/ancestors as tasks and reject self-links, cycles, dangling references, or ambiguous grouping. Save/verify parents before dependent children; failed dependencies leave children explicitly unsaved.
 Prefer verified source URLs; without one, retain a native locator with enough provider/container/object identity to retrieve the source, e.g. repository path plus full commit hash.
