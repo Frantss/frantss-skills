@@ -167,7 +167,7 @@ class ToolingTests(unittest.TestCase):
         self.assertTrue(any("line limit" in error for error in packaging_errors(self.root)))
 
     def test_named_line_limits_include_references(self):
-        for name, limit in (("core-communicate", 50), ("core-update", 50),
+        for name, limit in (("atomic-commits", 50), ("core-communicate", 50), ("core-update", 50),
                             ("persistence-records", 100), ("persistence-obsidian", 350)):
             with self.subTest(name=name):
                 skill = self.finished_skill(name)

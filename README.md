@@ -11,6 +11,7 @@ These skills are a work in progress. I'm still iterating on them.
 | Skill | Purpose |
 | --- | --- |
 | [core-communicate](skills/core-communicate/SKILL.md) | Write clear, direct replies throughout the session. |
+| [atomic-commits](skills/atomic-commits/SKILL.md) | Group all pending changes or a selected subset into small, cohesive Git commits. |
 | [bdd-frame-problem](skills/bdd-frame-problem/SKILL.md) | Establish needs, outcomes, evidence, scope, and constraints in a live problem brief. |
 | [bdd-design-solution](skills/bdd-design-solution/SKILL.md) | Select a solution concept and refine its design against agreed needs and behavior. |
 | [bdd-discover-behavior](skills/bdd-discover-behavior/SKILL.md) | Discover expected behavior through examples and per-area review in a live Markdown record. |
