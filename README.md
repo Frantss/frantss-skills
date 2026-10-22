@@ -101,14 +101,40 @@ distinguishable without recording when or how they changed.
 | `design.md` | `Context`, `Approach`, `Structure`, `Decisions`, `Open questions` |
 | `behavior.feature` | One named `Feature`, current scope description, `Rule` groups, tagged scenarios, Given/When/Then outcomes, and `Examples` for outlines |
 
-In `run.md`, `Documents` lists each other file and its current review status.
-`Validation` contains only the latest checks, results, and limits, with no history
-of findings or repairs. `Next action` states the current next step.
+`stage` identifies active work: `framing`, `concept`, `discovery`, `formulation`,
+or `design`. It does not establish readiness. `current_slice` identifies a stable
+slice such as `S-001`.
+
+Under `run.md`'s `Documents`, give each current slice a `### <slice_id>: <name>`
+entry with `Scope`, `Members`, and `Dependencies` fields, followed by a
+`File | Status` table containing the other four files. `Members` lists explicit
+file-qualified IDs, including in-slice rules and examples; use `Pending`
+until known. `Dependencies` lists slice/question references or `None`.
+Qualify cross-document IDs, for example `discovery.md:R-001`, to avoid ambiguity.
+Keep every slice's current definition when focus changes; these entries describe
+current scope and readiness, without recording its history.
+
+Use these exact document statuses:
+
+| Status | Meaning |
+| --- | --- |
+| `pending` | Unvisited |
+| `draft` | Unaccepted work |
+| `blocked` | An unresolved prerequisite prevents readiness |
+| `ready` | Accepted and unblocked for the intended next use |
+| `partial` | An explicitly accepted usable subset with named blockers |
+
+Keep scope and blockers in the slice fields, outside status cells. For `partial`,
+`Scope` names usable member IDs. Put the latest check results and limits under
+`Validation`, with no history of findings or repairs; `Next action` states the
+current next step. Acceptance and readiness do not imply implementation tests pass.
 In `problem.md`, put current evidence and assumptions under `Context and evidence`,
 current requirements and success measures under `Goals and success criteria`, and
 included/excluded scope, dependencies, and constraints under `Scope and constraints`.
 
-`discovery.md` uses an area-map table with ID, area, status, and dependencies.
+`discovery.md` uses an `ID | Area | Status | Dependencies` table. Area statuses
+use the same vocabulary plus `excluded`, which requires source or user authority.
+An area's status covers its whole included scope; slice statuses remain separate.
 Within `Area details`, use `### <id>: <name>` for each area, with `Boundary`, `Rules`,
 and `Examples` fields. Keep one authoritative definition per stable ID and put only
 unresolved questions under `Open questions`. State/action tables may clarify the
@@ -151,13 +177,21 @@ require no Cucumber runner. Current gaps and unresolved behavior stay in discove
 current specification review and parser outcomes stay in the run record.
 
 When converting earlier outputs, normalize their current content into these fixed
-sections. Move source mappings onto scenarios, applicable gaps/questions into
+sections. Keep existing run/slice IDs and map stages to the active-work vocabulary.
+Turn prose slice descriptions into current `Scope`, `Members`, and `Dependencies`
+fields and per-slice document tables. Map unvisited work to `pending`, unaccepted
+work to `draft`, and unresolved prerequisites to `blocked`. Map accepted, unblocked
+work to `ready`; use `partial` only for an explicitly accepted usable subset with
+named blockers. Preserve unresolved status meanings for clarification rather than
+inferring acceptance. Apply the same mapping to area statuses, retaining authorized
+exclusions as `excluded`. Do not interpret a syntax check as acceptance.
+Move source mappings onto scenarios, applicable gaps/questions into
 discovery, and the latest validation outcomes into the run record. Incorporate
 answered questions into definitions, then discard resolved-question records,
 superseded content, session logs, snapshots, and conversion narratives. Preserve
 current IDs and acceptance states, and verify the five-file set, section order,
-canonical names, source references, and cases. A retry uses the same run rather
-than allocating another ordinal. Editing/installing skills does not itself rewrite
+canonical names, status values, slice membership, source references, and cases.
+A retry uses the same run rather than allocating another ordinal. Editing/installing skills does not itself rewrite
 existing records; conversions must remain within the user's authorized scope.
 
 ## Install

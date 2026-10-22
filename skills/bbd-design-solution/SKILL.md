@@ -11,34 +11,37 @@ Accept a problem brief, clear requirements, or an existing design; no other skil
 
 ## Establish the design context and record
 
-Read supplied context, existing agreements, and relevant project evidence before proposing a direction.
-Identify the intended outcome, overall scope, current slice, constraints, known behavior, and the decision this design must support.
+Read supplied context, agreements, and project evidence; identify the outcome, scope, slice, constraints, known behavior, and intended design decision before proposing a direction.
 Default to a small coherent slice with explicit dependencies; use the whole scope when small or tightly coupled, and reuse settled context.
 If the problem itself is unclear, return focused framing questions rather than choosing an approach to an assumed need.
-Use the workspace's `.scratch/bdd/<run_id>/` for one feature across sessions and slices.
-On creation, fix `feature_name`, lowercase kebab-case `feature_slug`, and `run_id: <feature_slug>-<NNN>` in `run.md` YAML frontmatter; choose the next per-feature ordinal, padded to at least three digits.
-Resume the identified run by reading `run.md`; ask if the run is ambiguous. Create another only for a different feature or an explicit new-run request.
-Create exactly `run.md`, `problem.md`, `discovery.md`, `behavior.feature`, and `design.md` for a new run, even standalone. On resume, preserve existing contents and initialize only missing files.
-`run.md` adds `stage` and `current_slice` to its YAML frontmatter and uses exactly `## Documents` (file/status), `## Validation` (latest checks and limits), and `## Next action`; update current state after substantive exchanges. Initialize every required section as pending when unvisited, with a Gherkin comment for pending formulation.
-Use `<feature_name>: <document role>` Markdown titles and `Feature: <feature_name>`; keep names stable when solutions change.
-Keep only current content in these five files. Replace changed text and remove obsolete entries and resolved questions; use `None` for empty current sections. Retain no transcripts, revisions, superseded entries, change logs, audit files, or extra files/subfolders.
-Use these exact level-two sections in `problem.md`: `Problem`, `Context and evidence`, `People`, `Goals and success criteria`, `Scope and constraints`, `Open questions`.
-Use these exact level-two sections in `discovery.md`: `Boundary and vocabulary`, `Area map`, `Area details`, `Coverage gaps`, `Open questions`; each area uses `### <id>: <name>` with `Boundary`, `Rules`, and `Examples` fields.
-Use these exact level-two sections in `design.md`: `Context`, `Approach`, `Structure`, `Decisions`, `Open questions`; describe each part's purpose, boundary, interfaces, and dependencies under `Structure`.
-`behavior.feature` contains one named `Feature`, a scope description, `Rule` groups, tagged scenarios with Given/When/Then outcomes, and `Examples` for outlines.
-Keep the active focus and whether this is concept selection or refinement visible; distinguish proposed and agreed current decisions.
-Use stable IDs such as A-001 alternatives, P-001 parts, D-001 decisions, Q-001 questions; keep one current entry per point, updating definitions and references in place and removing obsolete entries.
-Link current needs, constraints, and behavior by ID or source location rather than copying specifications; update relevant sections before the next questions and link the file.
+Use `.scratch/bdd/<run_id>/` for one feature across sessions and slices.
+On creation, fix `feature_name`, lowercase kebab-case `feature_slug`, and `run_id: <feature_slug>-<NNN>` in `run.md` YAML; use the next per-feature ordinal, padded to at least three digits.
+Resume the identified run by reading `run.md`; ask if ambiguous. Create another only for a different feature or an explicit new-run request.
+Create exactly `run.md`, `problem.md`, `discovery.md`, `behavior.feature`, and `design.md`, even standalone; on resume, preserve contents and initialize only missing files/sections.
+Use `<feature_name>: <document role>` Markdown titles and `Feature: <feature_name>`. Use `Pending` for unvisited content, `None` for empty lists, and only a pending comment beneath an unvisited Feature.
+Keep current content only: replace changed definitions and remove obsolete entries and resolved questions. Keep no transcripts, histories, tombstones, or extra files/subfolders; preserve continuing IDs and repair affected references.
+YAML `stage` is `framing`, `concept`, `discovery`, `formulation`, or `design`, identifying active work; `current_slice` names a stable slice ID such as `S-001`.
+`run.md` uses exactly `Documents`, `Validation`, `Next action` as level-two sections, in order; keep latest checks/limits under Validation and the next step under Next action. Update affected records before asking the next round.
+Under Documents, use `### <slice_id>: <name>` per current slice with `Scope`, `Members`, and `Dependencies` fields, then a `File | Status` table for the other four files.
+Members lists explicit file-qualified IDs, such as `discovery.md:R-001`, including in-slice rules/examples; use `Pending` until known. Dependencies lists slice/question references or `None`; preserve other slices when focus changes.
+Document statuses: `pending` = unvisited, `draft` = unaccepted work, `blocked` = an unresolved prerequisite prevents readiness, `ready` = accepted and unblocked, `partial` = explicitly accepted usable subset with named blockers.
+Keep scope/blockers in slice fields; for partial, Scope names usable member IDs. Keep check results under Validation. Area-map statuses use the same values plus `excluded`, requiring source/user authority; area status covers its whole included scope.
+`problem.md` uses exactly these level-two sections, in order: `Problem`, `Context and evidence`, `People`, `Goals and success criteria`, `Scope and constraints`, `Open questions`.
+`discovery.md` uses exactly these level-two sections, in order: `Boundary and vocabulary`, `Area map`, `Area details`, `Coverage gaps`, `Open questions`.
+Area map is an `ID | Area | Status | Dependencies` table; Area details uses `### <id>: <name>` with `Boundary`, `Rules`, `Examples` fields. Qualify cross-document IDs with their filename.
+`design.md` uses exactly these level-two sections, in order: `Context`, `Approach`, `Structure`, `Decisions`, `Open questions`; Structure describes parts' purposes, boundaries, interfaces, and dependencies.
+`behavior.feature` contains one named Feature, current scope description, Rule groups, tagged Given/When/Then scenarios, and Examples for outlines. Cross-check slice membership and references before handoff.
+Use stable IDs such as A-001 alternatives, P-001 parts, D-001 decisions, Q-001 questions; keep one authoritative entry per point.
+Link current needs, constraints, and behavior by qualified ID or source location rather than copying specifications.
 
 ## Choose a solution concept when needed
 
 If a direction is already agreed or fixed by the user, retain it unless relevant evidence challenges its suitability.
 Otherwise compare credible approaches against the same goals and constraints, including reuse, nontechnical change, or no change when viable.
 Recommend one approach and explain its main trade-offs and the consequences of the alternatives; explain when only one is credible.
-Distinguish evidence from assumptions and identify unknowns that could change the choice. Avoid forcing a fixed number of alternatives.
-Use available code and documentation to investigate feasibility; keep unsupported feasibility claims visibly uncertain.
+Investigate feasibility through available code and documentation; distinguish evidence from assumptions and identify uncertainty that could change the choice.
 Ask independent questions together using available feedback interfaces, with stable IDs and the decisions they affect.
-Apply answers only to addressed points; keep proposals pending until the user chooses or accepts them.
+Apply answers only to addressed points; keep choices proposed until the user chooses or accepts them.
 Complete concept selection when its purpose, boundary, alternatives, rationale, and consequential uncertainty are reviewed and the direction is accepted.
 When detailed behavior is unsettled, hand the accepted concept and behavioral questions to discovery; keep dependent design choices provisional.
 
@@ -61,15 +64,12 @@ Changes to the problem, intended outcome, or scope return to framing; use a fram
 Missing or changed consumer-visible behavior returns to behavioral discovery; update its specification after the behavioral decision is agreed.
 Use discovery/formulation skills when available; their absence does not authorize inventing behavior or changing an agreed contract.
 Resolve technical alternatives within design. A cheaper or easier design is not authority to weaken agreed behavior.
-When agreements change, check linked framing, discovery, specifications, and designs; update authorized records or identify required updates, marking affected conclusions pending review.
+When agreements change, check linked framing, discovery, specifications, and designs; update authorized records or identify required updates, marking affected conclusions draft or blocked.
 Explicitly deferred decisions remain unresolved; name the design work they block while continuing independent work.
 
 ## Review and handoff
 
 Review the current slice against its intended decision and shared boundaries: approach, rationale, scope, cooperating parts, and remaining uncertainty.
 Account for all material source needs and constraints at the chosen design depth; identify behavior/design conflicts rather than hiding them as assumptions.
-Mark a concept ready for discovery when the user accepts its direction and no unresolved choice blocks specifying that concept's behavior.
 Mark refinement ready for the accepted slice when its consequential decisions and interactions support the next use; unrelated pending areas do not block it.
-An explicitly accepted partial handoff separates supported decisions from deferred questions and names their effects.
-Keep unaccepted drafts pending. Link the design and its source context, decisions, alternatives, and follow-ups.
-State what the record supports next without starting implementation or claiming behavior is tested; follow any separately authorized next-stage work.
+Link the design and state its next use without starting implementation or claiming behavior is tested; follow any separately authorized next-stage work.
