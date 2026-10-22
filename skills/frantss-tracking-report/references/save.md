@@ -8,7 +8,6 @@ The narrative summarizes outcomes and commitments, including activity without a 
 Coverage states checked sources/window, material access/truncation/history gaps, and partial status. Keep raw observations, transcripts, run/cursor details, and input manifests temporary.
 Generation time is distinct from the activity period. Identify whether pending work is historical or current at `status_cutoff`; unavailable history remains a gap.
 Find by key before creation; identical scope identifies one report with successive revisions, and retries cannot duplicate it.
-Retain prior report revisions and preserve human narrative edits during regeneration; links permit source lookup without promising exact input reconstruction.
-If storage cannot retain a prior revision, resolve replacement before overwriting. Live views supplement saved summaries.
+Regenerate the same report in place, preserving human narrative edits; retain one summary per period/scope without revision archives. Links support source lookup.
 Read back uncertain writes by key; return a verified reference or partial/unsaved payload with missing steps, without repeating saved effects.
 Legacy `evidence` or `manifest` fields require `frantss-update`; ordinary report operations leave affected records unchanged and return unsupported.

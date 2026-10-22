@@ -2,7 +2,7 @@
 
 Settings are one backend-wide singleton, independent of project identity; use the common fields from [logical records](records.md).
 Use `record_type: settings` and `key: settings`; allocate one UUID on explicit initialization and reuse it for updates/retries.
-Read and patch settings through the same logical save/read operations; preserve revisions, unknown fields, and existing values.
+Read and patch settings through the same logical save/read operations; preserve identity, unknown fields, and existing values.
 
 | Field | Logical value |
 | --- | --- |
@@ -16,4 +16,4 @@ Reading defaults does not initialize or save settings. Store only requested chan
 A source's `identity` is a native string or `{account_ref: <alias>}` into `accounts`.
 Resolve references before collection; provider/instance must match the source. Missing aliases or conflicting identities require clarification.
 Retain supplied aliases in configuration and resolved native identity in evidence attribution; never substitute the agent's authenticated identity silently.
-Retired `collection_limits` has no effect. On explicit update, back up then remove that owned field/Collection limits section; preserve singleton identity, revisions, accounts, other settings, and human edits. Verify read-back and fixed-policy selection; journal expected content and retry only missing changes.
+Retired `collection_limits` has no effect. On explicit update, back up then remove that owned field/Collection limits section; preserve singleton identity, accounts, other settings, and human edits. Verify read-back and fixed-policy selection; journal expected content and retry only missing changes.

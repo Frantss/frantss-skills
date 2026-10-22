@@ -8,5 +8,6 @@ Use `<record_type>:<id>` keys unless the supplied schema defines a composite key
 Composite keys are compact JSON strings with fixed element order, independent of storage serialization.
 Relationships use backend record IDs or readable project IDs, e.g. `frantss/frantssuy`; durable references supplement rather than replace IDs.
 Missing project definitions leave labels/scope unresolved without deleting historical records or invalidating their references.
-The caller declares domain fields, relationship types, key construction, and history requirements; preserve unknown fields as data and human edits.
+Store one current record per key; revision numbers detect conflicts, not separate history records.
+The caller declares domain fields, relationship types, and key construction; preserve unknown fields as data and human edits.
 Only the documented schema/version is supported; report incompatible data without rewriting it.

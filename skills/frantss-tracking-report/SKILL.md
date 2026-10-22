@@ -20,7 +20,7 @@ If absent, report that result and offer creation; if inaccessible, report the ac
 1. Resolve project IDs, period, timezone, and report type; read [period rules](references/periods.md) and clarify unresolved scope.
    Use `~/.frantss/projects.yaml`, with read-only `frantss-configure` resolution when available; retain historical missing-definition gaps.
    Explicit selection precedes unique registered remotes, then machine-scoped paths.
-2. Retrieve scoped tasks, relevant saved report summaries, and needed task revisions, including older outstanding commitments; expose access/history gaps.
+2. Retrieve scoped tasks and relevant saved report summaries, including older outstanding commitments; expose access/history gaps.
 3. When fresh context is needed/requested, use `frantss-tracking-collect` when available with the same scope and `capture: none`.
    Honor existing-evidence-only requests using saved summaries, task links, and session findings without source scans; otherwise reuse compatible findings without repeated failed scans or wider scope. Unavailable collection remains a gap.
 4. Read [content rules](references/content.md); compose from evidence, separating facts, reflection, and uncertainty, with supporting links.

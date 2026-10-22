@@ -9,6 +9,6 @@ Optional `due_date`/`due_at` is a firm deadline; `expected_date`/`expected_at` a
 Retain supported precision; unknown dates stay null. Resolve relative wording from occurrence date/timezone; clarify ambiguity and infer no dates from sprint boundaries.
 Aim for 5–15 content lines; title/context/blocker/reason plus headings/blanks must total at most 50, excluding link-only lines and storage metadata.
 Keep outcomes/high-level context and source links; acceptance criteria and implementation details stay at the source. Inline-link prose counts toward the limit.
-Summarize updates rather than append; preserve human edits/revisions. Unsafe condensation leaves a draft/conflict, never silent deletion or over-limit saves.
-Use retained task revisions for saved-state history; recording/modification times do not establish when a source action or state change occurred.
+Summarize updates rather than append; preserve human edits. Unsafe condensation leaves a draft/conflict, never silent deletion or over-limit saves.
+Keep one current task; dated sources or saved reports support past state. Recording/modification times never establish when an action occurred.
 Legacy `evidence`, `history_complete`, or Pending events payloads require migration through `frantss-update`; ordinary task operations leave them unchanged and report the affected record unsupported.

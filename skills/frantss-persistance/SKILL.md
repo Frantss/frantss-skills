@@ -1,6 +1,6 @@
 ---
 name: frantss-persistance
-description: "Store and retrieve prepared Frantss records using caller-supplied schemas. Use for persistence handoffs, record saves and queries, or historical revisions; configuration changes and source scans belong elsewhere."
+description: "Store and retrieve prepared Frantss records using caller-supplied schemas. Use for persistence handoffs, record saves and queries, or current-record lookups; configuration changes and source scans belong elsewhere."
 ---
 
 # Frantss persistance

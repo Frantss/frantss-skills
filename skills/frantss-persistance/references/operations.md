@@ -3,14 +3,14 @@
 ## Save
 
 Find by key before creation; reconcile duplicate matches or changed expected revisions before replacement.
-Preserve prior revisions and human edits. Identical retries create no new record or logical revision.
+Preserve human edits; replace the current record without creating revision archives. Identical retries create no new record or logical revision.
 Related records form one logical operation; the adapter owns ordering, verification, and recoverable partial writes.
 Retain missing payloads/identities so recovery completes the operation rather than repeating its effects.
 
 ## Read, query, and history
 
 Supply type and ID/key for lookup, or schema-defined filters and result limits; ordinary queries exclude archived revisions.
-Historical queries use retained revisions for recorded state; never infer occurrence from recording/modification time or promise a complete transition history.
+Historical state requires saved report summaries or dated sources; unavailable prior revisions return unsupported. Never infer occurrence from modification time.
 Return requested IDs/revisions plus missing history, unsupported legacy shapes/filters, pagination, and inaccessible records.
 Reads do not save defaults or repair records; missing history remains an explicit gap.
 

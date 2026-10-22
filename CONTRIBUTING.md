@@ -24,7 +24,8 @@ progressive disclosure does not increase the budget.
 
 Workflows own their domain schemas; persistence owns the common record envelope
 and storage operations. Ordinary workflows support only current formats. Keep
-record history and interrupted-write recovery. `frantss-update` owns upgrades:
+current records and interrupted-write recovery; keep migration backups outside
+active storage. `frantss-update` owns upgrades:
 compare source commits and migrate configuration/data before recording success.
 When changing a stored format, document the old/new mapping, applicability,
 verification, and retry behavior in the same commit. Preserve those instructions

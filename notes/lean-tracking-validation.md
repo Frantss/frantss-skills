@@ -46,9 +46,9 @@ repository locator and full commit hash.
 Ordinary task/report operations return unsupported for those legacy shapes.
 For an explicit update, the documented mapping preserves T2/R2 IDs and keys,
 resolves both link forms, merges task links, and maps report cutoff/coverage.
-Original revisions and retired notes remain available. Missing evidence blocks
+Original revisions and retired notes remain in verified external backups. Missing evidence blocks
 the affected conversion. A retry reuses the migration journal's identities.
-No step authorizes deleting the old archive or substituting a retrieval date.
+After reference/back-up checks, remove retired notes/history from active storage. Never substitute a retrieval date.
 
 ## Invocation boundaries
 
@@ -58,7 +58,7 @@ No step authorizes deleting the old archive or substituting a retrieval date.
 | Tasks | Track a stated follow-up: task with links, no event note | Create daily report: no task capture or triage |
 | Report | Create daily report: saved summary and links | Collect activity only: no report save |
 | Persistence | Save a prepared task/schema: delegate one logical record | Search project sources: collection owns source access |
-| Obsidian adapter | Save selected-backend task: Tasks note and prior revision if changed | Edit an unrelated note: ordinary editing |
+| Obsidian adapter | Save selected-backend task: One current Tasks note, replaced if changed | Edit an unrelated note: ordinary editing |
 | Configure | Remove a configured source: patch configuration and preserve tasks/reports | Quoted suggestion to remove a source: no configuration write |
 
 ## Structural checks
@@ -79,9 +79,9 @@ rules. This checks instruction decisions, without a live rename or link update.
 | Gildara daily report for 2026-10-20 | `Reports/2026-10-20 - Gildara daily report.md` |
 | Two distinct tasks with the same title/project | Add readable project context and then `(2)` when needed; keep distinct IDs and reuse chosen paths on retries |
 | Task title containing `/`, `:`, `[`, `]`, and `#` | Replace unsafe characters before path creation; retain the original meaningful title in properties |
-| Existing task renamed after its outcome changes | Find by ID/key, archive the previous revision, save the changed title, rename through FileManager, and verify inbound links and lookup |
+| Existing task renamed after its outcome changes | Find by ID/key, save the changed title in place, rename through FileManager, and verify inbound links and lookup |
 | Path-only rename with unchanged content | Preserve ID/key and logical revision; do not manufacture a new task or logical revision |
-| Historical task revision | `History/Tasks/Fix invoice export/Revision 1.md`; locate by ID/revision even after current title changes |
+| Historical task revision | Return unsupported for unavailable prior revisions; use saved reports or dated sources for historical state |
 | Interrupted migration from a UUID path | Resolve the journaled ID/revision at old/new paths; reuse a verified move and conflict on another identity at the target |
 | Internal-link auto-update disabled | Inspect and repair affected references; preserve the user's setting and report unresolved links as partial |
 | Request to edit an unrelated Obsidian note | Do not activate the adapter or apply database naming migrations |
@@ -89,3 +89,24 @@ rules. This checks instruction decisions, without a live rename or link update.
 The rename method and its dependence on user link settings were checked against
 the official [Obsidian API declarations](https://github.com/obsidianmd/obsidian-api/blob/master/obsidian.d.ts).
 Existing vault notes and agent installations remain unchanged by this exercise.
+
+## Current-record cleanup correction
+
+The previous migration retained retired notes/history in the active vault. The
+corrected workflow keeps only current tasks, saved report summaries, settings,
+and requested views. Migration backups and journals remain outside the vault.
+
+Manual walkthrough of the corrected instructions:
+
+- Change T1's state: compare current content, replace one note, increment its
+  revision, and read back. Create no history/event/evidence record.
+- Retry after an uncertain write: compare with the intended result; return the
+  verified current record without a second change or archive.
+- Regenerate R1: update the same period/scope key in place, preserve human edits,
+  and retain its task/source links. Create no prior-report note.
+- Request T1's old revision: return unsupported; use saved reports or dated
+  sources for historical reporting without inventing a prior state.
+- Cleanup legacy notes: verify external backup and retained inbound references,
+  trash only unchanged retired records, and retain tasks/settings/custom notes.
+- Nearby request to edit an unrelated Obsidian note: use ordinary note editing;
+  neither persistence nor its cleanup migration applies.

@@ -17,13 +17,14 @@ These skills are a work in progress. I'm still iterating on them.
 | [frantss-tracking-tasks](skills/frantss-tracking-tasks/SKILL.md) | Capture tasks and manage commitments, dates, and blockers. |
 | [frantss-tracking-collect](skills/frantss-tracking-collect/SKILL.md) | Read project sources for task links and report summaries. |
 | [frantss-tracking-report](skills/frantss-tracking-report/SKILL.md) | Create daily and weekly activity reports. |
-| [frantss-persistance](skills/frantss-persistance/SKILL.md) | Store workflow records and their history through a shared backend. |
+| [frantss-persistance](skills/frantss-persistance/SKILL.md) | Store task links and report summaries through a shared backend. |
 | [frantss-persistance-obsidian](skills/frantss-persistance-obsidian/SKILL.md) | Store records in Obsidian through its official CLI. |
 
 Tracking stores tasks with direct evidence links and saved report summaries,
 including daily reports. Collection findings and scan cursors stay temporary;
 activity without a task survives in a requested report's summary and source links.
-Task/report revisions support recovery, and shared settings remain configuration.
+Each task/report has one current record; revision numbers detect conflicting writes.
+Shared settings remain configuration. Migration backups stay outside the active store.
 Obsidian notes use descriptive filenames, such as `Fix invoice export.md` or
 `2026-10-20 - Gildara daily report.md`; stable IDs remain note properties.
 Existing evidence, run, and event records need an explicit
