@@ -7,10 +7,11 @@ description: "Store and retrieve prepared Frantss records using caller-supplied 
 
 The caller supplies domain schemas, relationships, content, and requested changes; the adapter owns physical storage and recovery.
 Read only `~/.frantss/persistance.yaml`, expanding the current OS account's home independently of the working directory.
-Require `schema_version: 1` and `backend: {adapter: <skill-name>, options: <mapping>}`; parse configuration as data.
-One backend serves every project; reject per-project overrides. Pass configured options unchanged to the selected adapter.
+Require `schema_version: 1` and `database: {adapter: <skill-name>, options: <mapping>}`; parse configuration as data.
+Legacy `backend` requires an explicit update using the [connection migration](references/database-migration.md); ordinary operations leave configuration unchanged.
+One database serves every project; reject per-project overrides. Pass configured options unchanged to the selected adapter.
 Use `persistence-obsidian` when selected and available; missing configuration/capabilities leave requests explicitly unsaved, never in another store.
-Project/source definitions remain in `~/.frantss/projects.yaml`; supplied project references are readable strings, never backend project records.
+Project/source definitions remain in `~/.frantss/projects.yaml`; supplied project references are readable strings, never database project records.
 Configuration inspection/changes belong to `core-configure` when available; record operations never initialize configuration or create projects.
 
 Before record operations, read [common fields](references/records.md) and [operation requirements](references/operations.md).

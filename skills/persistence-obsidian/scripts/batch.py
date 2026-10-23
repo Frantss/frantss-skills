@@ -205,8 +205,8 @@ class Batch:
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--vault-path', required=True, help='vault path from approved backend options')
-    parser.add_argument('--root', required=True, help='root from approved backend options')
+    parser.add_argument('--vault-path', required=True, help='vault path from approved database options')
+    parser.add_argument('--root', required=True, help='root from approved database options')
     args = parser.parse_args()
     results = []
     try:

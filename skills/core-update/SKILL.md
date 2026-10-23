@@ -1,7 +1,7 @@
 ---
 name: core-update
 description: "Update the installed Frantss skill set, check available updates, or resume an upgrade using commit hashes and configuration/database migrations. Editing skill instructions and ordinary configuration changes belong elsewhere."
-compatibility: Requires Git, access to the private Frantss/frantss-skills repository, the original installer, and configured backend tools for data migrations.
+compatibility: Requires Git, access to the private Frantss/frantss-skills repository, the original installer, and configured database tools for data migrations.
 ---
 
 # Update Frantss
@@ -33,8 +33,8 @@ Use content checks and atomic state/configuration writes; preserve unknown field
 
 5. The update authorizes lossless migrations; resolve ambiguous/destructive changes with frantss. Preserve IDs, keys, relationships, dates, unknown fields, and human edits; retain retired history in verified external backups.
    Patch schema-owned fields, structured relationships, and views. Reconcile old/new fields or paths before removal; coordinate incompatible consumers before changing shared data.
-6. Exclude concurrent updates/affected workflow writes. Back up configuration, installation, and affected backend data outside installer caches; verify restorable coverage.
-   Record backups and steps in `pending` before mutation. Empty data needs no migration or backend/project initialization.
+6. Exclude concurrent updates/affected workflow writes. Back up configuration, installation, and affected database data outside installer caches; verify restorable coverage.
+   Record backups and steps in `pending` before mutation. Empty data needs no migration or database/project initialization.
 7. Use source-history schemas and adapter protocols for ordered migrations; back up retired records/history externally before removing them from active storage. Verify current identity lookups; unavailable past revisions remain explicit gaps.
    For Obsidian, use its official CLI and conflict/recovery protocol; unavailable CLI access never permits filesystem writes instead.
    Recheck preconditions, mark started before writing, then read back all affected objects before marking verified.

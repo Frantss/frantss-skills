@@ -13,7 +13,7 @@ Before reads, queries, history lookups, or writes, read [task records](reference
 Use `~/.frantss/projects.yaml` for project scope; request read-only resolution through `core-configure` when available.
 Explicit selection takes precedence over unique registered remotes, then machine-scoped canonical paths; clarify unresolved matches without creating a project.
 Inbox capture/existing-ID operations need no checkout; the current repository never limits cross-project scope.
-Use `persistence-records` when available and the backend in `~/.frantss/persistance.yaml`.
+Use `persistence-records` when available and the database in `~/.frantss/persistance.yaml`.
 Without storage/schema capabilities, return unsaved payloads and missing dependencies; ordinary tracking never initiates setup or another store.
 
 - For explicit capture or discovered owned outcomes, read [capture](references/capture.md).

@@ -62,7 +62,7 @@ has an acceptance condition requiring all three plus verified integration.
   including child parent links, without changing user link-update settings.
 - Unknown/changed content conflicts before replacement; uncertain writes are
   read back by identity and only missing work is retried.
-- Backend settings saves remain unsupported; preferences stay in local YAML.
+- Database settings saves remain unsupported; preferences stay in local YAML.
 - Editing an unrelated note uses ordinary note editing, without activating
   tracking, storage setup, or migration.
 - A general implementation request alone does not create tracking records.
@@ -93,7 +93,7 @@ these cases do not create views or synthetic records in the personal vault.
 | All required queries succeed with no rows | Empty storage is valid; create no synthetic records |
 | Repeat setup with existing defaults and custom views/formulas/columns | Preserve existing definitions, add only missing defaults, and create no duplicates; conflicting default names remain explicit |
 | Authorized upgrade of initialized storage with missing views | Back up and journal additive view changes; preserve task/report records and retry only missing paths/view names |
-| Retrieve a saved report, update a task, inspect the backend, or edit/install the skill | No implicit view creation, repair, record migration, or acknowledgment |
+| Retrieve a saved report, update a task, inspect the database, or edit/install the skill | No implicit view creation, repair, record migration, or acknowledgment |
 
 `make validate`, `git diff --check`, and a temporary `gh skill install` exercise
 packaging and resource portability. Live data verification checks existing

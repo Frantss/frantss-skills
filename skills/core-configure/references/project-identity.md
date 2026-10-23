@@ -1,5 +1,5 @@
 # Project registry and resolution
-Use filesystem tools on `~/.frantss/projects.yaml`: `schema_version: 1` and `projects` keyed by readable IDs; projects may be ongoing or bounded; no backend access is required.
+Use filesystem tools on `~/.frantss/projects.yaml`: `schema_version: 1` and `projects` keyed by readable IDs; projects may be ongoing or bounded; no database access is required.
 Entries require `title` and `area: work|side-projects|personal` (`side-projects`: independent projects; `personal`: real-world matters); optional lists `local_paths` and `sources` read as empty without saving defaults.
 Reject unsupported versions, malformed entries, duplicate keys/IDs, and missing required fields; missing/unreadable configuration is unresolved.
 Resolve explicit ID or exact unique title first; an unresolved explicit selection never falls back to the checkout.
@@ -14,4 +14,4 @@ Only explicit creation registers a new ID: kebab-case owner/repository such as `
 Allow one/two slash-separated `[a-z0-9]+(?:-[a-z0-9]+)*` segments, excluding UUIDs; clarify owner/normalization/host collisions without invented suffixes.
 Explicit creation may initialize a missing version-1 empty registry; default new optional lists to empty. Renames, moves, and retries retain IDs.
 Patch only established associations/sources; preserve human edits/unknown fields. Recheck original content, use exclusive creation/atomic replacement, and read back.
-Stop after a repeated conflict/access failure with unsaved inputs. Backend selection leaves this registry unchanged.
+Stop after a repeated conflict/access failure with unsaved inputs. Database selection leaves this registry unchanged.

@@ -6,7 +6,7 @@ description: "Create, refresh, or retrieve daily and weekly report summaries of 
 # Tracking report
 
 Choose retrieve for a saved snapshot, create for a new report, or regenerate for a requested refresh. Clarify uncertain intent before collection.
-Use `persistence-records` when available and the backend in `~/.frantss/persistance.yaml`; reporting never initializes configuration or creates projects.
+Use `persistence-records` when available and the database in `~/.frantss/persistance.yaml`; reporting never initializes configuration or creates projects.
 Create/refresh delegates source-supported task capture/updates to `tracking-tasks` when available, including completed outcomes. Honor explicit no-task-write requests; reporting never acknowledges tasks or applies speculative planning changes.
 
 ## Retrieve

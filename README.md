@@ -55,7 +55,7 @@ Store and retrieve task records and reports.
 
 | Skill | Purpose |
 | --- | --- |
-| [persistence-records](skills/persistence-records/SKILL.md) | Store task links and report summaries through a shared backend. |
+| [persistence-records](skills/persistence-records/SKILL.md) | Store task links and report summaries through a shared database. |
 | [persistence-obsidian](skills/persistence-obsidian/SKILL.md) | Store records in Obsidian through its official CLI. |
 
 ## Install
@@ -158,12 +158,13 @@ formats. Backups and a pending-step journal support interrupted updates.
 The installer commands above update skill files only; use this workflow for
 configuration and stored-record migrations.
 
-For older installations, see [skill renames](notes/skill-renames.md).
+For older installations, see [skill renames](notes/skill-renames.md) and the
+[database key migration](skills/persistence-records/references/database-migration.md).
 
 ## Setup and automatic use
 
 Use [core-configure](skills/core-configure/SKILL.md) to set up the shared
-backend, projects, and sources. Configuration applies across workspaces.
+database, projects, and sources. Configuration applies across workspaces.
 For Obsidian storage, install both persistence skills and enable the official
 Obsidian CLI with an existing vault. Setup requires Tasks and Reports Bases with
 verified default views; missing or failing views leave setup incomplete.

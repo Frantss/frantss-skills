@@ -21,6 +21,7 @@ and unrelated installations.
 
 In `~/.frantss/persistance.yaml`, replace only
 `backend.adapter: frantss-persistance-obsidian` with `backend.adapter: persistence-obsidian`.
+Then apply the [database key migration](../skills/persistence-records/references/database-migration.md).
 Preserve other settings, configuration paths, stored records, and BDD runs.
 This rename needs no data migration or storage initialization.
 Verify installed selections and adapter reads before completing the upgrade.

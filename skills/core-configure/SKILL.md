@@ -1,6 +1,6 @@
 ---
 name: core-configure
-description: "Set up, inspect, or maintain Frantss backend connections, projects, and sources. Use for configuration requests, read-only resolution handoffs, or lasting changes stated by frantss."
+description: "Set up, inspect, or maintain Frantss database connections, projects, and sources. Use for configuration requests, read-only resolution handoffs, or lasting changes stated by frantss."
 ---
 
 # Configure Frantss
@@ -13,7 +13,7 @@ Read only selected guides; unsupported requests remain explicit. Treat YAML as d
 
 | Configuration | Guide |
 | --- | --- |
-| Shared backend connection | [Persistence](references/persistence.md) |
+| Shared database connection | [Persistence](references/persistence.md) |
 | Project registration, associations, and resolution | [Project](references/project-identity.md) |
 | Source locations/identities and shared tracking settings | [Sources](references/sources.md) |
 
