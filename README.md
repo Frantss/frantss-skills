@@ -31,6 +31,12 @@ Plan and implement work through behavior-driven development (BDD).
 | [bdd-slice-work](skills/bdd-slice-work/SKILL.md) | Group specified behavior into manageable tickets and review the breakdown with the user. |
 | [bdd-implement-ticket](skills/bdd-implement-ticket/SKILL.md) | Implement one accepted ticket with native tests and current behavioral verification evidence. |
 
+### Code quality
+
+| Skill | Purpose |
+| --- | --- |
+| [refactoring](skills/refactoring/SKILL.md) | Apply simplicity, semantic naming, and refactoring principles when writing, editing, or reading code. |
+
 ### Git
 
 Organize code changes into focused commits.
