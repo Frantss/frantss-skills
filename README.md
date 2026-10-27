@@ -47,13 +47,15 @@ Organize code changes into focused commits.
 
 ### Tracking
 
-Track commitments and report activity from project sources.
+Track commitments, report personal activity, and follow team initiatives from
+supplied sources.
 
 | Skill | Purpose |
 | --- | --- |
 | [tracking-tasks](skills/tracking-tasks/SKILL.md) | Capture tasks and manage commitments, dates, and blockers. |
 | [tracking-collect](skills/tracking-collect/SKILL.md) | Read project sources for task links and report summaries. |
 | [tracking-report](skills/tracking-report/SKILL.md) | Create daily and weekly activity reports. |
+| [tracking-team-digest](skills/tracking-team-digest/SKILL.md) | Summarize team initiatives from supplied sources and save a digest by default. |
 
 ### Persistence
 

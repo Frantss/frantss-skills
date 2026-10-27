@@ -1,0 +1,80 @@
+{
+  "description": "Behavioral evaluation inputs, not automated assertions. Use an isolated source/persistence stand-in; never access live services for these cases.",
+  "context": {
+    "now": "2026-10-21T12:00:00-03:00",
+    "timezone": "America/Montevideo",
+    "identities": {"slack": "U-FR", "github": "frantss"}
+  },
+  "sources": {
+    "slack": {
+      "scope": ["slack", "T-EXAMPLE", "C-INITIATIVES"],
+      "url": "https://example.slack.com/archives/C-INITIATIVES",
+      "items": [
+        {"id": "s1", "at": "2026-10-18T14:00:00-03:00", "actor": "U-ANA", "text": "Search migration: propose dual-write during rollout.", "thread": "s1"},
+        {"id": "s2", "at": "2026-10-19T09:00:00-03:00", "actor": "U-ANA", "text": "Search migration: we decided to use dual-write. Release is blocked by the rollback check in SEARCH-12.", "thread": "s1", "links": ["ticket"]},
+        {"id": "s3", "at": "2026-10-19T10:00:00-03:00", "actor": "U-FR", "text": "Payments launch: I reviewed the rollout checklist.", "thread": "s3"},
+        {"id": "s4", "at": "2026-10-19T10:30:00-03:00", "actor": "U-BO", "text": "Payments launch is now approved for all customers.", "thread": "s3"},
+        {"id": "s5", "at": "2026-10-19T11:00:00-03:00", "actor": "U-ANA", "text": "Coffee in the kitchen?", "thread": "s5"},
+        {"id": "s6", "at": "2026-10-19T11:30:00-03:00", "actor": "U-ANA", "text": "@U-FR We are considering retiring the legacy exporter. No decision yet.", "thread": "s6"},
+        {"id": "s7", "at": "2026-10-20T00:00:00-03:00", "actor": "U-ANA", "text": "Search rollout completed.", "thread": "s1"}
+      ]
+    },
+    "github": {
+      "scope": ["github", "github.example.test", "team/search"],
+      "url": "https://github.example.test/team/search",
+      "items": [
+        {"id": "g1", "at": "2026-10-19T09:15:00-03:00", "actor": "ana", "text": "Search migration: merged dual-write support. Rollout still waits for the rollback check.", "links": ["ticket"]}
+      ]
+    },
+    "meeting": {
+      "scope": ["document", "docs.example.test", "meetings/architecture-42"],
+      "url": "https://docs.example.test/meetings/architecture-42",
+      "items": [
+        {"id": "m1", "at": "2026-10-19T13:00:00-03:00", "actor": "Ana", "text": "Architecture meeting notes: Ana proposed queue isolation. A decision remains open. Frantss appears on the invitation; no attendance or contributions are recorded."},
+        {"id": "m2", "at": null, "actor": "Unknown", "text": "An undated appendix says queue isolation shipped."}
+      ]
+    },
+    "unavailable": {
+      "scope": ["jira", "jira.example.test", "PLATFORM"],
+      "url": "https://jira.example.test/projects/PLATFORM",
+      "error": "access denied"
+    },
+    "ticket": {
+      "scope": ["jira", "jira.example.test", "SEARCH-12"],
+      "url": "https://jira.example.test/browse/SEARCH-12",
+      "items": [
+        {"id": "t1", "at": "2026-10-19T08:00:00-03:00", "actor": "Ana", "text": "Rollback verification is pending; it blocks the search rollout. A link to the whole SEARCH project is available, but this ticket describes the relevant dependency."}
+      ]
+    }
+  },
+  "requests": [
+    {
+      "id": "generate",
+      "request": "Summarize team initiatives from sources slack, github, meeting, and unavailable on October 19, 2026, America/Montevideo. Prioritize discussions without me and include major developments regardless of my participation."
+    },
+    {
+      "id": "refresh",
+      "request": "Refresh that saved digest for the same period, selecting sources unavailable, meeting, github, slack, and github. Preserve the human note added to the saved report."
+    },
+    {
+      "id": "no-save",
+      "request": "Generate the October 19 digest again from slack, github, meeting, and unavailable. Do not save it."
+    },
+    {
+      "id": "retrieve",
+      "request": "Retrieve the saved digest by its ID."
+    },
+    {
+      "id": "missing-retrieve",
+      "request": "Retrieve team digest ID 00000000-0000-4000-8000-000000000099."
+    },
+    {
+      "id": "save-failure",
+      "request": "Generate a team digest for October 19 from github. Persistence is currently unavailable."
+    },
+    {
+      "id": "nearby",
+      "request": "Create my daily activity report for October 19 from my configured projects."
+    }
+  ]
+}
