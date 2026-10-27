@@ -166,7 +166,7 @@ formats. Backups and a pending-step journal support interrupted updates.
 The installer commands above update skill files only; use this workflow for
 configuration and stored-record migrations.
 
-For older installations, see [skill renames](notes/skill-renames.md) and the
+For older installations, see the
 [database key migration](skills/persistence-records/references/database-migration.md).
 
 ## Setup and automatic use
@@ -191,8 +191,6 @@ If its instructions leave the context, read it again before your next message.
 
 For Codex, use `~/.codex/AGENTS.md`. For other agents, use their supported
 persistent instructions file or setting.
-
-See [workflow notes](notes/workflow-notes.md) for planning, tracking, and storage behavior.
 
 ## Contributing
 
