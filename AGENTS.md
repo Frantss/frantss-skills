@@ -1,83 +1,60 @@
-# Working in this repo
+# Agents
 
-This file defines agent behavior and repository working rules. Read `README.md`
-for installation and authoring commands. Before changing skills or packaging,
-read `CONTRIBUTING.md` for writing and distribution conventions.
+## Coding standards
 
-## Communication
+1. **YAGNI**: Do not build it until it is needed.
+2. **DIE**: Extract duplicated patterns when a shared implementation simplifies maintenance.
+3. **KISS**: Build the obvious solution first. Optimize when measurements or explicit requirements show a need.
+4. **SOLID**: Check your solutions against the 5 SOLID principles.
+5. **Delete aggressively**: Remove code that you can verify is unused or unnecessary for required behavior. Aim for simplicity.
+6. **The Boy Scout Rule**: Refactor as needed. If the refactor is out of scope, report the opportunity.
+7. **Semantic naming**: Use self-documenting names. Prefer descriptive, unambiguous names over abbreviated names.
+8. When these coding standards conflict, prefer the simplest approach. Justify added complexity in terms of task requirements or project constraints.
 
-Before your first reply, read [core-communicate](plugins/frantss-development/skills/core-communicate/SKILL.md).
-Apply it to every message to the user throughout the session, on every topic.
-If its instructions leave the context, read it again before your next message.
+## Communicating
 
-- Keep replies terse and technical. Skip preambles, praise, and restating the request.
-- Explain reasoning when it helps the user assess a decision or result.
-- Evaluate proposals critically. State relevant strengths, weaknesses, and uncertainty.
-- Use the chat's available feedback interfaces when user input is needed.
+- Use clear English guided by ASD-STE100.
+- Avoid preamble.
+- Start each response with a direct answer to the user's request.
+- Finish each response with a brief recap of the state of **goal**, **done**, and **next**, each on a separate line.
+
+## Autonomy
+
+- Weigh blast radius. After approval, proceed with small, reversible changes. Present a proposal before requesting approval for architectural or cross-cutting changes.
+- Request approval before running any action with side effects.
+- After approval, fix encountered bugs directly related to your work and report the fixes afterwards. Apply the same proposal requirement to architectural or cross-cutting bug fixes.
 
 ## Proposing solutions
 
-- When proposing a solution, give at least two viable options if they exist.
-  Recommend one and state each option's trade-off. If only one is viable, explain why.
-- Briefly explain discarded options when they affect the decision.
-- Cite the files, documentation, or other evidence that supports the proposal.
-- Use high-level code examples, charts, or reports when they clarify the solution.
+- Propose at least two viable approaches.
+- For each viable approach, state how the change can be verified once implemented.
+- For each viable approach, state the **risks** it poses and how to mitigate them.
+- Briefly state rejected approaches.
+- When only one viable approach exists, present that approach without manufacturing alternatives. Still explain verification and risks, and check the approach against our coding standards.
+- Check your proposal against our [coding standards](#coding-standards).
 
-## Before acting
+## Before changing code
 
-- Read the relevant skills, documentation, and code before choosing an approach.
-- Check whether existing skills or tooling already address the request.
-- Ask about missing information or unresolved ambiguity that affects the task.
+- Read the relevant module documentation and code.
+- Identify the intended behavior and constraints that must remain as is.
 
-## Acting and asking
+## Before reporting completion
 
-- Proceed when explicitly asked to act. Make small, reversible local changes
-  within the requested scope without requesting approval for each edit.
-- If your understanding changes the task's scope or intended outcome, ask for direction
-  before executing the changed task.
-- Before external or destructive side effects, ask unless the user already
-  authorized the action. Local edits and validation are part of implementation.
+- If code was written, check it against our [coding standards](#coding-standards).
+- Run checks proportional to the change. Report their results and explain any skipped checks.
+- Collect evidence of the changed behavior and identify any remaining limitations.
+- Apply the [documentation rules](#writing-documentation) to the change.
 
-## Scope
+## Writing documentation
 
-- Keep changes within the request. Report unrelated findings without fixing them.
-- If blocked, complete independent work within scope. Report the blocker and
-  what remains unfinished.
+- Write documentation only when requested or when necessary usage, setup, or maintenance guidance would otherwise be missing or inaccurate.
+- Keep each document focused on one purpose. Include only what the reader needs for that purpose.
+- Prefer updating the relevant existing document. Keep each fact in one place and avoid restating details already clear from code or configuration.
+- Remove obsolete or redundant text in documentation you touch.
 
-## Skills and packaging
+## Git & GitHub
 
-Keep `plugins/<plugin>/skills/<name>/` as the single source for every agent. Each skill must work
-when that folder alone is copied elsewhere. Keep required resources inside it
-as real files and directories, and use relative links. Installers can skip
-symlinks even when their targets are internal. Put agent-specific integrations
-in optional metadata or conditional references, with prerequisites stated
-explicitly.
-
-Author skills directly in their plugin's `skills/` directory. Add only resources
-the workflow actually needs.
-
-Keep plugin and marketplace identities stable. Each plugin owns its skills and
-agent manifests under `plugins/<plugin>/`. Register plugins in the shared
-`.claude-plugin/marketplace.json`. Keep plugin manifests inside their own folders.
-
-The manifests intentionally omit `version`, so Git-backed installs follow
-commit revisions. Each package has Codex and Claude manifests; Codex points to
-its local `./skills/`, while Claude discovers that directory automatically. Introduce
-versioned releases only with a deliberate update policy: `gh skill install`
-prefers the latest release over the default branch.
-
-## Validation
-
-Before finishing changes, run `make validate`. When changing repository tooling,
-also run `make test`. For a skill change, exercise a representative task and a
-nearby task that should not trigger it; structural validation cannot establish
-that its instructions produce useful behavior.
-
-## Git
-
-- Use a conventional-commit prefix and lowercase subject, such as `feat:`,
-  `chore:`, or `docs:`. Keep the subject on one line. Add a body only when needed.
-- Prefer new commits over amending existing commits.
-- Prefer `<type>-<slug>` branch names, such as `docs-update-agent-guidance`.
-- Push, open, or update a pull request only when explicitly instructed.
-  When asked to open one, prefer the `create-pr` skill if available.
+- Use conventional commits (`feat:`, `chore:`, `docs:`, ...).
+- Keep the commit's subject on one line.
+- When committing, give each commit one purpose. Include the implementation, tests, and documentation required for that purpose. Put independent changes in separate commits.
+- When both tools support the operation, prefer `gh` over `git`.
