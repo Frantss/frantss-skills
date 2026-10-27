@@ -1,0 +1,9 @@
+{
+  "name": "frantss-skills",
+  "description": "Communication, development, behavior-driven planning, task tracking, and activity reports.",
+  "author": {
+    "name": "Frantss"
+  },
+  "repository": "https://github.com/Frantss/frantss-skills",
+  "skills": "./skills/"
+}

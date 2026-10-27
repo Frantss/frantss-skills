@@ -4,8 +4,7 @@ Start with one concrete task you repeat across workspaces. Give the skill a name
 that describes that task and a description that helps an agent recognize when
 to use it. The folder and frontmatter name must match.
 
-Create `plugins/<plugin>/skills/<name>/SKILL.md` with `name` and `description`
-frontmatter. Choose the plugin that owns the workflow.
+Create `skills/<name>/SKILL.md` with `name` and `description` frontmatter.
 
 Use functional prefixes: `bdd-` for behavior-led development, `tracking-` for tasks,
 activity and reports, `persistence-` for storage, and `core-` for shared capabilities.
@@ -83,7 +82,7 @@ make validate
 
 This requires GitHub CLI with `gh skill` support and Claude Code CLI.
 It runs `gh skill publish --dry-run` for skill format checks, then
-`claude plugin validate` for the marketplace and each plugin directory.
+`claude plugin validate` for the shared marketplace and root plugin.
 Each command's failure stops validation; warnings permit success.
 These commands validate local files without publishing. Missing-version,
 missing-license, and icon warnings can be expected for these private packages;
@@ -104,33 +103,35 @@ request that should activate the skill, one nearby request that should not,
 and any scripts or resource links used during the task. Testing only the
 authoring folder can hide dependencies that disappear during installation.
 
-For Claude, `claude --plugin-dir plugins/frantss-bdd` loads one local domain
-plugin for a test session. Replace the path with the package under test.
+For Claude, `claude --plugin-dir .` loads the complete local plugin for a test session.
 Avoid installing drafts into your everyday skills directories.
 
 With the Codex CLI installed, `make test` also exercises plugin installation and
 reinstallation through the shared marketplace, using a temporary Codex configuration
-and cache. It verifies that each domain contains only its assigned skills, all
-resources survive installation, and added, edited, and removed skills reach
-refreshed installations.
+and cache. It verifies that all resources survive installation, and added,
+edited, and removed skills reach refreshed installations. The suite also tests
+Claude Code and Copilot installation through the shared marketplace when those
+CLIs are installed. Unavailable CLI integration checks are skipped.
 
-## Domain packaging
+## Plugin packaging
 
-Author each skill directly in `plugins/<plugin>/skills/<name>/`. Each plugin has
-its own Codex and Claude manifests. Codex references `./skills/`; Claude discovers
-that directory automatically. There are no generated plugin copies.
+Author each skill directly in `skills/<name>/`. The repository root is the
+`frantss-skills` plugin. Codex reads `.codex-plugin/plugin.json`, which references
+`./skills/`. Claude Code and Copilot share `.claude-plugin/plugin.json` and
+discover `skills/` automatically. There are no generated plugin copies.
 
-Register plugins in `.claude-plugin/marketplace.json`. Plugin manifests live
-inside each plugin's folder. New skills need no manifest changes. Keep resources
-inside each skill as real files so direct installation remains portable.
+The `frantss` marketplace in `.claude-plugin/marketplace.json` points its single
+`frantss-skills` entry to `./`. Keep both plugin manifests consistent. New skills
+need no manifest changes. Keep resources inside each skill as real files so
+direct installation remains portable.
 
 ## Share changes
 
 Commit completed skills to this private repository; push only when requested.
-Every new skill under `plugins/<plugin>/skills/` is discovered by direct installers.
-Use `gh skill install` to choose individual skills, or install a Codex or Claude
-domain plugin. Keep skill names stable so installations and explicit invocations
-continue to resolve.
+Every new skill under `skills/` is discovered by direct installers.
+Use `gh skill install` to choose individual skills, or install `frantss-skills`
+through Codex, Claude Code, or Copilot. Keep skill names stable so installations
+and explicit invocations continue to resolve.
 
 When changing a trigger, explain which requests should now activate it. When
 changing a workflow, record the representative task you exercised. Tooling

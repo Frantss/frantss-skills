@@ -7,19 +7,9 @@
   },
   "plugins": [
     {
-      "name": "frantss-tracking",
-      "description": "Tasks, activity reports, team digests, configuration, persistence, and skill updates.",
-      "source": "./plugins/frantss-tracking"
-    },
-    {
-      "name": "frantss-bdd",
-      "description": "Plan and implement behavior-driven development workflows.",
-      "source": "./plugins/frantss-bdd"
-    },
-    {
-      "name": "frantss-development",
-      "description": "Communication, refactoring guidance, and atomic Git commits.",
-      "source": "./plugins/frantss-development"
+      "name": "frantss-skills",
+      "description": "Communication, development, behavior-driven planning, task tracking, and activity reports.",
+      "source": "./"
     }
   ]
 }

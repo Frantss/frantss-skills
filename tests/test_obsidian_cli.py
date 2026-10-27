@@ -8,7 +8,7 @@ import tempfile
 import unittest
 
 
-SCRIPT = Path(__file__).resolve().parents[1] / "plugins/frantss-tracking/skills/persistence-obsidian/scripts/read_cli.py"
+SCRIPT = Path(__file__).resolve().parents[1] / "skills/persistence-obsidian/scripts/read_cli.py"
 
 
 @unittest.skipUnless(os.name == "posix", "CLI fixture uses a POSIX executable")

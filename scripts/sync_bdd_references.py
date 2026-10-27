@@ -16,7 +16,7 @@ BDD_SKILLS = (
 )
 CONTRACT = Path("templates/bdd-run-record.md")
 REFERENCE = Path("references/run-record.md")
-SKILLS = Path("plugins/frantss-bdd/skills")
+SKILLS = Path("skills")
 
 
 def participating_skills(root: Path) -> list[Path]:

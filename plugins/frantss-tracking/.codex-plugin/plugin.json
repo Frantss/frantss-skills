@@ -1,9 +1,0 @@
-{
-  "name": "frantss-tracking",
-  "description": "Tasks, activity reports, team digests, configuration, persistence, and skill updates.",
-  "author": {
-    "name": "Frantss"
-  },
-  "repository": "https://github.com/Frantss/frantss-skills",
-  "skills": "./skills/"
-}

@@ -1,9 +1,0 @@
-{
-  "name": "frantss-bdd",
-  "description": "Plan and implement behavior-driven development workflows.",
-  "author": {
-    "name": "Frantss"
-  },
-  "repository": "https://github.com/Frantss/frantss-skills",
-  "skills": "./skills/"
-}

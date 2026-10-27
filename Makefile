@@ -5,10 +5,8 @@ sync-bdd:
 
 validate:
 	gh skill publish --dry-run
+	claude plugin validate .claude-plugin/marketplace.json
 	claude plugin validate .
-	@for plugin in plugins/*; do \
-		claude plugin validate "$$plugin" || exit $$?; \
-	done
 
 test:
 	python3 -m unittest discover -s tests -v
