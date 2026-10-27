@@ -35,7 +35,7 @@ Plan and implement work through behavior-driven development (BDD).
 
 | Skill | Purpose |
 | --- | --- |
-| [refactoring](plugins/frantss-development/skills/refactoring/SKILL.md) | Apply simplicity, semantic naming, and refactoring principles when writing, editing, or reading code. |
+| [refactoring](plugins/frantss-development/skills/refactoring/SKILL.md) | Refactor existing code through scoped changes and behavior-preservation checks, or assess requested refactoring opportunities. |
 
 ### Git
 
