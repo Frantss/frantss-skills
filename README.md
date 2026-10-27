@@ -43,112 +43,71 @@ activity.
 
 ## Install
 
-This repository is private. You need GitHub access and credentials for your
-installer. Choose either a plugin or direct skill installation for each agent
-to avoid duplicates.
+This repository is private. Your installer needs GitHub access. Choose one
+installation method per agent to avoid duplicate skills.
 
-Codex and Claude share the `frantss` marketplace. Choose domain plugins:
+For Codex and Claude, replace `frantss-development` with `frantss-bdd` or
+`frantss-tracking` to choose another domain. Repeat the install command for each
+plugin you want. Each plugin includes all skills listed under its name above.
+Start a new session after installation.
 
-| Plugin | Included skills |
-| --- | --- |
-| `frantss-tracking` | All `tracking-*` and `persistence-*` skills, `core-configure`, and `core-update` |
-| `frantss-bdd` | All six `bdd-*` skills |
-| `frantss-development` | `core-communicate`, `refactoring`, and `atomic-commits` |
+<details>
+<summary>Codex CLI</summary>
+
+Install a [domain plugin](#skills):
+
+```bash
+codex plugin marketplace add Frantss/frantss-skills
+codex plugin add frantss-development@frantss
+```
+
+</details>
+
+<details>
+<summary>Claude Code CLI</summary>
+
+Configure Git access to this repository, then install a [domain plugin](#skills):
+
+```bash
+claude plugin marketplace add Frantss/frantss-skills
+claude plugin install frantss-development@frantss
+```
+
+</details>
 
 <details>
 <summary>GitHub CLI</summary>
 
-Authenticate with `gh auth login`, then run inside your workspace:
+Authenticate with `gh auth login`, then install one skill for your agent:
 
 ```bash
-gh skill install Frantss/frantss-skills --all --agent codex
+gh skill install Frantss/frantss-skills core-communicate --agent codex
 ```
 
-Replace `codex` with your agent, such as `cursor`, `github-copilot`, `gemini-cli`,
-or `claude-code`. Replace `--all` with a skill name to install one skill.
-Add `--scope user` to make skills available across workspaces.
+Replace `core-communicate` with any skill name, or use `--all` for every skill.
+Replace `codex` with your agent, such as `claude-code`, `github-copilot`, or
+`cursor`. Installation defaults to the current project; add `--scope user`
+for all projects.
 
-Update installed skills:
-
-```bash
-gh skill update --all
-```
-
-See the [GitHub CLI install reference](https://cli.github.com/manual/gh_skill_install)
-for supported agents and revision pinning.
+See the [GitHub CLI reference](https://cli.github.com/manual/gh_skill_install).
 
 </details>
 
 <details>
-<summary>npx skills (Vercel)</summary>
+<summary>skills CLI</summary>
 
-Use Node.js 22.20 or later, then run inside your workspace:
-
-```bash
-npx skills add Frantss/frantss-skills
-```
-
-Choose the skills and agents interactively. Add `--agent codex` to select Codex,
-`--skill core-communicate` to select one skill, or `--global` to install across
-workspaces.
-
-List available skills before installing:
+Use Node.js 22.20 or later and Git credentials for this repository:
 
 ```bash
-npx skills add Frantss/frantss-skills --list
+npx skills@latest add Frantss/frantss-skills --skill core-communicate --agent codex
 ```
 
-Update installed skills:
-
-```bash
-npx skills update
-```
+Replace `core-communicate` with any skill name and `codex` with your agent, such
+as `claude-code`, `github-copilot`, or `cursor`. Installation defaults to the
+current project; add `--global` for all projects. Omit `--skill` and `--agent`
+to choose interactively.
 
 See the [skills CLI reference](https://github.com/vercel-labs/skills/blob/main/docs/commands.md).
-
-</details>
-
-<details>
-<summary>Codex plugin</summary>
-
-Use a Codex CLI with `plugin` commands and Git credentials for this repository:
-
-```bash
-codex plugin marketplace add Frantss/frantss-skills
-codex plugin add frantss-tracking@frantss
-```
-
-Replace `frantss-tracking` with another plugin from the table, or repeat the
-command for each domain you want.
-Start a new Codex session after installation. To update a selected plugin:
-
-```bash
-codex plugin marketplace upgrade frantss
-codex plugin add frantss-tracking@frantss
-```
-
-</details>
-
-<details>
-<summary>Claude Code plugin</summary>
-
-Configure SSH access to GitHub, then install:
-
-```bash
-claude plugin marketplace add Frantss/frantss-skills
-claude plugin install frantss-tracking@frantss
-```
-
-Replace `frantss-tracking` with another plugin from the table, or repeat the
-command for each domain you want.
-To update a selected plugin:
-
-```bash
-claude plugin marketplace update frantss
-claude plugin update frantss-tracking@frantss
-```
-
-See the [private marketplace guidance](https://code.claude.com/docs/en/plugins/host-marketplace).
 
 </details>
 
@@ -162,8 +121,8 @@ Checks are read-only; explicit pins and selected skills remain in effect.
 Full installation and shared data commit hashes are tracked separately in
 `~/.frantss/skills-state.yaml`. First use verifies existing provenance and data
 formats. Backups and a pending-step journal support interrupted updates.
-The installer commands above update skill files only; use this workflow for
-configuration and stored-record migrations.
+Installer updates change skill files only; use this workflow for configuration
+and stored-record migrations.
 
 For older installations, see the
 [database key migration](plugins/frantss-tracking/skills/persistence-records/references/database-migration.md).
