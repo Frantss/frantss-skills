@@ -128,20 +128,6 @@ Use [migrate-tracking](skills/migrate-tracking/SKILL.md) to check or migrate
 legacy configuration and records with backups and recovery. Package updates
 do not migrate stored data.
 
-## Communication across sessions
-
-To apply `communicate` automatically, add this text to your agent's persistent
-instructions with the installed skill's path:
-
-```text
-Before your first reply, read <installed-skill-path>.
-Apply it to every message to me throughout the session, on every topic.
-If its instructions leave the context, read it again before your next message.
-```
-
-For Codex, use `~/.codex/AGENTS.md`. For other agents, use their supported
-persistent instructions file or setting.
-
 ## Contributing
 
 Skills live in `skills/<name>/SKILL.md`. Each skill has one source folder, used
