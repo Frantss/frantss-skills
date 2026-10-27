@@ -1,6 +1,6 @@
 # Source access
 
-Each source identifies project-local `id`, `provider`, frantss's `identity`, and required project locations in `scope`. Hosted sources require native `instance`; local Git derives it from repository common directories. Slack/Gmail use their instance without selectors.
+Each source identifies project-local `id`, `provider`, the user's `identity`, and required project locations in `scope`. Hosted sources require native `instance`; local Git derives it from repository common directories. Slack/Gmail use their instance without selectors.
 Resolve `{account_ref: <alias>}` identities through `settings.accounts` in `~/.frantss/projects.yaml`; provider/instance must match. Never substitute authenticated-agent identity.
 Use native IDs/locations independently of tool profiles; empty source lists enable no collection. Unresolved identity or required locations need clarification. Retired search options have no effect; registrations supply where/who, never search behavior.
 Choose tools at runtime; preserve instance, identity, and restrictions across methods. Unavailable access/dependencies leave gaps; continue accessible branches without installing dependencies, broadening scope, or source writes.

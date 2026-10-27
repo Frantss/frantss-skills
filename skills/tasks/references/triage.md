@@ -1,17 +1,17 @@
 # Triage
 
-Read selected tasks/Inbox, relevant sources/findings, and the project registry; frantss's explicit categorization overrides inference. Apply clear decisions automatically; unresolved triage keeps captured tasks in Inbox.
+Read selected tasks/Inbox, relevant sources/findings, and the project registry; the user's explicit categorization overrides inference. Apply clear decisions automatically; unresolved triage keeps captured tasks in Inbox.
 
 | State | Evidence |
 | --- | --- |
 | `inbox` | Captured, with a material triage question remaining |
-| `next` | Committed work underway, explicitly near-term, assigned to frantss in the current sprint, or due/expected today or this week |
+| `next` | Committed work underway, explicitly near-term, assigned to the user in the current sprint, or due/expected today or this week |
 | `later` | Committed work that can wait; default for commitments without near-term evidence |
 | `maybe` | Captured possibility without commitment; dates alone never establish commitment |
-| `done` | frantss's report or evidence satisfies the entire outcome |
+| `done` | The user's report or evidence satisfies the entire outcome |
 
 Keep Next small without quotas/order; approaching/overdue committed work supports Next, while conflicting timing requires clarification.
 Keep blocked commitments in Next/Later with a blocker/next actor when known; clear resolved blockers from evidence.
 Assign named or uniquely source-mapped projects; unresolved fit stays in Inbox. A known project can coexist with Inbox; null project never defines it.
-Retain a brief `triage_reason` with relevant `source_urls`; reevaluate on new evidence/subsequent triage, preserving frantss's choices.
+Retain a brief `triage_reason` with relevant `source_urls`; reevaluate on new evidence/subsequent triage, preserving the user's choices.
 A suggested/missing project name or task acknowledgment is not creation; explicit creation uses `configure` when available, otherwise returns an unsaved request.

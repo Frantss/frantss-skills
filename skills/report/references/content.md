@@ -1,8 +1,8 @@
 # Report content
 
 Organize by selected project or configured area; include contributions without tracked tasks and retain requested scope.
-Report completed outcomes only from reports from frantss or outcome-satisfying evidence with supported occurrence dates.
-Include PR reviews, commits, discussions, investigations, decisions, and recordings; attribute frantss's contribution without claiming others' deliverables.
+Report completed outcomes only from reports from the user or outcome-satisfying evidence with supported occurrence dates.
+Include PR reviews, commits, discussions, investigations, decisions, and recordings; attribute the user's contribution without claiming others' deliverables.
 Deduplicate native source events; summarize related observations under supported outcomes, with relevant source links and no per-event ledger.
 Group subtasks under their highest verified ancestor outcome, retaining child progress/links without duplicating delivery claims. Fetch only needed ancestors; out-of-scope parents are labeled context, and inaccessible ancestors leave grouping/counts uncertain. A merged subtask never establishes parent completion; closed status alone supplies no completion date.
 Show Next/Later commitments and supported promises with due/expected dates and the task-status cutoff.
@@ -13,6 +13,6 @@ Date-only deadlines become overdue the following local day; offset timestamps af
 Show overlapping due/expected signals on one task without double counting; surface blocked deadlines and suggested triage without applying suggested changes.
 Upcoming is a report grouping, not a state. Only explicit acknowledgment adds `reviewed-by-frantss`; reporting never adds it.
 Count top-level outcomes and completed subtasks separately; never sum them as independent deliveries. Standalone tasks count once; for a completed parent with three completed children, show one outcome and three subtasks. Unknown ancestors/history/coverage prevent reliable totals.
-Describe observed work distribution without invented balance targets. Hours require explicit time records/reports from frantss; calendar duration is scheduled time.
+Describe observed work distribution without invented balance targets. Hours require explicit time records/reports from the user; calendar duration is scheduled time.
 Commit/message volume cannot measure effort. Inaccessible/empty sources do not establish inactivity; distinguish gaps from verified absence.
 Include a brief coverage/gaps summary; keep query logs and cursors temporary. Cost is known only when tools supply it.

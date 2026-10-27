@@ -9,6 +9,9 @@ Create `skills/<name>/SKILL.md` with `name` and `description` frontmatter.
 Use descriptive names without category prefixes. Use lowercase letters, digits,
 and single hyphens, up to 64 characters.
 
+Use "the user" in instructions and "you" in replies addressed to the user.
+Preserve repository attribution, storage paths, and technical identifiers.
+
 ## Write the shared instructions
 
 Each skill has a hard limit of 75 total lines across its authored UTF-8 text

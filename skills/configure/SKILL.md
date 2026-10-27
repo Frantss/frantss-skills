@@ -1,9 +1,9 @@
 ---
 name: configure
-description: "Set up, inspect, or maintain Frantss database connections, projects, and sources. Use for configuration requests, read-only resolution handoffs, or lasting changes stated by frantss."
+description: "Set up, inspect, or maintain the user's database connections, projects, and sources. Use for configuration requests, read-only resolution handoffs, or lasting changes stated by the user."
 ---
 
-# Configure Frantss
+# Configure connections, projects, and sources
 
 Choose setup for explicit initialization, inspect for read-only questions/resolution, or [maintenance](references/maintenance.md) for established changes.
 General setup prepares only `~/.frantss` and presents supported configurations; enable only requested entries.

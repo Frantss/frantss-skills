@@ -1,6 +1,6 @@
 # Sources and shared settings
 
-Sources live in project registry entries; use [registry writes](project-identity.md). Each has project-unique stable `id`, `provider`, frantss's native `identity` or `{account_ref: <alias>}`, and hosted `instance` when applicable. Resolve account aliases through local `settings.accounts` below. `scope` holds only required native project locations below; Slack/Gmail need no scope. Authenticated-agent identity never substitutes for frantss.
+Sources live in project registry entries; use [registry writes](project-identity.md). Each has project-unique stable `id`, `provider`, the user's native `identity` or `{account_ref: <alias>}`, and hosted `instance` when applicable. Resolve account aliases through local `settings.accounts` below. `scope` holds only required native project locations below; Slack/Gmail need no scope. Authenticated-agent identity never substitutes for the user.
 
 | Provider | Instance; project locations |
 | --- | --- |

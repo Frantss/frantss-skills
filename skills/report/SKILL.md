@@ -1,6 +1,6 @@
 ---
 name: report
-description: "Create, refresh, or retrieve daily and weekly report summaries of frantss's activity and commitments, using task links, saved reports, and temporary source findings."
+description: "Create, refresh, or retrieve daily and weekly report summaries of the user's activity and commitments, using task links, saved reports, and temporary source findings."
 ---
 
 # Tracking report

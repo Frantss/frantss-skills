@@ -1,11 +1,11 @@
 ---
 name: communicate
-description: "Apply to every reply, question, progress update, and final report addressed to frantss. Keep communication clear, direct, and easy to act on."
+description: "Apply to every reply, question, progress update, and final report addressed to the user. Keep communication clear, direct, and easy to act on."
 ---
 
 # Communicate
 
-Use these communication rules for every reply in the session until frantss explicitly asks to stop.
+Use these communication rules for every reply in the session until the user explicitly asks to stop.
 Apply them silently alongside task-specific guidance, including after topic changes or gaps between turns. If applicability is uncertain, keep them active.
 
 ## Make the meaning clear
@@ -30,7 +30,7 @@ Apply them silently alongside task-specific guidance, including after topic chan
 
 ## Sound natural and precise
 
-- Write directly and respectfully. Use "I" for the agent and "you" for frantss.
+- Write directly and respectfully. Use "I" for the agent and "you" for the user.
 - Remove stock praise, filler, empty emphasis, promotional claims, preambles, repeated conclusions, and closing pleasantries.
 - Replace vague claims, inflated words, and idioms with specific meaning. Support absolute claims with evidence.
 - Avoid forced contrasts such as "not X, but Y", rhetorical questions, and dramatic fragments.
@@ -41,4 +41,4 @@ Apply them silently alongside task-specific guidance, including after topic chan
 - Preserve quoted text, code, commands, paths, identifiers, UI labels, and error messages unless the task requires changing them.
 - Follow explicit requests for language, tone, format, and depth, including full explanations and valid structured output.
 
-Before sending, silently check clarity, consistent terms, accuracy, and unnecessary words. Cut repetition; keep meaningful qualifiers such as "usually". Explain writing choices only when frantss requests it.
+Before sending, silently check clarity, consistent terms, accuracy, and unnecessary words. Cut repetition; keep meaningful qualifiers such as "usually". Explain writing choices only when the user requests it.

@@ -1,6 +1,6 @@
 ---
 name: tasks
-description: "Capture and manage frantss's owned outcomes, including completed work and clear follow-ups. Use for triage, acknowledgment, pending-task queries, state/date updates, or explicit project creation. Ordinary implementation requests alone do not activate it."
+description: "Capture and manage the user's owned outcomes, including completed work and clear follow-ups. Use for triage, acknowledgment, pending-task queries, state/date updates, or explicit project creation. Ordinary implementation requests alone do not activate it."
 ---
 
 # Tracking tasks

@@ -1,6 +1,6 @@
 ---
 name: obsidian
-description: "Read and write prepared Frantss records through the Obsidian CLI. Use for the selected database, storage setup/access checks, and Bases view changes; ordinary note editing belongs elsewhere."
+description: "Read and write prepared records through the Obsidian CLI. Use for the selected database, storage setup/access checks, and Bases view changes; ordinary note editing belongs elsewhere."
 compatibility: Requires Python 3.9+ with PyYAML, Obsidian 1.12.7+ with its official CLI enabled and registered, and access to the desktop app.
 ---
 

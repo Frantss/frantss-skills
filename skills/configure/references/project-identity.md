@@ -10,7 +10,7 @@ Resolve SSH aliases; ambiguous equivalence requires clarification. File/local re
 Path entries are `{machine, path}` with absolute resolved roots and a stable device identifier; unavailable identity requires clarification or skipping path matching.
 Paths never match another machine or ancestors; a shared hostname alone cannot establish device identity.
 A failed lookup never creates a project. Reads are read-only; discovery alone never changes registrations or associations.
-Only explicit creation registers a new ID: kebab-case owner/repository such as `frantss/frantssuy`, or a slug chosen by frantss without a repository.
+Only explicit creation registers a new ID: kebab-case owner/repository such as `example/project`, or a slug chosen by the user without a repository.
 Allow one/two slash-separated `[a-z0-9]+(?:-[a-z0-9]+)*` segments, excluding UUIDs; clarify owner/normalization/host collisions without invented suffixes.
 Explicit creation may initialize a missing version-1 empty registry; default new optional lists to empty. Renames, moves, and retries retain IDs.
 Patch only established associations/sources; preserve human edits/unknown fields. Recheck original content, use exclusive creation/atomic replacement, and read back.
