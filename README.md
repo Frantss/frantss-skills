@@ -10,15 +10,23 @@ These skills are a work in progress.
 
 The `frantss-skills` plugin includes all skills below.
 
+### Development
+
 - [communicate](skills/communicate/SKILL.md): Write clear, direct replies throughout the session.
 - [refactoring](skills/refactoring/SKILL.md): Refactor existing code through scoped changes and behavior-preservation checks, or assess requested refactoring opportunities.
 - [atomic-commits](skills/atomic-commits/SKILL.md): Group all pending changes or a selected subset into small, cohesive Git commits.
+
+### BDD
+
 - [frame-problem](skills/frame-problem/SKILL.md): Establish needs, outcomes, evidence, scope, and constraints in a live problem brief.
 - [design-solution](skills/design-solution/SKILL.md): Select a solution concept and refine its design against agreed needs and behavior.
 - [discover-behavior](skills/discover-behavior/SKILL.md): Discover expected behavior through examples and per-area review in a live Markdown record.
 - [formulate-behavior](skills/formulate-behavior/SKILL.md): Turn agreed behavior into Gherkin specifications for existing test tools.
 - [slice-work](skills/slice-work/SKILL.md): Group specified behavior into manageable tickets and review the breakdown with the user.
 - [implement-ticket](skills/implement-ticket/SKILL.md): Implement one accepted ticket with native tests and current behavioral verification evidence.
+
+### Tracking
+
 - [configure](skills/configure/SKILL.md): Set up and maintain connections, projects, and sources.
 - [update](skills/update/SKILL.md): Update skills by commit hash and migrate configuration and stored records.
 - [tasks](skills/tasks/SKILL.md): Capture tasks and manage commitments, dates, and blockers.
@@ -105,70 +113,6 @@ See the [skills CLI reference](https://github.com/vercel-labs/skills/blob/main/d
 
 </details>
 
-<details>
-<summary>Replace the old domain plugins</summary>
-
-If you installed `frantss-development`, `frantss-bdd`, or `frantss-tracking`,
-refresh the marketplace and install `frantss-skills` with your CLI:
-
-```bash
-codex plugin marketplace upgrade frantss
-codex plugin add frantss-skills@frantss
-```
-
-```bash
-claude plugin marketplace update frantss
-claude plugin install frantss-skills@frantss
-```
-
-```bash
-copilot plugin marketplace update frantss
-copilot plugin install frantss-skills@frantss
-```
-
-Check that all 17 skills load from `frantss-skills`. Then remove each old plugin
-you installed, using your CLI below. Replace `frantss-development` with each old
-plugin name as needed. For Claude, match the original installation scope with
-`--scope user`, `--scope project`, or `--scope local`.
-
-```bash
-codex plugin remove frantss-development@frantss
-```
-
-```bash
-claude plugin uninstall frantss-development@frantss
-```
-
-```bash
-copilot plugin uninstall frantss-development
-```
-
-Restart your agent after removal to load the skills once. Shared configuration
-and stored records do not need migration. Direct skill installations do not
-need to switch to the plugin; use `update` to follow the moved source paths.
-
-</details>
-
-<details>
-<summary>Update installations with category-prefixed names</summary>
-
-Skill names and folders now omit `core-`, `bdd-`, `tracking-`, and `persistence-`.
-For example, `core-communicate` becomes `communicate`, `bdd-frame-problem` becomes
-`frame-problem`, `tracking-tasks` becomes `tasks`, and `persistence-obsidian`
-becomes `obsidian`. `atomic-commits` and `refactoring` keep their names.
-
-Ask your installed `core-update` skill, now named `update`, to apply the rename
-through your original installer. Preserve the agent, scope, selected skills,
-explicit revision pins, and local edits. Update explicit skill names and paths
-in persistent instructions and agent settings. Remove old owned skill folders
-only after their replacements verify, then start a new session.
-
-The plugin remains `frantss-skills@frantss`. Shared configuration and stored
-records keep their formats; `database.adapter: persistence-obsidian` remains
-the Obsidian adapter ID, independently of the skill's new name.
-
-</details>
-
 ## Update
 
 Ask `update` to update your Frantss skill set or check for updates.
@@ -185,19 +129,22 @@ and stored-record migrations.
 For older installations, see the
 [database key migration](skills/records/references/database-migration.md).
 
-## Setup and automatic use
+## Tracking setup and automatic use
 
-Use [configure](skills/configure/SKILL.md) to set up the shared
-database, projects, and sources. Configuration applies across workspaces.
+The tracking skills use a shared database, projects, and sources. Use
+[configure](skills/configure/SKILL.md) to set them up across workspaces.
 For Obsidian storage, install `records` and `obsidian` and enable the official
 Obsidian CLI with an existing vault. Setup requires Tasks and Reports Bases with
 verified default views; missing or failing views leave setup incomplete.
 
-For automatic use across sessions, reference `communicate`,
-`tasks`, and `configure` in your agent's persistent
-instructions. Skill discovery alone does not ensure automatic use.
+For automatic tracking across sessions, reference `tasks` and `configure` in
+your agent's persistent instructions. Skill discovery alone does not ensure
+automatic use.
 
-For communication, add this text with the installed skill's path:
+## Communication across sessions
+
+To apply `communicate` automatically, add this text to your agent's persistent
+instructions with the installed skill's path:
 
 ```text
 Before your first reply, read <installed-skill-path>.
