@@ -44,6 +44,7 @@ installation method per agent to avoid duplicate skills.
 
 Codex, Claude Code, and Copilot install the complete `frantss-skills` plugin from
 the shared `frantss` marketplace. Start a new session after installation.
+Use your plugin manager or original installer to update skills.
 
 <details>
 <summary>Codex CLI</summary>
@@ -114,31 +115,18 @@ See the [skills CLI reference](https://github.com/vercel-labs/skills/blob/main/d
 
 </details>
 
-## Updates and tracking migrations
+## Tracking
 
-Use your plugin manager or original installer to update skills. Package updates
-do not migrate tracking configuration or stored records.
+Use [configure](skills/configure/SKILL.md) to set up shared storage, projects,
+and sources across workspaces. Obsidian storage requires `records`, `obsidian`,
+and the official Obsidian CLI with an existing vault.
 
-Ask `migrate-tracking` to check compatibility, migrate legacy tracking formats,
-or resume an interrupted migration. Checks are read-only. Migrations preserve
-identities and human edits, with verified backups and a recovery journal in
-`~/.frantss/skills-state.yaml`. Existing installation entries remain unchanged;
-the skill manages only migration state.
+For automatic tracking, reference `tasks` and `configure` in your agent's
+persistent instructions.
 
-For older connection configurations, see the
-[database key migration](skills/migrate-tracking/references/database-migration.md).
-
-## Tracking setup and automatic use
-
-The tracking skills use a shared database, projects, and sources. Use
-[configure](skills/configure/SKILL.md) to set them up across workspaces.
-For Obsidian storage, install `records` and `obsidian` and enable the official
-Obsidian CLI with an existing vault. Setup requires Tasks and Reports Bases with
-verified default views; missing or failing views leave setup incomplete.
-
-For automatic tracking across sessions, reference `tasks` and `configure` in
-your agent's persistent instructions. Skill discovery alone does not ensure
-automatic use.
+Use [migrate-tracking](skills/migrate-tracking/SKILL.md) to check or migrate
+legacy configuration and records with backups and recovery. Package updates
+do not migrate stored data.
 
 ## Communication across sessions
 
