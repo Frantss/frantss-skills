@@ -38,7 +38,7 @@ class BddReferencesTests(unittest.TestCase):
                 self.assertEqual(reference.read_bytes(), (self.root / CONTRACT).read_bytes())
 
     def test_template_changes_fail_validation_until_regenerated(self):
-        skill = self.add_skill("bdd-design-solution")
+        skill = self.add_skill("design-solution")
         sync_references(self.root)
         entrypoint = (skill / "SKILL.md").read_bytes()
         reference = skill / REFERENCE
@@ -52,7 +52,7 @@ class BddReferencesTests(unittest.TestCase):
         self.assertEqual((skill / "SKILL.md").read_bytes(), entrypoint)
 
     def test_missing_reference_and_template_are_reported(self):
-        self.add_skill("bdd-formulate-behavior")
+        self.add_skill("formulate-behavior")
         self.assertEqual(len(reference_errors(self.root)), 1)
         (self.root / CONTRACT).unlink()
         self.assertIn("missing shared BDD run contract", reference_errors(self.root)[0])
@@ -65,7 +65,7 @@ class BddReferencesTests(unittest.TestCase):
         self.assertEqual(reference_errors(self.source), [])
 
     def test_sync_is_idempotent_and_rejects_symlink_destinations(self):
-        skill = self.add_skill("bdd-frame-problem")
+        skill = self.add_skill("frame-problem")
         sync_references(self.root)
         reference = skill / REFERENCE
         modified = reference.stat().st_mtime_ns

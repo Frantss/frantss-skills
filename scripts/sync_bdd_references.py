@@ -7,12 +7,12 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 BDD_SKILLS = (
-    "bdd-frame-problem",
-    "bdd-design-solution",
-    "bdd-discover-behavior",
-    "bdd-formulate-behavior",
-    "bdd-slice-work",
-    "bdd-implement-ticket",
+    "frame-problem",
+    "design-solution",
+    "discover-behavior",
+    "formulate-behavior",
+    "slice-work",
+    "implement-ticket",
 )
 CONTRACT = Path("templates/bdd-run-record.md")
 REFERENCE = Path("references/run-record.md")

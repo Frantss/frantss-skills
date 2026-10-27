@@ -58,17 +58,17 @@ class PluginTests(unittest.TestCase):
     def test_github_cli_installs_one_skill_with_bundled_resources(self):
         with tempfile.TemporaryDirectory() as destination:
             result = subprocess.run(
-                ['gh', 'skill', 'install', str(self.root), 'bdd-design-solution',
+                ['gh', 'skill', 'install', str(self.root), 'design-solution',
                  '--from-local', '--dir', destination],
                 cwd=self.root, capture_output=True, text=True, timeout=30)
             self.assertEqual(result.returncode, 0, result.stderr)
-            self.assertEqual({p.name for p in Path(destination).iterdir()}, {'bdd-design-solution'})
-            reference = Path('bdd-design-solution/references/run-record.md')
+            self.assertEqual({p.name for p in Path(destination).iterdir()}, {'design-solution'})
+            reference = Path('design-solution/references/run-record.md')
             self.assertEqual((Path(destination) / reference).read_bytes(),
                              (self.root / 'skills' / reference).read_bytes())
 
     @unittest.skipUnless(shutil.which('codex'), 'Codex CLI is needed for plugin installation')
-    def test_codex_installs_all_skills_and_refreshes_without_sync(self):
+    def test_codex_refreshes_skill_changes_and_renames(self):
         with tempfile.TemporaryDirectory() as runtime:
             env = {**os.environ, 'CODEX_HOME': runtime}
 
@@ -78,22 +78,32 @@ class PluginTests(unittest.TestCase):
                 self.assertEqual(result.returncode, 0, result.stderr)
                 return json.loads(result.stdout)
 
+            skills = self.root / 'skills'
+            legacy_skill = skills / 'core-communicate'
+            (skills / 'communicate').rename(legacy_skill)
+            entrypoint = legacy_skill / 'SKILL.md'
+            entrypoint.write_text(entrypoint.read_text().replace('name: communicate\n',
+                                                               'name: core-communicate\n'))
             codex('marketplace', 'add', str(self.root))
             installed = Path(codex('add', 'frantss-skills@frantss')['installedPath'])
             self.assertTrue(installed.resolve().is_relative_to(Path(runtime).resolve()))
             manifest = json.loads((installed / '.codex-plugin/plugin.json').read_text())
             self.assertEqual(manifest['skills'], './skills/')
             self.assert_installed_skills(installed)
-            skills = self.root / 'skills'
-            (skills / 'tracking-added').mkdir()
-            (skills / 'tracking-added/SKILL.md').write_text('---\nname: tracking-added\ndescription: Added.\n---\nTrack.\n')
-            (skills / 'tracking-tasks/SKILL.md').write_text('Updated instruction.\n')
-            shutil.rmtree(skills / 'tracking-collect')
+            legacy_skill.rename(skills / 'communicate')
+            entrypoint = skills / 'communicate/SKILL.md'
+            entrypoint.write_text(entrypoint.read_text().replace('name: core-communicate\n',
+                                                               'name: communicate\n'))
+            (skills / 'added').mkdir()
+            (skills / 'added/SKILL.md').write_text('---\nname: added\ndescription: Added.\n---\nTrack.\n')
+            (skills / 'tasks/SKILL.md').write_text('Updated instruction.\n')
+            shutil.rmtree(skills / 'collect')
             installed = Path(codex('add', 'frantss-skills@frantss')['installedPath'])
             self.assert_installed_skills(installed)
-            self.assertTrue((installed / 'skills/tracking-added/SKILL.md').is_file())
-            self.assertEqual((installed / 'skills/tracking-tasks/SKILL.md').read_text(), 'Updated instruction.\n')
-            self.assertFalse((installed / 'skills/tracking-collect').exists())
+            self.assertTrue((installed / 'skills/added/SKILL.md').is_file())
+            self.assertEqual((installed / 'skills/tasks/SKILL.md').read_text(), 'Updated instruction.\n')
+            self.assertFalse((installed / 'skills/collect').exists())
+            self.assertFalse((installed / 'skills/core-communicate').exists())
 
     @unittest.skipUnless(shutil.which('claude'), 'Claude Code CLI is needed for plugin installation')
     def test_claude_installs_all_skills_from_shared_marketplace(self):

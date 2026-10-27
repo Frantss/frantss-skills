@@ -8,7 +8,7 @@ import tempfile
 import unittest
 
 
-SCRIPT = Path(__file__).resolve().parents[1] / 'skills/persistence-obsidian/scripts/batch.py'
+SCRIPT = Path(__file__).resolve().parents[1] / 'skills/obsidian/scripts/batch.py'
 NODE = shutil.which('node')
 try:
     import yaml

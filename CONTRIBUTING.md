@@ -6,15 +6,14 @@ to use it. The folder and frontmatter name must match.
 
 Create `skills/<name>/SKILL.md` with `name` and `description` frontmatter.
 
-Use functional prefixes: `bdd-` for behavior-led development, `tracking-` for tasks,
-activity and reports, `persistence-` for storage, and `core-` for shared capabilities.
-Use lowercase letters, digits, and single hyphens, up to 64 characters.
+Use descriptive names without category prefixes. Use lowercase letters, digits,
+and single hyphens, up to 64 characters.
 
 ## Write the shared instructions
 
 Each skill has a hard limit of 75 total lines across its authored UTF-8 text
-files. `atomic-commits`, `core-communicate`, and `core-update` each have a 50-line limit;
-`persistence-records` has a 100-line limit; `persistence-obsidian` has a 350-line
+files. `atomic-commits`, `communicate`, and `update` each have a 50-line limit;
+`records` has a 100-line limit; `obsidian` has a 350-line
 limit to include its executable batch runner.
 Count frontmatter, blank lines, references, helper code, and metadata.
 Binary assets are excluded. Review the total during skill edits;
@@ -23,7 +22,7 @@ progressive disclosure does not increase the budget.
 Workflows own their domain schemas; persistence owns the common record envelope
 and storage operations. Ordinary workflows support only current formats. Keep
 current records and interrupted-write recovery; keep migration backups outside
-active storage. `core-update` owns upgrades:
+active storage. `update` owns upgrades:
 compare source commits and migrate configuration/data before recording success.
 When changing a stored format, document the old/new mapping, applicability,
 verification, and retry behavior in the same commit. Preserve those instructions
@@ -95,7 +94,7 @@ Try installation into a temporary directory before sharing a new skill:
 
 ```bash
 preview_dir=$(mktemp -d)
-gh skill install . tracking-my-skill --from-local --dir "$preview_dir"
+gh skill install . my-skill --from-local --dir "$preview_dir"
 ```
 
 Inspect that copied folder and exercise it with the intended agents. Check one
