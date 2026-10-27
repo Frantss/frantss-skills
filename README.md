@@ -105,10 +105,22 @@ for supported agents and revision pinning.
 </details>
 
 <details>
-<summary>Vercel skills CLI</summary>
+<summary>npx skills (Vercel)</summary>
+
+Use Node.js 22.20 or later, then run inside your workspace:
 
 ```bash
 npx skills add Frantss/frantss-skills
+```
+
+Choose the skills and agents interactively. Add `--agent codex` to select Codex,
+`--skill core-communicate` to select one skill, or `--global` to install across
+workspaces.
+
+List available skills before installing:
+
+```bash
+npx skills add Frantss/frantss-skills --list
 ```
 
 Update installed skills:
@@ -117,7 +129,7 @@ Update installed skills:
 npx skills update
 ```
 
-See the [skills CLI reference](https://github.com/vercel-labs/skills).
+See the [skills CLI reference](https://github.com/vercel-labs/skills/blob/main/docs/commands.md).
 
 </details>
 
