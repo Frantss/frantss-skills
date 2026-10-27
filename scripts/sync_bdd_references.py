@@ -16,11 +16,12 @@ BDD_SKILLS = (
 )
 CONTRACT = Path("templates/bdd-run-record.md")
 REFERENCE = Path("references/run-record.md")
+SKILLS = Path("plugins/frantss-bdd/skills")
 
 
 def participating_skills(root: Path) -> list[Path]:
-    return [root / "skills" / name for name in BDD_SKILLS
-            if (root / "skills" / name / "SKILL.md").is_file()]
+    return [root / SKILLS / name for name in BDD_SKILLS
+            if (root / SKILLS / name / "SKILL.md").is_file()]
 
 
 def reference_errors(root: Path) -> list[str]:

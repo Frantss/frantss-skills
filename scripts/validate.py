@@ -26,42 +26,70 @@ LINK = re.compile(r'!?\[[^\]\n]*\]\(\s*(<[^>\n]+>|[^\s)]+)(?:\s+[\'\"][^)\n]*[\'
 FENCE = re.compile(r"^```[^\n]*\n.*?^```\s*$", re.MULTILINE | re.DOTALL)
 
 
-def packaging_errors(root: Path) -> list[str]:
+def plugin_directories(root: Path) -> list[Path]:
+    return sorted((root / "plugins").iterdir())
+
+
+def manifest_errors(root: Path) -> list[str]:
     errors = []
     try:
-        plugin = json.loads((root / ".claude-plugin/plugin.json").read_text())
-        codex = json.loads((root / ".codex-plugin/plugin.json").read_text())
         market = json.loads((root / ".claude-plugin/marketplace.json").read_text())
         entries = market.get("plugins", [])
-        if len(entries) != 1 or entries[0].get("name") != plugin.get("name"):
-            errors.append("marketplace must contain the root plugin with the same name")
+        if market.get("name") != "frantss":
+            errors.append("marketplace name must remain frantss")
+        plugins = plugin_directories(root)
+        expected = {path.name: f"./plugins/{path.name}" for path in plugins}
+        if len(entries) != len(expected) or {entry.get("name"): entry.get("source") for entry in entries} != expected:
+            errors.append("marketplace must list each plugin with the same name and source")
+        for agent in ("claude", "codex"):
+            if (root / f".{agent}-plugin/plugin.json").exists():
+                errors.append("plugin manifests must live under plugins/")
         for entry in entries:
-            if entry.get("source") != "./":
-                errors.append("marketplace plugin source must be ./")
-        for manifest in [plugin, *entries]:
-            if "version" in manifest:
+            if "version" in entry:
                 errors.append("omit plugin versions to track Git revisions")
-            if "skills" in manifest:
-                errors.append("use automatic skills/ discovery instead of explicit skill lists")
-        if codex.get("name") != plugin.get("name"):
-            errors.append("Codex and Claude plugin names must match")
-        if codex.get("skills") != "./skills/":
-            errors.append("Codex skills must reference the shared ./skills/ directory")
-        if "version" in codex:
-            errors.append("omit Codex plugin versions to track Git revisions")
+            if "skills" in entry:
+                errors.append("declare skills in plugin manifests instead of marketplace entries")
+        for directory in plugins:
+            name = directory.name
+            for agent in ("claude", "codex"):
+                path = directory / f".{agent}-plugin/plugin.json"
+                manifest = json.loads(path.read_text())
+                if manifest.get("name") != name:
+                    errors.append(f"{path.relative_to(root)}: plugin names must match {name}")
+                if "version" in manifest:
+                    errors.append(f"{path.relative_to(root)}: omit {agent.title()} plugin versions to track Git revisions")
+                expected_skills = "./skills/" if agent == "codex" else None
+                if manifest.get("skills") != expected_skills:
+                    errors.append(f"{path.relative_to(root)}: skills must reference {expected_skills!r}")
     except (OSError, ValueError, TypeError, AttributeError) as error:
         errors.append(f"invalid plugin manifests: {error}")
+    return errors
 
-    skills = root / "skills"
-    if not skills.is_dir() or skills.is_symlink():
-        return errors + ["skills/ must be a real directory"]
-    for skill in sorted(skills.iterdir()):
+
+def skill_errors(root: Path) -> list[str]:
+    errors = []
+
+    plugins = root / "plugins"
+    if not plugins.is_dir() or plugins.is_symlink():
+        return ["plugins/ must be a real directory"]
+    skill_roots = []
+    for plugin in plugin_directories(root):
+        skills = plugin / "skills"
+        if plugin.is_symlink() or not plugin.is_dir() or skills.is_symlink() or not skills.is_dir():
+            errors.append(f"{plugin.relative_to(root)}: expected a real plugin with a skills/ directory")
+        else:
+            skill_roots.append(skills)
+    names = set()
+    for skill in sorted(path for skills in skill_roots for path in skills.iterdir()):
         if skill.name == ".gitkeep":
             continue
         label = skill.relative_to(root)
         if skill.is_symlink() or not skill.is_dir():
             errors.append(f"{label}: expected a real skill directory")
             continue
+        if skill.name in names:
+            errors.append(f"{label}: duplicate skill name across plugins")
+        names.add(skill.name)
         if not (skill / "SKILL.md").is_file():
             errors.append(f"{label}: missing SKILL.md")
         line_count = 0
@@ -102,9 +130,13 @@ def packaging_errors(root: Path) -> list[str]:
 
     for directory, children, files in os.walk(root):
         children[:] = [name for name in children if name not in {".git", ".venv", "node_modules"}]
-        if "SKILL.md" in files and Path(directory).parent != skills:
-            errors.append(f"{Path(directory).relative_to(root)}/SKILL.md: skills must live directly under skills/")
+        if "SKILL.md" in files and Path(directory).parent not in skill_roots:
+            errors.append(f"{Path(directory).relative_to(root)}/SKILL.md: skills must live under plugins/<plugin>/skills/")
     return errors + reference_errors(root)
+
+
+def packaging_errors(root: Path) -> list[str]:
+    return manifest_errors(root) + skill_errors(root)
 
 
 def main() -> None:
@@ -118,11 +150,13 @@ def main() -> None:
     if args.packaging_only:
         return
     commands = []
-    if any((ROOT / "skills").glob("*/SKILL.md")):
+    if any(ROOT.glob("plugins/*/skills/*/SKILL.md")):
         commands.append(["gh", "skill", "publish", "--dry-run"])
     else:
         print("No skills yet; skipping skill format validation.", flush=True)
     commands.append(["claude", "plugin", "validate", "."])
+    commands.extend(["claude", "plugin", "validate", str(path.relative_to(ROOT))]
+                    for path in plugin_directories(ROOT))
     for command in commands:
         if not shutil.which(command[0]):
             parser.exit(1, f"error: install {command[0]} to run {' '.join(command)}\n")

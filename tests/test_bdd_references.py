@@ -5,8 +5,8 @@ import tempfile
 import unittest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
-from sync_bdd_references import BDD_SKILLS, CONTRACT, REFERENCE, reference_errors, sync_references
-from validate import packaging_errors
+from sync_bdd_references import BDD_SKILLS, CONTRACT, REFERENCE, SKILLS, reference_errors, sync_references
+from validate import skill_errors
 
 
 class BddReferencesTests(unittest.TestCase):
@@ -15,27 +15,25 @@ class BddReferencesTests(unittest.TestCase):
         self.addCleanup(self.temporary.cleanup)
         self.root = Path(self.temporary.name)
         self.source = Path(__file__).resolve().parents[1]
-        for folder in (".claude-plugin", ".codex-plugin"):
-            shutil.copytree(self.source / folder, self.root / folder)
-        (self.root / "skills").mkdir()
+        (self.root / SKILLS).mkdir(parents=True)
         (self.root / CONTRACT).parent.mkdir()
         shutil.copyfile(self.source / CONTRACT, self.root / CONTRACT)
 
     def add_skill(self, name):
-        target = self.root / "skills" / name
+        target = self.root / SKILLS / name
         target.mkdir()
-        shutil.copyfile(self.source / "skills" / name / "SKILL.md", target / "SKILL.md")
+        shutil.copyfile(self.source / SKILLS / name / "SKILL.md", target / "SKILL.md")
         return target
 
     def test_bundled_skills_are_independent_real_files(self):
         for name in BDD_SKILLS:
             self.add_skill(name)
         sync_references(self.root)
-        self.assertEqual(packaging_errors(self.root), [])
+        self.assertEqual(skill_errors(self.root), [])
         for name in BDD_SKILLS:
             with self.subTest(name=name), tempfile.TemporaryDirectory() as isolated:
                 skill = Path(isolated) / name
-                shutil.copytree(self.root / "skills" / name, skill)
+                shutil.copytree(self.root / SKILLS / name, skill)
                 reference = skill / REFERENCE
                 self.assertFalse(reference.is_symlink())
                 self.assertEqual(reference.read_bytes(), (self.root / CONTRACT).read_bytes())
@@ -48,7 +46,7 @@ class BddReferencesTests(unittest.TestCase):
         original_reference = reference.read_bytes()
         with (self.root / CONTRACT).open("a") as output:
             output.write("\nPreserve accepted external source references.\n")
-        self.assertTrue(any("stale or missing" in error for error in packaging_errors(self.root)))
+        self.assertTrue(any("stale or missing" in error for error in skill_errors(self.root)))
         self.assertEqual(reference.read_bytes(), original_reference)
         sync_references(self.root)
         self.assertEqual(reference_errors(self.root), [])

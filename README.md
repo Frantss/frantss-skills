@@ -14,9 +14,9 @@ Manage communication, shared configuration, and skill updates.
 
 | Skill | Purpose |
 | --- | --- |
-| [core-communicate](skills/core-communicate/SKILL.md) | Write clear, direct replies throughout the session. |
-| [core-configure](skills/core-configure/SKILL.md) | Set up and maintain connections, projects, and sources. |
-| [core-update](skills/core-update/SKILL.md) | Update skills by commit hash and migrate configuration and stored records. |
+| [core-communicate](plugins/frantss-development/skills/core-communicate/SKILL.md) | Write clear, direct replies throughout the session. |
+| [core-configure](plugins/frantss-tracking/skills/core-configure/SKILL.md) | Set up and maintain connections, projects, and sources. |
+| [core-update](plugins/frantss-tracking/skills/core-update/SKILL.md) | Update skills by commit hash and migrate configuration and stored records. |
 
 ### Planning and BDD
 
@@ -24,18 +24,18 @@ Plan and implement work through behavior-driven development (BDD).
 
 | Skill | Purpose |
 | --- | --- |
-| [bdd-frame-problem](skills/bdd-frame-problem/SKILL.md) | Establish needs, outcomes, evidence, scope, and constraints in a live problem brief. |
-| [bdd-design-solution](skills/bdd-design-solution/SKILL.md) | Select a solution concept and refine its design against agreed needs and behavior. |
-| [bdd-discover-behavior](skills/bdd-discover-behavior/SKILL.md) | Discover expected behavior through examples and per-area review in a live Markdown record. |
-| [bdd-formulate-behavior](skills/bdd-formulate-behavior/SKILL.md) | Turn agreed behavior into Gherkin specifications for existing test tools. |
-| [bdd-slice-work](skills/bdd-slice-work/SKILL.md) | Group specified behavior into manageable tickets and review the breakdown with the user. |
-| [bdd-implement-ticket](skills/bdd-implement-ticket/SKILL.md) | Implement one accepted ticket with native tests and current behavioral verification evidence. |
+| [bdd-frame-problem](plugins/frantss-bdd/skills/bdd-frame-problem/SKILL.md) | Establish needs, outcomes, evidence, scope, and constraints in a live problem brief. |
+| [bdd-design-solution](plugins/frantss-bdd/skills/bdd-design-solution/SKILL.md) | Select a solution concept and refine its design against agreed needs and behavior. |
+| [bdd-discover-behavior](plugins/frantss-bdd/skills/bdd-discover-behavior/SKILL.md) | Discover expected behavior through examples and per-area review in a live Markdown record. |
+| [bdd-formulate-behavior](plugins/frantss-bdd/skills/bdd-formulate-behavior/SKILL.md) | Turn agreed behavior into Gherkin specifications for existing test tools. |
+| [bdd-slice-work](plugins/frantss-bdd/skills/bdd-slice-work/SKILL.md) | Group specified behavior into manageable tickets and review the breakdown with the user. |
+| [bdd-implement-ticket](plugins/frantss-bdd/skills/bdd-implement-ticket/SKILL.md) | Implement one accepted ticket with native tests and current behavioral verification evidence. |
 
 ### Code quality
 
 | Skill | Purpose |
 | --- | --- |
-| [refactoring](skills/refactoring/SKILL.md) | Apply simplicity, semantic naming, and refactoring principles when writing, editing, or reading code. |
+| [refactoring](plugins/frantss-development/skills/refactoring/SKILL.md) | Apply simplicity, semantic naming, and refactoring principles when writing, editing, or reading code. |
 
 ### Git
 
@@ -43,7 +43,7 @@ Organize code changes into focused commits.
 
 | Skill | Purpose |
 | --- | --- |
-| [atomic-commits](skills/atomic-commits/SKILL.md) | Group all pending changes or a selected subset into small, cohesive Git commits. |
+| [atomic-commits](plugins/frantss-development/skills/atomic-commits/SKILL.md) | Group all pending changes or a selected subset into small, cohesive Git commits. |
 
 ### Tracking
 
@@ -52,10 +52,10 @@ supplied sources.
 
 | Skill | Purpose |
 | --- | --- |
-| [tracking-tasks](skills/tracking-tasks/SKILL.md) | Capture tasks and manage commitments, dates, and blockers. |
-| [tracking-collect](skills/tracking-collect/SKILL.md) | Read project sources for task links and report summaries. |
-| [tracking-report](skills/tracking-report/SKILL.md) | Create daily and weekly activity reports. |
-| [tracking-team-digest](skills/tracking-team-digest/SKILL.md) | Summarize team initiatives from supplied sources and save a digest by default. |
+| [tracking-tasks](plugins/frantss-tracking/skills/tracking-tasks/SKILL.md) | Capture tasks and manage commitments, dates, and blockers. |
+| [tracking-collect](plugins/frantss-tracking/skills/tracking-collect/SKILL.md) | Read project sources for task links and report summaries. |
+| [tracking-report](plugins/frantss-tracking/skills/tracking-report/SKILL.md) | Create daily and weekly activity reports. |
+| [tracking-team-digest](plugins/frantss-tracking/skills/tracking-team-digest/SKILL.md) | Summarize team initiatives from supplied sources and save a digest by default. |
 
 ### Persistence
 
@@ -63,14 +63,22 @@ Store and retrieve task records and reports.
 
 | Skill | Purpose |
 | --- | --- |
-| [persistence-records](skills/persistence-records/SKILL.md) | Store task links and report summaries through a shared database. |
-| [persistence-obsidian](skills/persistence-obsidian/SKILL.md) | Store records in Obsidian through its official CLI. |
+| [persistence-records](plugins/frantss-tracking/skills/persistence-records/SKILL.md) | Store task links and report summaries through a shared database. |
+| [persistence-obsidian](plugins/frantss-tracking/skills/persistence-obsidian/SKILL.md) | Store records in Obsidian through its official CLI. |
 
 ## Install
 
 This repository is private. You need GitHub access and credentials for your
 installer. Choose either a plugin or direct skill installation for each agent
 to avoid duplicates.
+
+Codex and Claude share the `frantss` marketplace. Choose domain plugins:
+
+| Plugin | Included skills |
+| --- | --- |
+| `frantss-tracking` | All `tracking-*` and `persistence-*` skills, `core-configure`, and `core-update` |
+| `frantss-bdd` | All six `bdd-*` skills |
+| `frantss-development` | `core-communicate`, `refactoring`, and `atomic-commits` |
 
 <details>
 <summary>GitHub CLI</summary>
@@ -120,14 +128,16 @@ Use a Codex CLI with `plugin` commands and Git credentials for this repository:
 
 ```bash
 codex plugin marketplace add Frantss/frantss-skills
-codex plugin add frantss-skills@frantss
+codex plugin add frantss-tracking@frantss
 ```
 
-Start a new Codex session after installation. To update:
+Replace `frantss-tracking` with another plugin from the table, or repeat the
+command for each domain you want.
+Start a new Codex session after installation. To update a selected plugin:
 
 ```bash
 codex plugin marketplace upgrade frantss
-codex plugin add frantss-skills@frantss
+codex plugin add frantss-tracking@frantss
 ```
 
 </details>
@@ -139,14 +149,16 @@ Configure SSH access to GitHub, then install:
 
 ```bash
 claude plugin marketplace add Frantss/frantss-skills
-claude plugin install frantss-skills@frantss
+claude plugin install frantss-tracking@frantss
 ```
 
-To update:
+Replace `frantss-tracking` with another plugin from the table, or repeat the
+command for each domain you want.
+To update a selected plugin:
 
 ```bash
 claude plugin marketplace update frantss
-claude plugin update frantss-skills@frantss
+claude plugin update frantss-tracking@frantss
 ```
 
 See the [private marketplace guidance](https://code.claude.com/docs/en/plugins/host-marketplace).
@@ -167,11 +179,11 @@ The installer commands above update skill files only; use this workflow for
 configuration and stored-record migrations.
 
 For older installations, see the
-[database key migration](skills/persistence-records/references/database-migration.md).
+[database key migration](plugins/frantss-tracking/skills/persistence-records/references/database-migration.md).
 
 ## Setup and automatic use
 
-Use [core-configure](skills/core-configure/SKILL.md) to set up the shared
+Use [core-configure](plugins/frantss-tracking/skills/core-configure/SKILL.md) to set up the shared
 database, projects, and sources. Configuration applies across workspaces.
 For Obsidian storage, install both persistence skills and enable the official
 Obsidian CLI with an existing vault. Setup requires Tasks and Reports Bases with
@@ -194,7 +206,9 @@ persistent instructions file or setting.
 
 ## Contributing
 
-Skills live in `skills/<name>/SKILL.md`. See [CONTRIBUTING.md](CONTRIBUTING.md)
+Skills live in `plugins/<plugin>/skills/<name>/SKILL.md`. Each skill has one source
+folder, used directly by its plugin.
+See [CONTRIBUTING.md](CONTRIBUTING.md)
 for authoring and testing instructions, or the [glossary](GLOSSARY.md) for shared terms.
 
 ```bash

@@ -1,7 +1,0 @@
-{
-  "name": "frantss-skills",
-  "description": "Frantss's personal agent skills.",
-  "author": { "name": "Frantss" },
-  "repository": "https://github.com/Frantss/frantss-skills",
-  "skills": "./skills/"
-}

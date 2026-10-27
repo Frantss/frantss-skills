@@ -2,12 +2,24 @@
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "frantss",
   "description": "Frantss's personal agent skills.",
-  "owner": { "name": "Frantss" },
+  "owner": {
+    "name": "Frantss"
+  },
   "plugins": [
     {
-      "name": "frantss-skills",
-      "description": "Frantss's personal agent skills.",
-      "source": "./"
+      "name": "frantss-tracking",
+      "description": "Tasks, activity reports, team digests, configuration, persistence, and skill updates.",
+      "source": "./plugins/frantss-tracking"
+    },
+    {
+      "name": "frantss-bdd",
+      "description": "Plan and implement behavior-driven development workflows.",
+      "source": "./plugins/frantss-bdd"
+    },
+    {
+      "name": "frantss-development",
+      "description": "Communication, refactoring guidance, and atomic Git commits.",
+      "source": "./plugins/frantss-development"
     }
   ]
 }

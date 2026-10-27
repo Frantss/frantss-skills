@@ -4,7 +4,8 @@ Start with one concrete task you repeat across workspaces. Give the skill a name
 that describes that task and a description that helps an agent recognize when
 to use it. The folder and frontmatter name must match.
 
-Create `skills/<name>/SKILL.md` with `name` and `description` frontmatter.
+Create `plugins/<plugin>/skills/<name>/SKILL.md` with `name` and `description`
+frontmatter. Choose the plugin that owns the workflow.
 
 Use functional prefixes: `bdd-` for behavior-led development, `tracking-` for tasks,
 activity and reports, `persistence-` for storage, and `core-` for shared capabilities.
@@ -81,8 +82,10 @@ make validate
 ```
 
 This runs repository packaging checks, `gh skill publish --dry-run` for actual
-skills, and `claude plugin validate`. Packaging checks include the Codex manifest
-and its shared marketplace identity. It publishes nothing. A missing-version
+skills, and `claude plugin validate` for the marketplace and every domain package.
+Packaging checks include both agent manifests, the shared marketplace identity,
+local skill paths, and unique skill names across plugins.
+Validation does not publish anything. A missing-version
 or missing-license warning can be expected for these private manifests; review
 other warnings. An empty collection is allowed while setting up the repository.
 
@@ -102,19 +105,32 @@ request that should activate the skill, one nearby request that should not,
 and any scripts or resource links used during the task. Testing only the
 authoring folder can hide dependencies that disappear during installation.
 
-For Claude, `claude --plugin-dir .` loads the local plugin for a test session.
+For Claude, `claude --plugin-dir plugins/frantss-bdd` loads one local domain
+plugin for a test session. Replace the path with the package under test.
 Avoid installing drafts into your everyday skills directories.
 
 With the Codex CLI installed, `make test` also exercises plugin installation and
 reinstallation through the shared marketplace, using a temporary Codex configuration
-and cache. It verifies that new and edited skills reach the installed package.
+and cache. It verifies that each domain contains only its assigned skills, all
+resources survive installation, and added, edited, and removed skills reach
+refreshed installations.
+
+## Domain packaging
+
+Author each skill directly in `plugins/<plugin>/skills/<name>/`. Each plugin has
+its own Codex and Claude manifests. Codex references `./skills/`; Claude discovers
+that directory automatically. There are no generated plugin copies.
+
+Register plugins in `.claude-plugin/marketplace.json`. Plugin manifests live
+inside each plugin's folder. New skills need no manifest changes. Keep resources
+inside each skill as real files so direct installation remains portable.
 
 ## Share changes
 
-Commit and push completed skills to this private repository. Every new skill
-under `skills/` is discovered automatically; manifests need no per-skill list.
-Use `gh skill install` to choose individual skills, or a Codex or Claude plugin for the
-collection. Keep skill names stable so installations and explicit invocations
+Commit completed skills to this private repository; push only when requested.
+Every new skill under `plugins/<plugin>/skills/` is discovered by direct installers.
+Use `gh skill install` to choose individual skills, or install a Codex or Claude
+domain plugin. Keep skill names stable so installations and explicit invocations
 continue to resolve.
 
 When changing a trigger, explain which requests should now activate it. When

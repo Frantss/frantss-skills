@@ -6,7 +6,7 @@ read `CONTRIBUTING.md` for writing and distribution conventions.
 
 ## Communication
 
-Before your first reply, read [core-communicate](skills/core-communicate/SKILL.md).
+Before your first reply, read [core-communicate](plugins/frantss-development/skills/core-communicate/SKILL.md).
 Apply it to every message to the user throughout the session, on every topic.
 If its instructions leave the context, read it again before your next message.
 
@@ -46,20 +46,23 @@ If its instructions leave the context, read it again before your next message.
 
 ## Skills and packaging
 
-Keep `skills/<name>/` as the single source for every agent. Each skill must work
+Keep `plugins/<plugin>/skills/<name>/` as the single source for every agent. Each skill must work
 when that folder alone is copied elsewhere. Keep required resources inside it
 as real files and directories, and use relative links. Installers can skip
 symlinks even when their targets are internal. Put agent-specific integrations
 in optional metadata or conditional references, with prerequisites stated
 explicitly.
 
-Author skills directly in `skills/<name>/SKILL.md`. Add only resources the
-workflow actually needs.
+Author skills directly in their plugin's `skills/` directory. Add only resources
+the workflow actually needs.
 
-Keep plugin and marketplace identities stable. The manifests intentionally
-omit `version`, so Git-backed installs follow commit revisions. Both plugins use
-the shared `.claude-plugin/marketplace.json`; the Codex manifest points to `./skills/`,
-while Claude discovers that directory automatically. Introduce
+Keep plugin and marketplace identities stable. Each plugin owns its skills and
+agent manifests under `plugins/<plugin>/`. Register plugins in the shared
+`.claude-plugin/marketplace.json`. Keep plugin manifests inside their own folders.
+
+The manifests intentionally omit `version`, so Git-backed installs follow
+commit revisions. Each package has Codex and Claude manifests; Codex points to
+its local `./skills/`, while Claude discovers that directory automatically. Introduce
 versioned releases only with a deliberate update policy: `gh skill install`
 prefers the latest release over the default branch.
 
