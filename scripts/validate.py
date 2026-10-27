@@ -87,8 +87,6 @@ def packaging_errors(root: Path) -> list[str]:
             line_count += len(text.splitlines())
             if path.suffix != ".md":
                 continue
-            if "<!-- scaffold:" in text:
-                errors.append(f"{label}: replace unfinished scaffold comments")
             for match in LINK.finditer(FENCE.sub("", text)):
                 target = urlsplit(match.group(1).strip("<>"))
                 if target.scheme or target.netloc or not target.path:

@@ -53,8 +53,8 @@ symlinks even when their targets are internal. Put agent-specific integrations
 in optional metadata or conditional references, with prerequisites stated
 explicitly.
 
-Create skills with `scripts/new_skill.py`. The template stays outside discovery
-as a `.tmpl` file. Add only resources the workflow actually needs.
+Author skills directly in `skills/<name>/SKILL.md`. Add only resources the
+workflow actually needs.
 
 Keep plugin and marketplace identities stable. The manifests intentionally
 omit `version`, so Git-backed installs follow commit revisions. Both plugins use

@@ -198,6 +198,5 @@ Skills live in `skills/<name>/SKILL.md`. See [CONTRIBUTING.md](CONTRIBUTING.md)
 for authoring and testing instructions, or the [glossary](GLOSSARY.md) for shared terms.
 
 ```bash
-python3 scripts/new_skill.py tracking-my-skill --description "Use when ..."
 make validate
 ```

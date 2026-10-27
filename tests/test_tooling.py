@@ -8,7 +8,6 @@ import tempfile
 import unittest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
-from new_skill import create_skill
 from validate import packaging_errors
 
 
@@ -22,11 +21,12 @@ class ToolingTests(unittest.TestCase):
             shutil.copytree(source / folder, self.root / folder)
         (self.root / "skills").mkdir()
 
-    def finished_skill(self, name="example-task"):
-        skill = create_skill(self.root, name, 'Use when a task contains: "quotes".')
-        path = skill / "SKILL.md"
-        lines = path.read_text().splitlines()
-        path.write_text("\n".join(line for line in lines if "<!-- scaffold:" not in line))
+    def finished_skill(self, name="tracking-example"):
+        skill = (self.root / "skills") / name
+        skill.mkdir()
+        (skill / "SKILL.md").write_text(
+            f"---\nname: {name}\ndescription: A fixture skill.\n---\n\n# Example\n\nComplete the fixture task.\n"
+        )
         return skill
 
     def test_empty_collection_and_completed_skill(self):
@@ -34,27 +34,9 @@ class ToolingTests(unittest.TestCase):
         self.finished_skill()
         self.assertEqual(packaging_errors(self.root), [])
 
-    def test_description_is_quoted_without_losing_content(self):
-        skill = self.finished_skill()
-        value = (skill / "SKILL.md").read_text().splitlines()[2].removeprefix("description: ")
-        self.assertEqual(json.loads(value), 'Use when a task contains: "quotes".')
 
-    def test_invalid_names_cannot_escape_skills(self):
-        for name in ("../escape", "Uppercase", "two--hyphens", "-leading", "trailing-", "a" * 65, ""):
-            with self.subTest(name=name), self.assertRaises(ValueError):
-                create_skill(self.root, name, "A task.")
-        self.assertEqual(list((self.root / "skills").iterdir()), [])
 
-    def test_existing_skill_is_preserved(self):
-        skill = self.finished_skill()
-        original = (skill / "SKILL.md").read_bytes()
-        with self.assertRaises(FileExistsError):
-            create_skill(self.root, skill.name, "A different task.")
-        self.assertEqual((skill / "SKILL.md").read_bytes(), original)
 
-    def test_unfinished_scaffold_fails(self):
-        create_skill(self.root, "draft", "A draft task.")
-        self.assertTrue(any("scaffold" in error for error in packaging_errors(self.root)))
 
     def test_links_from_nested_references_and_missing_files(self):
         skill = self.finished_skill()
@@ -140,8 +122,10 @@ class ToolingTests(unittest.TestCase):
                 self.assertEqual((installed / "skills" / source.name / "SKILL.md").read_bytes(),
                                  (source / "SKILL.md").read_bytes())
 
-    def test_template_is_not_discovered_but_stray_skills_fail(self):
-        (self.root / "templates/SKILL.md").write_text("An accidentally discoverable template.")
+    def test_skills_outside_plugin_directories_fail(self):
+        stray = self.root / "stray"
+        stray.mkdir()
+        (stray / "SKILL.md").write_text("An incorrectly placed skill.")
         self.assertTrue(any("directly under skills/" in error for error in packaging_errors(self.root)))
 
     def test_line_limit_counts_entrypoint_references_and_metadata(self):

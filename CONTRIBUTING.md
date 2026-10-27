@@ -4,14 +4,11 @@ Start with one concrete task you repeat across workspaces. Give the skill a name
 that describes that task and a description that helps an agent recognize when
 to use it. The folder and frontmatter name must match.
 
-```bash
-python3 scripts/new_skill.py tracking-my-skill --description "Use when ..."
-```
+Create `skills/<name>/SKILL.md` with `name` and `description` frontmatter.
 
 Use functional prefixes: `bdd-` for behavior-led development, `tracking-` for tasks,
 activity and reports, `persistence-` for storage, and `core-` for shared capabilities.
 Use lowercase letters, digits, and single hyphens, up to 64 characters.
-The generator refuses existing destinations and invalid names.
 
 ## Write the shared instructions
 
@@ -32,9 +29,9 @@ When changing a stored format, document the old/new mapping, applicability,
 verification, and retry behavior in the same commit. Preserve those instructions
 in source history so updates can cross several revisions.
 
-Replace every scaffold comment with the workflow's actual decisions and a
-checkable completion condition. Keep only guidance that changes how an agent
-performs the task. The description is read before activation; put detailed
+Write the workflow's actual decisions and a checkable completion condition.
+Keep only guidance that changes how an agent performs the task. The description
+is read before activation; put detailed
 procedures in the body.
 
 Add supporting files when needed:
@@ -90,7 +87,7 @@ or missing-license warning can be expected for these private manifests; review
 other warnings. An empty collection is allowed while setting up the repository.
 
 The packaging checker catches symlinks, broken inline relative Markdown
-links, unfinished scaffold comments, and manifest drift. It does not parse all
+links and manifest drift. It does not parse all
 Markdown syntax, validate remote URLs, or establish workflow correctness.
 
 Try installation into a temporary directory before sharing a new skill:
