@@ -8,63 +8,38 @@ These skills are a work in progress.
 
 ## Skills
 
-### Core
+### frantss-development
 
-Manage communication, shared configuration, and skill updates.
+Write clear replies, refactor code, and organize Git commits.
 
-| Skill | Purpose |
-| --- | --- |
-| [core-communicate](plugins/frantss-development/skills/core-communicate/SKILL.md) | Write clear, direct replies throughout the session. |
-| [core-configure](plugins/frantss-tracking/skills/core-configure/SKILL.md) | Set up and maintain connections, projects, and sources. |
-| [core-update](plugins/frantss-tracking/skills/core-update/SKILL.md) | Update skills by commit hash and migrate configuration and stored records. |
+- [core-communicate](plugins/frantss-development/skills/core-communicate/SKILL.md): Write clear, direct replies throughout the session.
+- [refactoring](plugins/frantss-development/skills/refactoring/SKILL.md): Refactor existing code through scoped changes and behavior-preservation checks, or assess requested refactoring opportunities.
+- [atomic-commits](plugins/frantss-development/skills/atomic-commits/SKILL.md): Group all pending changes or a selected subset into small, cohesive Git commits.
 
-### Planning and BDD
+### frantss-bdd
 
 Plan and implement work through behavior-driven development (BDD).
 
-| Skill | Purpose |
-| --- | --- |
-| [bdd-frame-problem](plugins/frantss-bdd/skills/bdd-frame-problem/SKILL.md) | Establish needs, outcomes, evidence, scope, and constraints in a live problem brief. |
-| [bdd-design-solution](plugins/frantss-bdd/skills/bdd-design-solution/SKILL.md) | Select a solution concept and refine its design against agreed needs and behavior. |
-| [bdd-discover-behavior](plugins/frantss-bdd/skills/bdd-discover-behavior/SKILL.md) | Discover expected behavior through examples and per-area review in a live Markdown record. |
-| [bdd-formulate-behavior](plugins/frantss-bdd/skills/bdd-formulate-behavior/SKILL.md) | Turn agreed behavior into Gherkin specifications for existing test tools. |
-| [bdd-slice-work](plugins/frantss-bdd/skills/bdd-slice-work/SKILL.md) | Group specified behavior into manageable tickets and review the breakdown with the user. |
-| [bdd-implement-ticket](plugins/frantss-bdd/skills/bdd-implement-ticket/SKILL.md) | Implement one accepted ticket with native tests and current behavioral verification evidence. |
+- [bdd-frame-problem](plugins/frantss-bdd/skills/bdd-frame-problem/SKILL.md): Establish needs, outcomes, evidence, scope, and constraints in a live problem brief.
+- [bdd-design-solution](plugins/frantss-bdd/skills/bdd-design-solution/SKILL.md): Select a solution concept and refine its design against agreed needs and behavior.
+- [bdd-discover-behavior](plugins/frantss-bdd/skills/bdd-discover-behavior/SKILL.md): Discover expected behavior through examples and per-area review in a live Markdown record.
+- [bdd-formulate-behavior](plugins/frantss-bdd/skills/bdd-formulate-behavior/SKILL.md): Turn agreed behavior into Gherkin specifications for existing test tools.
+- [bdd-slice-work](plugins/frantss-bdd/skills/bdd-slice-work/SKILL.md): Group specified behavior into manageable tickets and review the breakdown with the user.
+- [bdd-implement-ticket](plugins/frantss-bdd/skills/bdd-implement-ticket/SKILL.md): Implement one accepted ticket with native tests and current behavioral verification evidence.
 
-### Code quality
+### frantss-tracking
 
-| Skill | Purpose |
-| --- | --- |
-| [refactoring](plugins/frantss-development/skills/refactoring/SKILL.md) | Refactor existing code through scoped changes and behavior-preservation checks, or assess requested refactoring opportunities. |
+Configure sources and storage, track commitments, and report personal and team
+activity.
 
-### Git
-
-Organize code changes into focused commits.
-
-| Skill | Purpose |
-| --- | --- |
-| [atomic-commits](plugins/frantss-development/skills/atomic-commits/SKILL.md) | Group all pending changes or a selected subset into small, cohesive Git commits. |
-
-### Tracking
-
-Track commitments, report personal activity, and follow team initiatives from
-supplied sources.
-
-| Skill | Purpose |
-| --- | --- |
-| [tracking-tasks](plugins/frantss-tracking/skills/tracking-tasks/SKILL.md) | Capture tasks and manage commitments, dates, and blockers. |
-| [tracking-collect](plugins/frantss-tracking/skills/tracking-collect/SKILL.md) | Read project sources for task links and report summaries. |
-| [tracking-report](plugins/frantss-tracking/skills/tracking-report/SKILL.md) | Create daily and weekly activity reports. |
-| [tracking-team-digest](plugins/frantss-tracking/skills/tracking-team-digest/SKILL.md) | Summarize team initiatives from supplied sources and save a digest by default. |
-
-### Persistence
-
-Store and retrieve task records and reports.
-
-| Skill | Purpose |
-| --- | --- |
-| [persistence-records](plugins/frantss-tracking/skills/persistence-records/SKILL.md) | Store task links and report summaries through a shared database. |
-| [persistence-obsidian](plugins/frantss-tracking/skills/persistence-obsidian/SKILL.md) | Store records in Obsidian through its official CLI. |
+- [core-configure](plugins/frantss-tracking/skills/core-configure/SKILL.md): Set up and maintain connections, projects, and sources.
+- [core-update](plugins/frantss-tracking/skills/core-update/SKILL.md): Update skills by commit hash and migrate configuration and stored records.
+- [tracking-tasks](plugins/frantss-tracking/skills/tracking-tasks/SKILL.md): Capture tasks and manage commitments, dates, and blockers.
+- [tracking-collect](plugins/frantss-tracking/skills/tracking-collect/SKILL.md): Read project sources for task links and report summaries.
+- [tracking-report](plugins/frantss-tracking/skills/tracking-report/SKILL.md): Create daily and weekly activity reports.
+- [tracking-team-digest](plugins/frantss-tracking/skills/tracking-team-digest/SKILL.md): Summarize team initiatives from supplied sources and save a digest by default.
+- [persistence-records](plugins/frantss-tracking/skills/persistence-records/SKILL.md): Store task links and report summaries through a shared database.
+- [persistence-obsidian](plugins/frantss-tracking/skills/persistence-obsidian/SKILL.md): Store records in Obsidian through its official CLI.
 
 ## Install
 
