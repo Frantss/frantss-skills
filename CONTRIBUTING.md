@@ -18,7 +18,7 @@ files. `atomic-commits`, `core-communicate`, and `core-update` each have a 50-li
 `persistence-records` has a 100-line limit; `persistence-obsidian` has a 350-line
 limit to include its executable batch runner.
 Count frontmatter, blank lines, references, helper code, and metadata.
-Binary assets are excluded. `make validate` enforces the total per skill;
+Binary assets are excluded. Review the total during skill edits;
 progressive disclosure does not increase the budget.
 
 Workflows own their domain schemas; persistence owns the common record envelope
@@ -65,7 +65,7 @@ adapting an existing skill, preserve its license and attribution.
 
 Edit `templates/bdd-run-record.md` for the tracked-run contract, then run
 `make sync-bdd`. The generator writes real copies to the six BDD skill folders;
-`make validate` rejects missing or stale copies. Keep mode selection and each
+`make test` checks for missing or stale copies. Keep mode selection and each
 stage's workflow in its entrypoint; the shared reference is loaded only for
 tracked work. Bundled copies count toward each skill's existing line limit.
 
@@ -81,17 +81,16 @@ use ordinary work and requests that explicitly continue existing tracked runs.
 make validate
 ```
 
-This runs repository packaging checks, `gh skill publish --dry-run` for actual
-skills, and `claude plugin validate` for the marketplace and every domain package.
-Packaging checks include both agent manifests, the shared marketplace identity,
-local skill paths, and unique skill names across plugins.
-Validation does not publish anything. A missing-version
-or missing-license warning can be expected for these private manifests; review
-other warnings. An empty collection is allowed while setting up the repository.
+This requires GitHub CLI with `gh skill` support and Claude Code CLI.
+It runs `gh skill publish --dry-run` for skill format checks, then
+`claude plugin validate` for the marketplace and each plugin directory.
+Each command's failure stops validation; warnings permit success.
+These commands validate local files without publishing. Missing-version,
+missing-license, and icon warnings can be expected for these private packages;
+review other warnings.
 
-The packaging checker catches symlinks, broken inline relative Markdown
-links and manifest drift. It does not parse all
-Markdown syntax, validate remote URLs, or establish workflow correctness.
+Review line budgets, self-contained resources, and local Markdown links during
+authoring. Use the installation and behavioral checks below to verify the result.
 
 Try installation into a temporary directory before sharing a new skill:
 

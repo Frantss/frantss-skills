@@ -6,7 +6,6 @@ import unittest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 from sync_bdd_references import BDD_SKILLS, CONTRACT, REFERENCE, SKILLS, reference_errors, sync_references
-from validate import skill_errors
 
 
 class BddReferencesTests(unittest.TestCase):
@@ -29,7 +28,7 @@ class BddReferencesTests(unittest.TestCase):
         for name in BDD_SKILLS:
             self.add_skill(name)
         sync_references(self.root)
-        self.assertEqual(skill_errors(self.root), [])
+        self.assertEqual(reference_errors(self.root), [])
         for name in BDD_SKILLS:
             with self.subTest(name=name), tempfile.TemporaryDirectory() as isolated:
                 skill = Path(isolated) / name
@@ -46,7 +45,7 @@ class BddReferencesTests(unittest.TestCase):
         original_reference = reference.read_bytes()
         with (self.root / CONTRACT).open("a") as output:
             output.write("\nPreserve accepted external source references.\n")
-        self.assertTrue(any("stale or missing" in error for error in skill_errors(self.root)))
+        self.assertTrue(any("stale or missing" in error for error in reference_errors(self.root)))
         self.assertEqual(reference.read_bytes(), original_reference)
         sync_references(self.root)
         self.assertEqual(reference_errors(self.root), [])
@@ -61,6 +60,9 @@ class BddReferencesTests(unittest.TestCase):
     def test_collection_without_bdd_skills_needs_no_template(self):
         (self.root / CONTRACT).unlink()
         self.assertEqual(reference_errors(self.root), [])
+
+    def test_repository_references_match_contract(self):
+        self.assertEqual(reference_errors(self.source), [])
 
     def test_sync_is_idempotent_and_rejects_symlink_destinations(self):
         skill = self.add_skill("bdd-frame-problem")
