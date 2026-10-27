@@ -20,29 +20,18 @@ Use content checks and atomic state/configuration writes; preserve unknown field
 
 ## Compare commits
 
-1. Inspect installation provenance, local edits, and pending work. Verify installed files against recorded commits, excluding installer metadata.
-   Without state, recover hashes from provenance or exact source-tree matches; establish the data baseline separately from schemas/preconditions. Clarify unresolved baselines.
-2. Fetch history into a temporary checkout. Resolve remote default-branch HEAD, or the requested revision, to one fixed full target hash.
-   Resolve conflicting pins or local edits before writes. Missing history/tools/access, divergent commits, or newer shared data leave the upgrade incomplete.
-3. Read chronological, rename-aware diffs from each installation/data baseline to target, including changed schemas, adapters, installer docs, and migration guidance.
-   Account for every changed config path/key, domain/common field, storage mapping, skill name, and install reference; equal schema numbers do not prove compatibility.
-4. Derive ordered, lossless migration steps with applicability checks, transformations, verification, and partial-write recovery. Report hashes, changes, and conflicts.
-   Inspect all affected settings, tasks, evidence, runs, reports, events, retained revisions, and views. End checks/previews here without writing state or backups.
+1. Inspect installation provenance, local edits, and pending work. Verify installed files against recorded commits, excluding installer metadata. Without state, recover hashes from provenance or exact source-tree matches; establish the data baseline separately from schemas/preconditions. Clarify unresolved baselines.
+2. Fetch history into a temporary checkout. Resolve remote default-branch HEAD, or the requested revision, to one fixed full target hash. Resolve conflicting pins or local edits before writes. Missing history/tools/access, divergent commits, or newer shared data leave the upgrade incomplete.
+3. Read chronological, rename-aware diffs from each installation/data baseline to target, including changed schemas, adapters, installer docs, and migration guidance. Account for every changed config path/key, domain/common field, storage mapping, skill name, and install reference; equal schema numbers do not prove compatibility.
+4. Derive ordered, lossless migration steps with applicability checks, transformations, verification, and partial-write recovery. Report hashes, changes, and conflicts. Inspect all affected settings, tasks, evidence, runs, reports, events, retained revisions, and views. End checks/previews here without writing state or backups.
 
 ## Apply migrations and installation
 
-5. The update authorizes lossless migrations; resolve ambiguous/destructive changes with frantss. Preserve IDs, keys, relationships, dates, unknown fields, and human edits; retain retired history in verified external backups.
-   Patch schema-owned fields, structured relationships, and views. Reconcile old/new fields or paths before removal; coordinate incompatible consumers before changing shared data.
-6. Exclude concurrent updates/affected workflow writes. Back up configuration, installation, and affected database data outside installer caches; verify restorable coverage.
-   Record backups and steps in `pending` before mutation. Empty data needs no migration or database/project initialization.
-7. Use source-history schemas and adapter protocols for ordered migrations; back up retired records/history externally before removing them from active storage. Verify current identity lookups; unavailable past revisions remain explicit gaps.
-   For Obsidian, use its official CLI and conflict/recovery protocol; unavailable CLI access never permits filesystem writes instead.
-   Recheck preconditions, mark started before writing, then read back all affected objects before marking verified.
-8. Use installed installer help to install the fixed target through the original installer; a checkout at that commit can serve local installs.
-   Preserve subsets, map renamed skills through history, and include new skills for `all`. Remove obsolete owned files/names after replacements verify.
-   If exact installation is unsupported, stop with staged source. Preserve unrelated/local edits; never substitute a moving target.
-9. On failure, retain hashes, journal, backups, and unsaved payloads; report persisted/missing work and pause incompatible workflows.
-   Resume the journal's fixed target; inspect started-step effects and execute only missing work with the same identities. Restore only when safe against later edits.
+5. The update authorizes lossless migrations; resolve ambiguous/destructive changes with frantss. Preserve IDs, keys, relationships, dates, unknown fields, and human edits; retain retired history in verified external backups. Patch schema-owned fields, structured relationships, and views. Reconcile old/new fields or paths before removal; coordinate incompatible consumers before changing shared data.
+6. Exclude concurrent updates/affected workflow writes. Back up configuration, installation, and affected database data outside installer caches; verify restorable coverage. Record backups and steps in `pending` before mutation. Empty data needs no migration or database/project initialization.
+7. Use source-history schemas and adapter protocols for ordered migrations; back up retired records/history externally before removing them from active storage. Verify current identity lookups; unavailable past revisions remain explicit gaps. For Obsidian, use its official CLI and conflict/recovery protocol; unavailable CLI access never permits filesystem writes instead. Recheck preconditions, mark started before writing, then read back all affected objects before marking verified.
+8. Use installed installer help to install the fixed target through the original installer; a checkout at that commit can serve local installs. Preserve subsets, map renamed skills through history, and include new skills for `all`. Remove obsolete owned files/names after replacements verify. If exact installation is unsupported, stop with staged source. Preserve unrelated/local edits; never substitute a moving target.
+9. On failure, retain hashes, journal, backups, and unsaved payloads; report persisted/missing work and pause incompatible workflows. Resume the journal's fixed target; inspect started-step effects and execute only missing work with the same identities. Restore only when safe against later edits.
 
 ## Verify completion
 
