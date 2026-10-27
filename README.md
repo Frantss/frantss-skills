@@ -4,7 +4,8 @@ My personal agent skills for communication, development, task tracking, and acti
 reports. Use them with agents that support [Agent Skills](https://agentskills.io/specification),
 including Codex, Claude Code, Cursor, GitHub Copilot, and Gemini CLI.
 
-These skills are a work in progress.
+> [!NOTE]
+> These skills are still a work in progress. Their behavior and configuration may change.
 
 ## Skills
 
