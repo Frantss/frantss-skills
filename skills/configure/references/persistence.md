@@ -1,6 +1,6 @@
 # Database connection
 
-Use only `~/.frantss/persistance.yaml` for this connection; legacy `backend` requires an explicit `update` migration, never inspection-time rewriting or replacement setup:
+Use only `~/.frantss/persistance.yaml` for this connection; legacy `backend` requires an explicitly requested `migrate-tracking`, never inspection-time rewriting or replacement setup:
 ```yaml
 schema_version: 1
 database: {adapter: persistence-obsidian, options: {vault: /path/to/vault, root: Frantss}}

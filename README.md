@@ -28,7 +28,7 @@ The `frantss-skills` plugin includes all skills below.
 ### Tracking
 
 - [configure](skills/configure/SKILL.md): Set up and maintain connections, projects, and sources.
-- [update](skills/update/SKILL.md): Update skills by commit hash and migrate configuration and stored records.
+- [migrate-tracking](skills/migrate-tracking/SKILL.md): Check or migrate tracking configuration and stored records, with backups and recovery.
 - [tasks](skills/tasks/SKILL.md): Capture tasks and manage commitments, dates, and blockers.
 - [collect](skills/collect/SKILL.md): Read project sources for task links and report summaries.
 - [report](skills/report/SKILL.md): Create daily and weekly activity reports.
@@ -113,21 +113,19 @@ See the [skills CLI reference](https://github.com/vercel-labs/skills/blob/main/d
 
 </details>
 
-## Update
+## Updates and tracking migrations
 
-Ask `update` to update your Frantss skill set or check for updates.
-It reviews changes through a fixed default-branch commit, applies required
-configuration/database migrations, and updates through the original installer.
-Checks are read-only; explicit pins and selected skills remain in effect.
+Use your plugin manager or original installer to update skills. Package updates
+do not migrate tracking configuration or stored records.
 
-Full installation and shared data commit hashes are tracked separately in
-`~/.frantss/skills-state.yaml`. First use verifies existing provenance and data
-formats. Backups and a pending-step journal support interrupted updates.
-Installer updates change skill files only; use this workflow for configuration
-and stored-record migrations.
+Ask `migrate-tracking` to check compatibility, migrate legacy tracking formats,
+or resume an interrupted migration. Checks are read-only. Migrations preserve
+identities and human edits, with verified backups and a recovery journal in
+`~/.frantss/skills-state.yaml`. Existing installation entries remain unchanged;
+the skill manages only migration state.
 
-For older installations, see the
-[database key migration](skills/records/references/database-migration.md).
+For older connection configurations, see the
+[database key migration](skills/migrate-tracking/references/database-migration.md).
 
 ## Tracking setup and automatic use
 

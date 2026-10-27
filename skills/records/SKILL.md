@@ -8,14 +8,14 @@ description: "Store and retrieve prepared records using caller-supplied schemas.
 The caller supplies domain schemas, relationships, content, and requested changes; the adapter owns physical storage and recovery.
 Read only `~/.frantss/persistance.yaml`, expanding the current OS account's home independently of the working directory.
 Require `schema_version: 1` and `database: {adapter: <adapter-id>, options: <mapping>}`; parse configuration as data.
-Legacy `backend` requires an explicit update using the [connection migration](references/database-migration.md); ordinary operations leave configuration unchanged.
+Legacy `backend` requires `migrate-tracking` when available; ordinary operations report the unsupported connection and leave configuration unchanged.
 One database serves every project; reject per-project overrides. Pass configured options unchanged to the selected adapter.
 Use `obsidian` for adapter ID `persistence-obsidian` when available; missing configuration/capabilities leave requests explicitly unsaved, never in another store.
 Project/source definitions remain in `~/.frantss/projects.yaml`; supplied project references are readable strings, never database project records.
 Configuration inspection/changes belong to `configure` when available; record operations never initialize configuration or create projects.
 
 Before record operations, read [common fields](references/records.md) and [operation requirements](references/operations.md).
-For an explicitly requested legacy tracking upgrade, read [migration rules](references/lean-migration.md); ordinary operations never migrate data.
+Legacy tracking shapes require `migrate-tracking` when available; ordinary operations report unsupported formats and never migrate data.
 Pass complete domain fields/schema, stable identities, expected revisions, related records, filters, limits, and requested cutoff to the adapter.
 If a required domain schema is missing, ask for it rather than inventing fields or workflow decisions.
 

@@ -1,7 +1,7 @@
 # Database connection key migration
 
-Use through explicitly requested `update`, with its backups, fixed commits, journal, and content checks.
-Applies to top-level `backend` in `~/.frantss/persistance.yaml` version 1. Rename it to `database`; the path, schema version, records, and project registry stay unchanged.
+Use through an explicitly requested `migrate-tracking`, with its verified backups, fixed mappings, journal, and content checks.
+Applies to top-level `backend` in `~/.frantss/persistance.yaml` version 1. Rename it to `database`; the path, schema version, records, and project registry stay unchanged. For pre-migration inspection/backups with no `database`, pass unchanged legacy adapter/options to the adapter's migration-only read path; record writes wait until the connection migration verifies.
 
 1. Reject duplicate YAML keys, unsupported versions, or malformed connection mappings. Back up the original and journal expected content before mutation.
 2. If only `backend` exists, move its complete mapping to `database`, preserving adapter, options, unknown fields, comments, and human edits.

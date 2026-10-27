@@ -15,7 +15,7 @@ Preserve repository attribution, storage paths, and technical identifiers.
 ## Write the shared instructions
 
 Each skill has a hard limit of 75 total lines across its authored UTF-8 text
-files. `atomic-commits`, `communicate`, and `update` each have a 50-line limit;
+files. `atomic-commits` and `communicate` each have a 50-line limit;
 `records` has a 100-line limit; `obsidian` has a 350-line
 limit to include its executable batch runner.
 Count frontmatter, blank lines, references, helper code, and metadata.
@@ -25,8 +25,10 @@ progressive disclosure does not increase the budget.
 Workflows own their domain schemas; persistence owns the common record envelope
 and storage operations. Ordinary workflows support only current formats. Keep
 current records and interrupted-write recovery; keep migration backups outside
-active storage. `update` owns upgrades:
-compare source commits and migrate configuration/data before recording success.
+active storage. `migrate-tracking` owns explicit configuration/data migrations;
+installers own skill and plugin updates. Ordinary workflows report incompatible
+formats without converting them. Keep known migration mappings inside
+`migrate-tracking` so individual installations include their procedures.
 When changing a stored format, document the old/new mapping, applicability,
 verification, and retry behavior in the same commit. Preserve those instructions
 in source history so updates can cross several revisions.

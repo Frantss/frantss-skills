@@ -1,8 +1,8 @@
 # Migration to task links and report summaries
 
-Use only through an explicitly requested `update` migration, with its verified backups, fixed commits, journal, and adapter protocol.
+Use only through an explicitly requested `migrate-tracking`, with its verified backups, fixed mappings, journal, and adapter protocol.
 Applies to retained settings/evidence/run/event/revision notes, tasks with `evidence`/`history_complete`/Pending events and reports with `evidence`/`manifest`; empty storage needs no conversion; current tasks may still require legacy-note cleanup.
-The common envelope remains version 1; domain shape, not that number alone, determines applicability. Local registry version 1 supports optional shared `settings`; legacy database Settings notes migrate through `configure` before removal.
+The common envelope remains version 1; domain shape, not that number alone, determines applicability. Migrate legacy database Settings notes through [configuration migration](configuration-migration.md) before removal.
 
 1. Inspect current records, referenced evidence/events/runs, retained revisions, and affected views. Exclude concurrent legacy writers before conversion.
 2. Resolve old Pending events with the baseline write protocol before mapping; ambiguous/missing dependencies leave the affected conversion incomplete.
@@ -13,5 +13,5 @@ The common envelope remains version 1; domain shape, not that number alone, dete
 7. Update affected owned views to task/report inputs after replacements verify; preserve custom views and report any that still depend on retired types.
 8. Verify IDs/keys, links, mapped fields, report text, external backups, and current task/report queries. Unresolved references block completion.
 9. Retry by the journal's original identities and expected revisions; inspect started-step effects, reuse verified replacements/archives, and write only missing work.
-10. Once replacements, inbound references, and external backups verify, remove retired evidence/run/event/revision notes and empty owned folders from active storage through the adapter. Preserve unrelated/custom notes and views. A requested update authorizes this backed-up cleanup; ambiguous references block affected removals.
+10. Once replacements, inbound references, and external backups verify, remove retired evidence/run/event/revision notes and empty owned folders from active storage through the adapter. Preserve unrelated/custom notes and views. A requested tracking migration authorizes this backed-up cleanup; ambiguous references block affected removals.
 Keep only current tasks, saved report summaries, and adapter-required or requested views; settings belong in local configuration. Verify that no retained note links to a removed record; retry removal only for unchanged journaled identities.
