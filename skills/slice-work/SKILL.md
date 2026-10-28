@@ -15,7 +15,7 @@ description: "Draft or review implementation tickets from agreed behavioral spec
 ## Establish supported scope
 
 - Read scope, specifications, design, tickets, code, and tests; distinguish required work from already-satisfied behavior using evidence and qualified verification claims.
-- Identify agreed behavior, source cases/examples, dependencies, and consequential blockers; preserve source identities and continue independently supported work.
+- Identify agreed behavior, source cases/examples, dependencies, blockers, and authorized exclusions; preserve source identities and keep unresolved choices with their sources.
 
 ## Draft verifiable outcomes
 
@@ -24,10 +24,8 @@ description: "Draft or review implementation tickets from agreed behavioral spec
 - For wide mechanical changes, consider compatible expansion, bounded migration, and contraction; justify preparatory/refactoring tickets with concrete dependent work and independently verifiable preservation checks.
 - Give each ticket an outcome title, context sentence, blocking Dependencies or None, and behavior/case mappings; add Verification only for non-obvious setup or regressions.
 - Reference complete acceptance cases, including outputs, state changes, and prohibited effects, instead of copying their assertions into tickets.
-- Assign all relevant Examples rows or stable groups; make each ticket verifiable after prerequisites and give each required case/group one accountable delivery owner.
-- Assign spanning behavior to its completing ticket with named prerequisites; give prerequisites their own checks and keep regression references separate from ownership.
-- Account for every selected case as assigned, already satisfied with evidence, or a gap; retain authorized exclusions and unresolved choices with their source definitions.
-- Verify bounded outcomes, source resolution, unique ownership, meaningful completion checks, and an acyclic dependency graph before presenting the draft.
+- Account for every selected case/Examples row or stable group as owned by one completing ticket, already satisfied with evidence, or an explicit gap.
+- Make each bounded ticket verifiable after named prerequisites; require resolvable sources, acyclic dependencies, and independent prerequisite checks without transferring ownership through regression references.
 
 ## Deliver the breakdown
 

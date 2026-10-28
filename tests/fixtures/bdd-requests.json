@@ -90,6 +90,12 @@
     "outcome": "Preserve the project's tag and case-identity conventions, link scenarios to R-001, and derive supported boundary cases without requiring @source-* or @derived tags. Preserve the run.md format and deliver the specification without a new acceptance gate."
   },
   {
+    "request": "Draft separate validator-helper and CLI tickets. The CLI completes the integer acceptance cases 0, 1, 5, and 6; helper delivery is its prerequisite. Inputs 1 through 5 pass and other integers fail without changing state. Do not implement.",
+    "skill": "slice-work",
+    "mode": "standalone",
+    "outcome": "Give each acceptance case one completing owner in the CLI ticket, with an explicit helper dependency and independently verifiable helper checks. Regression references retain their original ownership; account for every case and stop after the draft."
+  },
+  {
     "request": "Fix this typo in a CSS comment.",
     "skill": null,
     "mode": "ordinary",
