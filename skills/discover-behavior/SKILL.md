@@ -30,11 +30,11 @@ description: "Clarify unresolved consumer-visible rules, examples, boundaries, o
 
 ## Review and deliver
 
-- Review rules, examples, vocabulary, exclusions, and gaps across the included scope.
+- Check coverage of every in-scope rule and example; keep exclusions and unresolved gaps explicit.
 - Check interactions, contradictions, missing areas, and dependencies against the original outcome; exclusions need source or user authority.
 - Review affected definitions, links, and conclusions when decisions change; preserve unaffected decisions.
 - Deliver supported definitions and consequential questions in the conversation or requested document, distinguishing agreed/open behavior without claiming exhaustive coverage or tested behavior.
-- Delivering the draft completes a draft request; continue authorized formulation or implementation using settled behavior without reconfirmation.
+- Continue authorized formulation or implementation using settled behavior without reconfirmation.
 
 ## Tracked records
 

@@ -9,7 +9,7 @@ description: "Clarify an unclear problem's needs, evidence, intended outcomes, s
 
 ## Choose the working mode
 
-- Use supplied context and prior decisions; deliver in the conversation or requested document.
+- Use supplied context and prior decisions.
 - Use tracked records only when explicitly requested or when explicitly continuing an identified run.
 
 ## Establish the problem
@@ -31,8 +31,8 @@ description: "Clarify an unclear problem's needs, evidence, intended outcomes, s
 
 ## Deliver the brief
 
-- Review coherence, evidence, affected people, outcomes, scope, constraints, subproblem coverage, and blockers to intended use.
-- Deliver the supported brief and consequential uncertainties; delivery completes a draft request.
+- Check every in-scope need and constraint against the brief; identify evidence gaps and blockers to its intended use.
+- Deliver the brief with consequential uncertainties in the conversation or requested document.
 - Continue into solution comparison, behavior discovery, or delivery planning only when authorized; resolve blockers without starting unrelated workflows.
 
 ## Tracked records

@@ -31,7 +31,7 @@ description: "Draft or review implementation tickets from agreed behavioral spec
 
 ## Deliver the breakdown
 
-- Deliver IDs, outcomes, source cases, dependencies, and gaps in the conversation or requested document to complete a draft request.
+- Deliver the breakdown and remaining gaps in the conversation or requested document.
 - Choose routine boundaries and ordering within agreed scope; seek consequential scope, ownership, delivery, or dependency decisions and review grouping when requested.
 - Review affected allocations and dependencies when sources or decisions change; preserve unaffected decisions and block only tickets dependent on unresolved choices.
 - Continue authorized publication or implementation without separate approval of routine allocation; verify delivery prerequisites in current code before implementation.

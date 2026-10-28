@@ -9,7 +9,7 @@ description: "Write or review Gherkin scenarios from agreed behavioral requireme
 
 ## Choose the working mode
 
-- Use supplied sources; deliver the specification in the conversation or requested document.
+- Use supplied sources.
 - Use tracked records only when explicitly requested or when explicitly continuing an identified run.
 
 ## Establish the source
@@ -33,13 +33,13 @@ description: "Write or review Gherkin scenarios from agreed behavioral requireme
 - Identify missing decisions and affected scenarios; ask consequential questions and continue supported formulation without starting a full discovery workflow.
 - Resolve behavior changes with the user; editorial corrections and cases derived from settled rules need no new decision.
 - Review affected scenarios and links when sources change.
-- Check fidelity, concrete outcomes, consistent terms, duplicates, cross-area interactions, and coverage of every in-scope rule/example; identify blocked work and authorized exclusions.
+- Account for every in-scope rule/example with concrete, source-faithful outcomes; check interactions, duplicate cases, blocked work, and authorized exclusions.
 - Count coverage only when an assertion distinguishes success from a violation; source tags establish provenance rather than coverage or passing tests.
 - Use an available Gherkin parser or report manual syntax review; distinguish parsing, behavioral review, user acceptance, and executed system tests.
 
 ## Deliver the specification
 
-- Deliver the supported specification with source mappings, usable scope, and remaining questions to complete a draft request.
+- Deliver the specification with source mappings, usable scope, and remaining questions in the conversation or requested document.
 - Continue into ticketing, integration, or implementation only when authorized; faithful formulation of settled behavior needs no separate approval.
 
 ## Tracked records

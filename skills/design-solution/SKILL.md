@@ -30,9 +30,9 @@ description: "Design a solution or technical migration when the user asks to com
 
 ## Deliver the proposal
 
-- Review approach, rationale, scope, responsibilities, interactions, alternatives, and consequential uncertainty against the requested design depth.
+- Check the proposal against every in-scope need, behavior, and constraint at the requested design depth; identify unresolved decisions and unverified assumptions.
 - Deliver the proposal in the conversation or requested document, distinguishing proposed, decided, and unverified points and including migration sequencing when requested.
-- Delivering the proposal completes a draft request; continue only authorized work and ask only about consequential unresolved choices.
+- Continue only authorized work; ask only about consequential unresolved choices.
 
 ## Tracked records
 
