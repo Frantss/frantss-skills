@@ -127,14 +127,3 @@ persistent instructions.
 Use [migrate-tracking](skills/migrate-tracking/SKILL.md) to check or migrate
 legacy configuration and records with backups and recovery. Package updates
 do not migrate stored data.
-
-## Contributing
-
-Skills live in `skills/<name>/SKILL.md`. Each skill has one source folder, used
-directly by the plugin and individual installers.
-See [CONTRIBUTING.md](CONTRIBUTING.md)
-for authoring and testing instructions, or the [glossary](GLOSSARY.md) for shared terms.
-
-```bash
-make validate
-```
