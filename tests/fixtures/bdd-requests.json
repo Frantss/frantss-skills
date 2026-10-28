@@ -78,6 +78,12 @@
     "outcome": "Discuss meaningful splits, grouping, and dependencies as requested, without inferring implementation or publication authorization from the review."
   },
   {
+    "request": "Use discover-behavior in a tracked run for one small subject: a draft may be renamed, but whether an empty name is allowed is undecided.",
+    "skill": "discover-behavior",
+    "mode": "tracked",
+    "outcome": "Keep rules, examples, and open questions flat without requiring an area map or area statuses. Ask about empty names without inventing the answer; preserve the run.md format and stop before unrequested formulation or implementation."
+  },
+  {
     "request": "Fix this typo in a CSS comment.",
     "skill": null,
     "mode": "ordinary",

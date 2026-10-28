@@ -46,6 +46,6 @@ description: "Clarify unresolved consumer-visible rules, examples, boundaries, o
 - Keep checks and limits under Validation, the current step under Next action, and scope/blockers outside status cells.
 - Create only participating records; preserve source locations, identities, human edits, and unaffected work.
 - Reset affected checks to not_run and reopen affected done tickets when source decisions invalidate evidence.
-- Use level-two sections in `discovery.md`: Boundary and vocabulary; Area map; Area details; Coverage gaps; Open questions.
-- Area map uses ID | Area | Status | Dependencies; each area's included scope has Boundary, Rules, Examples, and a document status.
-- Use excluded for areas excluded by supplied sources or the user.
+- Keep `discovery.md` sections Boundary and vocabulary; Area details; Coverage gaps; Open questions; Area map is optional.
+- Add an ID | Area | Status | Dependencies map only when grouped areas need coordination; otherwise keep rules and examples flat.
+- Apply document statuses to grouped areas; use excluded only with source or user authority.
