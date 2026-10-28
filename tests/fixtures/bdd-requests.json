@@ -30,10 +30,10 @@
     "outcome": "Deliver verifiable draft tickets linked to supplied cases; do not publish, implement, or wait for acceptance to deliver the draft."
   },
   {
-    "request": "Implement accepted ticket TK-001 using its supplied acceptance criteria and the existing native tests.",
+    "request": "Implement ticket TK-001 using its supplied clear acceptance criteria and the existing native tests.",
     "skill": "implement-ticket",
     "mode": "standalone",
-    "outcome": "Implement and verify the selected ticket without requiring Gherkin or new planning records."
+    "outcome": "Reuse the implementation authorization and supplied criteria; implement and verify without a separate ticket-acceptance step, Gherkin, or new planning records."
   },
   {
     "request": "Start a tracked BDD run for the upload limits feature and formulate the supplied agreed rules.",
@@ -46,6 +46,36 @@
     "skill": "design-solution",
     "mode": "tracked",
     "outcome": "Preserve run identity and accepted sources; update only the participating design/run records."
+  },
+  {
+    "request": "Draft tickets for these settled upload rules and implement the first independently verifiable ticket. Choose routine ticket boundaries and dependencies within the supplied scope.",
+    "skill": "slice-work",
+    "mode": "standalone",
+    "outcome": "Allocate the supplied cases and continue with implement-ticket under the existing authorization, without a mandatory split/group review or separate acceptance of the ticket definitions."
+  },
+  {
+    "request": "Write Gherkin for these agreed rules and implement the validator: integers 1 through 5 are accepted; all other integers are rejected without changing state. Inputs are integers only.",
+    "skill": "formulate-behavior",
+    "mode": "standalone",
+    "outcome": "Formulate faithful scenarios and implement the authorized validator without approval of the derived specification, a slicing prerequisite, or rediscovery of settled behavior."
+  },
+  {
+    "request": "Continue tracked run upload-limits-001. Implement only its settled size-limit cases; its unrelated duplicate-upload policy remains undecided.",
+    "skill": "implement-ticket",
+    "mode": "tracked",
+    "outcome": "Use the selected settled scope without a new partial-handoff approval; preserve the unrelated open decision and existing identities. Verify real prerequisites, invalidate affected prior evidence before changes, and record current execution results separately from ticket definitions."
+  },
+  {
+    "request": "Implement ticket TK-002 to retry failed uploads. The allowed retry count and treatment of partly saved files are undecided.",
+    "skill": "implement-ticket",
+    "mode": "standalone",
+    "outcome": "Ask for the consequential unresolved behavior before implementing dependent retries. Do not invent defaults or start a full discovery workflow; continue only independently supported authorized work."
+  },
+  {
+    "request": "Review the grouping of these implementation tickets with me. Keep this request to the review; do not implement or publish them.",
+    "skill": "slice-work",
+    "mode": "standalone",
+    "outcome": "Discuss meaningful splits, grouping, and dependencies as requested, without inferring implementation or publication authorization from the review."
   },
   {
     "request": "Fix this typo in a CSS comment.",

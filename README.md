@@ -21,10 +21,10 @@ The `frantss-skills` plugin includes all skills below.
 
 - [frame-problem](skills/frame-problem/SKILL.md): Establish needs, outcomes, evidence, scope, and constraints in a live problem brief.
 - [design-solution](skills/design-solution/SKILL.md): Select a solution concept and refine its design against agreed needs and behavior.
-- [discover-behavior](skills/discover-behavior/SKILL.md): Discover expected behavior through examples and per-area review in a live Markdown record.
+- [discover-behavior](skills/discover-behavior/SKILL.md): Resolve expected behavior through rules, examples, and conversation.
 - [formulate-behavior](skills/formulate-behavior/SKILL.md): Turn agreed behavior into Gherkin specifications for existing test tools.
-- [slice-work](skills/slice-work/SKILL.md): Group specified behavior into manageable tickets and review the breakdown with the user.
-- [implement-ticket](skills/implement-ticket/SKILL.md): Implement one accepted ticket with native tests and current behavioral verification evidence.
+- [slice-work](skills/slice-work/SKILL.md): Group specified behavior into bounded, verifiable tickets.
+- [implement-ticket](skills/implement-ticket/SKILL.md): Implement one authorized ticket with native tests and current behavioral verification evidence.
 
 ### Tracking
 
