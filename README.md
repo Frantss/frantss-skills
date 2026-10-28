@@ -28,14 +28,14 @@ The `frantss-skills` plugin includes all skills below.
 
 ### Tracking
 
-- [configure](skills/configure/SKILL.md): Set up and maintain connections, projects, and sources.
-- [migrate-tracking](skills/migrate-tracking/SKILL.md): Check or migrate tracking configuration and stored records, with backups and recovery.
-- [tasks](skills/tasks/SKILL.md): Capture tasks and manage commitments, dates, and blockers.
-- [collect](skills/collect/SKILL.md): Read project sources for task links and report summaries.
-- [report](skills/report/SKILL.md): Create daily and weekly activity reports.
-- [team-digest](skills/team-digest/SKILL.md): Summarize team initiatives from supplied sources and save a digest by default.
-- [records](skills/records/SKILL.md): Store task links and report summaries through a shared database.
-- [obsidian](skills/obsidian/SKILL.md): Store records in Obsidian through its official CLI.
+- [tracking-configure](skills/tracking-configure/SKILL.md): Set up and maintain connections, projects, and sources.
+- [tracking-migrate](skills/tracking-migrate/SKILL.md): Check or migrate tracking configuration and stored records, with backups and recovery.
+- [tracking-tasks](skills/tracking-tasks/SKILL.md): Capture tasks and manage commitments, dates, and blockers.
+- [tracking-collect](skills/tracking-collect/SKILL.md): Read project sources for task links and report summaries.
+- [tracking-report](skills/tracking-report/SKILL.md): Create daily and weekly activity reports.
+- [tracking-team-digest](skills/tracking-team-digest/SKILL.md): Summarize team initiatives from supplied sources and save a digest by default.
+- [tracking-records](skills/tracking-records/SKILL.md): Store task links and report summaries through a shared database.
+- [tracking-obsidian](skills/tracking-obsidian/SKILL.md): Store records in Obsidian through its official CLI.
 
 ## Install
 
@@ -117,13 +117,13 @@ See the [skills CLI reference](https://github.com/vercel-labs/skills/blob/main/d
 
 ## Tracking
 
-Use [configure](skills/configure/SKILL.md) to set up shared storage, projects,
-and sources across workspaces. Obsidian storage requires `records`, `obsidian`,
+Use [tracking-configure](skills/tracking-configure/SKILL.md) to set up shared storage, projects,
+and sources across workspaces. Obsidian storage requires `tracking-records`, `tracking-obsidian`,
 and the official Obsidian CLI with an existing vault.
 
-For automatic tracking, reference `tasks` and `configure` in your agent's
+For automatic tracking, reference `tracking-tasks` and `tracking-configure` in your agent's
 persistent instructions.
 
-Use [migrate-tracking](skills/migrate-tracking/SKILL.md) to check or migrate
+Use [tracking-migrate](skills/tracking-migrate/SKILL.md) to check or migrate
 legacy configuration and records with backups and recovery. Package updates
 do not migrate stored data.

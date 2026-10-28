@@ -1,6 +1,6 @@
 # Tracking configuration migration
 
-Use only through an explicitly requested `migrate-tracking`, with its verified backups, fixed mappings, journal, and content checks. Preserve IDs, native identities/locations, human edits, unknown fields, and unrelated entries.
+Use only through an explicitly requested `tracking-migrate`, with its verified backups, fixed mappings, journal, and content checks. Preserve IDs, native identities/locations, human edits, unknown fields, and unrelated entries.
 Applies to legacy source selectors in `~/.frantss/projects.yaml` version 1 or database Settings notes; current configuration needs no rewriting.
 
 1. Back up originals outside active storage. Retired Slack `messages`/`channels`/`threads`, Jira `issue_filter`, and Gmail `labels`/`thread_filter` no longer restrict searches. Remove only these owned fields; omit empty Slack/Gmail scopes. If Jira has only a legacy filter, recover native project keys only from an unambiguous project constraint or verified registration; unresolved locations block that source, never permit site-wide fallback.

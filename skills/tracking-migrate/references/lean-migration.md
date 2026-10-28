@@ -1,6 +1,6 @@
 # Migration to task links and report summaries
 
-Use only through an explicitly requested `migrate-tracking`, with its verified backups, fixed mappings, journal, and adapter protocol.
+Use only through an explicitly requested `tracking-migrate`, with its verified backups, fixed mappings, journal, and adapter protocol.
 Applies to retained settings/evidence/run/event/revision notes, tasks with `evidence`/`history_complete`/Pending events and reports with `evidence`/`manifest`; empty storage needs no conversion; current tasks may still require legacy-note cleanup.
 The common envelope remains version 1; domain shape, not that number alone, determines applicability. Migrate legacy database Settings notes through [configuration migration](configuration-migration.md) before removal.
 

@@ -1,5 +1,5 @@
 ---
-name: configure
+name: tracking-configure
 description: "Set up, inspect, or maintain the user's database connections, projects, and sources. Use for configuration requests, read-only resolution handoffs, or lasting changes stated by the user."
 ---
 

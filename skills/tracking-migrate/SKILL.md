@@ -1,6 +1,6 @@
 ---
-name: migrate-tracking
-description: "Check, migrate, or resume changes to tracking configuration and stored records. Use for legacy tracking formats and interrupted data migrations; package updates and ordinary configuration edits belong to their installers and configure."
+name: tracking-migrate
+description: "Check, migrate, or resume changes to tracking configuration and stored records. Use for legacy tracking formats and interrupted data migrations; package updates and ordinary configuration edits belong to their installers and tracking-configure."
 ---
 
 # Migrate tracking configuration and records

@@ -1,13 +1,13 @@
 ---
-name: obsidian
+name: tracking-obsidian
 description: "Read and write prepared records through the Obsidian CLI. Use for the selected database, storage setup/access checks, and Bases view changes; ordinary note editing belongs elsewhere."
 compatibility: Requires Python 3.9+ with PyYAML, Obsidian 1.12.7+ with its official CLI enabled and registered, and access to the desktop app.
 ---
 
 # Persist records in Obsidian
 
-Accept complete record payloads and operation requirements from the caller or `records`. Read [note mapping](references/notes.md) for record operations/setup, [write protocol](references/writes.md) before writes, and [Bases views](references/bases.md) for setup, authorized upgrades, or view changes.
-Use `database.options` from `~/.frantss/persistance.yaml`, expanding `~` for the current OS account. Require schema version 1, adapter ID `persistence-obsidian`, an existing absolute `vault` path, and vault-relative `root`. For explicitly requested `migrate-tracking` inspection/backups only, accept unchanged legacy `backend.options` when `database` is absent, with the same validation; record writes wait until the connection migration verifies `database`. Ordinary operations require `database`. Repository/ancestor settings never select storage; missing options leave it unconfigured.
+Accept complete record payloads and operation requirements from the caller or `tracking-records`. Read [note mapping](references/notes.md) for record operations/setup, [write protocol](references/writes.md) before writes, and [Bases views](references/bases.md) for setup, authorized upgrades, or view changes.
+Use `database.options` from `~/.frantss/persistance.yaml`, expanding `~` for the current OS account. Require schema version 1, adapter ID `persistence-obsidian`, an existing absolute `vault` path, and vault-relative `root`. For explicitly requested `tracking-migrate` inspection/backups only, accept unchanged legacy `backend.options` when `database` is absent, with the same validation; record writes wait until the connection migration verifies `database`. Ordinary operations require `database`. Repository/ancestor settings never select storage; missing options leave it unconfigured.
 For sandboxed access, read [CLI access](references/sandbox.md) before checks. Stop after its permitted retry fails; retain unsaved payloads without installing dependencies or switching databases/filesystem writes.
 
 For record batches, use the [Python runner](scripts/batch.py) and its [interface](references/batch.md). It verifies the connection and reuses an in-memory lookup until process exit; independent calls rebuild it. Let the runner perform connection checks.
