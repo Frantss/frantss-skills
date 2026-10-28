@@ -10,7 +10,7 @@ description: "Design a solution or technical migration when the user asks to com
 ## Choose the working mode
 
 - Use supplied requirements, a problem brief, or an existing design; earlier skills and particular document formats are not prerequisites.
-- For an explicitly requested tracked workflow or explicit continuation of an identified run, read [the run contract](references/run-record.md).
+- Use tracked records only when explicitly requested or when explicitly continuing an identified run.
 
 ## Establish the design context
 
@@ -33,3 +33,15 @@ description: "Design a solution or technical migration when the user asks to com
 - Review approach, rationale, scope, responsibilities, interactions, alternatives, and consequential uncertainty against the requested design depth.
 - Deliver the proposal in the conversation or requested document, distinguishing proposed, decided, and unverified points and including migration sequencing when requested.
 - Delivering the proposal completes a draft request; continue only authorized work and ask only about consequential unresolved choices.
+
+## Tracked records
+
+- Use `.scratch/bdd/<feature_slug>-<NNN>/`, with a stable feature name, lowercase kebab-case slug, and next per-feature ordinal padded to at least three digits.
+- Keep `run.md` YAML: `feature_name`, `feature_slug`, `run_id`, `stage`, `current_slice`, `current_ticket` (null until selected).
+- Set `stage` to concept for approach selection or design for refinement; keep level-two sections Documents, Validation, and Next action.
+- Under Documents, keep `### S-001: <name>`, Scope, file-qualified Members, Dependencies (slice/question references or None), and a File | Status table.
+- Use pending (unvisited), draft (proposed/incomplete), blocked (unresolved prerequisite), ready (settled and sufficient for intended use), or partial (named usable scope and blockers).
+- Keep checks and limits under Validation, the current step under Next action, and scope/blockers outside status cells.
+- Create only participating records; preserve source locations, identities, human edits, and unaffected work.
+- Reset affected checks to not_run and reopen affected done tickets when source decisions invalidate evidence.
+- Use level-two sections in `design.md`: Context; Approach; Structure; Decisions; Open questions.

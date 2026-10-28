@@ -39,13 +39,13 @@
     "request": "Start a tracked BDD run for the upload limits feature and formulate the supplied agreed rules.",
     "skill": "formulate-behavior",
     "mode": "tracked",
-    "outcome": "Create run.md and the needed specification; future-stage files remain absent."
+    "outcome": "Create run.md with feature_name, feature_slug, run_id, stage, current_slice, current_ticket and Documents, Validation, Next action sections. Preserve the S-* slice entries, Scope/Members/Dependencies, and File | Status table; create only the needed specification, with no future-stage files or external record-guidance dependency."
   },
   {
     "request": "Continue the identified BDD run upload-limits-001 by refining its current design.",
     "skill": "design-solution",
     "mode": "tracked",
-    "outcome": "Preserve run identity and accepted sources; update only the participating design/run records."
+    "outcome": "Preserve the current run.md fields, section names, slice entries, status meanings, identities, and accepted sources; update only the participating design/run records using the skill's local guidance."
   },
   {
     "request": "Draft tickets for these settled upload rules and implement the first independently verifiable ticket. Choose routine ticket boundaries and dependencies within the supplied scope.",

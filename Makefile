@@ -1,7 +1,4 @@
-.PHONY: validate test sync-bdd
-
-sync-bdd:
-	python3 scripts/sync_bdd_references.py
+.PHONY: validate test
 
 validate:
 	gh skill publish --dry-run

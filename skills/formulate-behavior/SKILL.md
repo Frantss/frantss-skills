@@ -10,7 +10,7 @@ description: "Write or review Gherkin scenarios from agreed behavioral requireme
 ## Choose the working mode
 
 - Use supplied sources; deliver the specification in the conversation or requested document.
-- For an explicitly requested tracked workflow or explicit continuation of an identified run, read [the run contract](references/run-record.md).
+- Use tracked records only when explicitly requested or when explicitly continuing an identified run.
 
 ## Establish the source
 
@@ -41,3 +41,16 @@ description: "Write or review Gherkin scenarios from agreed behavioral requireme
 
 - Deliver the supported specification with source mappings, usable scope, and remaining questions to complete a draft request.
 - Continue into ticketing, integration, or implementation only when authorized; faithful formulation of settled behavior needs no separate approval.
+
+## Tracked records
+
+- Use `.scratch/bdd/<feature_slug>-<NNN>/`, with a stable feature name, lowercase kebab-case slug, and next per-feature ordinal padded to at least three digits.
+- Keep `run.md` YAML: `feature_name`, `feature_slug`, `run_id`, `stage`, `current_slice`, `current_ticket` (null until selected).
+- Set `stage` to formulation; keep level-two sections Documents, Validation, and Next action.
+- Under Documents, keep `### S-001: <name>`, Scope, file-qualified Members, Dependencies (slice/question references or None), and a File | Status table.
+- Use pending (unvisited), draft (proposed/incomplete), blocked (unresolved prerequisite), ready (settled and sufficient for intended use), or partial (named usable scope and blockers).
+- Keep checks and limits under Validation, the current step under Next action, and scope/blockers outside status cells.
+- Create only participating records; preserve source locations, identities, human edits, and unaffected work.
+- Reset affected checks to not_run and reopen affected done tickets when source decisions invalidate evidence.
+- Write one named Feature in `behavior.feature`, with Rule groups and the scenario/source-mapping rules above.
+- Add a source-definition record only when existing sources cannot resolve the mappings.

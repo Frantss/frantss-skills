@@ -64,13 +64,14 @@ external actions on the user's behalf.
 Keep credentials and machine-specific paths in the user's environment. When
 adapting an existing skill, preserve its license and attribution.
 
-## Shared BDD references
+## BDD records
 
-Edit `templates/bdd-run-record.md` for the tracked-run contract, then run
-`make sync-bdd`. The generator writes real copies to the six BDD skill folders;
-`make test` checks for missing or stale copies. Keep mode selection and each
-stage's workflow in its entrypoint; the shared reference is loaded only for
-tracked work. Bundled copies count toward each skill's existing line limit.
+Each BDD skill owns its tracked-record guidance in `SKILL.md`, including its
+artifact structure. The small repeated `run.md` convention keeps each skill
+independently installable; there is no shared base or generation step.
+Preserve the existing run fields, section names, slice tables, and status
+meanings when changing stage guidance. Keep execution-table details in
+`implement-ticket`; other stages only invalidate affected existing evidence.
 
 Behavioral regression requests live in `tests/fixtures/bdd-requests.json`.
 Exercise them in isolated workspaces and check actual outputs, artifacts,

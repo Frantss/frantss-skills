@@ -55,17 +55,29 @@ class PluginTests(unittest.TestCase):
         self.assertCountEqual(discovered, expected)
 
     @unittest.skipUnless(shutil.which('gh'), 'GitHub CLI is needed for skill installation')
-    def test_github_cli_installs_one_skill_with_bundled_resources(self):
-        with tempfile.TemporaryDirectory() as destination:
-            result = subprocess.run(
-                ['gh', 'skill', 'install', str(self.root), 'design-solution',
-                 '--from-local', '--dir', destination],
-                cwd=self.root, capture_output=True, text=True, timeout=30)
-            self.assertEqual(result.returncode, 0, result.stderr)
-            self.assertEqual({p.name for p in Path(destination).iterdir()}, {'design-solution'})
-            reference = Path('design-solution/references/run-record.md')
-            self.assertEqual((Path(destination) / reference).read_bytes(),
-                             (self.root / 'skills' / reference).read_bytes())
+    def test_github_cli_installs_bdd_skills_independently(self):
+        for name in ('frame-problem', 'design-solution', 'discover-behavior',
+                     'formulate-behavior', 'slice-work', 'implement-ticket'):
+            with self.subTest(skill=name), tempfile.TemporaryDirectory() as destination:
+                result = subprocess.run(
+                    ['gh', 'skill', 'install', str(self.root), name,
+                     '--from-local', '--dir', destination],
+                    cwd=self.root, capture_output=True, text=True, timeout=30)
+                self.assertEqual(result.returncode, 0, result.stderr)
+                self.assertEqual({p.name for p in Path(destination).iterdir()}, {name})
+                expected = self.root / 'skills' / name
+                actual = Path(destination) / name
+                self.assertEqual({p.relative_to(expected) for p in expected.rglob('*') if p.is_file()},
+                                 {p.relative_to(actual) for p in actual.rglob('*') if p.is_file()})
+                for path in actual.rglob('*'):
+                    self.assertFalse(path.is_symlink(), path)
+                    if path.is_file():
+                        source = expected / path.relative_to(actual)
+                        if path.name == 'SKILL.md':
+                            self.assertEqual(path.read_text().split('\n---\n', 1)[1].strip(),
+                                             source.read_text().split('\n---\n', 1)[1].strip())
+                        else:
+                            self.assertEqual(path.read_bytes(), source.read_bytes())
 
     @unittest.skipUnless(shutil.which('codex'), 'Codex CLI is needed for plugin installation')
     def test_codex_refreshes_skill_changes_and_renames(self):
@@ -79,6 +91,9 @@ class PluginTests(unittest.TestCase):
                 return json.loads(result.stdout)
 
             skills = self.root / 'skills'
+            legacy_reference = skills / 'design-solution/references/run-record.md'
+            legacy_reference.parent.mkdir(exist_ok=True)
+            legacy_reference.write_text('Legacy tracked-run reference.\n')
             legacy_skill = skills / 'core-communicate'
             (skills / 'communicate').rename(legacy_skill)
             entrypoint = legacy_skill / 'SKILL.md'
@@ -90,6 +105,7 @@ class PluginTests(unittest.TestCase):
             manifest = json.loads((installed / '.codex-plugin/plugin.json').read_text())
             self.assertEqual(manifest['skills'], './skills/')
             self.assert_installed_skills(installed)
+            legacy_reference.unlink()
             legacy_skill.rename(skills / 'communicate')
             entrypoint = skills / 'communicate/SKILL.md'
             entrypoint.write_text(entrypoint.read_text().replace('name: core-communicate\n',
@@ -104,6 +120,7 @@ class PluginTests(unittest.TestCase):
             self.assertEqual((installed / 'skills/tasks/SKILL.md').read_text(), 'Updated instruction.\n')
             self.assertFalse((installed / 'skills/collect').exists())
             self.assertFalse((installed / 'skills/core-communicate').exists())
+            self.assertFalse((installed / 'skills/design-solution/references/run-record.md').exists())
 
     @unittest.skipUnless(shutil.which('claude'), 'Claude Code CLI is needed for plugin installation')
     def test_claude_installs_all_skills_from_shared_marketplace(self):

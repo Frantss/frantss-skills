@@ -10,7 +10,7 @@ description: "Implement or resume one authorized ticket with clear behavioral re
 ## Choose the working mode
 
 - Use the supplied ticket and its source cases; Gherkin, earlier skills, and new planning documents are not prerequisites.
-- For an explicitly requested tracked workflow or explicit continuation of an identified run, read [the run contract](references/run-record.md).
+- Use tracked records only when explicitly requested or when explicitly continuing an identified run.
 
 ## Verify the ticket and baseline
 
@@ -36,3 +36,17 @@ description: "Implement or resume one authorized ticket with clear behavioral re
 - Record commands/test selectors, actual outcomes, checked code, blockers, and limitations; distinguish failed, blocked, and unexecuted checks.
 - Mark done only when every promised behavior and required check passes on current code, with no missing coverage or unresolved blockers.
 - Report results and evidence in the conversation or requested record; continue beyond the ticket or publish only when already authorized.
+
+## Tracked records
+
+- Use `.scratch/bdd/<feature_slug>-<NNN>/`, with a stable feature name, lowercase kebab-case slug, and next per-feature ordinal padded to at least three digits.
+- Keep `run.md` YAML: `feature_name`, `feature_slug`, `run_id`, `stage`, `current_slice`, `current_ticket` (null until selected).
+- Set `stage` to implementation and select the current slice/ticket; keep level-two sections Documents, Validation, and Next action.
+- Under Documents, keep `### S-001: <name>`, Scope, file-qualified Members, Dependencies (slice/question references or None), and a File | Status table.
+- Use pending (unvisited), draft (proposed/incomplete), blocked (unresolved prerequisite), ready (settled and sufficient for intended use), or partial (named usable scope and blockers).
+- Keep checks and limits under Validation, the current step under Next action, and scope/blockers outside status cells.
+- Create only participating records; preserve source locations, identities, human edits, and unaffected work.
+- Under Validation, use Implementation: Ticket | State | Evidence, with states pending, in_progress, blocked, done.
+- Use Behavior checks: Ticket | Cases | Check | Result, with results passed, failed, blocked, not_run.
+- Map Cases to source cases/Examples groups or None for other checks; separate rows with different results.
+- Before edits and on resume, set checks invalidated by code, decisions, design, or prerequisites to not_run and reopen affected done tickets.
