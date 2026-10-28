@@ -22,11 +22,12 @@ description: "Write or review Gherkin scenarios from agreed behavioral requireme
 
 - Write independently understandable scenarios with relevant starting conditions, an action/event, and observable outcomes, including promised side effects and prohibited effects.
 - Preserve domain vocabulary, interfaces, units, and time boundaries; exclude setup mechanics and private implementation choices from consumer-visible scenarios.
-- Use Scenario Outline and Examples for shared behavior with varying data; separate distinct behavior and give continuing cases stable unique tags such as @case-001.
-- Link scenarios to current source definitions; tracked runs use resolvable @source-<id> mappings without invented discovery work.
+- Use Scenario Outline and Examples for shared behavior with varying data; separate distinct behavior.
+- Link scenarios to source definitions using project conventions or source comments; preserve existing tags and case IDs.
+- Give cases stable identities when continuing references need them.
 - Derive outcomes only from agreed rules; check boundaries, combinations, states, failures, retries, and timing without guessing missing rules.
 - For integers 1 through 5 accepted and all other integers rejected, derive 0, 1, 5, and 6; leave decimal handling undecided.
-- Let outline rows inherit sources; separate tagged Examples groups when sources differ and tag derived scenarios/groups @derived without losing provenance during deduplication.
+- Preserve source mappings when grouping Examples rows or deduplicating cases; annotate derived cases only when project conventions require it.
 
 ## Resolve uncertainty and review
 
@@ -34,7 +35,7 @@ description: "Write or review Gherkin scenarios from agreed behavioral requireme
 - Resolve behavior changes with the user; editorial corrections and cases derived from settled rules need no new decision.
 - Review affected scenarios and links when sources change.
 - Account for every in-scope rule/example with concrete, source-faithful outcomes; check interactions, duplicate cases, blocked work, and authorized exclusions.
-- Count coverage only when an assertion distinguishes success from a violation; source tags establish provenance rather than coverage or passing tests.
+- Count coverage only when an assertion distinguishes success from a violation; source references establish provenance rather than coverage or passing tests.
 - Use an available Gherkin parser or report manual syntax review; distinguish parsing, behavioral review, user acceptance, and executed system tests.
 
 ## Deliver the specification

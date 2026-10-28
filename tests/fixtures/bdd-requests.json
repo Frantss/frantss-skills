@@ -84,6 +84,12 @@
     "outcome": "Keep rules, examples, and open questions flat without requiring an area map or area statuses. Ask about empty names without inventing the answer; preserve the run.md format and stop before unrequested formulation or implementation."
   },
   {
+    "request": "In a tracked run, formulate R-001: integer inputs 1 through 5 are accepted and other integers are rejected. This project uses @acceptance tags and case-ID comments rather than source or derived-case tags.",
+    "skill": "formulate-behavior",
+    "mode": "tracked",
+    "outcome": "Preserve the project's tag and case-identity conventions, link scenarios to R-001, and derive supported boundary cases without requiring @source-* or @derived tags. Preserve the run.md format and deliver the specification without a new acceptance gate."
+  },
+  {
     "request": "Fix this typo in a CSS comment.",
     "skill": null,
     "mode": "ordinary",
