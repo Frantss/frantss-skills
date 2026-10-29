@@ -1,0 +1,534 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A visual guide to the Frantss BDD skills: entry points, supported workflows, specification breakdown, optional records, and verification.">
+  <link rel="icon" href="data:,">
+  <title>The BDD skill set · Frantss skills</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f5f3ec; --surface: #fffefa; --ink: #202e35; --muted: #52616a;
+      --rule: #ced3cf; --teal: #12594f; --teal-wash: #e3eeea; --amber: #785016;
+      --amber-wash: #f5ead4; --focus: #9b3c17; --code: #edf0ed;
+      --serif: Georgia, "Times New Roman", serif;
+      --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 24px; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 16px/1.6 var(--sans); }
+    a { color: var(--teal); text-underline-offset: 3px; }
+    a:hover { text-decoration-thickness: 2px; }
+    button, select { font: inherit; }
+    button, a, select, summary { -webkit-tap-highlight-color: transparent; }
+    :focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; }
+    button { cursor: pointer; }
+    h1, h2, h3, p { margin: 0; }
+    h1, h2 { font-family: var(--serif); font-weight: 400; line-height: 1.08; text-wrap: balance; }
+    h1 { font-size: clamp(44px, 5.8vw, 76px); max-width: 920px; letter-spacing: -.035em; }
+    h2 { font-size: clamp(30px, 3.5vw, 43px); letter-spacing: -.025em; }
+    h3 { font-size: 19px; line-height: 1.35; }
+    p + p { margin-top: 12px; }
+    code { font: .88em/1.5 ui-monospace, SFMono-Regular, Consolas, monospace; overflow-wrap: anywhere; }
+    pre { background: var(--code); border-radius: 4px; padding: 20px; white-space: pre-wrap; overflow-wrap: anywhere; margin: 16px 0 0; }
+    pre code { font-size: 13px; }
+    ul, ol { padding-left: 22px; margin: 12px 0 0; }
+    li + li { margin-top: 7px; }
+    [hidden] { display: none !important; }
+    .wrap { width: min(1240px, calc(100% - 80px)); margin-inline: auto; }
+    .skip { position: absolute; top: -80px; left: 20px; background: var(--surface); padding: 12px; z-index: 10; }
+    .skip:focus { top: 12px; }
+    .masthead { display: flex; justify-content: space-between; gap: 20px; padding-block: 25px; border-bottom: 1px solid var(--rule); font-size: 14px; }
+    .masthead strong { font-weight: 650; }
+    .masthead span:last-child { color: var(--muted); }
+    header { padding: 64px 0 38px; }
+    .kicker { color: var(--teal); font-size: 14px; font-weight: 650; margin-bottom: 16px; }
+    .intro { max-width: 790px; margin-top: 24px; font-size: 20px; line-height: 1.55; }
+    .jump-links { display: flex; flex-wrap: wrap; gap: 4px 28px; margin-top: 28px; }
+    .jump-links a { padding-block: 9px; font-size: 15px; }
+    section { padding-block: 42px; border-top: 1px solid var(--rule); }
+    .section-top { display: flex; justify-content: space-between; align-items: end; gap: 28px; margin-bottom: 26px; }
+    .section-top > p { max-width: 480px; color: var(--muted); }
+    .index { display: block; color: var(--muted); font-size: 13px; margin-bottom: 10px; }
+    .workflow-controls { display: grid; grid-template-columns: minmax(230px, 350px) 1fr; gap: 28px; align-items: start; padding: 24px; background: var(--surface); border: 1px solid var(--rule); border-radius: 5px; }
+    label { display: block; font-size: 14px; font-weight: 650; margin-bottom: 8px; }
+    select { width: 100%; min-height: 48px; background: var(--surface); color: var(--ink); border: 1px solid var(--muted); border-radius: 3px; padding: 10px 30px 10px 12px; }
+    #workflow-description { font-size: 16px; }
+    .small { font-size: 14px; color: var(--muted); }
+    #workflow-stop { margin-top: 10px; color: var(--teal); font-size: 14px; }
+    figure { margin: 30px 0 0; }
+    .map { position: relative; padding: 12px 0; }
+    .map-grid { position: relative; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); grid-template-areas: "frame design discover formulate slice implement" ". engine engine . . ."; gap: 64px 22px; }
+    .connections { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+    .connection { fill: none; stroke: #6f7d76; stroke-width: 1.5; }
+    .engine-connection { fill: none; stroke: var(--amber); stroke-width: 1.5; stroke-dasharray: 5 4; }
+    .skill-node { position: relative; z-index: 1; text-align: left; min-height: 160px; border: 1px solid #6f7d76; background: var(--surface); border-radius: 4px; color: var(--ink); padding: 15px 13px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+    .skill-node .node-purpose { font-size: 12px; color: var(--muted); }
+    .skill-node strong { font-size: 17px; line-height: 1.25; font-weight: 650; }
+    .skill-node code { font-size: 12px; margin-top: auto; }
+    .skill-node.in-route { background: var(--teal-wash); border-color: var(--teal); }
+    .skill-node[aria-pressed="true"] { outline: 3px solid var(--ink); outline-offset: 3px; }
+    .skill-node:focus-visible { outline: 3px solid var(--focus); outline-offset: 6px; }
+    .skill-node.engine { grid-area: engine; min-height: 126px; background: var(--amber-wash); border-color: var(--amber); display: grid; grid-template-columns: 1fr auto; gap: 6px 14px; }
+    .skill-node.engine strong { grid-column: 1; }
+    .skill-node.engine code { grid-column: 2; grid-row: 1; margin-top: 0; color: var(--amber); }
+    .engine .node-purpose { grid-column: 1 / -1; font-size: 13px; color: var(--amber); }
+    figcaption { margin-top: 16px; color: var(--muted); font-size: 14px; max-width: 960px; }
+    .legend { display: flex; flex-wrap: wrap; gap: 12px 24px; margin-top: 18px; font-size: 13px; color: var(--muted); }
+    .legend span { display: flex; align-items: center; gap: 8px; }
+    .swatch { width: 16px; height: 12px; border: 1px solid var(--teal); background: var(--teal-wash); }
+    .swatch.engine { border-color: var(--amber); background: var(--amber-wash); }
+    .dash { width: 24px; height: 0; border-top: 2px dashed var(--amber); }
+    .route-area { padding-block: 24px; margin-top: 24px; border-block: 1px solid var(--rule); }
+    .route { display: flex; flex-wrap: wrap; list-style: none; padding: 0; gap: 10px 0; }
+    .route li { margin: 0; display: flex; align-items: center; gap: 10px; font-size: 14px; }
+    .route li + li::before { content: "→"; margin-inline: 10px; color: var(--muted); }
+    .route a { min-height: 44px; display: inline-flex; align-items: center; }
+    .detail-panel { display: grid; grid-template-columns: 1fr 1.8fr; gap: 28px; padding: 26px 0 0; }
+    .detail-panel h3 { font-size: 23px; }
+    .detail-panel .small { margin-top: 8px; }
+    .detail-panel dl { margin: 0; display: grid; grid-template-columns: 95px 1fr; gap: 8px 18px; }
+    dt { font-size: 13px; font-weight: 650; color: var(--muted); }
+    dd { margin: 0; font-size: 15px; }
+    .skill-reference { border-bottom: 1px solid var(--rule); }
+    .skill-reference details { border-top: 1px solid var(--rule); }
+    summary { cursor: pointer; padding: 20px 4px; font-weight: 600; min-height: 52px; }
+    summary:hover { color: var(--teal); }
+    .reference-heading { display: inline-grid; grid-template-columns: minmax(170px, 235px) 1fr; gap: 24px; width: calc(100% - 28px); vertical-align: middle; }
+    .reference-heading span { font-weight: 400; font-size: 15px; color: var(--muted); }
+    .reference-body { padding: 0 28px 26px; display: grid; grid-template-columns: 1fr 1fr; gap: 18px 34px; }
+    .reference-body h4 { font-size: 13px; color: var(--muted); margin: 0 0 7px; }
+    .reference-body p { font-size: 15px; }
+    .reference-body .prompt { grid-column: 1 / -1; padding: 16px 18px; background: var(--code); border-radius: 3px; }
+    .reference-body .source { grid-column: 1 / -1; font-size: 14px; }
+    .two-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 42px; }
+    .two-columns h3 { margin-bottom: 12px; }
+    .call-loop { display: grid; grid-template-columns: 1fr 44px 1fr; align-items: center; gap: 20px; margin-top: 24px; }
+    .call-loop > div:not(.loop-arrow) { border: 1px solid var(--rule); background: var(--surface); padding: 22px; border-radius: 4px; }
+    .call-loop .analysis { background: var(--amber-wash); border-color: var(--amber); }
+    .loop-arrow { text-align: center; font-size: 28px; color: var(--amber); }
+    .call-loop h3 { font-size: 18px; }
+    .call-loop p { font-size: 15px; margin-top: 8px; }
+    .principle { font-family: var(--serif); font-size: 27px; line-height: 1.35; max-width: 760px; margin-top: 26px; }
+    .mode-buttons { display: flex; flex-wrap: wrap; gap: 10px; margin-block: 22px; }
+    .mode-buttons button { border: 1px solid var(--muted); background: transparent; padding: 10px 16px; min-height: 46px; color: var(--ink); border-radius: 3px; }
+    .mode-buttons button[aria-pressed="true"] { background: var(--ink); color: var(--surface); border-color: var(--ink); }
+    .record-view { display: grid; grid-template-columns: 1.2fr 1fr; gap: 32px; }
+    .record-files { margin: 0; background: var(--code); padding: 20px; list-style: none; border-radius: 4px; }
+    .record-files li { display: grid; grid-template-columns: minmax(140px, 1fr) 1.5fr; gap: 12px; margin-top: 0; padding-block: 9px; border-bottom: 1px solid var(--rule); font-size: 13px; }
+    .record-files li:last-child { border-bottom: 0; }
+    .record-files span { color: var(--muted); }
+    .records-schema { margin-top: 28px; border-top: 1px solid var(--rule); }
+    .records-schema .schema-body { padding-bottom: 20px; }
+    .schema-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; margin-top: 12px; }
+    .schema-grid p { font-size: 14px; }
+    .status-list { display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: 14px; margin-top: 16px; }
+    .status-list span { border-bottom: 2px solid var(--rule); padding-bottom: 4px; }
+    .table-wrap { width: 100%; }
+    table { border-collapse: collapse; width: 100%; text-align: left; }
+    caption { text-align: left; margin-bottom: 14px; color: var(--muted); font-size: 14px; }
+    th { font-size: 13px; color: var(--muted); font-weight: 650; border-bottom: 2px solid var(--rule); padding: 12px 14px 12px 0; }
+    td { padding: 16px 18px 16px 0; border-bottom: 1px solid var(--rule); font-size: 15px; vertical-align: top; }
+    td:first-child { width: 20%; font-weight: 600; }
+    .evidence-note { padding: 20px 0 0; max-width: 900px; }
+    .boundary-list { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 42px; list-style: none; padding: 0; margin-top: 24px; }
+    .boundary-list li { padding-top: 14px; border-top: 1px solid var(--rule); margin: 0; }
+    .boundary-list strong { display: block; font-size: 15px; margin-bottom: 4px; }
+    .boundary-list p { color: var(--muted); font-size: 14px; }
+    .sources { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 32px; padding: 0; list-style: none; }
+    .sources li { margin: 0; font-size: 14px; }
+    .sources a { display: inline-block; padding-block: 8px; }
+    footer { border-top: 1px solid var(--rule); padding-block: 24px 40px; font-size: 13px; color: var(--muted); }
+    noscript p { background: var(--amber-wash); padding: 20px; margin-block: 20px; }
+    @media (max-width: 1100px) {
+      .wrap { width: min(100% - 48px, 1000px); }
+      .map-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-areas: "frame design discover" ". engine engine" "formulate slice implement"; gap: 36px 26px; }
+      .skill-node { min-height: 142px; }
+      .map { padding-inline: 12px; }
+    }
+    @media (max-width: 700px) {
+      .wrap { width: calc(100% - 36px); }
+      .masthead { font-size: 12px; padding-block: 18px; flex-wrap: wrap; gap: 4px 16px; }
+      header { padding-block: 36px 28px; }
+      .intro { font-size: 18px; }
+      .jump-links { gap: 0 20px; }
+      section { padding-block: 30px; }
+      .section-top { display: block; margin-bottom: 22px; }
+      .section-top > p { margin-top: 14px; }
+      .workflow-controls { grid-template-columns: 1fr; gap: 18px; padding: 18px; }
+      .map { padding: 8px 28px 8px 0; }
+      .map-grid { grid-template-columns: 1fr; grid-template-areas: "frame" "design" "discover" "engine" "formulate" "slice" "implement"; gap: 24px; }
+      .skill-node { min-height: 104px; display: grid; grid-template-columns: 1fr; gap: 5px; padding: 13px 16px; }
+      .skill-node strong { font-size: 18px; }
+      .skill-node code { position: absolute; top: 15px; right: 14px; max-width: 48%; font-size: 11px; }
+      .skill-node .node-purpose { padding-right: 55%; }
+      .skill-node.engine { min-height: 116px; display: block; }
+      .skill-node.engine strong { display: block; margin-bottom: 7px; }
+      .skill-node.engine code { position: static; font-size: 12px; }
+      .skill-node.engine .node-purpose { display: block; padding-right: 0; margin-bottom: 7px; }
+      .detail-panel, .two-columns, .reference-body, .record-view, .schema-grid { grid-template-columns: 1fr; gap: 20px; }
+      .detail-panel dl { grid-template-columns: 80px 1fr; gap: 8px 14px; }
+      .reference-heading { display: inline-flex; flex-direction: column; gap: 5px; width: calc(100% - 30px); }
+      .reference-body { padding-inline: 10px; }
+      .reference-body .prompt, .reference-body .source { grid-column: auto; }
+      .call-loop { grid-template-columns: 1fr; gap: 10px; }
+      .loop-arrow { transform: rotate(90deg); line-height: 1; }
+      .record-files li { grid-template-columns: 1fr; gap: 2px; }
+      .boundary-list, .sources { grid-template-columns: 1fr; gap: 14px; }
+      table, tbody, tr, td { display: block; }
+      thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+      tr { padding-block: 12px; border-bottom: 1px solid var(--rule); }
+      td { border: 0; padding: 5px 0; }
+      td:first-child { width: 100%; font-size: 16px; }
+      td[data-label]::before { content: attr(data-label) ": "; font-size: 13px; font-weight: 650; color: var(--muted); }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    @media print {
+      body { background: white; color: #202e35; font-size: 10pt; }
+      .wrap { width: 100%; }
+      header { padding-block: 20px; }
+      h1 { font-size: 38pt; } h2 { font-size: 24pt; }
+      .jump-links, .workflow-controls, .mode-buttons, .skip { display: none; }
+      .map-grid { grid-template-columns: repeat(3, 1fr); grid-template-areas: "frame design discover" ". engine engine" "formulate slice implement"; }
+      .skill-node { min-height: 115px; background: white; }
+      .skill-node[aria-pressed="true"] { outline: none; }
+      section { break-inside: auto; padding-block: 24px; }
+      .skill-reference details, .call-loop, .record-view { break-inside: avoid; }
+      .reference-body, .records-schema .schema-body { display: grid !important; }
+      a { color: inherit; }
+      footer { padding-bottom: 0; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to report</a>
+  <div class="wrap">
+    <div class="masthead"><strong>Frantss skills / Behavior-driven development</strong><span>Working tree report · 28 October 2026</span></div>
+    <header>
+      <p class="kicker">A field guide to seven cooperating skills</p>
+      <h1>The BDD skill set</h1>
+      <p class="intro">Start with the question you need to answer. Use the skills that produce the missing evidence, decisions, specification, or code.</p>
+      <nav class="jump-links" aria-label="Report sections">
+        <a href="#workflows">Workflow map</a><a href="#reference">Skill reference</a><a href="#handoff">Breakdown and discovery</a><a href="#records">Working modes</a><a href="#evidence">Evidence</a><a href="#sources">Sources</a>
+      </nav>
+    </header>
+    <main id="main">
+      <noscript><p>The complete skill reference, handoff explanation, and source links work without JavaScript. Enable JavaScript to change the highlighted workflow and record view.</p></noscript>
+      <section id="workflows" aria-labelledby="map-title">
+        <div class="section-top"><div><span class="index">01 / Choose an entry point</span><h2 id="map-title">One toolkit. Several routes.</h2></div><p>Each skill can work independently. The diagram shows useful connections; arrows do not establish prerequisites.</p></div>
+        <div class="workflow-controls">
+          <div><label for="workflow">What are you trying to do?</label>
+            <select id="workflow">
+              <optgroup label="Understand and decide">
+                <option value="understand">Understand software or a spec</option>
+                <option value="problem">Clarify the problem</option>
+                <option value="design">Design or plan a migration</option>
+                <option value="discovery">Agree unresolved behavior</option>
+              </optgroup>
+              <optgroup label="Take a feature through delivery">
+                <option value="feature">Develop a new feature</option>
+                <option value="change">Change an existing feature</option>
+                <option value="spec-build">Specify and implement rules</option>
+                <option value="plan-build">Plan and implement a ticket</option>
+              </optgroup>
+              <optgroup label="Enter with prepared inputs">
+                <option value="formulate">Write Gherkin from agreed rules</option>
+                <option value="slice">Draft implementation tickets</option>
+                <option value="implement" selected>Implement from clear cases</option>
+                <option value="partial">Deliver a settled subset of a feature</option>
+              </optgroup>
+            </select>
+          </div>
+          <div aria-live="polite" aria-atomic="true"><p id="workflow-description">Implement one authorized outcome from clear acceptance cases. A ticket document, Gherkin, and earlier stages are optional.</p><p id="workflow-stop">Check the baseline and verify every promised case on the final code. Selecting this example does not execute a skill.</p></div>
+        </div>
+        <figure aria-labelledby="map-title map-caption">
+          <div class="map" id="skill-map">
+            <svg class="connections" aria-hidden="true"><defs><marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L8 4 L0 8 Z" fill="#6f7d76"/></marker><marker id="amber-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L8 4 L0 8 Z" fill="#785016"/></marker></defs><g id="paths"></g></svg>
+            <div class="map-grid">
+              <button class="skill-node" style="grid-area:frame" data-skill="frame" aria-pressed="false"><span class="node-purpose">Need and scope</span><strong>Frame the problem</strong><code>frame-problem</code></button>
+              <button class="skill-node" style="grid-area:design" data-skill="design" aria-pressed="false"><span class="node-purpose">Approach and trade-offs</span><strong>Design a solution</strong><code>design-solution</code></button>
+              <button class="skill-node" style="grid-area:discover" data-skill="discover" aria-pressed="false"><span class="node-purpose">Rules and agreement</span><strong>Discover behavior</strong><code>discover-behavior</code></button>
+              <button class="skill-node engine" data-skill="break" aria-pressed="false"><strong>Break it down</strong><span class="node-purpose">Map the full specification. Discovery can request analysis and resume with the findings.</span><code>break-down</code></button>
+              <button class="skill-node" style="grid-area:formulate" data-skill="formulate" aria-pressed="false"><span class="node-purpose">Behavioral specification</span><strong>Formulate behavior</strong><code>formulate-behavior</code></button>
+              <button class="skill-node" style="grid-area:slice" data-skill="slice" aria-pressed="false"><span class="node-purpose">Bounded implementation work</span><strong>Slice the work</strong><code>slice-work</code></button>
+              <button class="skill-node in-route" style="grid-area:implement" data-skill="implement" aria-pressed="true"><span class="node-purpose">Code and executed checks</span><strong>Implement one outcome</strong><code>implement-ticket</code></button>
+            </div>
+          </div>
+          <figcaption id="map-caption">Select a skill for its contract. Green nodes belong to the selected route. The amber analysis skill can also run on its own. Its dashed connection is a request-and-return loop with discovery.</figcaption>
+        </figure>
+        <div class="legend" aria-label="Diagram legend"><span><i class="swatch" aria-hidden="true"></i>Selected workflow</span><span><i class="swatch engine" aria-hidden="true"></i>Specification analysis</span><span><i class="dash" aria-hidden="true"></i>Invoke when context needs analysis</span></div>
+        <div class="route-area"><p class="small" id="route-label">Example sequence for the selected workflow</p><ol class="route" id="route" aria-labelledby="route-label"><li><a href="#ref-implement"><code>implement-ticket</code></a></li></ol><p class="small" id="route-note">Clear native acceptance cases can go directly to implementation. Add other stages only when their output is needed.</p></div>
+        <div class="detail-panel" id="skill-detail" aria-live="polite" aria-atomic="true">
+          <div><h3 id="detail-title">Implement one outcome</h3><p class="small" id="detail-question">Does the final code satisfy every promised case and required check?</p><p class="small"><a id="detail-source" href="../skills/implement-ticket/SKILL.md">Read the skill source</a></p></div>
+          <dl><dt>Input</dt><dd id="detail-input">An authorized ticket or named scope with clear acceptance cases.</dd><dt>Output</dt><dd id="detail-output">Implementation, native tests, and current verification evidence for the selected outcome.</dd><dt>Completion</dt><dd id="detail-done">Every promised behavior and required check passes on final code, without missing coverage or unresolved blockers.</dd></dl>
+        </div>
+      </section>
+      <section id="reference" aria-labelledby="reference-title">
+        <div class="section-top"><div><span class="index">02 / Inputs, outputs, and example requests</span><h2 id="reference-title">Use the skill that fits the gap.</h2></div><p>Explicit skill names make intent clear. Automatic selection is also enabled. These example prompts describe requests; they do not run commands.</p></div>
+        <div class="skill-reference">
+          <details id="ref-break"><summary><span class="reference-heading"><code>break-down</code><span>Collect and explain software or a specification.</span></span></summary><div class="reference-body">
+            <div><h4>Use when</h4><p>You need a structured understanding of existing software or a complete or partial specification. It also accepts scoped analysis requests from discovery.</p></div>
+            <div><h4>Delivers</h4><p>Areas, rules, states, cases, evidence, conflicts, and gaps. It includes interfaces, data, background behavior, and stated nonfunctional constraints beyond journeys.</p></div>
+            <div><h4>Important boundary</h4><p>Preserve whether requirements are proposed or agreed. Separate observed results, code inferences, and derived cases. Analysis leaves unsupported outcomes open.</p></div>
+            <div><h4>Completion</h4><p>Every in-scope source requirement maps to an area and cases or an explicit gap. Reconstructed maps name inspected and unexplored surfaces.</p></div>
+            <div class="prompt"><h4>Example request</h4><code>Use $break-down to collect and explain the invitation specification, including permissions, API rules, expiry jobs, states, and stated latency targets. Keep missing decisions open.</code></div>
+            <a class="source" href="../skills/break-down/SKILL.md">Source: break-down/SKILL.md</a>
+          </div></details>
+          <details id="ref-frame"><summary><span class="reference-heading"><code>frame-problem</code><span>Establish the need, evidence, and outcome.</span></span></summary><div class="reference-body">
+            <div><h4>Use when</h4><p>The problem, intended outcome, scope, or constraints are unclear. A proposed solution can be an input without becoming an agreed direction.</p></div>
+            <div><h4>Delivers</h4><p>A problem brief covering context, people, goals, evidence, boundaries, constraints, and consequential questions.</p></div>
+            <div><h4>Important boundary</h4><p>Separate needs from symptoms, assumptions, and proposed solutions. Preserve prior agreements and leave unknown baselines or targets explicit.</p></div>
+            <div><h4>Completion</h4><p>Each in-scope need and constraint is accounted for. Evidence gaps and blockers to the brief's intended use are identified.</p></div>
+            <div class="prompt"><h4>Example request</h4><code>Use $frame-problem to understand why invitations fail to produce completed onboarding. Define the problem and useful success criteria before choosing a solution.</code></div>
+            <a class="source" href="../skills/frame-problem/SKILL.md">Source: frame-problem/SKILL.md</a>
+          </div></details>
+          <details id="ref-design"><summary><span class="reference-heading"><code>design-solution</code><span>Choose an approach and define cooperating parts.</span></span></summary><div class="reference-body">
+            <div><h4>Use when</h4><p>You need to compare solutions, refine a design, or plan a technical migration. Supplied requirements or an existing design are sufficient starting points.</p></div>
+            <div><h4>Delivers</h4><p>A scoped proposal with alternatives, responsibilities, interfaces, dependencies, trade-offs, and unresolved choices. Migration sequencing is included when requested.</p></div>
+            <div><h4>Important boundary</h4><p>Concept selection can happen before detailed behavior discovery. Keep proposed approaches separate from decisions and verify feasibility against relevant code or authoritative sources.</p></div>
+            <div><h4>Completion</h4><p>The design addresses the supplied needs, behavior, and constraints at the requested depth. Unverified assumptions and unresolved decisions are visible.</p></div>
+            <div class="prompt"><h4>Example request</h4><code>Use $design-solution to compare ways to resend invitations. Define responsibilities, interfaces, dependencies, verification, and risks. Keep this request to the proposal.</code></div>
+            <a class="source" href="../skills/design-solution/SKILL.md">Source: design-solution/SKILL.md</a>
+          </div></details>
+          <details id="ref-discover"><summary><span class="reference-heading"><code>discover-behavior</code><span>Resolve expected behavior through conversation.</span></span></summary><div class="reference-body">
+            <div><h4>Use when</h4><p>Consumer-visible rules, boundaries, or outcomes need agreement. Consumers include people, API clients, and calling code.</p></div>
+            <div><h4>Delivers</h4><p>Rules and examples with starting conditions, events, outcomes, side effects, and prohibited effects. Agreements, proposals, evidence, and open decisions remain distinct.</p></div>
+            <div><h4>Important boundary</h4><p>Check relevant revisions before reusing observations or code inferences. Refresh affected findings without changing agreements. Use break-down for missing context, then focus discovery on unresolved outcomes and affected interactions.</p></div>
+            <div><h4>Completion</h4><p>Coverage, interactions, contradictions, and gaps are reviewed. Unresolved choices block only dependent work; silence does not settle a decision.</p></div>
+            <div class="prompt"><h4>Example request</h4><code>Use $discover-behavior to agree invitation resend rules. Analyze the supplied specification where needed, then discuss eligibility, expiry changes, and limits.</code></div>
+            <a class="source" href="../skills/discover-behavior/SKILL.md">Source: discover-behavior/SKILL.md</a>
+          </div></details>
+          <details id="ref-formulate"><summary><span class="reference-heading"><code>formulate-behavior</code><span>Turn agreed behavior into source-linked Gherkin.</span></span></summary><div class="reference-body">
+            <div><h4>Use when</h4><p>The expected behavior is settled and Gherkin is requested or fits existing project tooling. Precise native acceptance cases can go directly to slicing or implementation.</p></div>
+            <div><h4>Delivers</h4><p>Independently understandable scenarios, Rule groups, and Scenario Outlines where useful. Preserve project tags, terminology, units, case identities, and source mappings.</p></div>
+            <div><h4>Important boundary</h4><p>Derive only outcomes supported by agreed rules. Valid Gherkin syntax does not establish that software behaves correctly.</p></div>
+            <div><h4>Completion</h4><p>Every in-scope rule and example is accounted for, with conflicts and gaps explicit. Report parser validation or manual syntax review separately from runtime testing.</p></div>
+            <div class="prompt"><h4>Example request</h4><code>Use $formulate-behavior for these agreed rules: integer inputs 1 through 5 pass; other integers fail without changing state. Preserve our existing tags and case-ID comments.</code></div>
+            <a class="source" href="../skills/formulate-behavior/SKILL.md">Source: formulate-behavior/SKILL.md</a>
+          </div></details>
+          <details id="ref-slice"><summary><span class="reference-heading"><code>slice-work</code><span>Group agreed behavior into verifiable tickets.</span></span></summary><div class="reference-body">
+            <div><h4>Use when</h4><p>You need bounded implementation outcomes and dependencies from an agreed behavioral specification. Gherkin is optional.</p></div>
+            <div><h4>Delivers</h4><p>Tickets with stable IDs, outcome titles, context, dependencies, and behavior mappings. Add verification guidance where setup or regressions need explanation.</p></div>
+            <div><h4>Important boundary</h4><p>Each selected case has one completing owner, is already satisfied with evidence, or remains an explicit gap. Regression references preserve ownership. One ticket can cover the whole selected scope.</p></div>
+            <div><h4>Completion</h4><p>Coverage is accounted for, dependencies are acyclic, prerequisites are verifiable, and ticket sources resolve. Drafting tickets does not itself authorize publication or implementation.</p></div>
+            <div class="prompt"><h4>Example request</h4><code>Use $slice-work to draft tickets from these agreed invitation cases. Choose useful boundaries and dependencies. Do not publish or implement them.</code></div>
+            <a class="source" href="../skills/slice-work/SKILL.md">Source: slice-work/SKILL.md</a>
+          </div></details>
+          <details id="ref-implement"><summary><span class="reference-heading"><code>implement-ticket</code><span>Implement and verify one authorized outcome.</span></span></summary><div class="reference-body">
+            <div><h4>Use when</h4><p>A ticket or named implementation scope has clear acceptance cases and implementation is authorized. Ticket documents, prior BDD stages, and Gherkin are optional.</p></div>
+            <div><h4>Delivers</h4><p>Code, native tests, and current evidence for all promised cases. Default to test-first, while reporting a concrete reason when that ordering is impractical.</p></div>
+            <div><h4>Important boundary</h4><p>Verify real prerequisites and the baseline. If adequate passing evidence already covers every case, report that no code change is needed. Ask only about consequential missing scope or behavior.</p></div>
+            <div><h4>Completion</h4><p>All promised behavior and required checks pass on the final code, with no missing coverage or unresolved blocker. Record failed, blocked, and unexecuted checks accurately.</p></div>
+            <div class="prompt"><h4>Example request</h4><code>Use $implement-ticket to implement TK-001 from its supplied acceptance cases. Use the existing native tests and report verification against the final code.</code></div>
+            <a class="source" href="../skills/implement-ticket/SKILL.md">Source: implement-ticket/SKILL.md</a>
+          </div></details>
+        </div>
+      </section>
+      <section id="handoff" aria-labelledby="handoff-title">
+        <div class="section-top"><div><span class="index">03 / Analysis supports agreement</span><h2 id="handoff-title">Breakdown gives discovery a starting point.</h2></div><p>The two skills share behavioral concepts. They answer different questions and preserve different kinds of certainty.</p></div>
+        <div class="call-loop">
+          <div><h3><code>discover-behavior</code></h3><p>Identify a consequential behavior choice. Reuse sufficient context, or request analysis of the specific missing area.</p><p class="small">Sends: subject, sources, scope, and gaps.</p></div>
+          <div class="loop-arrow" aria-label="Request analysis and return findings">⇄</div>
+          <div class="analysis"><h3><code>break-down</code></h3><p>Collect a supported map of rules, states, cases, interfaces, and stated constraints. Explain conflicts and unknowns.</p><p class="small">Returns: findings, source identities, evidence, and gaps.</p></div>
+        </div>
+        <div class="two-columns" style="margin-top:28px">
+          <div><h3>Works with a specification alone</h3><p>There does not need to be an application to inspect. A proposed specification can be mapped, with its proposed status preserved. Missing rules remain questions for discovery.</p></div>
+          <div><h3>Can repeat within a conversation</h3><p>A later decision can expose another factual gap. Request a focused breakdown and keep unaffected findings. Check revisions before reuse; refresh stale observations without silently changing agreements. Discovery also works without break-down.</p></div>
+        </div>
+        <p class="principle">An explanation establishes what the sources support. A behavior decision establishes what is expected.</p>
+        <p class="small" style="margin-top:16px">Sources: <a href="../skills/break-down/SKILL.md">break-down</a> and <a href="../skills/discover-behavior/SKILL.md">discover-behavior</a>.</p>
+      </section>
+      <section id="records" aria-labelledby="records-title">
+        <div class="section-top"><div><span class="index">04 / Choose how work is kept</span><h2 id="records-title">Standalone by default. Tracked when requested.</h2></div><p>These are working modes, not extra stages. An unrelated BDD folder does not enroll a new request into that run.</p></div>
+        <div class="mode-buttons" role="group" aria-label="Working mode"><button id="standalone-mode" type="button" aria-pressed="true">Standalone work</button><button id="tracked-mode" type="button" aria-pressed="false">Tracked BDD run</button></div>
+        <div class="record-view" aria-live="polite" aria-atomic="true">
+          <div><h3 id="mode-title">Use the supplied inputs and return the requested result.</h3><p id="mode-description" style="margin-top:12px">Work in the conversation or requested document. Earlier skills, Gherkin, and a new BDD folder are not general prerequisites.</p><p class="small" id="mode-path" style="margin-top:12px">Files shown here are illustrative destinations, not files created by this report.</p></div>
+          <ul class="record-files" id="record-files" aria-label="Records for the selected workflow"><li><code>Conversation</code><span>Results for the selected skills, with sources and unresolved gaps.</span></li><li><code>Requested files</code><span>Create only documents or code included in the request.</span></li></ul>
+        </div>
+        <details class="records-schema"><summary>How a tracked run is organized</summary><div class="schema-body">
+          <p>Use <code>.scratch/bdd/&lt;feature_slug&gt;-&lt;NNN&gt;/</code>, with a stable feature slug and a three-digit per-feature ordinal. Create only records for participating stages.</p>
+          <div class="schema-grid">
+            <div><h3>Run identity</h3><pre><code>feature_name: Invitation resend
+feature_slug: invitation-resend
+run_id: invitation-resend-001
+stage: discovery
+current_slice: S-001
+current_ticket: null</code></pre><p class="small" style="margin-top:10px">Illustrative YAML. The active stage can be framing, concept, design, discovery, formulation, slicing, or implementation.</p></div>
+            <div><h3>Run sections</h3><p style="margin-top:12px"><strong>Documents</strong> keeps named slice entries, scope, file-qualified members, dependencies, and a File | Status table.</p><p><strong>Validation</strong> keeps evidence and limitations. Implementation adds ticket execution and behavior-check tables.</p><p><strong>Next action</strong> identifies the current step. Preserve identities, human edits, and unaffected work when resuming.</p></div>
+          </div>
+          <div class="status-list" aria-label="Document status meanings"><span><code>pending</code>: unvisited</span><span><code>draft</code>: incomplete</span><span><code>blocked</code>: unresolved prerequisite</span><span><code>ready</code>: sufficient for intended use</span><span><code>partial</code>: named usable scope and blockers</span></div>
+          <p class="small" style="margin-top:16px">Document readiness differs from implementation completion. Implementation states are pending, in_progress, blocked, and done; behavior-check results are passed, failed, blocked, and not_run. Changes that invalidate evidence reset affected checks and reopen affected done tickets.</p>
+          <p class="small" style="margin-top:12px">break-down has no separate BDD stage or fixed tracked-file schema. It returns its map to the caller or saves it only when requested or continuing an identified record.</p>
+        </div></details>
+      </section>
+      <section id="evidence" aria-labelledby="evidence-title">
+        <div class="section-top"><div><span class="index">05 / Know what each result proves</span><h2 id="evidence-title">Keep evidence and agreement distinct.</h2></div><p>A source reference establishes where a claim came from. An executed assertion establishes a checked outcome within its tested scope.</p></div>
+        <div class="table-wrap"><table><caption>Illustrative invitation example. These rows explain the contracts; they are not results from an executed invitation system.</caption><thead><tr><th scope="col">Kind of result</th><th scope="col">Example</th><th scope="col">What it establishes</th></tr></thead><tbody>
+          <tr><td>Source statement</td><td data-label="Example">A proposed specification says invitations expire after seven days.</td><td data-label="Establishes">The proposal contains that rule. Its presence alone does not establish agreement or implementation.</td></tr>
+          <tr><td>Implementation inference</td><td data-label="Example">Reading an expiry condition suggests rejection at the cutoff.</td><td data-label="Establishes">A source-backed inference. No runtime observation has been made.</td></tr>
+          <tr><td>Agreed behavior</td><td data-label="Example">Acceptance at or after expiry must fail without creating membership.</td><td data-label="Establishes">An expected outcome accepted during discovery or supplied as an agreed requirement.</td></tr>
+          <tr><td>Formulated scenario</td><td data-label="Example">Given a pending invitation at expiry, when accepted, then reject it and create no membership.</td><td data-label="Establishes">A concrete specification of the rule. Parsing it checks syntax, not system behavior.</td></tr>
+          <tr><td>Executed check</td><td data-label="Example">A native test asserts rejection and no membership at the cutoff, then passes on the final code.</td><td data-label="Establishes">Evidence for that acceptance case on the checked code. Other cases and required regressions still need coverage.</td></tr>
+        </tbody></table></div>
+        <p class="evidence-note">Traceability runs from source rules to cases, ticket ownership, and native assertions. Keep one authoritative definition of each rule and preserve its identity across handoffs.</p>
+        <ul class="boundary-list">
+          <li><strong>Missing decisions stay open.</strong><p>Infer only outcomes supported by supplied rules. Unanswered questions block dependent work, not an unrelated settled subset.</p></li>
+          <li><strong>Scope does not imply permission.</strong><p>Explaining behavior does not authorize changes. Drafting tickets does not authorize publishing them. Continue implementation only when it is included in the request or prior authorization.</p></li>
+          <li><strong>Prepared inputs let you enter later.</strong><p>Clear native acceptance cases can go straight to implementation without a ticket document. Add Gherkin when requested or useful, and slicing when implementation boundaries need work.</p></li>
+          <li><strong>Ordinary work can stay ordinary.</strong><p>A typo correction or a request to run existing tests does not require BDD discovery, formulation, or new run records.</p></li>
+        </ul>
+      </section>
+      <section id="sources" aria-labelledby="sources-title">
+        <div class="section-top"><div><span class="index">06 / Report basis</span><h2 id="sources-title">The local skill contracts.</h2></div><p>This report reflects the working tree, including the new breakdown skill. Workflow recipes combine the documented capabilities; they are examples rather than required sequences.</p></div>
+        <ul class="sources"><li><a href="../skills/break-down/SKILL.md">break-down / Full specification analysis</a></li><li><a href="../skills/frame-problem/SKILL.md">frame-problem / Needs and outcomes</a></li><li><a href="../skills/design-solution/SKILL.md">design-solution / Approach and responsibilities</a></li><li><a href="../skills/discover-behavior/SKILL.md">discover-behavior / Rules and agreement</a></li><li><a href="../skills/formulate-behavior/SKILL.md">formulate-behavior / Gherkin specification</a></li><li><a href="../skills/slice-work/SKILL.md">slice-work / Tickets and coverage</a></li><li><a href="../skills/implement-ticket/SKILL.md">implement-ticket / Delivery and verification</a></li><li><a href="../tests/fixtures/bdd-requests.json">Regression request matrix / Supported and nearby requests</a></li><li><a href="../CONTRIBUTING.md">Authoring conventions / Packaging and record ownership</a></li></ul>
+        <p class="small" style="margin-top:18px">The report runs offline without external assets. Source links refer to files in this repository. Selected regression requests run through the <a href="../evals/bdd.py">BDD evaluator</a>; fixture presence and evaluator unit tests alone do not establish successful agent execution.</p>
+      </section>
+    </main>
+    <footer>Frantss skills · BDD field guide · Built from the current local instructions on 28 October 2026.</footer>
+  </div>
+  <script>
+    const skills = {
+      break: { name: "break-down", title: "Break down software and specifications", question: "What does the full specification contain, and what do its sources support?", input: "Existing software, a complete or partial specification, or a scoped request from another skill.", output: "A source-linked map of areas, rules, states, cases, constraints, conflicts, and gaps, followed by an explanation.", done: "Every in-scope source requirement maps to supported cases or an explicit gap; inspected and unexplored surfaces are identified.", file: null },
+      frame: { name: "frame-problem", title: "Frame the problem", question: "What need are we addressing, for whom, and with what intended outcome?", input: "Context, evidence, reported symptoms, prior decisions, and constraints.", output: "A scoped problem brief with people, goals, evidence, constraints, and open questions.", done: "In-scope needs and constraints are accounted for, with evidence gaps and blockers explicit.", file: "problem.md" },
+      design: { name: "design-solution", title: "Design a solution", question: "Which approach fits the need, and how should its parts cooperate?", input: "Requirements, a problem brief, relevant behavior, or an existing design.", output: "A scoped proposal covering alternatives, responsibilities, interfaces, dependencies, trade-offs, and unresolved choices.", done: "The proposal addresses supplied needs and constraints at the requested depth; unverified assumptions remain visible.", file: "design.md" },
+      discover: { name: "discover-behavior", title: "Discover behavior", question: "What should happen under these conditions?", input: "Requirements, examples, prior decisions, and relevant evidence.", output: "Supported rules and concrete examples, with agreements and open decisions distinguished.", done: "The supported scope is clear; consequential gaps and unresolved behavior remain explicit.", file: "discovery.md" },
+      formulate: { name: "formulate-behavior", title: "Formulate behavior", question: "How do we express the agreed behavior as precise, independently understandable scenarios?", input: "Agreed rules and examples from any sufficient supplied source.", output: "Source-linked Gherkin that preserves project vocabulary, tags, identities, and behavioral boundaries.", done: "All in-scope rules and examples are accounted for, with syntax review and runtime claims distinguished.", file: "behavior.feature" },
+      slice: { name: "slice-work", title: "Slice work into tickets", question: "Which bounded outcomes deliver the agreed cases, and what depends on what?", input: "An agreed behavioral specification, Gherkin or native examples, plus relevant design.", output: "Verifiable tickets with source case mappings, dependencies, and explicit coverage gaps.", done: "Each selected case has one completing owner, existing satisfaction evidence, or a named gap; dependencies are acyclic.", file: "tickets.md" },
+      implement: { name: "implement-ticket", title: "Implement one outcome", question: "Does the final code satisfy every promised case and required check?", input: "An authorized ticket or named scope with clear acceptance cases; no ticket document is required.", output: "Implementation, native tests, and current verification evidence for the selected outcome.", done: "Every promised behavior and required check passes on final code, without missing coverage or unresolved blockers.", file: null }
+    };
+    const workflows = {
+      understand: { steps: ["break"], focus: "break", description: "Collect and explain the full supplied specification, or reconstruct supported behavior from existing software. Journeys are one view alongside states, interfaces, data, background events, and stated constraints.", stop: "The result is understanding. Behavior choices and implementation remain outside this request.", note: "No implementation or BDD run is required. Return the map in the conversation or requested document." },
+      problem: { steps: ["frame"], focus: "frame", description: "Clarify needs, evidence, affected people, scope, and intended outcomes before deciding how to address them.", stop: "Deliver the brief with open questions. A proposed solution remains a proposal.", note: "Enter here when the problem itself is unresolved. Continue into design only when the request includes that work." },
+      design: { steps: ["design"], focus: "design", description: "Compare credible approaches or refine an existing design, including responsibilities, interfaces, dependencies, risks, and verification.", stop: "A proposal can be delivered without enrolling the work in a BDD run or asking for acceptance of the draft.", note: "Useful for migrations and architectural decisions as well as features. Supplied requirements can be enough." },
+      discovery: { steps: ["discover"], focus: "discover", description: "Resolve unsettled rules through examples and conversation. If specification context needs systematic analysis, discovery can invoke break-down and then resume.", stop: "Missing decisions remain open. Discovery works even when break-down is unavailable.", note: "Check relevant revisions before reusing observations. Refresh affected findings, preserve agreements, and focus on unresolved outcomes and interactions." },
+      feature: { steps: ["frame", "design", "discover", "formulate", "slice", "implement"], focus: "discover", description: "This longer example frames an unclear need, compares an approach, agrees behavior, writes Gherkin, groups the work, and implements a selected outcome.", stop: "Implementation requires authorization. Selecting this example does not execute any skill.", note: "Skip framing or design when those questions are settled. Gherkin and ticket slicing are optional when native acceptance cases already define a clear implementation scope." },
+      change: { steps: ["break", "discover", "design", "formulate", "slice", "implement"], focus: "break", description: "Understand the relevant existing behavior, agree the change, refine its design, specify the cases, draft tickets, and implement the selected ticket.", stop: "Implementation facts are evidence, not automatically agreed requirements. Keep the analysis within the affected scope.", note: "This example starts with an explicit breakdown. Discovery can instead request it internally. Design may precede or follow discovery." },
+      "spec-build": { steps: ["formulate", "implement"], focus: "formulate", description: "Turn already agreed rules into Gherkin, then implement their supplied clear acceptance scope using native tests.", stop: "This route requires authorization for both specification and implementation. Missing consequential rules still need decisions.", note: "There is no mandatory discovery run, specification-acceptance gate, or slicing stage for a clear authorized implementation scope." },
+      "plan-build": { steps: ["slice", "implement"], focus: "slice", description: "Draft verifiable tickets from agreed cases, choose routine boundaries and dependencies, then implement the first independently verifiable ticket.", stop: "The request must include implementation. Drafting tickets alone does not authorize it.", note: "Verify real prerequisites before coding. Existing authorization can cover the handoff without a separate acceptance of routine ticket definitions." },
+      formulate: { steps: ["formulate"], focus: "formulate", description: "Use agreed rules directly to produce source-linked Gherkin, including only boundary cases and combinations the sources support.", stop: "Deliver the specification. Report parsing separately from executed system tests.", note: "A discovery document is optional. Preserve the project's existing tags and case-identity conventions." },
+      slice: { steps: ["slice"], focus: "slice", description: "Group supplied behavior examples into coherent implementation outcomes, with one completing owner per selected case and explicit dependencies.", stop: "Deliver draft tickets. Publication or implementation needs its own authorization.", note: "Inputs can be native examples rather than Gherkin. A previous BDD run is unnecessary." },
+      implement: { steps: ["implement"], focus: "implement", description: "Implement one authorized outcome from clear acceptance cases, inspect the baseline and real prerequisites, and verify all promised cases on final code.", stop: "Do not mark done while a promised case or required check remains missing, failed, or blocked.", note: "A ticket document is optional. Clear native acceptance cases can go directly to implementation. Add earlier stages only when their output is needed." },
+      partial: { steps: ["implement"], focus: "implement", description: "Implement a named, settled subset while unrelated behavior remains undecided. Keep the open questions and unaffected records intact.", stop: "A missing choice blocks only dependent work. Verify that the selected subset has no unresolved prerequisite.", note: "When resuming an identified run, invalidate affected prior evidence and record current results. Do not silently expand the selected scope." }
+    };
+    const workflowSelect = document.getElementById("workflow");
+    const nodes = Array.from(document.querySelectorAll(".skill-node"));
+    let selectedWorkflow = workflows[workflowSelect.value];
+    let tracked = false;
+    function skillSource(key) { return "../skills/" + skills[key].name + "/SKILL.md"; }
+    function showSkill(key) {
+      const skill = skills[key];
+      nodes.forEach(function(node) { node.setAttribute("aria-pressed", String(node.dataset.skill === key)); });
+      document.getElementById("detail-title").textContent = skill.title;
+      document.getElementById("detail-question").textContent = skill.question;
+      document.getElementById("detail-input").textContent = skill.input;
+      document.getElementById("detail-output").textContent = skill.output;
+      document.getElementById("detail-done").textContent = skill.done;
+      document.getElementById("detail-source").href = skillSource(key);
+    }
+    function addRecord(file, meaning) {
+      const li = document.createElement("li");
+      const code = document.createElement("code");
+      const description = document.createElement("span");
+      code.textContent = file; description.textContent = meaning;
+      li.append(code, description); document.getElementById("record-files").append(li);
+    }
+    function updateRecords() {
+      document.getElementById("standalone-mode").setAttribute("aria-pressed", String(!tracked));
+      document.getElementById("tracked-mode").setAttribute("aria-pressed", String(tracked));
+      document.getElementById("record-files").replaceChildren();
+      if (!tracked) {
+        document.getElementById("mode-title").textContent = "Use the supplied inputs and return the requested result.";
+        document.getElementById("mode-description").textContent = "Work in the conversation or requested document. Earlier skills, Gherkin, and a new BDD folder are not general prerequisites.";
+        document.getElementById("mode-path").textContent = "Files shown here are illustrative destinations, not files created by this report.";
+        addRecord("Conversation", "Results for the selected skills, with sources and unresolved gaps.");
+        addRecord("Requested files", "Create only documents or code included in the request.");
+      } else if (selectedWorkflow.steps.every(function(key) { return key === "break"; })) {
+        document.getElementById("mode-title").textContent = "Breakdown returns a map; it has no separate tracked BDD stage.";
+        document.getElementById("mode-description").textContent = "Save its output only when requested or continuing an identified record. A breakdown alone does not require run.md.";
+        document.getElementById("mode-path").textContent = "A caller can reference the map from an existing run while preserving its source identities.";
+        addRecord("Specification map", "Conversation or requested document; no mandatory filename.");
+      } else {
+        document.getElementById("mode-title").textContent = "Create or resume only the records that this workflow uses.";
+        document.getElementById("mode-description").textContent = "Use tracked mode only when explicitly requested or continuing an identified run. Preserve existing identities, decisions, human edits, and unaffected work.";
+        document.getElementById("mode-path").textContent = "Illustrative location: .scratch/bdd/invitation-resend-001/";
+        addRecord("run.md", "Current identity, stage, documents, validation, and next action. Update as work progresses.");
+        selectedWorkflow.steps.forEach(function(key) {
+          if (skills[key].file) addRecord(skills[key].file, skills[key].title);
+          if (key === "break") addRecord("Specification map", "Requested document or returned findings; no separate BDD stage.");
+          if (key === "implement") addRecord("Code + native tests", "Current behavior and prerequisite checks; implementation evidence is recorded under run.md Validation.");
+        });
+      }
+    }
+    function showWorkflow() {
+      selectedWorkflow = workflows[workflowSelect.value];
+      document.getElementById("workflow-description").textContent = selectedWorkflow.description;
+      document.getElementById("workflow-stop").textContent = selectedWorkflow.stop;
+      document.getElementById("route-note").textContent = selectedWorkflow.note;
+      const route = document.getElementById("route"); route.replaceChildren();
+      selectedWorkflow.steps.forEach(function(key) {
+        const li = document.createElement("li"); const link = document.createElement("a"); const code = document.createElement("code");
+        link.href = "#ref-" + key; code.textContent = skills[key].name;
+        link.append(code); li.append(link); route.append(li);
+      });
+      nodes.forEach(function(node) {
+        const included = selectedWorkflow.steps.includes(node.dataset.skill);
+        node.classList.toggle("in-route", included);
+        node.setAttribute("aria-label", skills[node.dataset.skill].title + (included ? ", included in selected workflow" : ", outside selected workflow") + ". Show skill contract.");
+      });
+      showSkill(selectedWorkflow.focus); updateRecords();
+    }
+    function drawConnections() {
+      const map = document.getElementById("skill-map"); const box = map.getBoundingClientRect();
+      const positions = {};
+      nodes.forEach(function(node) { const r = node.getBoundingClientRect(); positions[node.dataset.skill] = { x: r.left - box.left, y: r.top - box.top, w: r.width, h: r.height }; });
+      const paths = document.getElementById("paths"); paths.replaceChildren();
+      function path(d, engine, both) {
+        const p = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        p.setAttribute("d", d); p.setAttribute("class", engine ? "engine-connection" : "connection");
+        p.setAttribute("marker-end", engine ? "url(#amber-arrow)" : "url(#arrow)");
+        if (both) p.setAttribute("marker-start", engine ? "url(#amber-arrow)" : "url(#arrow)");
+        paths.append(p);
+      }
+      const route = ["frame", "design", "discover", "formulate", "slice", "implement"];
+      route.slice(0, -1).forEach(function(key, i) {
+        const a = positions[key]; const b = positions[route[i + 1]];
+        if (Math.abs(a.y - b.y) < 10) {
+          path("M " + (a.x + a.w + 3) + " " + (a.y + a.h / 2) + " L " + (b.x - 5) + " " + (b.y + b.h / 2), false, key === "design");
+        } else if (window.innerWidth <= 700 && key !== "discover") {
+          path("M " + (a.x + a.w / 2) + " " + (a.y + a.h + 3) + " L " + (b.x + b.w / 2) + " " + (b.y - 5), false, key === "design");
+        } else if (window.innerWidth > 700) {
+          const right = box.width - 4;
+          const above = b.y - 18;
+          path("M " + (a.x + a.w + 3) + " " + (a.y + a.h / 2) + " L " + right + " " + (a.y + a.h / 2) + " L " + right + " " + above + " L " + (b.x + b.w / 2) + " " + above + " L " + (b.x + b.w / 2) + " " + (b.y - 5), false, false);
+        } else {
+          const right = box.width - 4;
+          path("M " + (a.x + a.w + 3) + " " + (a.y + a.h / 2) + " L " + right + " " + (a.y + a.h / 2) + " L " + right + " " + (b.y + b.h / 2) + " L " + (b.x + b.w + 5) + " " + (b.y + b.h / 2), false, false);
+        }
+      });
+      const d = positions.discover; const e = positions.break;
+      const x = Math.min(d.x + d.w * .45, e.x + e.w - 30);
+      path("M " + x + " " + (d.y + d.h + 7) + " L " + x + " " + (e.y - 7), true, true);
+    }
+    nodes.forEach(function(node) { node.addEventListener("click", function() { showSkill(node.dataset.skill); }); });
+    workflowSelect.addEventListener("change", showWorkflow);
+    document.getElementById("standalone-mode").addEventListener("click", function() { tracked = false; updateRecords(); });
+    document.getElementById("tracked-mode").addEventListener("click", function() { tracked = true; updateRecords(); });
+    function revealReference() {
+      if (location.hash.indexOf("#ref-") === 0) {
+        const target = document.getElementById(location.hash.slice(1)); if (target) target.open = true;
+      }
+    }
+    window.addEventListener("hashchange", revealReference);
+    window.addEventListener("beforeprint", function() {
+      document.querySelectorAll("details").forEach(function(detail) { detail.dataset.wasOpen = String(detail.open); detail.open = true; }); drawConnections();
+    });
+    window.addEventListener("afterprint", function() {
+      document.querySelectorAll("details").forEach(function(detail) { detail.open = detail.dataset.wasOpen === "true"; }); drawConnections();
+    });
+    showWorkflow(); revealReference();
+    new ResizeObserver(drawConnections).observe(document.getElementById("skill-map"));
+    window.addEventListener("resize", drawConnections);
+  </script>
+</body>
+</html>
