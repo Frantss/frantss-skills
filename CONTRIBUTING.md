@@ -80,6 +80,17 @@ questions, and stopping behavior. The matrix records expected outcomes; it is
 not an automated claim of model behavior. Include nearby requests that should
 use ordinary work and requests that explicitly continue existing tracked runs.
 
+Entries with `eval_case` also drive `make eval-bdd`, using the evaluation environment
+described below. The five cases check direct implementation without a ticket,
+stale findings, sufficient-map reuse, a settled subset in a tracked run, and
+verification without changes. Run one case with
+`make eval-bdd EVAL_ARGS="--case direct --attempts 1"`; use `--prepare-only` to
+generate fixtures without calling a model.
+Graders inspect independent acceptance cases, native test mutation coverage,
+preserved sources and records, captured actions, and structured handoff facts.
+Unit tests check that graders reject incorrect outcomes; only agent trials
+exercise skill behavior. Existing tracked-record formats remain unchanged.
+
 ## Check a skill
 
 ```bash

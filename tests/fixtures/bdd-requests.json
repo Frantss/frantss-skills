@@ -1,17 +1,20 @@
 [
   {
+    "eval_case": "direct",
     "request": "Use implement-ticket to implement the named integer-validator scope: integers 1 through 5 pass; other integers fail without changing state. Inputs are integers only. There is no ticket document and no Gherkin is requested.",
     "skill": "implement-ticket",
     "mode": "standalone",
     "outcome": "Implement and verify the supplied scope directly, without manufacturing a ticket, Gherkin, tracked run, or extra approval gate."
   },
   {
+    "eval_case": "stale",
     "request": "Use discover-behavior with the prior invitation breakdown and the current repository to discuss resend limits. Preserve existing agreements and check whether the breakdown still supports its implementation findings.",
     "skill": "discover-behavior",
     "mode": "standalone",
     "outcome": "Compare source revisions, refresh only the stale implementation inference, preserve the agreed expiry requirement, and leave the resend limit open for a decision."
   },
   {
+    "eval_case": "audit",
     "request": "Check this existing application against its agreed integer acceptance cases without changing the application or tests. Report actual outcomes and coverage gaps; passing existing tests alone does not establish acceptance coverage.",
     "skill": null,
     "mode": "ordinary",
@@ -42,6 +45,7 @@
     "outcome": "Invoke available break-down for the supplied specification, including areas outside journeys, then return to the unresolved policy. No implementation prerequisite, invented policy, duplicate map, or automatic tracked-run artifacts."
   },
   {
+    "eval_case": "reuse",
     "request": "Use discover-behavior to settle the resend limit. This complete breakdown already identifies all relevant invitation rules, cases, sources, and open questions.",
     "skill": "discover-behavior",
     "mode": "standalone",
@@ -114,6 +118,7 @@
     "outcome": "Formulate faithful scenarios and implement the authorized validator without approval of the derived specification, a slicing prerequisite, or rediscovery of settled behavior."
   },
   {
+    "eval_case": "partial",
     "request": "Continue tracked run upload-limits-001. Implement only its settled size-limit cases; its unrelated duplicate-upload policy remains undecided.",
     "skill": "implement-ticket",
     "mode": "tracked",
