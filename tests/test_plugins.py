@@ -21,8 +21,8 @@ class PluginTests(unittest.TestCase):
     def test_marketplace_exposes_one_plugin_with_all_skills(self):
         self.assertFalse((SOURCE / 'plugins').exists())
         names = [path.parent.name for path in self.root.glob('skills/*/SKILL.md')]
-        self.assertEqual(len(names), 17)
-        self.assertEqual(len(set(names)), 17)
+        self.assertEqual(len(names), 18)
+        self.assertEqual(len(set(names)), 18)
         market = json.loads((self.root / '.claude-plugin/marketplace.json').read_text())
         self.assertEqual(market['name'], 'frantss')
         self.assertEqual(len(market['plugins']), 1)

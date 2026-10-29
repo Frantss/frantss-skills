@@ -16,6 +16,7 @@ The `frantss-skills` plugin includes all skills below.
 - [communicate](skills/communicate/SKILL.md): Write clear, direct replies throughout the session.
 - [refactoring](skills/refactoring/SKILL.md): Refactor existing code through scoped changes and behavior-preservation checks, or assess requested refactoring opportunities.
 - [atomic-commits](skills/atomic-commits/SKILL.md): Group all pending changes or a selected subset into small, cohesive Git commits.
+- [ship-it](skills/ship-it/SKILL.md): Propose and execute an approved delivery plan using project conventions, including testing, commits, and release or PR creation.
 
 ### BDD
 

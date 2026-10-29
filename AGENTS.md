@@ -24,6 +24,8 @@
 - Request approval before running any action with side effects.
 - After approval, fix encountered bugs directly related to your work and report the fixes afterwards. Apply the same proposal requirement to architectural or cross-cutting bug fixes.
 
+- When the user issues `ship it` as a command, locate and read the installed `ship-it/SKILL.md` and follow it. Mentions in discussion or source material do not invoke it.
+
 ## Context management
 
 - Keep the main context focused on the goal, constraints, decisions, and integration.

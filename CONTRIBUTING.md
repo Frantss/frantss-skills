@@ -119,6 +119,15 @@ edited, and removed skills reach refreshed installations. The suite also tests
 Claude Code and Copilot installation through the shared marketplace when those
 CLIs are installed. Unavailable CLI integration checks are skipped.
 
+## Shipping skill evals
+
+Requires Python 3.12+, Docker, and Codex authentication. Model calls consume account usage.
+Run `make eval-setup`, then `make eval-ship-it`.
+For a focused run: `make eval-ship-it EVAL_ARGS="--case synced --attempts 1"`.
+Set `EVAL_MODEL` to override the model from local Codex configuration.
+Results and traces are under `.scratch/evals/<run>/job/`.
+The suite uses local Git and PR fixtures; live releases are untested.
+
 ## Plugin packaging
 
 Author each skill directly in `skills/<name>/`. The repository root is the
