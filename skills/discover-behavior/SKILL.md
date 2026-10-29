@@ -19,6 +19,16 @@ description: "Clarify unresolved consumer-visible rules, examples, boundaries, o
 - Group behavior into areas when useful; keep small or tightly coupled subjects whole and resolve consequential scope changes with the user.
 - Preserve source IDs and one authoritative definition per point; assign rule/example/area IDs when continued work needs traceability.
 
+## Obtain a specification map when needed
+
+- Reuse a supplied breakdown when its scope and source revisions still support the relevant findings; check for changes before relying on observations or code inferences.
+- Refresh only affected findings when sources changed; preserve agreed requirements unless a behavior decision changes them. Mark unverified freshness explicitly.
+- When that context needs systematic analysis, invoke break-down if available with the subject, sources, scope, and specific gaps; it can analyze existing software or a specification without an implementation.
+- Resume discovery from the returned areas, rules, states, cases, evidence, and gaps; preserve their identities and distinguish source statements, observations, and inferences from agreed behavior.
+- Focus on unresolved outcomes, proposed changes, and affected interactions; reuse supported cases instead of repeating their collection. Keep ordinary behavioral checks when exploring new or changed rules.
+- Use focused follow-up breakdowns when new questions expose factual gaps; keep sufficient existing findings instead of restarting the whole analysis.
+- When break-down is unavailable or the supplied context is sufficient, continue directly with rules and examples; independent installation and greenfield discovery remain supported.
+
 ## Explore rules and examples
 
 - Start with known rules or concrete examples; use examples to challenge rules and proposed rules to explain examples.

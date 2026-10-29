@@ -14,6 +14,7 @@ The `frantss-skills` plugin includes all skills below.
 ### Development
 
 - [communicate](skills/communicate/SKILL.md): Write clear, direct replies throughout the session.
+- [break-down](skills/break-down/SKILL.md): Map and explain software or full specifications through areas, rules, states, cases, and evidence; callable by behavior discovery.
 - [refactoring](skills/refactoring/SKILL.md): Refactor existing code through scoped changes and behavior-preservation checks, or assess requested refactoring opportunities.
 - [atomic-commits](skills/atomic-commits/SKILL.md): Group all pending changes or a selected subset into small, cohesive Git commits.
 - [ship-it](skills/ship-it/SKILL.md): Propose and execute an approved delivery plan using project conventions, including testing, commits, and release or PR creation.
@@ -22,10 +23,23 @@ The `frantss-skills` plugin includes all skills below.
 
 - [frame-problem](skills/frame-problem/SKILL.md): Establish needs, outcomes, evidence, scope, and constraints in a live problem brief.
 - [design-solution](skills/design-solution/SKILL.md): Select a solution concept and refine its design against agreed needs and behavior.
-- [discover-behavior](skills/discover-behavior/SKILL.md): Resolve expected behavior through rules, examples, and conversation.
+- [discover-behavior](skills/discover-behavior/SKILL.md): Resolve expected behavior through rules, examples, and conversation, using break-down when specification context needs analysis.
 - [formulate-behavior](skills/formulate-behavior/SKILL.md): Turn agreed behavior into Gherkin specifications for existing test tools.
 - [slice-work](skills/slice-work/SKILL.md): Group specified behavior into bounded, verifiable tickets.
 - [implement-ticket](skills/implement-ticket/SKILL.md): Implement one authorized ticket with native tests and current behavioral verification evidence.
+
+Start with the smallest workflow that supplies the missing result:
+
+| Starting point | Workflow |
+| --- | --- |
+| Existing software or a specification needs explanation | `break-down` |
+| The need or intended outcome is unclear | `frame-problem` |
+| A consequential solution choice is unresolved | `design-solution` |
+| Expected behavior needs agreement | `discover-behavior`, using `break-down` for missing specification context |
+| Agreed behavior needs implementation boundaries | `slice-work`, then authorized implementation |
+
+Reuse current inputs and prior agreements. Check revisions before reusing implementation
+observations; refresh affected findings without treating code changes as behavior decisions.
 
 ### Tracking
 

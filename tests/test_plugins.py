@@ -21,8 +21,8 @@ class PluginTests(unittest.TestCase):
     def test_marketplace_exposes_one_plugin_with_all_skills(self):
         self.assertFalse((SOURCE / 'plugins').exists())
         names = [path.parent.name for path in self.root.glob('skills/*/SKILL.md')]
-        self.assertEqual(len(names), 18)
-        self.assertEqual(len(set(names)), 18)
+        self.assertEqual(len(names), 19)
+        self.assertEqual(len(set(names)), 19)
         market = json.loads((self.root / '.claude-plugin/marketplace.json').read_text())
         self.assertEqual(market['name'], 'frantss')
         self.assertEqual(len(market['plugins']), 1)
@@ -56,7 +56,7 @@ class PluginTests(unittest.TestCase):
 
     @unittest.skipUnless(shutil.which('gh'), 'GitHub CLI is needed for skill installation')
     def test_github_cli_installs_bdd_skills_independently(self):
-        for name in ('frame-problem', 'design-solution', 'discover-behavior',
+        for name in ('break-down', 'frame-problem', 'design-solution', 'discover-behavior',
                      'formulate-behavior', 'slice-work', 'implement-ticket'):
             with self.subTest(skill=name), tempfile.TemporaryDirectory() as destination:
                 result = subprocess.run(

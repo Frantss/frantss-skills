@@ -1,5 +1,47 @@
 [
   {
+    "request": "Use discover-behavior with the prior invitation breakdown and the current repository to discuss resend limits. Preserve existing agreements and check whether the breakdown still supports its implementation findings.",
+    "skill": "discover-behavior",
+    "mode": "standalone",
+    "outcome": "Compare source revisions, refresh only the stale implementation inference, preserve the agreed expiry requirement, and leave the resend limit open for a decision."
+  },
+  {
+    "request": "Break down this specification for a service that does not exist yet. It covers invitations, administrator permissions, nightly expiry, audit events, an API contract, and a stated response-time target. Collect its rules and cases, then explain it.",
+    "skill": "break-down",
+    "mode": "standalone",
+    "outcome": "Map every supplied specification area with source references, including system events, interfaces, and stated nonfunctional constraints outside journeys. Derive supported cases, leave missing decisions open, and explain the collected map without requiring code, agreeing new rules, or starting implementation planning."
+  },
+  {
+    "request": "Explain how invitations work in this repository. Collect the possible states and cases, including expiration and repeated requests. The documentation and implementation may disagree.",
+    "skill": "break-down",
+    "mode": "standalone",
+    "outcome": "Inspect relevant journeys, entry points, code, tests, and documents; reconstruct a source-linked map without treating code organization as the explanation. Distinguish specified, observed, and inferred behavior, show conflicts and unexplored scope, and avoid claiming unexecuted checks or universal coverage."
+  },
+  {
+    "request": "Use discover-behavior to decide how resending invitations should work. Inspect the existing invitation behavior first; I have no behavior map yet.",
+    "skill": "discover-behavior",
+    "mode": "standalone",
+    "outcome": "Invoke available break-down for the relevant existing invitation scope, then resume discovery using its cases, sources, and gaps. Resolve desired behavior through conversation without promoting implementation facts into requirements or analyzing unrelated software."
+  },
+  {
+    "request": "Use discover-behavior with this partial specification for a new invitation service. Map its roles, API rules, expiry job, and stated constraints before we resolve its open resend policy. There is no implementation.",
+    "skill": "discover-behavior",
+    "mode": "standalone",
+    "outcome": "Invoke available break-down for the supplied specification, including areas outside journeys, then return to the unresolved policy. No implementation prerequisite, invented policy, duplicate map, or automatic tracked-run artifacts."
+  },
+  {
+    "request": "Use discover-behavior to settle the resend limit. This complete breakdown already identifies all relevant invitation rules, cases, sources, and open questions.",
+    "skill": "discover-behavior",
+    "mode": "standalone",
+    "outcome": "Reuse the sufficient supplied breakdown and ask about the unresolved resend limit without repeating the analysis. Preserve evidence identities and continue only the requested discovery."
+  },
+  {
+    "request": "Only discover-behavior is installed. Help agree a new service's invitation rules from these requirements; expiration is specified, but resend limits are undecided.",
+    "skill": "discover-behavior",
+    "mode": "standalone",
+    "outcome": "Continue independent discovery from supplied requirements and clarify resend limits; no required break-down installation, existing implementation, or new workflow enrollment."
+  },
+  {
     "request": "Plan a StyleX migration and define shared theme variables.",
     "skill": "design-solution",
     "mode": "standalone",
