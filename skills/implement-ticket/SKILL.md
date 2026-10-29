@@ -1,24 +1,25 @@
 ---
 name: implement-ticket
-description: "Implement or resume one authorized ticket with clear behavioral requirements and verification. Accept an external ticket without a BDD run. Unsettled behavior, ticket drafting, standalone review, and whole-scope orchestration are separate tasks."
+description: "Implement or resume one authorized ticket or bounded implementation scope with clear acceptance cases and verification. Ticket documents, Gherkin, and BDD runs are optional. Unsettled behavior, standalone review, and whole-scope orchestration are separate tasks."
 ---
 
-# Implement one ticket
+# Implement one bounded outcome
 
-- Deliver the selected authorized ticket in code and native tests, with current evidence for its complete behavioral requirements.
+- Deliver the selected authorized outcome in code and native tests, with current evidence for all its acceptance cases.
 
 ## Choose the working mode
 
-- Use the supplied ticket and its source cases; Gherkin, earlier skills, and new planning documents are not prerequisites.
+- Accept a supplied ticket or a named scope with clear acceptance cases; reuse the user's feature or outcome name without manufacturing a ticket document or slicing stage.
 - Use tracked records only when explicitly requested or when explicitly continuing an identified run.
 
 ## Verify the ticket and baseline
 
-- Read the full ticket, linked requirements/cases/Examples, design, repository instructions, and tests; ask only about unresolved ticket identity or consequential requirements.
+- Read the complete scope, linked requirements/cases/Examples, design, repository instructions, and tests; ask only about consequential missing scope or behavior.
 - Reuse supplied requirements and existing authorization without new ticket acceptance; verify delivery prerequisites through current code and test evidence.
 - Identify required checks from test/build configuration.
 - Map every promised case/example to native assertions for outputs, state changes, and prohibited effects; test count need not match case count.
 - Run relevant existing tests and inspect assertions; use adequate passing evidence for correct behavior and preservation/completion checks for preparatory work.
+- If all acceptance cases already have adequate passing evidence, report that no implementation change is needed; test-first applies to missing behavior or coverage.
 - Reuse agreed boundaries and project conventions; use case IDs when practical, expected results independent of implementation, and substitutes only at genuine external boundaries.
 
 ## Implement incrementally
@@ -41,7 +42,7 @@ description: "Implement or resume one authorized ticket with clear behavioral re
 
 - Use `.scratch/bdd/<feature_slug>-<NNN>/`, with a stable feature name, lowercase kebab-case slug, and next per-feature ordinal padded to at least three digits.
 - Keep `run.md` YAML: `feature_name`, `feature_slug`, `run_id`, `stage`, `current_slice`, `current_ticket` (null until selected).
-- Set `stage` to implementation and select the current slice/ticket; keep level-two sections Documents, Validation, and Next action.
+- Set `stage` to implementation and select the current slice/ticket; assign a local ticket ID to a named scope only when tracked tables need one. Keep Documents, Validation, and Next action.
 - Under Documents, keep `### S-001: <name>`, Scope, file-qualified Members, Dependencies (slice/question references or None), and a File | Status table.
 - Use pending (unvisited), draft (proposed/incomplete), blocked (unresolved prerequisite), ready (settled and sufficient for intended use), or partial (named usable scope and blockers).
 - Keep checks and limits under Validation, the current step under Next action, and scope/blockers outside status cells.

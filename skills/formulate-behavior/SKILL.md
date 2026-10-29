@@ -1,6 +1,6 @@
 ---
 name: formulate-behavior
-description: "Write or review Gherkin scenarios from agreed behavioral requirements, supplied examples, or discovery records. Use when the requested output is a behavioral specification. Unsettled behavior discovery, native test implementation, and test execution are separate tasks."
+description: "Write or review Gherkin scenarios from agreed requirements, examples, or discovery records. Use when Gherkin is requested or fits existing project tooling. Unsettled behavior, native acceptance-case writing, and test execution are separate tasks."
 ---
 
 # Formulate behavior
@@ -10,6 +10,7 @@ description: "Write or review Gherkin scenarios from agreed behavioral requireme
 ## Choose the working mode
 
 - Use supplied sources.
+- Use this stage for Gherkin; sufficiently precise native acceptance cases can pass directly to slicing or implementation without another specification format.
 - Use tracked records only when explicitly requested or when explicitly continuing an identified run.
 
 ## Establish the source

@@ -1,9 +1,21 @@
 [
   {
+    "request": "Use implement-ticket to implement the named integer-validator scope: integers 1 through 5 pass; other integers fail without changing state. Inputs are integers only. There is no ticket document and no Gherkin is requested.",
+    "skill": "implement-ticket",
+    "mode": "standalone",
+    "outcome": "Implement and verify the supplied scope directly, without manufacturing a ticket, Gherkin, tracked run, or extra approval gate."
+  },
+  {
     "request": "Use discover-behavior with the prior invitation breakdown and the current repository to discuss resend limits. Preserve existing agreements and check whether the breakdown still supports its implementation findings.",
     "skill": "discover-behavior",
     "mode": "standalone",
     "outcome": "Compare source revisions, refresh only the stale implementation inference, preserve the agreed expiry requirement, and leave the resend limit open for a decision."
+  },
+  {
+    "request": "Check this existing application against its agreed integer acceptance cases without changing the application or tests. Report actual outcomes and coverage gaps; passing existing tests alone does not establish acceptance coverage.",
+    "skill": null,
+    "mode": "ordinary",
+    "outcome": "Verify the supplied cases and report the uncovered upper-bound defect without fixing code, invoking implementation, creating Gherkin, or enrolling in a BDD run."
   },
   {
     "request": "Break down this specification for a service that does not exist yet. It covers invitations, administrator permissions, nightly expiry, audit events, an API contract, and a stated response-time target. Collect its rules and cases, then explain it.",

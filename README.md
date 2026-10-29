@@ -26,7 +26,7 @@ The `frantss-skills` plugin includes all skills below.
 - [discover-behavior](skills/discover-behavior/SKILL.md): Resolve expected behavior through rules, examples, and conversation, using break-down when specification context needs analysis.
 - [formulate-behavior](skills/formulate-behavior/SKILL.md): Turn agreed behavior into Gherkin specifications for existing test tools.
 - [slice-work](skills/slice-work/SKILL.md): Group specified behavior into bounded, verifiable tickets.
-- [implement-ticket](skills/implement-ticket/SKILL.md): Implement one authorized ticket with native tests and current behavioral verification evidence.
+- [implement-ticket](skills/implement-ticket/SKILL.md): Implement one authorized ticket or bounded scope from clear acceptance cases, with native tests and current verification evidence.
 
 Start with the smallest workflow that supplies the missing result:
 
@@ -36,10 +36,15 @@ Start with the smallest workflow that supplies the missing result:
 | The need or intended outcome is unclear | `frame-problem` |
 | A consequential solution choice is unresolved | `design-solution` |
 | Expected behavior needs agreement | `discover-behavior`, using `break-down` for missing specification context |
+| Clear acceptance cases and implementation authorization | `implement-ticket`, with no ticket document required |
 | Agreed behavior needs implementation boundaries | `slice-work`, then authorized implementation |
+| Gherkin is requested or useful to existing tooling | Insert `formulate-behavior` before planning or implementation |
+| Existing software needs checking without changes | Ordinary verification: map the supplied cases to checks and report evidence and gaps |
 
 Reuse current inputs and prior agreements. Check revisions before reusing implementation
 observations; refresh affected findings without treating code changes as behavior decisions.
+Standalone work creates only requested artifacts. Tracked work preserves the existing
+`run.md` format and uses one slice for a small subject; additional area maps remain optional.
 
 ### Tracking
 
