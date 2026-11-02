@@ -139,6 +139,19 @@ Set `EVAL_MODEL` to override the model from local Codex configuration.
 Results and traces are under `.scratch/evals/<run>/job/`.
 The suite uses local Git and PR fixtures; live releases are untested.
 
+## Atomic commit evals
+
+Requires Node.js, the Codex CLI with plugin support, and Codex authentication.
+Run `make eval-atomic-commits EVAL_ARGS="--attempts 1"`. Model calls consume account
+usage; Docker and Harbor are not required.
+
+The `decomposable` case covers dependent steps within one feature; `inseparable`
+covers an API rename that must land with its callers. The grader checks actual
+commit boundaries and executes each intermediate tree, without pinning subjects
+or exact commit counts. Use `--case decomposable` or `--case inseparable` to select
+a case, and `--prepare-only` to inspect fixtures without calling a model.
+Results and traces are under `.scratch/evals/`.
+
 ## Plugin packaging
 
 Author each skill directly in `skills/<name>/`. The repository root is the

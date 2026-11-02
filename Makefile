@@ -1,4 +1,4 @@
-.PHONY: validate test eval-setup eval-ship-it eval-ship-it-bare eval-bdd
+.PHONY: validate test eval-setup eval-ship-it eval-ship-it-bare eval-bdd eval-atomic-commits
 
 validate:
 	gh skill publish --dry-run
@@ -20,3 +20,6 @@ eval-ship-it-bare:
 
 eval-bdd:
 	.scratch/evals/venv/bin/python evals/bdd.py $(EVAL_ARGS)
+
+eval-atomic-commits:
+	python3 evals/atomic_commits.py $(EVAL_ARGS)

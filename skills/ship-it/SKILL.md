@@ -23,7 +23,7 @@ Present the approval plan as a numbered list. Give each step one short sentence,
 
 State the exact actions supported by the inspected state. Resolve decisions during discovery instead of writing placeholders such as "rebase if needed" or "publish or deploy". Omit unnecessary actions, including rebasing or merging when the branch state does not require them.
 
-Use the available workflow for atomic commit planning: discover and read its instructions, then split pending changes into commits by purpose. Use one numbered step for creating commits, with a nested bullet list in commit order. Give each commit its exact subject and brief scope. Use this format even for a single commit, which is appropriate when all included changes serve one purpose.
+Use the available workflow for atomic commit planning: discover and read its instructions, then use its grouping criteria and dependency order. Use one numbered step for creating commits, with a nested bullet list in commit order. Give each commit its exact subject and brief scope. Use this format even when the atomic workflow yields a single commit.
 
 Before writing that compact plan, establish the following details internally. Summarize the resulting actions; do not reproduce this checklist in the response:
 
