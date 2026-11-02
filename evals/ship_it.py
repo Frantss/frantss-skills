@@ -47,7 +47,7 @@ def write(path, text):
     path.write_text(text)
 
 
-def fixture(task, case, image):
+def fixture(task, case, image, *, route_skill=True, local_skills=True):
     seed = task / 'environment/seed'
     seed.mkdir(parents=True)
     (task / 'environment/service-bin').mkdir()
@@ -55,10 +55,11 @@ def fixture(task, case, image):
     run_git(seed, 'config', 'user.name', 'Skill Eval')
     run_git(seed, 'config', 'user.email', 'eval@example.invalid')
     write(seed / '.gitignore', '.agents/\n')
-    routing = next(line for line in (ROOT / 'AGENTS.md').read_text().splitlines()
-                   if line.startswith('- When the user issues `ship it` as a command,'))
-    write(seed / 'AGENTS.md', 'Use conventional commits and atomic commits. Preserve unrelated work.\n'
-          + routing + '\n')
+    instructions = 'Use conventional commits and atomic commits. Preserve unrelated work.\n'
+    if route_skill:
+        instructions += next(line for line in (ROOT / 'AGENTS.md').read_text().splitlines()
+                             if line.startswith('- When the user issues `ship it` as a command,')) + '\n'
+    write(seed / 'AGENTS.md', instructions)
     readme = '# Greeting fixture\nPersonal project. Source is distributed through the main branch in Git.\n'
     conventions = (f'# Contributing\nRun `{CHECK}` and `{TEST}` before committing or delivering. '
                    'On main, ship directly to origin/main. On a feature branch, rebase onto origin/main, '
@@ -117,7 +118,7 @@ def fixture(task, case, image):
             stream.write(regression)
     with (seed / 'docs/usage.md').open('a') as stream:
         stream.write('Send support requests to help@example.invalid.\n')
-    for name in ('ship-it', 'atomic-commits'):
+    for name in ('ship-it', 'atomic-commits') if local_skills else ():
         shutil.copytree(ROOT / 'skills' / name, seed / '.agents/skills' / name,
                         ignore=shutil.ignore_patterns('__pycache__', '*.pyc'))
     write(task / 'environment/Dockerfile', DOCKERFILE.replace('__BASE_IMAGE__', image))

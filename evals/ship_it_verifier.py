@@ -58,7 +58,7 @@ def grade_plan(answer, commands, case):
     steps = re.findall(r'^\d+\.\s+(.+)$', answer, re.MULTILINE)
     commits = re.findall(r'^\s{2,}[-*]\s+(.+)$', answer, re.MULTILINE)
     command_text = '\n'.join(item.get('command', '') for item in commands)
-    mutations = r'\bgit\s+(?:add|commit|push|fetch|rebase|merge|switch|checkout)\b'
+    mutations = r'\bgit\s+(?:add|commit|push|fetch|rebase|merge|cherry-pick|switch|checkout)\b'
     checks = {
         'workflow_loaded': shipping_workflow_read(commands),
         'atomic_guidance_loaded': 'atomic-commits' in command_text,

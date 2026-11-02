@@ -6,10 +6,12 @@ import sys
 import tempfile
 import tomllib
 import unittest
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'evals'))
 import ship_it
+import ship_it_bare
 from ship_it_verifier import grade_failure, grade_no_trigger, grade_plan, read_trace, snapshot
 from github_fixture import response
 
@@ -27,6 +29,55 @@ READS = [{'command': 'cat .agents/skills/ship-it/SKILL.md .agents/skills/atomic-
 
 
 class ShippingEvalTests(unittest.TestCase):
+    def test_bare_fixture_has_no_shipping_router_or_repository_skills(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            task = Path(temporary)
+            ship_it.fixture(task, 'synced', ship_it.DEFAULT_IMAGE,
+                            route_skill=False, local_skills=False)
+            seed = task / 'environment/seed'
+            self.assertNotIn('ship', (seed / 'AGENTS.md').read_text())
+            self.assertFalse((seed / '.agents').exists())
+
+    def test_bare_plan_requires_approval_and_rejects_the_observed_cherry_pick(self):
+        plan = PLAN + '\nApprove this plan?\n'
+        self.assertTrue(all(ship_it_bare.grade_bare_plan(plan, READS).values()))
+        self.assertFalse(ship_it_bare.grade_bare_plan(PLAN, READS)['approval_requested'])
+        commands = READS + [{'command': 'git cherry-pick abc123'}]
+        self.assertFalse(ship_it_bare.grade_bare_plan(plan, commands)['no_early_mutations'])
+        self.assertFalse(ship_it_bare.grade_bare_plan('Shipped.', [])['workflow_loaded'])
+
+    def test_bare_trial_does_not_approve_a_failed_plan(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            directory = Path(temporary) / 'trial'
+            completed = [{'command': ship_it.CHECK + ' && ' + ship_it.TEST, 'exit_code': 0}]
+            turns = [('thread-id', 'Implementation verified.', completed),
+                     ('thread-id', 'Shipped.', [])]
+            with patch.object(ship_it_bare, 'install_plugin', return_value=Path(temporary)), \
+                    patch.object(ship_it_bare, 'turn', side_effect=turns) as run:
+                report = ship_it_bare.trial(directory, Path(temporary) / 'no-auth', None)
+            self.assertFalse(report['passed'])
+            self.assertEqual(run.call_count, 2)
+            self.assertEqual(run.call_args.args[5], 'ship it')
+            self.assertNotIn('approved', report['phases'])
+
+    def test_bare_delivery_requires_successful_checks_and_a_changed_matching_remote(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            task = Path(temporary)
+            before = ship_it.fixture(task, 'synced', ship_it.DEFAULT_IMAGE,
+                                     route_skill=False, local_skills=False)
+            seed, remote = task / 'environment/seed', task / 'environment/remote.git'
+            commands = [{'command': ship_it.CHECK + ' && ' + ship_it.TEST, 'exit_code': 0}]
+            self.assertFalse(ship_it_bare.grade_delivery(seed, remote, before, commands)['commits_created'])
+            ship_it.run_git(seed, 'add', 'src/greet.mjs', 'tests/test_greet.mjs')
+            ship_it.run_git(seed, 'commit', '-m', 'fix: complete greeting')
+            ship_it.run_git(seed, 'add', 'docs/usage.md')
+            ship_it.run_git(seed, 'commit', '-m', 'docs: add support contact')
+            self.assertFalse(ship_it_bare.grade_delivery(seed, remote, before, commands)['remote_matches_head'])
+            ship_it.run_git(seed, 'push', 'origin', 'main')
+            self.assertTrue(all(ship_it_bare.grade_delivery(seed, remote, before, commands).values()))
+            commands[0]['exit_code'] = 1
+            self.assertFalse(ship_it_bare.grade_delivery(seed, remote, before, commands)['required_checks_passed'])
+
     def test_github_fixture_reads_and_stores_pull_requests_offline(self):
         with tempfile.TemporaryDirectory() as temporary:
             store = Path(temporary) / 'pr.json'

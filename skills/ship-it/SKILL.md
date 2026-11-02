@@ -1,12 +1,13 @@
 ---
 name: ship-it
 description: "Use only when the user issues `ship it` as a command. Plan and execute project-specific testing, atomic commits, integration, and release or PR creation after approval."
-disable-model-invocation: true
 ---
 
 # Ship it
 
 Discover the project's delivery conventions, propose a concrete plan, and execute it once approved. Completion means reaching the approved endpoint with verification evidence.
+
+`ship it` starts discovery and planning. Execution begins only after the user approves the concrete plan presented in this workflow.
 
 ## Discover the workflow
 
