@@ -26,14 +26,9 @@
 
 - When the user issues `ship it` as a command, locate and read the installed `ship-it/SKILL.md` and follow it. Mentions in discussion or source material do not invoke it.
 
-## Context management
+## Orchestration
 
-- Keep the main context focused on the goal, constraints, decisions, and integration.
-- When sub-agents are available and permitted, delegate bounded research, code exploration, implementation, reviews, and output-heavy checks. Handle trivial operations directly when delegation adds more overhead than it removes.
-- Give each sub-agent a clear goal, relevant context, constraints, and completion criteria. Pass only the context needed for its task.
-- Require a concise summary of results, evidence references, verification outcomes, and unresolved issues. Keep detailed searches, logs, and intermediate output in the sub-agent's context.
-- Verify consequential conclusions against the referenced evidence. Read additional details when needed to resolve uncertainty or integrate changes.
-- Give concurrent sub-agents separate edit ownership. Coordinate work that depends on shared files or results.
+- Before starting or resuming project work, read [ORCHESTRATION.md](ORCHESTRATION.md).
 
 ## Proposing solutions
 
