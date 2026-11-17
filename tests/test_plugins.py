@@ -21,8 +21,8 @@ class PluginTests(unittest.TestCase):
     def test_marketplace_exposes_one_plugin_with_all_skills(self):
         self.assertFalse((SOURCE / 'plugins').exists())
         names = [path.parent.name for path in self.root.glob('skills/*/SKILL.md')]
-        self.assertEqual(len(names), 19)
-        self.assertEqual(len(set(names)), 19)
+        self.assertEqual(len(names), 11)
+        self.assertEqual(len(set(names)), 11)
         market = json.loads((self.root / '.claude-plugin/marketplace.json').read_text())
         self.assertEqual(market['name'], 'frantss')
         self.assertEqual(len(market['plugins']), 1)
@@ -112,13 +112,13 @@ class PluginTests(unittest.TestCase):
                                                                'name: communicate\n'))
             (skills / 'added').mkdir()
             (skills / 'added/SKILL.md').write_text('---\nname: added\ndescription: Added.\n---\nTrack.\n')
-            (skills / 'tracking-tasks/SKILL.md').write_text('Updated instruction.\n')
-            shutil.rmtree(skills / 'tracking-collect')
+            (skills / 'frame-problem/SKILL.md').write_text('Updated instruction.\n')
+            shutil.rmtree(skills / 'slice-work')
             installed = Path(codex('add', 'frantss-skills@frantss')['installedPath'])
             self.assert_installed_skills(installed)
             self.assertTrue((installed / 'skills/added/SKILL.md').is_file())
-            self.assertEqual((installed / 'skills/tracking-tasks/SKILL.md').read_text(), 'Updated instruction.\n')
-            self.assertFalse((installed / 'skills/tracking-collect').exists())
+            self.assertEqual((installed / 'skills/frame-problem/SKILL.md').read_text(), 'Updated instruction.\n')
+            self.assertFalse((installed / 'skills/slice-work').exists())
             self.assertFalse((installed / 'skills/core-communicate').exists())
             self.assertFalse((installed / 'skills/design-solution/references/run-record.md').exists())
 

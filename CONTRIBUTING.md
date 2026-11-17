@@ -6,8 +6,7 @@ to use it. The folder and frontmatter name must match.
 
 Create `skills/<name>/SKILL.md` with `name` and `description` frontmatter.
 
-Use the `tracking-` prefix for tracking skills and descriptive names without
-category prefixes for other skills. Use lowercase letters, digits, and single
+Use descriptive names without category prefixes. Use lowercase letters, digits, and single
 hyphens, up to 64 characters.
 
 Use "the user" in instructions and "you" in replies addressed to the user.
@@ -16,23 +15,10 @@ Preserve repository attribution, storage paths, and technical identifiers.
 ## Write the shared instructions
 
 Each skill has a hard limit of 75 total lines across its authored UTF-8 text
-files. `atomic-commits` and `communicate` each have a 50-line limit;
-`tracking-records` has a 100-line limit; `tracking-obsidian` has a 350-line
-limit to include its executable batch runner.
+files. `atomic-commits` and `communicate` each have a 50-line limit.
 Count frontmatter, blank lines, references, helper code, and metadata.
 Binary assets are excluded. Review the total during skill edits;
 progressive disclosure does not increase the budget.
-
-Workflows own their domain schemas; persistence owns the common record envelope
-and storage operations. Ordinary workflows support only current formats. Keep
-current records and interrupted-write recovery; keep migration backups outside
-active storage. `tracking-migrate` owns explicit configuration/data migrations;
-installers own skill and plugin updates. Ordinary workflows report incompatible
-formats without converting them. Keep known migration mappings inside
-`tracking-migrate` so individual installations include their procedures.
-When changing a stored format, document the old/new mapping, applicability,
-verification, and retry behavior in the same commit. Preserve those instructions
-in source history so updates can cross several revisions.
 
 Write the workflow's actual decisions and a checkable completion condition.
 Keep only guidance that changes how an agent performs the task. The description

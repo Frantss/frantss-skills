@@ -1,7 +1,6 @@
 # Frantss skills
 
-My personal agent skills for communication, development, task tracking, and activity
-reports. Use them with agents that support [Agent Skills](https://agentskills.io/specification),
+My personal agent skills for communication and development. Use them with agents that support [Agent Skills](https://agentskills.io/specification),
 including Codex, Claude Code, Cursor, GitHub Copilot, and Gemini CLI.
 
 > [!NOTE]
@@ -45,17 +44,6 @@ Reuse current inputs and prior agreements. Check revisions before reusing implem
 observations; refresh affected findings without treating code changes as behavior decisions.
 Standalone work creates only requested artifacts. Tracked work preserves the existing
 `run.md` format and uses one slice for a small subject; additional area maps remain optional.
-
-### Tracking
-
-- [tracking-configure](skills/tracking-configure/SKILL.md): Set up and maintain connections, projects, and sources.
-- [tracking-migrate](skills/tracking-migrate/SKILL.md): Check or migrate tracking configuration and stored records, with backups and recovery.
-- [tracking-tasks](skills/tracking-tasks/SKILL.md): Capture tasks and manage commitments, dates, and blockers.
-- [tracking-collect](skills/tracking-collect/SKILL.md): Read project sources for task links and report summaries.
-- [tracking-report](skills/tracking-report/SKILL.md): Create daily and weekly activity reports.
-- [tracking-team-digest](skills/tracking-team-digest/SKILL.md): Summarize team initiatives from supplied sources and save a digest by default.
-- [tracking-records](skills/tracking-records/SKILL.md): Store task links and report summaries through a shared database.
-- [tracking-obsidian](skills/tracking-obsidian/SKILL.md): Store records in Obsidian through its official CLI.
 
 ## Install
 
@@ -134,16 +122,3 @@ to choose interactively.
 See the [skills CLI reference](https://github.com/vercel-labs/skills/blob/main/docs/commands.md).
 
 </details>
-
-## Tracking
-
-Use [tracking-configure](skills/tracking-configure/SKILL.md) to set up shared storage, projects,
-and sources across workspaces. Obsidian storage requires `tracking-records`, `tracking-obsidian`,
-and the official Obsidian CLI with an existing vault.
-
-For automatic tracking, reference `tracking-tasks` and `tracking-configure` in your agent's
-persistent instructions.
-
-Use [tracking-migrate](skills/tracking-migrate/SKILL.md) to check or migrate
-legacy configuration and records with backups and recovery. Package updates
-do not migrate stored data.
