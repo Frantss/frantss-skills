@@ -16,6 +16,7 @@ The `frantss-skills` plugin includes all skills below.
 - [break-down](skills/break-down/SKILL.md): Map and explain software or full specifications through areas, rules, states, cases, and evidence; callable by behavior discovery.
 - [refactoring](skills/refactoring/SKILL.md): Refactor existing code through scoped changes and behavior-preservation checks, or assess requested refactoring opportunities.
 - [atomic-commits](skills/atomic-commits/SKILL.md): Group all pending changes or a selected subset into small, cohesive Git commits.
+- [weird-shit](skills/weird-shit/SKILL.md): Stop an unexpected approach, get independent review, explain the wrong turn, and propose the obvious fix.
 - [ship-it](skills/ship-it/SKILL.md): Propose and execute an approved delivery plan using project conventions, including testing, commits, and release or PR creation.
 
 ### BDD
