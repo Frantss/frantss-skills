@@ -1,104 +1,37 @@
 # Frantss skills
 
-My personal agent skills for communication and development. Use them with agents that support [Agent Skills](https://agentskills.io/specification),
-including Codex, Claude Code, Cursor, GitHub Copilot, and Gemini CLI.
-
-> [!NOTE]
-> These skills are still a work in progress. Their behavior and configuration may change.
+My personal agent skills.
 
 ## Skills
 
-The `frantss-skills` plugin includes all skills below.
-
 ### Development
 
-- [communicate](skills/communicate/SKILL.md): Write clear, direct replies throughout the session.
-- [break-down](skills/break-down/SKILL.md): Map and explain software or full specifications through areas, rules, states, cases, and evidence; callable by behavior discovery.
-- [spelunk](skills/spelunk/SKILL.md): Map an unfamiliar codebase or feature into a Markdown orientation report with parts, dependencies, a getting-started tour, and caveats.
-- [refactoring](skills/refactoring/SKILL.md): Refactor existing code through scoped changes and behavior-preservation checks, or assess requested refactoring opportunities.
-- [atomic-commits](skills/atomic-commits/SKILL.md): Group all pending changes or a selected subset into small, cohesive Git commits.
-- [weird-shit](skills/weird-shit/SKILL.md): Stop an unexpected approach, get independent review, explain the wrong turn, and propose the obvious fix.
-- [ship-it](skills/ship-it/SKILL.md): Propose and execute an approved delivery plan using project conventions, including testing, commits, and release or PR creation.
+- [communicate](skills/communicate/SKILL.md): Write clear, direct replies.
+- [spelunk](skills/spelunk/SKILL.md): Map an unfamiliar codebase into an orientation report.
+- [refactoring](skills/refactoring/SKILL.md): Refactor code while preserving behavior.
+- [atomic-commits](skills/atomic-commits/SKILL.md): Group pending changes into atomic commits.
+- [weird-shit](skills/weird-shit/SKILL.md): Stop a strange approach and propose the obvious fix.
+- [ship-it](skills/ship-it/SKILL.md): Test, commit, and deliver after an approved plan.
 
 ### BDD
 
-- [frame-problem](skills/frame-problem/SKILL.md): Establish needs, outcomes, evidence, scope, and constraints in a live problem brief.
-- [design-solution](skills/design-solution/SKILL.md): Select a solution concept and refine its design against agreed needs and behavior.
-- [discover-behavior](skills/discover-behavior/SKILL.md): Resolve expected behavior through rules, examples, and conversation, using break-down when specification context needs analysis.
-- [formulate-behavior](skills/formulate-behavior/SKILL.md): Turn agreed behavior into Gherkin specifications for existing test tools.
-- [slice-work](skills/slice-work/SKILL.md): Group specified behavior into bounded, verifiable tickets.
-- [implement-ticket](skills/implement-ticket/SKILL.md): Implement one authorized ticket or bounded scope from clear acceptance cases, with native tests and current verification evidence.
+- [break-down](skills/break-down/SKILL.md): Map and explain software or specifications.
+- [frame-problem](skills/frame-problem/SKILL.md): Establish needs, outcomes, scope, and constraints.
+- [design-solution](skills/design-solution/SKILL.md): Compare approaches and refine a solution design.
+- [discover-behavior](skills/discover-behavior/SKILL.md): Agree expected behavior through rules and examples.
+- [formulate-behavior](skills/formulate-behavior/SKILL.md): Turn agreed behavior into Gherkin.
+- [slice-work](skills/slice-work/SKILL.md): Group specified behavior into verifiable tickets.
+- [implement-ticket](skills/implement-ticket/SKILL.md): Implement one ticket from clear acceptance cases.
 
-Start with the smallest workflow that supplies the missing result:
+## Install with skills CLI
 
-| Starting point | Workflow |
-| --- | --- |
-| Existing software or a specification needs explanation | `break-down` |
-| The need or intended outcome is unclear | `frame-problem` |
-| A consequential solution choice is unresolved | `design-solution` |
-| Expected behavior needs agreement | `discover-behavior`, using `break-down` for missing specification context |
-| Clear acceptance cases and implementation authorization | `implement-ticket`, with no ticket document required |
-| Agreed behavior needs implementation boundaries | `slice-work`, then authorized implementation |
-| Gherkin is requested or useful to existing tooling | Insert `formulate-behavior` before planning or implementation |
-| Existing software needs checking without changes | Ordinary verification: map the supplied cases to checks and report evidence and gaps |
+```bash
+npx skills@latest add Frantss/frantss-skills
+```
 
-Reuse current inputs and prior agreements. Check revisions before reusing implementation
-observations; refresh affected findings without treating code changes as behavior decisions.
-Standalone work creates only requested artifacts. Tracked work preserves the existing
-`run.md` format and uses one slice for a small subject; additional area maps remain optional.
-
-## Install
-
-This repository is private. Your installer needs GitHub access. Choose one
-installation method per agent to avoid duplicate skills.
-
-Claude Code installs the complete `frantss-skills` plugin from the `frantss`
-marketplace. Other agents install individual skills with GitHub CLI or the
-skills CLI. Start a new session after installation.
-Use your plugin manager or original installer to update skills.
-
-<details>
-<summary>Claude Code CLI</summary>
+## Install as a Claude Code plugin
 
 ```bash
 claude plugin marketplace add Frantss/frantss-skills
 claude plugin install frantss-skills@frantss
 ```
-
-</details>
-
-<details>
-<summary>GitHub CLI</summary>
-
-Authenticate with `gh auth login`, then install one skill for your agent:
-
-```bash
-gh skill install Frantss/frantss-skills communicate --agent codex
-```
-
-Replace `communicate` with any skill name, or use `--all` for every skill.
-Replace `codex` with your agent, such as `claude-code`, `github-copilot`, or
-`cursor`. Installation defaults to the current project; add `--scope user`
-for all projects.
-
-See the [GitHub CLI reference](https://cli.github.com/manual/gh_skill_install).
-
-</details>
-
-<details>
-<summary>skills CLI</summary>
-
-Use Node.js 22.20 or later and Git credentials for this repository:
-
-```bash
-npx skills@latest add Frantss/frantss-skills --skill communicate --agent codex
-```
-
-Replace `communicate` with any skill name and `codex` with your agent, such
-as `claude-code`, `github-copilot`, or `cursor`. Installation defaults to the
-current project; add `--global` for all projects. Omit `--skill` and `--agent`
-to choose interactively.
-
-See the [skills CLI reference](https://github.com/vercel-labs/skills/blob/main/docs/commands.md).
-
-</details>
