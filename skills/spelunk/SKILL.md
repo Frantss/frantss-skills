@@ -1,6 +1,6 @@
 ---
 name: spelunk
-description: "Map an unfamiliar codebase or feature into a Markdown orientation report."
+description: "Use only when the user asks for spelunk by name. Map an unfamiliar codebase or feature into a Markdown orientation report."
 ---
 
 # Spelunk
