@@ -21,8 +21,8 @@ class PluginTests(unittest.TestCase):
     def test_marketplace_exposes_one_plugin_with_all_skills(self):
         self.assertFalse((SOURCE / 'plugins').exists())
         names = [path.parent.name for path in self.root.glob('skills/*/SKILL.md')]
-        self.assertEqual(len(names), 11)
-        self.assertEqual(len(set(names)), 11)
+        self.assertEqual(len(names), 13)
+        self.assertEqual(len(set(names)), 13)
         market = json.loads((self.root / '.claude-plugin/marketplace.json').read_text())
         self.assertEqual(market['name'], 'frantss')
         self.assertEqual(len(market['plugins']), 1)
@@ -131,7 +131,8 @@ class PluginTests(unittest.TestCase):
                 result = subprocess.run(['claude', 'plugin', *arguments], cwd=runtime,
                                         env=env, capture_output=True, text=True, timeout=30)
                 self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
-            plugins = json.loads(result.stdout)
+            # Inline plugins from the calling session can appear beside the isolated installation.
+            plugins = [plugin for plugin in json.loads(result.stdout) if not plugin['id'].endswith('@inline')]
             self.assertEqual([plugin['id'] for plugin in plugins], ['frantss-skills@frantss'])
             plugin = plugins[0]
             self.assertTrue(plugin['enabled'])
