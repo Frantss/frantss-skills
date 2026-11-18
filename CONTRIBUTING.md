@@ -32,7 +32,6 @@ Add supporting files when needed:
 | `references/` | Detail read only for a particular branch of the workflow |
 | `scripts/` | Repeated operations that benefit from deterministic execution |
 | `assets/` | Templates or files copied into the output |
-| `agents/` | Optional agent-specific UI metadata |
 
 Link references from the point where an agent needs them. Use links relative
 to the containing Markdown file, and bundle every required resource within the
@@ -41,11 +40,9 @@ including internal ones. Keep examples generic enough to travel between workspac
 record actual system, network, or tool requirements in `compatibility` when
 relevant.
 
-Use the [standard frontmatter fields](https://agentskills.io/specification).
-Automatic invocation is the default. If you need explicit-only invocation,
-configure and test it for each intended agent: Claude's
-`disable-model-invocation` and Codex's `agents/openai.yaml` policy are different
-interfaces. A tool allowlist also depends on the host; it does not authorize
+Use only the [standard frontmatter fields](https://agentskills.io/specification),
+with no agent-specific fields or metadata files. Automatic invocation is the
+default; to limit invocation, state the trigger in the description. A tool allowlist also depends on the host; it does not authorize
 external actions on the user's behalf.
 
 Keep credentials and machine-specific paths in the user's environment. When

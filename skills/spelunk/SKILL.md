@@ -1,7 +1,6 @@
 ---
 name: spelunk
 description: "Map an unfamiliar codebase or feature into a Markdown orientation report."
-disable-model-invocation: true
 ---
 
 # Spelunk
