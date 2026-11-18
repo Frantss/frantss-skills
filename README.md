@@ -52,19 +52,10 @@ Standalone work creates only requested artifacts. Tracked work preserves the exi
 This repository is private. Your installer needs GitHub access. Choose one
 installation method per agent to avoid duplicate skills.
 
-Codex, Claude Code, and Copilot install the complete `frantss-skills` plugin from
-the shared `frantss` marketplace. Start a new session after installation.
+Claude Code installs the complete `frantss-skills` plugin from the `frantss`
+marketplace. Other agents install individual skills with GitHub CLI or the
+skills CLI. Start a new session after installation.
 Use your plugin manager or original installer to update skills.
-
-<details>
-<summary>Codex CLI</summary>
-
-```bash
-codex plugin marketplace add Frantss/frantss-skills
-codex plugin add frantss-skills@frantss
-```
-
-</details>
 
 <details>
 <summary>Claude Code CLI</summary>
@@ -73,19 +64,6 @@ codex plugin add frantss-skills@frantss
 claude plugin marketplace add Frantss/frantss-skills
 claude plugin install frantss-skills@frantss
 ```
-
-</details>
-
-<details>
-<summary>GitHub Copilot CLI</summary>
-
-```bash
-copilot plugin marketplace add Frantss/frantss-skills
-copilot plugin install frantss-skills@frantss
-```
-
-Copilot reads the shared Claude-compatible marketplace and plugin manifest.
-See the [Copilot plugin reference](https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-plugin-reference).
 
 </details>
 

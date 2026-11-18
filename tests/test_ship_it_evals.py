@@ -12,7 +12,8 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'evals'))
 import ship_it
 import ship_it_bare
-from ship_it_verifier import grade_failure, grade_no_trigger, grade_plan, read_trace, snapshot
+from ship_it_verifier import (grade_failure, grade_no_trigger, grade_plan, read_trace,
+                               shipping_workflow_read, snapshot)
 from github_fixture import response
 
 
@@ -54,7 +55,7 @@ class ShippingEvalTests(unittest.TestCase):
                      ('thread-id', 'Shipped.', [])]
             with patch.object(ship_it_bare, 'install_plugin', return_value=Path(temporary)), \
                     patch.object(ship_it_bare, 'turn', side_effect=turns) as run:
-                report = ship_it_bare.trial(directory, Path(temporary) / 'no-auth', None)
+                report = ship_it_bare.trial(directory, None)
             self.assertFalse(report['passed'])
             self.assertEqual(run.call_count, 2)
             self.assertEqual(run.call_args.args[5], 'ship it')
@@ -178,6 +179,31 @@ class ShippingEvalTests(unittest.TestCase):
             answer, commands = read_trace(path)
             self.assertEqual(answer, PLAN)
             self.assertEqual(commands[0]['command'], 'git status')
+
+    def test_claude_trace_reads_tool_results_skill_bodies_and_final_result(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / 'trace.jsonl'
+            skill = (ROOT / 'skills/ship-it/SKILL.md').read_text()
+            events = [
+                {'type': 'system', 'subtype': 'init', 'session_id': 'session-id'},
+                {'type': 'assistant', 'message': {'content': [
+                    {'type': 'tool_use', 'id': 'skill', 'name': 'Skill', 'input': {'skill': 'ship-it'}}]}},
+                {'type': 'user', 'message': {'content': [
+                    {'type': 'tool_result', 'tool_use_id': 'skill', 'content': 'Launching skill: ship-it'}]}},
+                {'type': 'user', 'message': {'content': [{'type': 'text', 'text': skill}]}},
+                {'type': 'assistant', 'message': {'content': [
+                    {'type': 'tool_use', 'id': 'test', 'name': 'Bash', 'input': {'command': ship_it.TEST}}]}},
+                {'type': 'user', 'message': {'content': [{'type': 'tool_result', 'tool_use_id': 'test',
+                                                          'content': [{'type': 'text', 'text': 'fail 1'}],
+                                                          'is_error': True}]}},
+                {'type': 'result', 'is_error': False, 'result': PLAN, 'session_id': 'session-id'}]
+            path.write_text('\n'.join(json.dumps(event) for event in events))
+            answer, commands = ship_it_bare.read_trace(path)
+            self.assertEqual(answer, PLAN)
+            self.assertIn('ship-it', commands[0]['command'])
+            self.assertTrue(shipping_workflow_read(commands))
+            self.assertEqual((commands[1]['command'], commands[1]['exit_code']), (ship_it.TEST, 1))
+            self.assertFalse(ship_it_bare.checks_passed(commands))
 
     def test_fixture_has_hidden_graders_and_detects_working_changes(self):
         with tempfile.TemporaryDirectory() as temporary:

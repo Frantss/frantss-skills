@@ -36,7 +36,7 @@ Add supporting files when needed:
 
 Link references from the point where an agent needs them. Use links relative
 to the containing Markdown file, and bundle every required resource within the
-skill as real files and directories. GitHub CLI's local installer skips symlinks,
+skill as real files and directories. Some direct installers skip symlinks,
 including internal ones. Keep examples generic enough to travel between workspaces;
 record actual system, network, or tool requirements in `compatibility` when
 relevant.
@@ -85,7 +85,7 @@ make validate
 
 This requires GitHub CLI with `gh skill` support and Claude Code CLI.
 It runs `gh skill publish --dry-run` for skill format checks, then
-`claude plugin validate` for the shared marketplace and root plugin.
+`claude plugin validate` for the marketplace and root plugin.
 Each command's failure stops validation; warnings permit success.
 These commands validate local files without publishing. Missing-version,
 missing-license, and icon warnings can be expected for these private packages;
@@ -98,10 +98,10 @@ Try installation into a temporary directory before sharing a new skill:
 
 ```bash
 preview_dir=$(mktemp -d)
-gh skill install . my-skill --from-local --dir "$preview_dir"
+(cd "$preview_dir" && npx skills@latest add "$OLDPWD" --skill my-skill --agent codex --copy --yes)
 ```
 
-Inspect that copied folder and exercise it with the intended agents. Check one
+Inspect the copied folder under `$preview_dir/.agents/skills/` and exercise it with the intended agents. Check one
 request that should activate the skill, one nearby request that should not,
 and any scripts or resource links used during the task. Testing only the
 authoring folder can hide dependencies that disappear during installation.
@@ -109,12 +109,10 @@ authoring folder can hide dependencies that disappear during installation.
 For Claude, `claude --plugin-dir .` loads the complete local plugin for a test session.
 Avoid installing drafts into your everyday skills directories.
 
-With the Codex CLI installed, `make test` also exercises plugin installation and
-reinstallation through the shared marketplace, using a temporary Codex configuration
-and cache. It verifies that all resources survive installation, and added,
-edited, and removed skills reach refreshed installations. The suite also tests
-Claude Code and Copilot installation through the shared marketplace when those
-CLIs are installed. Unavailable CLI integration checks are skipped.
+With the Claude Code CLI installed, `make test` also installs the plugin through
+the `frantss` marketplace into a temporary Claude configuration and verifies that
+all resources survive installation. With GitHub CLI installed, it also checks
+direct skill installation. Unavailable CLI integration checks are skipped.
 
 ## Shipping skill evals
 
@@ -127,9 +125,12 @@ The suite uses local Git and PR fixtures; live releases are untested.
 
 ## Atomic commit evals
 
-Requires Node.js, the Codex CLI with plugin support, and Codex authentication.
-Run `make eval-atomic-commits EVAL_ARGS="--attempts 1"`. Model calls consume account
-usage; Docker and Harbor are not required.
+Requires Node.js, the Claude Code CLI, and `CLAUDE_CODE_OAUTH_TOKEN` (from
+`claude setup-token`) or `ANTHROPIC_API_KEY`. Run
+`make eval-atomic-commits EVAL_ARGS="--attempts 1"`. Model calls consume account
+usage; Docker and Harbor are not required. Set `EVAL_MODEL` to choose the model.
+`make eval-ship-it-bare` uses the same setup to check bare `ship it` discovery
+and approval through the installed plugin.
 
 The `decomposable` case covers dependent steps within one feature; `inseparable`
 covers an API rename that must land with its callers. The grader checks actual
@@ -141,22 +142,21 @@ Results and traces are under `.scratch/evals/`.
 ## Plugin packaging
 
 Author each skill directly in `skills/<name>/`. The repository root is the
-`frantss-skills` plugin. Codex reads `.codex-plugin/plugin.json`, which references
-`./skills/`. Claude Code and Copilot share `.claude-plugin/plugin.json` and
-discover `skills/` automatically. There are no generated plugin copies.
+`frantss-skills` Claude Code plugin. `.claude-plugin/plugin.json` declares it, and
+Claude Code discovers `skills/` automatically. There are no generated plugin copies.
 
 The `frantss` marketplace in `.claude-plugin/marketplace.json` points its single
-`frantss-skills` entry to `./`. Keep both plugin manifests consistent. New skills
-need no manifest changes. Keep resources inside each skill as real files so
-direct installation remains portable.
+`frantss-skills` entry to `./`. New skills need no manifest changes. Keep
+`SKILL.md` on the standard frontmatter so direct installers work for every agent.
+Keep resources inside each skill as real files so direct installation remains portable.
 
 ## Share changes
 
 Commit completed skills to this private repository; push only when requested.
 Every new skill under `skills/` is discovered by direct installers.
-Use `gh skill install` to choose individual skills, or install `frantss-skills`
-through Codex, Claude Code, or Copilot. Keep skill names stable so installations
-and explicit invocations continue to resolve.
+Use `npx skills add` to choose individual skills, or install `frantss-skills`
+through Claude Code. Keep skill names stable so installations and explicit
+invocations continue to resolve.
 
 When changing a trigger, explain which requests should now activate it. When
 changing a workflow, record the representative task you exercised. Tooling

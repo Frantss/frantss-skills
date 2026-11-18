@@ -1,4 +1,4 @@
-"""Evaluate commit-a against executable local Git histories using an installed Codex plugin."""
+"""Evaluate commit-a against executable local Git histories using an installed Claude Code plugin."""
 
 import argparse
 from datetime import datetime, timezone
@@ -8,8 +8,8 @@ from pathlib import Path
 import subprocess
 from textwrap import dedent
 
-from ship_it import ROOT, configured_model, run_git, write
-from ship_it_bare import install_plugin, turn
+from ship_it import ROOT, run_git, write
+from ship_it_bare import AUTH_KEYS, install_plugin, isolated_env, turn
 from ship_it_verifier import inventory
 from atomic_commits_verifier import grade
 
@@ -318,7 +318,7 @@ def fixture(directory, case):
     return expected
 
 
-def trial(directory, case, auth, model):
+def trial(directory, case, model):
     directory = Path(directory).resolve()
     report = {
         'case': case, 'model': model, 'passed': False,
@@ -331,13 +331,7 @@ def trial(directory, case, auth, model):
         remote_head = run_git(remote, 'symbolic-ref', 'HEAD')
         runtime = directory / 'runtime'
         runtime.mkdir(mode=0o700)
-        if auth.is_file():
-            (runtime / 'auth.json').symlink_to(auth.resolve())
-        write(runtime / 'config.toml', '[projects.' + json.dumps(str(seed)) + ']\ntrust_level = "trusted"\n')
-        env = {key: value for key, value in os.environ.items() if key in (
-            'PATH', 'HOME', 'USER', 'LOGNAME', 'SHELL', 'LANG', 'LC_ALL', 'TMPDIR',
-            'OPENAI_API_KEY', 'CODEX_API_KEY')}
-        env['CODEX_HOME'] = str(runtime)
+        env = isolated_env(runtime)
         report['installed_plugin'] = str(install_plugin(runtime, env))
         session, answer, commands = turn(seed, remote, env, directory, 'commit-a', PROMPT, model)
         report.update(session=session, answer=answer)
@@ -360,13 +354,14 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--case', action='append', choices=CASES)
     parser.add_argument('--attempts', type=int, default=3)
-    parser.add_argument('--model', default=configured_model())
+    parser.add_argument('--model', default=os.environ.get('EVAL_MODEL'))
     parser.add_argument('--prepare-only', action='store_true')
     args = parser.parse_args()
     if args.attempts < 1:
         parser.error('attempts must be positive')
     cases = list(dict.fromkeys(args.case or CASES))
-    auth = Path(os.environ.get('CODEX_HOME', Path.home() / '.codex')) / 'auth.json'
+    if not args.prepare_only and not any(os.environ.get(key) for key in AUTH_KEYS):
+        parser.error('set CLAUDE_CODE_OAUTH_TOKEN (from claude setup-token) or ANTHROPIC_API_KEY')
     stamp = datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ')
     workspace = ROOT / '.scratch/evals' / (stamp + '-atomic-commits')
     results = []
@@ -377,7 +372,7 @@ def main():
                 fixture(directory, case)
                 print(f'Prepared {case} attempt {attempt}: {directory}', flush=True)
                 continue
-            report = trial(directory, case, auth, args.model)
+            report = trial(directory, case, args.model)
             results.append(report['passed'])
             failed = [key for key, passed in report['checks'].items() if not passed]
             detail = report.get('error') or ', '.join(failed)

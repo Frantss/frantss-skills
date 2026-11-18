@@ -1,9 +1,0 @@
-{
-  "name": "frantss-skills",
-  "description": "Communication, development, and behavior-driven planning.",
-  "author": {
-    "name": "Frantss"
-  },
-  "repository": "https://github.com/Frantss/frantss-skills",
-  "skills": "./skills/"
-}
